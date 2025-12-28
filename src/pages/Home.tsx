@@ -1,8 +1,8 @@
 import './Home.css'
-import { COMPANY, ABOUT, SERVICES_PREVIEW, APPROACH_STEPS, CASES_PREVIEW_WITH_RESULTS, PLANETA_PROMO } from '../constants/data'
+import { COMPANY, ABOUT, SERVICES_PREVIEW, APPROACH_STEPS, CASES_PREVIEW_WITH_RESULTS, PLANETA_PROMO, ECOMMERCE_PROMO } from '../constants/data'
 
 interface HomeProps {
-  onNavigate: (page: 'home' | 'services' | 'cases') => void
+  onNavigate: (page: 'home' | 'services' | 'cases', caseId?: string) => void
 }
 
 export default function Home({ onNavigate }: HomeProps) {
@@ -49,14 +49,32 @@ export default function Home({ onNavigate }: HomeProps) {
       {/* About Section */}
       <section className="about section">
         <div className="container">
+          <h2>Кто мы</h2>
           <div className="about-content">
+            <div className="about-photo">
+              <img 
+                src="/eldar-photo.jpg" 
+                alt={ABOUT.founder.name}
+                className="founder-photo"
+                onError={(e) => {
+                  // Если изображение не загрузилось, показываем placeholder
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+              <div className="photo-placeholder hidden">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
             <div className="about-text">
-              <h2>Кто мы</h2>
               <div className="founder-info">
                 <h3>{ABOUT.founder.name}</h3>
                 <p className="founder-title">{ABOUT.founder.title}</p>
               </div>
               <p className="about-story">{ABOUT.founder.story}</p>
+              <p className="about-team">{ABOUT.founder.team}</p>
               <blockquote className="about-philosophy">
                 {ABOUT.founder.philosophy}
               </blockquote>
@@ -165,13 +183,70 @@ export default function Home({ onNavigate }: HomeProps) {
 
       <div className="divider"></div>
 
+      {/* E-commerce Promo */}
+      <section className="ecommerce-promo section">
+        <div className="container">
+          <div className="ecommerce-promo-content">
+            <div className="ecommerce-badge">{ECOMMERCE_PROMO.badge}</div>
+            <h2 className="ecommerce-title">{ECOMMERCE_PROMO.title}</h2>
+            <p className="ecommerce-description">{ECOMMERCE_PROMO.description}</p>
+            
+            <div className="ecommerce-features">
+              <h3>Что входит в решение:</h3>
+              <ul className="ecommerce-list">
+                {ECOMMERCE_PROMO.features.map((feature, idx) => (
+                  <li key={idx}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="ecommerce-example">
+              <p className="example-text">«{ECOMMERCE_PROMO.example.text}»</p>
+              <p className="example-subtext">— {ECOMMERCE_PROMO.example.subtext}</p>
+              <div className="example-links">
+                {ECOMMERCE_PROMO.example.links.map((link, idx) => (
+                  <a 
+                    key={idx}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="example-link"
+                  >
+                    {link.label} →
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="ecommerce-cta">
+              <a 
+                href={ECOMMERCE_PROMO.ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ecommerce"
+              >
+                {ECOMMERCE_PROMO.cta}
+              </a>
+              <span className="ecommerce-note">Стоимость комплексного решения уточняйте в Telegram</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider"></div>
+
       {/* Cases Preview */}
       <section className="cases-preview section">
         <div className="container">
           <h2>Кейсы</h2>
           <div className="cases-preview-grid">
             {CASES_PREVIEW_WITH_RESULTS.map((caseItem) => (
-              <div key={caseItem.id} className="case-card">
+              <div 
+                key={caseItem.id} 
+                className="case-card"
+                onClick={() => onNavigate('cases', caseItem.id)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="case-header">
                   <h3>{caseItem.title}</h3>
                   <span className="case-tag">{caseItem.tags.join(' / ')}</span>

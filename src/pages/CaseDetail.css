@@ -1,0 +1,287 @@
+.case-detail-page {
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  transition: opacity 0.2s;
+  letter-spacing: -0.01em;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+.case-detail {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.case-detail-header {
+  margin-bottom: 3rem;
+}
+
+.case-detail-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.case-tag {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.case-section {
+  margin-bottom: 3rem;
+}
+
+.case-section h3 {
+  font-size: clamp(1.333rem, 3vw, 1.777rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.case-section p {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-light);
+  letter-spacing: -0.01em;
+}
+
+.case-list {
+  list-style: none;
+  padding: 0;
+}
+
+.case-list li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-light);
+  letter-spacing: -0.01em;
+}
+
+.case-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.case-results-section {
+  margin: 4rem 0;
+  padding: 3rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0;
+}
+
+.case-results-section h3 {
+  font-size: clamp(1.777rem, 4vw, 2.369rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--color-text);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.result-card {
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0;
+  transition: var(--transition);
+}
+
+.result-card:hover {
+  border-color: var(--color-border);
+}
+
+.result-big {
+  font-size: clamp(2.369rem, 5vw, 3.157rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.result-card p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.case-quote {
+  margin: 3rem 0;
+  padding: 2rem 3rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 0;
+  position: relative;
+}
+
+.case-quote blockquote {
+  margin: 0;
+}
+
+.case-quote p {
+  font-size: 1.333rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: white;
+  letter-spacing: -0.01em;
+}
+
+.case-quote cite {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: normal;
+  opacity: 0.9;
+  color: white;
+  letter-spacing: -0.01em;
+}
+
+.case-cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 0;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.case-cta h3 {
+  font-size: clamp(1.777rem, 4vw, 2.369rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+  position: relative;
+  z-index: 1;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.case-cta p {
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  color: white;
+  position: relative;
+  z-index: 1;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+.case-cta .btn {
+  background: white;
+  color: var(--color-primary);
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  border: 1px solid white;
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.case-cta .btn:hover {
+  background: var(--color-bg);
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .case-detail-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .case-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .case-section p,
+  .case-list li {
+    font-size: 1rem;
+  }
+
+  .case-results-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .result-big {
+    font-size: 2.5rem;
+  }
+
+  .case-quote {
+    padding: 1.5rem;
+  }
+
+  .case-quote p {
+    font-size: 1.1rem;
+  }
+
+  .case-cta {
+    padding: 2rem 1.5rem;
+  }
+
+  .case-cta h3 {
+    font-size: 1.5rem;
+  }
+}
+

@@ -3,11 +3,13 @@
 }
 
 .page-intro {
-  font-size: 1.25rem;
+  font-size: 1.333rem;
+  font-weight: 400;
   color: var(--color-text-light);
   margin-bottom: var(--spacing-xl);
   max-width: 700px;
   line-height: 1.7;
+  letter-spacing: -0.01em;
 }
 
 .services-grid {
@@ -17,42 +19,24 @@
 
 .service-card {
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0;
   padding: var(--spacing-lg);
   transition: var(--transition);
-  box-shadow: var(--shadow-sm);
   position: relative;
-  overflow: hidden;
-}
-
-.service-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: var(--transition);
 }
 
 .service-card:hover {
-  border-color: var(--color-primary);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.service-card:hover::before {
-  transform: scaleX(1);
+  border-color: var(--color-border);
 }
 
 .service-card h2 {
-  font-size: 1.5rem;
+  font-size: 1.777rem;
+  font-weight: 600;
   margin-bottom: var(--spacing-md);
   color: var(--color-primary);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
 .service-card ul {
@@ -66,8 +50,11 @@
   padding-left: 2rem;
   margin-bottom: var(--spacing-sm);
   line-height: 1.7;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--color-text-light);
   transition: var(--transition);
+  letter-spacing: -0.01em;
 }
 
 .service-card li:hover {
@@ -80,15 +67,11 @@
   position: absolute;
   left: 0;
   top: 0.6em;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--color-primary);
+  border-radius: 0;
   transition: var(--transition);
-}
-
-.service-card li:hover::before {
-  transform: scale(1.3);
 }
 
 .service-card li:last-child {
@@ -99,20 +82,27 @@
   text-align: center;
   margin-top: var(--spacing-xl);
   padding: var(--spacing-xl);
-  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-soft) 100%);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  background: var(--color-bg);
+  border-radius: 0;
+  border: 1px solid var(--color-gray-light);
 }
 
 .services-cta h2 {
+  font-size: clamp(1.777rem, 4vw, 2.369rem);
+  font-weight: 700;
   margin-bottom: var(--spacing-sm);
   color: var(--color-primary);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .services-cta p {
+  font-size: 1.125rem;
+  font-weight: 400;
   margin-bottom: var(--spacing-md);
   color: var(--color-text-light);
+  line-height: 1.7;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
