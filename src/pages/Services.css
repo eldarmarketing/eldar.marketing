@@ -1,0 +1,127 @@
+.services h1 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-intro {
+  font-size: 1.25rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xl);
+  max-width: 700px;
+  line-height: 1.7;
+}
+
+.services-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.service-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition);
+}
+
+.service-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-card li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.7;
+  color: var(--color-text-light);
+  transition: var(--transition);
+}
+
+.service-card li:hover {
+  color: var(--color-text);
+  transform: translateX(4px);
+}
+
+.service-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.service-card li:hover::before {
+  transform: scale(1.3);
+}
+
+.service-card li:last-child {
+  margin-bottom: 0;
+}
+
+.services-cta {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-soft) 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.services-cta h2 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
+}
+
+.services-cta p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    padding: var(--spacing-md);
+  }
+
+  .services-cta {
+    padding: var(--spacing-lg) 0;
+  }
+}
+
