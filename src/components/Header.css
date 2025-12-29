@@ -252,6 +252,18 @@
   display: inline-block;
 }
 
+/* Стили для кнопки в хедере - контрастный hover */
+.header .btn-primary:hover {
+  background: var(--color-bg);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.header .btn-primary:hover::before {
+  opacity: 0;
+}
+
 /* Анимация появления мобильного меню */
 @keyframes slideDownFade {
   from {
