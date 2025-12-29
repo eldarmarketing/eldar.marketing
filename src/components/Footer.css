@@ -290,6 +290,27 @@
   text-decoration: underline;
 }
 
+/* Кнопки в футере - инвертированный стиль */
+.footer .btn,
+.footer .btn-primary {
+  background: var(--color-bg);
+  color: var(--color-primary);
+  border-color: var(--color-bg);
+}
+
+.footer .btn::before,
+.footer .btn-primary::before {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.footer .btn:hover,
+.footer .btn-primary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  border-color: var(--color-bg);
+  transform: translateY(-2px);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .footer-content {
