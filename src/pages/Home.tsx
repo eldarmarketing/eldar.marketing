@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Home.css'
+import '../components/CompanyDetailsModal.css'
 import { COMPANY, ABOUT, SERVICES_PREVIEW, APPROACH_STEPS, CASES_PREVIEW_WITH_RESULTS, PLANETA_PROMO, ECOMMERCE_PROMO, CONTACTS } from '../constants/data'
 
 export default function Home() {
@@ -72,60 +73,56 @@ export default function Home() {
               
               {/* Contact Popup */}
               {showContactPopup && (
-                <>
-                  <div 
-                    className="contact-popup-overlay"
-                    onClick={() => setShowContactPopup(false)}
-                  />
-                  <div className="contact-popup">
+                <div className="modal-overlay" onClick={() => setShowContactPopup(false)}>
+                  <div className="modal-content contact-modal" onClick={(e) => e.stopPropagation()}>
                     <button 
-                      className="contact-popup-close"
+                      className="modal-close"
                       onClick={() => setShowContactPopup(false)}
                       aria-label="Закрыть"
                     >
-                      ×
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                     </button>
-                    <div className="contact-popup-header">
-                      <div className="contact-popup-avatar-wrapper">
-                        <img 
-                          src="/eldar-photo.png" 
-                          alt={ABOUT.founder.name}
-                          className="contact-popup-avatar"
-                        />
-                        <span className="contact-popup-status"></span>
-                      </div>
-                      <div className="contact-popup-info">
-                        <h3>{ABOUT.founder.name}</h3>
-                        <p className="contact-popup-role">{ABOUT.founder.title}</p>
-                      </div>
-                    </div>
-                    <div className="contact-popup-buttons">
+                    
+                    <h2 className="modal-title">Связаться</h2>
+                    
+                    <div className="details-list">
                       <a
                         href={CONTACTS.telegram}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="contact-popup-btn telegram"
+                        className="detail-item contact-item"
                         onClick={() => setShowContactPopup(false)}
                       >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M22 2L11 13"/>
-                          <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
-                        </svg>
-                        Написать в Telegram
+                        <div className="detail-label">Telegram</div>
+                        <div className="detail-value-wrapper">
+                          <div className="detail-value">Написать в Telegram</div>
+                          <div className="contact-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                          </div>
+                        </div>
                       </a>
                       <a
                         href={`tel:${CONTACTS.phoneLink}`}
-                        className="contact-popup-btn phone"
+                        className="detail-item contact-item"
                         onClick={() => setShowContactPopup(false)}
                       >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                        Позвонить {CONTACTS.phone}
+                        <div className="detail-label">Телефон</div>
+                        <div className="detail-value-wrapper">
+                          <div className="detail-value">{CONTACTS.phone}</div>
+                          <div className="contact-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                          </div>
+                        </div>
                       </a>
                     </div>
                   </div>
-                </>
+                </div>
               )}
               <p className="about-story">{ABOUT.founder.story}</p>
               <p className="about-team">{ABOUT.founder.team}</p>
