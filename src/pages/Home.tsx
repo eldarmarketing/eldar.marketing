@@ -1,15 +1,11 @@
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import './Home.css'
-import { COMPANY, ABOUT, SERVICES_PREVIEW, APPROACH_STEPS, CASES_PREVIEW_WITH_RESULTS, PLANETA_PROMO, ECOMMERCE_PROMO } from '../constants/data'
+import { COMPANY, ABOUT, SERVICES_PREVIEW, APPROACH_STEPS, CASES_PREVIEW_WITH_RESULTS, PLANETA_PROMO, ECOMMERCE_PROMO, CONTACTS } from '../constants/data'
 
-interface HomeProps {
-  onNavigate: (page: 'home' | 'services' | 'cases', caseId?: string) => void
-}
-
-export default function Home({ onNavigate }: HomeProps) {
-  const handleNavigate = (page: 'home' | 'services' | 'cases') => {
-    onNavigate(page)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+export default function Home() {
+  const navigate = useNavigate()
+  const [showContactPopup, setShowContactPopup] = useState(false)
 
   return (
     <div className="home">
@@ -22,20 +18,20 @@ export default function Home({ onNavigate }: HomeProps) {
               {COMPANY.hero.subtitle}
             </p>
             <div className="hero-buttons">
-              <button
+              <a
+                href={CONTACTS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn"
-                onClick={() => {
-                  document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' })
-                }}
               >
                 Обсудить проект
-              </button>
-              <button
+              </a>
+              <Link
+                to="/cases"
                 className="btn btn-outline"
-                onClick={() => handleNavigate('cases')}
               >
                 Посмотреть кейсы
-              </button>
+              </Link>
             </div>
             <p className="hero-caption">
               {COMPANY.hero.caption}
@@ -51,28 +47,86 @@ export default function Home({ onNavigate }: HomeProps) {
         <div className="container">
           <h2>Кто мы</h2>
           <div className="about-content">
-            <div className="about-photo">
-              <img 
-                src="/eldar-photo.jpg" 
-                alt={ABOUT.founder.name}
-                className="founder-photo"
-                onError={(e) => {
-                  // Если изображение не загрузилось, показываем placeholder
-                  (e.target as HTMLImageElement).style.display = 'none';
-                  (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                }}
-              />
-              <div className="photo-placeholder hidden">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
-                </svg>
-              </div>
-            </div>
             <div className="about-text">
               <div className="founder-info">
-                <h3>{ABOUT.founder.name}</h3>
-                <p className="founder-title">{ABOUT.founder.title}</p>
+                <div 
+                  className="founder-avatar-wrapper"
+                  onClick={() => setShowContactPopup(true)}
+                  style={{ cursor: 'pointer' }}
+                  title="Связаться с Эльдаром"
+                >
+                  <img 
+                    src="/eldar-photo.png" 
+                    alt={ABOUT.founder.name}
+                    className="founder-avatar"
+                  />
+                  <span className="online-indicator">
+                    <span className="online-dot"></span>
+                  </span>
+                </div>
+                <div className="founder-details">
+                  <h3>{ABOUT.founder.name}</h3>
+                  <p className="founder-title">{ABOUT.founder.title}</p>
+                </div>
               </div>
+              
+              {/* Contact Popup */}
+              {showContactPopup && (
+                <>
+                  <div 
+                    className="contact-popup-overlay"
+                    onClick={() => setShowContactPopup(false)}
+                  />
+                  <div className="contact-popup">
+                    <button 
+                      className="contact-popup-close"
+                      onClick={() => setShowContactPopup(false)}
+                      aria-label="Закрыть"
+                    >
+                      ×
+                    </button>
+                    <div className="contact-popup-header">
+                      <div className="contact-popup-avatar-wrapper">
+                        <img 
+                          src="/eldar-photo.png" 
+                          alt={ABOUT.founder.name}
+                          className="contact-popup-avatar"
+                        />
+                        <span className="contact-popup-status"></span>
+                      </div>
+                      <div className="contact-popup-info">
+                        <h3>{ABOUT.founder.name}</h3>
+                        <p className="contact-popup-role">{ABOUT.founder.title}</p>
+                      </div>
+                    </div>
+                    <div className="contact-popup-buttons">
+                      <a
+                        href={CONTACTS.telegram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="contact-popup-btn telegram"
+                        onClick={() => setShowContactPopup(false)}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M22 2L11 13"/>
+                          <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+                        </svg>
+                        Написать в Telegram
+                      </a>
+                      <a
+                        href={`tel:${CONTACTS.phoneLink}`}
+                        className="contact-popup-btn phone"
+                        onClick={() => setShowContactPopup(false)}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        Позвонить {CONTACTS.phone}
+                      </a>
+                    </div>
+                  </div>
+                </>
+              )}
               <p className="about-story">{ABOUT.founder.story}</p>
               <p className="about-team">{ABOUT.founder.team}</p>
               <blockquote className="about-philosophy">
@@ -106,12 +160,12 @@ export default function Home({ onNavigate }: HomeProps) {
             ))}
           </div>
           <div className="section-cta">
-            <button
+            <Link
+              to="/services"
               className="btn btn-outline"
-              onClick={() => handleNavigate('services')}
             >
               Все услуги
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -240,38 +294,54 @@ export default function Home({ onNavigate }: HomeProps) {
         <div className="container">
           <h2>Кейсы</h2>
           <div className="cases-preview-grid">
-            {CASES_PREVIEW_WITH_RESULTS.map((caseItem) => (
-              <div 
-                key={caseItem.id} 
-                className="case-card"
-                onClick={() => onNavigate('cases', caseItem.id)}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="case-header">
-                  <h3>{caseItem.title}</h3>
-                  <span className="case-tag">{caseItem.tags.join(' / ')}</span>
+            {CASES_PREVIEW_WITH_RESULTS.map((caseItem) => {
+              // Проверяем, является ли это кейсом про рекламу
+              const isAdCase = caseItem.title.includes('реклама не работает')
+              
+              return (
+                <div 
+                  key={caseItem.id} 
+                  className="case-card"
+                  onClick={() => navigate(`/cases/${caseItem.id}`)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="case-header">
+                    <h3>
+                      {isAdCase ? (
+                        // Разбиваем текст на слова для водного эффекта
+                        caseItem.title.split(' ').map((word, idx) => (
+                          <span key={idx} className="water-text-word">
+                            {word}{idx < caseItem.title.split(' ').length - 1 ? ' ' : ''}
+                          </span>
+                        ))
+                      ) : (
+                        caseItem.title
+                      )}
+                    </h3>
+                    <span className="case-tag">{caseItem.tags.join(' / ')}</span>
+                  </div>
+                  <p className="case-description">
+                    {caseItem.description}
+                  </p>
+                  <div className="case-results">
+                    {caseItem.previewResults.map((result, idx) => (
+                      <div key={idx} className="result-item">
+                        <div className="result-value">{result.value}</div>
+                        <div className="result-label">{result.label}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <p className="case-description">
-                  {caseItem.description}
-                </p>
-                <div className="case-results">
-                  {caseItem.previewResults.map((result, idx) => (
-                    <div key={idx} className="result-item">
-                      <div className="result-value">{result.value}</div>
-                      <div className="result-label">{result.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
           <div className="section-cta">
-            <button
+            <Link
+              to="/cases"
               className="btn btn-outline"
-              onClick={() => handleNavigate('cases')}
             >
               Все кейсы
-            </button>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,11 +1,10 @@
-import './Cases.css'
+import { Link, useNavigate } from 'react-router-dom'
 import { ALL_CASES_PREVIEW } from '../constants/data'
+import './Cases.css'
 
-interface CasesProps {
-  onNavigate: (page: 'home' | 'services' | 'cases', caseId?: string) => void
-}
+export default function Cases() {
+  const navigate = useNavigate()
 
-export default function Cases({ onNavigate }: CasesProps) {
   return (
     <div className="cases">
       <section className="section">
@@ -20,7 +19,7 @@ export default function Cases({ onNavigate }: CasesProps) {
               <article 
                 key={caseItem.id}
                 className="case-preview-card" 
-                onClick={() => onNavigate('cases', caseItem.id)}
+                onClick={() => navigate(`/cases/${caseItem.id}`)}
               >
                 <div className="case-preview-header">
                   <h3>{caseItem.title}</h3>
@@ -37,17 +36,12 @@ export default function Cases({ onNavigate }: CasesProps) {
 
           <div className="case-cta">
             <h3>Готовы к своему успешному кейсу?</h3>
-            <p>Свяжитесь с нами, чтобы обсудить ваш проект</p>
+            <p>Свяжитесь со мной, чтобы обсудить ваш проект</p>
             <button
               className="btn"
-              onClick={() => {
-                onNavigate('home')
-                setTimeout(() => {
-                  document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' })
-                }, 100)
-              }}
+              onClick={() => navigate('/contacts')}
             >
-              Обсудить проект
+              Перейти к контактам
             </button>
           </div>
         </div>

@@ -1,92 +1,80 @@
+import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { COMPANY, CONTACTS } from '../constants/data'
 import './Header.css'
+import './LogoAnimations.css'
 
-type Page = 'home' | 'services' | 'cases'
+export default function Header() {
+  const location = useLocation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-interface HeaderProps {
-  currentPage: Page
-  onNavigate: (page: Page) => void
-}
-
-export default function Header({ currentPage, onNavigate }: HeaderProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const isActive = (path: string) => location.pathname === path
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
+    setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  const handleNavigate = (page: Page) => {
-    onNavigate(page)
-    setMobileMenuOpen(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
   }
 
-  const scrollToContacts = () => {
-    setMobileMenuOpen(false)
-    setTimeout(() => {
-      document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
+  const handleLogoClick = () => {
+    closeMobileMenu()
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
   }
 
   return (
     <header className="header">
       <div className="container">
         <div className="header-content">
-          <button
-            className="logo-btn"
-            onClick={() => handleNavigate('home')}
-            aria-label="На главную"
-          >
-            <img src="/logo.svg" alt="eldar.marketing" className="logo-img" />
-          </button>
+          <Link to="/" className="logo logo-advanced" onClick={handleLogoClick}>
+            <img src="/logo.svg" alt={COMPANY.name} className="logo-img" />
+          </Link>
 
-          <nav className="nav-desktop" aria-label="Основная навигация">
-            <a
-              href="#"
-              className={currentPage === 'home' ? 'active' : ''}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigate('home')
-              }}
+          <nav className="nav-desktop">
+            <Link 
+              to="/" 
+              className={`nav-link ${isActive('/') ? 'active' : ''}`}
             >
               Главная
-            </a>
-            <a
-              href="#"
-              className={currentPage === 'services' ? 'active' : ''}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigate('services')
-              }}
+            </Link>
+            <Link 
+              to="/services" 
+              className={`nav-link ${isActive('/services') ? 'active' : ''}`}
             >
               Услуги
-            </a>
-            <a
-              href="#"
-              className={currentPage === 'cases' ? 'active' : ''}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigate('cases')
-              }}
+            </Link>
+            <Link 
+              to="/cases" 
+              className={`nav-link ${isActive('/cases') || location.pathname.startsWith('/cases/') ? 'active' : ''}`}
             >
               Кейсы
-            </a>
-            <a
-              href="#contacts"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToContacts()
-              }}
+            </Link>
+            <Link 
+              to="/contacts" 
+              className={`nav-link ${isActive('/contacts') ? 'active' : ''}`}
             >
               Контакты
-            </a>
+            </Link>
           </nav>
 
-          <button
-            className={`burger ${mobileMenuOpen ? 'open' : ''}`}
+          <a 
+            href={CONTACTS.telegram} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn btn-primary header-cta"
+          >
+            Написать в Telegram
+          </a>
+
+          <button 
+            className={`burger ${isMobileMenuOpen ? 'open' : ''}`}
             onClick={toggleMobileMenu}
             aria-label="Меню"
-            aria-expanded={mobileMenuOpen}
           >
             <span></span>
             <span></span>
@@ -94,46 +82,44 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </button>
         </div>
 
-        {mobileMenuOpen && (
-          <nav className="nav-mobile" aria-label="Мобильная навигация">
-            <a
-              href="#"
-              className={currentPage === 'home' ? 'active' : ''}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigate('home')
-              }}
+        {isMobileMenuOpen && (
+          <nav className="nav-mobile">
+            <Link 
+              to="/" 
+              className={isActive('/') ? 'active' : ''}
+              onClick={closeMobileMenu}
             >
               Главная
-            </a>
-            <a
-              href="#"
-              className={currentPage === 'services' ? 'active' : ''}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigate('services')
-              }}
+            </Link>
+            <Link 
+              to="/services" 
+              className={isActive('/services') ? 'active' : ''}
+              onClick={closeMobileMenu}
             >
               Услуги
-            </a>
-            <a
-              href="#"
-              className={currentPage === 'cases' ? 'active' : ''}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigate('cases')
-              }}
+            </Link>
+            <Link 
+              to="/cases" 
+              className={isActive('/cases') || location.pathname.startsWith('/cases/') ? 'active' : ''}
+              onClick={closeMobileMenu}
             >
               Кейсы
-            </a>
-            <a
-              href="#contacts"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToContacts()
-              }}
+            </Link>
+            <Link 
+              to="/contacts" 
+              className={isActive('/contacts') ? 'active' : ''}
+              onClick={closeMobileMenu}
             >
               Контакты
+            </Link>
+            <a 
+              href={CONTACTS.telegram} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{ marginTop: 'var(--spacing-sm)' }}
+            >
+              Написать в Telegram
             </a>
           </nav>
         )}

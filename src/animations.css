@@ -1,0 +1,620 @@
+/* ============================================
+   UNIFIED ANIMATION SYSTEM: "Smooth Minimalism"
+   Концепция: Профессиональные, тонкие анимации
+   для минималистичного дизайна
+   ============================================ */
+
+/* ============================================
+   1. TIMING FUNCTIONS
+   Единые функции плавности для всех анимаций
+   ============================================ */
+:root {
+  /* Easing functions */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.68, -0.25, 0.265, 1.25);
+  
+  /* Duration */
+  --duration-instant: 150ms;
+  --duration-fast: 250ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
+  --duration-very-slow: 900ms;
+  
+  /* Delays for staggered animations */
+  --delay-step: 80ms;
+}
+
+/* ============================================
+   2. CONTENT REVEAL ANIMATIONS
+   Появление контента на странице
+   ============================================ */
+
+/* Fade In Up - базовая анимация появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Down - для элементов сверху */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Left - для боковых элементов */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade In Right - для боковых элементов */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale Fade In - для акцентных элементов */
+@keyframes scaleFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide Reveal - для разделителей и линий */
+@keyframes slideReveal {
+  from {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+/* Number Counter - для цифр и статистики */
+@keyframes numberPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ============================================
+   3. HOVER & INTERACTION ANIMATIONS
+   Интерактивные эффекты при наведении
+   ============================================ */
+
+/* Geometric Lift - подъем с тенью */
+.animate-lift {
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.animate-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Border Glow - свечение границы */
+.animate-border-glow {
+  position: relative;
+  transition: border-color var(--duration-normal) var(--ease-smooth);
+}
+
+.animate-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.animate-border-glow:hover::before {
+  opacity: 0.15;
+}
+
+/* Slide Underline - подчеркивание снизу */
+.animate-underline {
+  position: relative;
+}
+
+.animate-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width var(--duration-normal) var(--ease-smooth);
+}
+
+.animate-underline:hover::after {
+  width: 100%;
+}
+
+/* Magnetic Pull - магнитное притяжение для кнопок */
+.animate-magnetic {
+  transition: transform var(--duration-fast) var(--ease-elastic);
+}
+
+.animate-magnetic:hover {
+  transform: scale(1.02);
+}
+
+.animate-magnetic:active {
+  transform: scale(0.98);
+}
+
+/* Icon Bounce - подпрыгивание иконок */
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-icon-bounce:hover svg {
+  animation: iconBounce 0.6s var(--ease-bounce);
+}
+
+/* Rotate on Hover - поворот элемента */
+.animate-rotate {
+  transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+.animate-rotate:hover {
+  transform: rotate(2deg);
+}
+
+/* ============================================
+   4. PAGE TRANSITION ANIMATIONS
+   Переходы между страницами
+   ============================================ */
+
+/* Page Enter - появление страницы */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page Exit - исчезновение страницы */
+@keyframes pageExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.page-transition-enter {
+  animation: pageEnter var(--duration-normal) var(--ease-enter) both;
+}
+
+.page-transition-exit {
+  animation: pageExit var(--duration-fast) var(--ease-exit) both;
+}
+
+/* ============================================
+   5. BACKGROUND & AMBIENT ANIMATIONS
+   Фоновые эффекты для атмосферы
+   ============================================ */
+
+/* Subtle Float - едва заметное плавание */
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
+/* Pulse Glow - пульсирующее свечение */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Gradient Shift - сдвиг градиента */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Grid Pattern - движение сетки (очень тонкое) */
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 20px);
+  }
+}
+
+/* ============================================
+   6. LOADING & PROGRESS ANIMATIONS
+   Индикаторы загрузки
+   ============================================ */
+
+/* Spinner - вращение */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Progress Bar - заполнение */
+@keyframes progressFill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Skeleton Loading - пульсация скелетона */
+@keyframes skeletonPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-skeleton {
+  animation: skeletonPulse 2s ease-in-out infinite;
+  background: linear-gradient(90deg, 
+    var(--color-bg-muted) 25%, 
+    var(--color-bg-soft) 50%, 
+    var(--color-bg-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonPulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   7. MICRO-INTERACTIONS
+   Мелкие взаимодействия для UX
+   ============================================ */
+
+/* Shake - тряска при ошибке */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Success Bounce - подпрыгивание при успехе */
+@keyframes successBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.animate-success {
+  animation: successBounce 0.5s var(--ease-bounce);
+}
+
+/* Ripple Effect - волновой эффект при клике */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   8. SCROLL-TRIGGERED ANIMATIONS
+   Анимации при скролле (без JS)
+   ============================================ */
+
+/* Reveal on Scroll - базовая анимация */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Children - каскадное появление */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-normal) var(--ease-smooth),
+              transform var(--duration-normal) var(--ease-smooth);
+}
+
+.stagger-children > *:nth-child(1) { transition-delay: calc(var(--delay-step) * 1); }
+.stagger-children > *:nth-child(2) { transition-delay: calc(var(--delay-step) * 2); }
+.stagger-children > *:nth-child(3) { transition-delay: calc(var(--delay-step) * 3); }
+.stagger-children > *:nth-child(4) { transition-delay: calc(var(--delay-step) * 4); }
+.stagger-children > *:nth-child(5) { transition-delay: calc(var(--delay-step) * 5); }
+.stagger-children > *:nth-child(6) { transition-delay: calc(var(--delay-step) * 6); }
+
+.stagger-children.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   9. СПЕЦИАЛЬНЫЕ ЭФФЕКТЫ ДЛЯ КОМПОНЕНТОВ
+   ============================================ */
+
+/* Card Tilt - наклон карточек */
+.card-tilt {
+  transform-style: preserve-3d;
+  transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+.card-tilt:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+}
+
+/* Number Counter Animation - для статистики */
+.animate-count {
+  animation: numberPulse 1s var(--ease-smooth);
+}
+
+/* Badge Pop - появление бейджей */
+@keyframes badgePop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.badge-pop {
+  animation: badgePop var(--duration-normal) var(--ease-bounce);
+}
+
+/* Modal Animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-overlay {
+  animation: modalFadeIn var(--duration-normal) var(--ease-smooth);
+}
+
+.modal-content {
+  animation: modalSlideUp var(--duration-normal) var(--ease-smooth);
+}
+
+/* ============================================
+   10. ACCESSIBILITY
+   Уважение к prefers-reduced-motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float,
+  .animate-pulse,
+  .animate-gradient,
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+/* ============================================
+   11. UTILITY CLASSES
+   Готовые классы для быстрого применения
+   ============================================ */
+
+/* Delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Durations */
+.duration-fast { animation-duration: var(--duration-fast); }
+.duration-normal { animation-duration: var(--duration-normal); }
+.duration-slow { animation-duration: var(--duration-slow); }
+
+/* Hover States */
+.hover-lift {
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-scale {
+  transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-brightness {
+  transition: filter var(--duration-fast) var(--ease-smooth);
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+/* Focus States */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  animation: focusPulse 1s var(--ease-smooth);
+}
+
+@keyframes focusPulse {
+  0%, 100% {
+    outline-color: var(--color-primary);
+  }
+  50% {
+    outline-color: var(--color-accent);
+  }
+}
+
+/* ============================================
+   12. ПРИМЕРЫ ПРИМЕНЕНИЯ
+   Комментарии для разработчиков
+   ============================================ */
+
+/*
+ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ:
+
+1. Карточки при загрузке:
+   <div class="card scroll-reveal">...</div>
+
+2. Кнопки с магнитным эффектом:
+   <button class="btn animate-magnetic animate-icon-bounce">...</button>
+
+3. Секции с каскадным появлением:
+   <div class="stagger-children">
+     <div>Item 1</div>
+     <div>Item 2</div>
+     <div>Item 3</div>
+   </div>
+
+4. Статистика с подсветкой:
+   <div class="stat-value animate-count">500+</div>
+
+5. Линии-разделители:
+   <div class="divider" style="animation: slideReveal 1s ease-out"></div>
+
+6. Hero секция:
+   <section class="hero" style="animation: fadeInUp 1s ease-out"></section>
+
+7. Интерактивные карточки:
+   <div class="card animate-lift card-tilt">...</div>
+
+8. Бейджи/теги:
+   <span class="badge badge-pop">NEW</span>
+*/
+

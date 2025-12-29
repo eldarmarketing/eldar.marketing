@@ -1,12 +1,10 @@
+import { useParams, useNavigate } from 'react-router-dom'
+import { CASES_FULL, CONTACTS } from '../constants/data'
 import './CaseDetail.css'
-import { CASES_FULL, CaseDetail as CaseDetailType } from '../constants/data'
 
-interface CaseDetailProps {
-  caseId: string
-  onNavigate: (page: 'home' | 'services' | 'cases') => void
-}
-
-export default function CaseDetail({ caseId, onNavigate }: CaseDetailProps) {
+export default function CaseDetail() {
+  const { caseId } = useParams<{ caseId: string }>()
+  const navigate = useNavigate()
   const caseData = CASES_FULL.find((c) => c.id === caseId)
 
   if (!caseData) {
@@ -14,7 +12,7 @@ export default function CaseDetail({ caseId, onNavigate }: CaseDetailProps) {
       <div className="case-detail-page">
         <section className="section">
           <div className="container">
-            <button className="back-button" onClick={() => onNavigate('cases')}>
+            <button className="back-button" onClick={() => navigate('/cases')}>
               ← Вернуться к кейсам
             </button>
             <h1>Кейс не найден</h1>
@@ -29,7 +27,7 @@ export default function CaseDetail({ caseId, onNavigate }: CaseDetailProps) {
     <div className="case-detail-page">
       <section className="section">
         <div className="container">
-          <button className="back-button" onClick={() => onNavigate('cases')}>
+          <button className="back-button" onClick={() => navigate('/cases')}>
             ← Вернуться к кейсам
           </button>
 
@@ -131,17 +129,14 @@ export default function CaseDetail({ caseId, onNavigate }: CaseDetailProps) {
             <div className="case-cta">
               <h3>Хотите похожий результат?</h3>
               <p>Обсудим ваш проект и подберём решение</p>
-              <button
+              <a
+                href={CONTACTS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn"
-                onClick={() => {
-                  onNavigate('home')
-                  setTimeout(() => {
-                    document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' })
-                  }, 100)
-                }}
               >
-                Связаться с нами
-              </button>
+                Написать в Telegram
+              </a>
             </div>
           </article>
         </div>

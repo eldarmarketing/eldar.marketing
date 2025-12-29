@@ -1,0 +1,285 @@
+.contract-generator-page {
+  min-height: 100vh;
+  padding-top: clamp(60px, 8vw, 100px);
+  animation: fadeInUp var(--duration-slow) var(--ease-smooth);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contract-header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 4vw, 4rem);
+  animation: fadeInUp var(--duration-slow) var(--ease-smooth) 0.1s backwards;
+}
+
+.contract-header h1 {
+  margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.contract-intro {
+  font-size: clamp(1.125rem, 1.3vw, 1.25rem);
+  color: var(--color-text-light);
+  max-width: clamp(700px, 65vw, 900px);
+  margin: 0 auto clamp(2rem, 2.5vw, 2.5rem);
+  line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.contract-price-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: clamp(0.75rem, 1vw, 1rem);
+  padding: clamp(1rem, 1.5vw, 1.5rem) clamp(2rem, 2.5vw, 2.5rem);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 50%, var(--color-text-light) 100%);
+  color: var(--color-bg);
+  border-radius: 0;
+  border: 2px solid var(--glass-light);
+  box-shadow: 0 8px 24px var(--overlay-darker);
+  animation: scaleFadeIn var(--duration-slow) var(--ease-smooth) 0.2s backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.contract-price-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glass-medium), transparent);
+  animation: shimmer 3s infinite;
+}
+
+.price-label {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-weight: 500;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.price-value {
+  font-size: clamp(1.777rem, 2.5vw, 2.369rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.contract-form {
+  max-width: clamp(900px, 70vw, 1200px);
+  margin: 0 auto;
+  animation: fadeInUp var(--duration-slow) var(--ease-smooth) 0.3s backwards;
+}
+
+.form-section {
+  background: var(--color-bg);
+  border: 1px solid var(--color-gray-light);
+  padding: clamp(2rem, 3vw, 3rem);
+  margin-bottom: clamp(1.5rem, 2vw, 2rem);
+  border-radius: 0;
+  transition: border-color var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-section:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 16px var(--overlay-medium);
+}
+
+.form-section h3 {
+  font-size: clamp(1.333rem, 1.8vw, 1.777rem);
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+  padding-bottom: clamp(0.75rem, 1vw, 1rem);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.section-note {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  color: var(--color-text-muted);
+  margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+  font-style: italic;
+}
+
+.form-group {
+  margin-bottom: clamp(1.25rem, 1.8vw, 1.75rem);
+}
+
+.form-group label {
+  display: block;
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: clamp(0.5rem, 0.7vw, 0.75rem);
+  letter-spacing: -0.01em;
+}
+
+.required {
+  color: var(--color-error);
+  margin-left: 0.25rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: clamp(0.875rem, 1.2vw, 1.125rem) clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0;
+  transition: border-color var(--duration-fast) var(--ease-smooth),
+              box-shadow var(--duration-fast) var(--ease-smooth);
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(50, 50, 50, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 25vw, 280px), 1fr));
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.form-actions {
+  text-align: center;
+  padding: clamp(2rem, 3vw, 3rem) 0;
+}
+
+.btn-generate {
+  padding: clamp(1rem, 1.5vw, 1.25rem) clamp(3rem, 4vw, 4rem);
+  font-size: clamp(1.125rem, 1.3vw, 1.333rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: var(--color-bg);
+  border: 2px solid var(--color-primary);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-smooth);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: inherit;
+  box-shadow: 0 4px 16px var(--overlay-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-generate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-dark) 100%);
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+  z-index: -1;
+}
+
+.btn-generate:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 40px var(--overlay-darkest);
+}
+
+.btn-generate:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.btn-generate:active:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 24px var(--overlay-darker);
+}
+
+.btn-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-note {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  color: var(--color-text-muted);
+  margin-top: clamp(1rem, 1.5vw, 1.5rem);
+  line-height: 1.6;
+}
+
+/* Анимации для полей формы */
+.form-section:nth-child(1) { animation: fadeInUp var(--duration-slow) var(--ease-smooth) 0.3s backwards; }
+.form-section:nth-child(2) { animation: fadeInUp var(--duration-slow) var(--ease-smooth) 0.35s backwards; }
+.form-section:nth-child(3) { animation: fadeInUp var(--duration-slow) var(--ease-smooth) 0.4s backwards; }
+.form-section:nth-child(4) { animation: fadeInUp var(--duration-slow) var(--ease-smooth) 0.45s backwards; }
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .contract-generator-page {
+    padding-top: 80px;
+  }
+
+  .contract-price-badge {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .form-section {
+    padding: var(--spacing-md);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-generate {
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+}
+
+/* Адаптация для больших экранов */
+@media (min-width: 1920px) {
+  .contract-form {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .contract-form {
+    max-width: 1400px;
+  }
+}
+
+/* Анимация для темных элементов */
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+

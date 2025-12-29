@@ -1,5 +1,5 @@
+import { SERVICES_FULL, CONTACTS } from '../constants/data'
 import './Services.css'
-import { SERVICES_FULL } from '../constants/data'
 
 export default function Services() {
 
@@ -27,14 +27,12 @@ export default function Services() {
 
           <div className="services-cta">
             <h2>Готовы обсудить проект?</h2>
-            <p>Свяжитесь с нами удобным способом</p>
+            <p>Свяжитесь со мной удобным способом</p>
             <button
               className="btn"
-              onClick={() => {
-                document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={() => onNavigate?.('contacts')}
             >
-              Связаться
+              Перейти к контактам
             </button>
           </div>
         </div>

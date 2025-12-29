@@ -9,15 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pdfmake": "^0.2.21",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.11.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "terser": "^5.44.1",
     "typescript": "^5.6.3",
     "vite": "^6.0.3"
   }
 }
-
