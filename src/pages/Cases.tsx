@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ALL_CASES_PREVIEW } from '../constants/data'
 import './Cases.css'
 

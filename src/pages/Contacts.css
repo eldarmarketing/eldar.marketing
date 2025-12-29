@@ -302,13 +302,29 @@
 }
 
 .why-icon {
-  font-size: clamp(2.5rem, 3vw, 3.5rem);
-  margin-bottom: var(--spacing-sm);
-  transition: transform var(--duration-fast) var(--ease-elastic);
+  width: clamp(56px, 6vw, 72px);
+  height: clamp(56px, 6vw, 72px);
+  margin: 0 auto var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-soft);
+  color: var(--color-primary);
+  border-radius: 0;
+  transition: transform var(--duration-fast) var(--ease-elastic),
+              background var(--duration-normal) var(--ease-smooth),
+              color var(--duration-normal) var(--ease-smooth);
 }
 
 .why-item:hover .why-icon {
-  transform: scale(1.2) rotate(-5deg);
+  transform: scale(1.1) rotate(-5deg);
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.why-icon svg {
+  width: clamp(32px, 4vw, 40px);
+  height: clamp(32px, 4vw, 40px);
 }
 
 .why-item h3 {
@@ -438,7 +454,13 @@
   }
 
   .why-icon {
-    font-size: 2.5rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  .why-icon svg {
+    width: 32px;
+    height: 32px;
   }
 
   .contacts-cta {

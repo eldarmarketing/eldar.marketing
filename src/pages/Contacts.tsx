@@ -121,22 +121,38 @@ export default function Contacts() {
               <h2>Почему выбирают меня</h2>
               <div className="why-grid">
                 <div className="why-item">
-                  <div className="why-icon">⚡</div>
+                  <div className="why-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" fill="currentColor"/>
+                    </svg>
+                  </div>
                   <h3>Быстрая связь</h3>
                   <p>Отвечаю в течение нескольких часов. Всегда на связи в рабочее время.</p>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon">🎯</div>
+                  <div className="why-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z" fill="currentColor"/>
+                    </svg>
+                  </div>
                   <h3>Индивидуальный подход</h3>
                   <p>Каждый проект уникален. Разрабатываю решения под ваши задачи.</p>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon">💼</div>
+                  <div className="why-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM7 10H9V17H7V10ZM11 7H13V17H11V7ZM15 13H17V17H15V13Z" fill="currentColor"/>
+                    </svg>
+                  </div>
                   <h3>Прозрачность</h3>
                   <p>Честные сроки, понятные цены, регулярные отчеты о ходе работы.</p>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon">🚀</div>
+                  <div className="why-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="currentColor"/>
+                    </svg>
+                  </div>
                   <h3>Результат</h3>
                   <p>Фокус на достижение ваших бизнес-целей, а не просто выполнение задач.</p>
                 </div>

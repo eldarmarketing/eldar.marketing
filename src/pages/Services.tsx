@@ -1,7 +1,9 @@
-import { SERVICES_FULL, CONTACTS } from '../constants/data'
+import { useNavigate } from 'react-router-dom'
+import { SERVICES_FULL } from '../constants/data'
 import './Services.css'
 
 export default function Services() {
+  const navigate = useNavigate()
 
   return (
     <div className="services">
@@ -30,7 +32,7 @@ export default function Services() {
             <p>Свяжитесь со мной удобным способом</p>
             <button
               className="btn"
-              onClick={() => onNavigate?.('contacts')}
+              onClick={() => navigate('/contacts')}
             >
               Перейти к контактам
             </button>
