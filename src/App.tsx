@@ -9,6 +9,8 @@ import CaseDetail from './pages/CaseDetail'
 import Contacts from './pages/Contacts'
 import ContractGenerator from './pages/ContractGenerator'
 import LogoDemo from './pages/LogoDemo'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/cases" element={<Cases />} />
           <Route path="/cases/:caseId" element={<CaseDetail />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:postId" element={<BlogPost />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/contract" element={<ContractGenerator />} />
           <Route path="/logo-demo" element={<LogoDemo />} />

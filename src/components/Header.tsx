@@ -36,26 +36,32 @@ export default function Header() {
           </Link>
 
           <nav className="nav-desktop">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className={`nav-link ${isActive('/') ? 'active' : ''}`}
             >
               Главная
             </Link>
-            <Link 
-              to="/services" 
+            <Link
+              to="/services"
               className={`nav-link ${isActive('/services') ? 'active' : ''}`}
             >
               Услуги
             </Link>
-            <Link 
-              to="/cases" 
+            <Link
+              to="/cases"
               className={`nav-link ${isActive('/cases') || location.pathname.startsWith('/cases/') ? 'active' : ''}`}
             >
               Кейсы
             </Link>
-            <Link 
-              to="/contacts" 
+            <Link
+              to="/blog"
+              className={`nav-link ${isActive('/blog') || location.pathname.startsWith('/blog/') ? 'active' : ''}`}
+            >
+              Блог
+            </Link>
+            <Link
+              to="/contacts"
               className={`nav-link ${isActive('/contacts') ? 'active' : ''}`}
             >
               Контакты
@@ -84,37 +90,44 @@ export default function Header() {
 
         {isMobileMenuOpen && (
           <nav className="nav-mobile">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className={isActive('/') ? 'active' : ''}
               onClick={closeMobileMenu}
             >
               Главная
             </Link>
-            <Link 
-              to="/services" 
+            <Link
+              to="/services"
               className={isActive('/services') ? 'active' : ''}
               onClick={closeMobileMenu}
             >
               Услуги
             </Link>
-            <Link 
-              to="/cases" 
+            <Link
+              to="/cases"
               className={isActive('/cases') || location.pathname.startsWith('/cases/') ? 'active' : ''}
               onClick={closeMobileMenu}
             >
               Кейсы
             </Link>
-            <Link 
-              to="/contacts" 
+            <Link
+              to="/blog"
+              className={isActive('/blog') || location.pathname.startsWith('/blog/') ? 'active' : ''}
+              onClick={closeMobileMenu}
+            >
+              Блог
+            </Link>
+            <Link
+              to="/contacts"
               className={isActive('/contacts') ? 'active' : ''}
               onClick={closeMobileMenu}
             >
               Контакты
             </Link>
-            <a 
-              href={CONTACTS.telegram} 
-              target="_blank" 
+            <a
+              href={CONTACTS.telegram}
+              target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
               style={{ marginTop: 'var(--spacing-sm)' }}
