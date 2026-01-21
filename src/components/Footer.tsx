@@ -84,6 +84,12 @@ export default function Footer() {
                 >
                   Правовая информация
                 </button>
+                <Link 
+                  to="/privacy"
+                  className="footer-bottom-link"
+                >
+                  Политика конфиденциальности
+                </Link>
               </div>
             </div>
           </div>

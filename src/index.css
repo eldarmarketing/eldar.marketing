@@ -10,7 +10,9 @@
 @import './animations.css';
 
 /* Reset & Base */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -27,67 +29,85 @@
   --color-text: #323232;
   --color-text-light: #555555;
   --color-text-muted: #757575;
-  --color-gray-light: #e8e8e8;
-  --color-gray-mid: #8a8a8a;
-  --color-border: #e0e0e0;
+  --color-gray-light: #f0f0f0;
+  --color-gray-mid: #9a9a9a;
+  --color-border: #ececec;
   --color-success: #27ae60;
   --color-error: #e74c3c;
   --color-warning: #f39c12;
-  
+
   /* Прозрачные оттенки для единообразия */
   --overlay-light: rgba(0, 0, 0, 0.05);
   --overlay-medium: rgba(0, 0, 0, 0.08);
   --overlay-dark: rgba(0, 0, 0, 0.12);
   --overlay-darker: rgba(0, 0, 0, 0.2);
   --overlay-darkest: rgba(0, 0, 0, 0.3);
-  
+
   --glass-light: rgba(255, 255, 255, 0.08);
   --glass-medium: rgba(255, 255, 255, 0.12);
   --glass-strong: rgba(255, 255, 255, 0.2);
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-bright: rgba(255, 255, 255, 0.98);
-  
+
   /* Fluid Spacing - масштабируется для всех экранов */
-  --spacing-xs: clamp(0.5rem, 0.5vw, 0.75rem);       /* 8px - 12px */
-  --spacing-sm: clamp(1rem, 1vw, 1.25rem);           /* 16px - 20px */
-  --spacing-md: clamp(1.5rem, 2vw, 2rem);            /* 24px - 32px */
-  --spacing-lg: clamp(3rem, 4vw, 5rem);              /* 48px - 80px */
-  --spacing-xl: clamp(5rem, 6vw, 8rem);              /* 80px - 128px */
-  --spacing-2xl: clamp(7rem, 8vw, 10rem);            /* 112px - 160px */
-  
+  --spacing-xs: clamp(0.5rem, 0.5vw, 0.75rem);
+  /* 8px - 12px */
+  --spacing-sm: clamp(1rem, 1vw, 1.25rem);
+  /* 16px - 20px */
+  --spacing-md: clamp(1.5rem, 2vw, 2rem);
+  /* 24px - 32px */
+  --spacing-lg: clamp(3rem, 4vw, 5rem);
+  /* 48px - 80px */
+  --spacing-xl: clamp(5rem, 6vw, 8rem);
+  /* 80px - 128px */
+  --spacing-2xl: clamp(7rem, 8vw, 10rem);
+  /* 112px - 160px */
+
   /* Typography Scale - Perfect Fourth (1.333) - fluid sizing */
-  --text-xs: clamp(0.75rem, 0.8vw, 0.875rem);        /* 12px - 14px */
-  --text-sm: clamp(0.875rem, 0.9vw, 1rem);           /* 14px - 16px */
-  --text-base: clamp(1rem, 1.1vw, 1.125rem);         /* 16px - 18px */
-  --text-lg: clamp(1.125rem, 1.2vw, 1.333rem);       /* 18px - 21px */
-  --text-xl: clamp(1.333rem, 1.4vw, 1.5rem);         /* 21px - 24px */
-  --text-2xl: clamp(1.777rem, 1.8vw, 2rem);          /* 28px - 32px */
-  --text-3xl: clamp(2.369rem, 2.5vw, 3rem);          /* 38px - 48px */
-  --text-4xl: clamp(3.157rem, 3.5vw, 4.5rem);        /* 50px - 72px */
-  
+  --text-xs: clamp(0.75rem, 0.8vw, 0.875rem);
+  /* 12px - 14px */
+  --text-sm: clamp(0.875rem, 0.9vw, 1rem);
+  /* 14px - 16px */
+  --text-base: clamp(1rem, 1.1vw, 1.125rem);
+  /* 16px - 18px */
+  --text-lg: clamp(1.125rem, 1.2vw, 1.333rem);
+  /* 18px - 21px */
+  --text-xl: clamp(1.333rem, 1.4vw, 1.5rem);
+  /* 21px - 24px */
+  --text-2xl: clamp(1.777rem, 1.8vw, 2rem);
+  /* 28px - 32px */
+  --text-3xl: clamp(2.369rem, 2.5vw, 3rem);
+  /* 38px - 48px */
+  --text-4xl: clamp(3.157rem, 3.5vw, 4.5rem);
+  /* 50px - 72px */
+
   /* Layout - адаптивная max-width для больших экранов */
   --max-width: clamp(1200px, 75vw, 1600px);
   --max-width-text: clamp(900px, 60vw, 1200px);
   --max-width-narrow: clamp(700px, 50vw, 900px);
-  
-  /* Border Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-  
-  /* Shadows - единые значения */
-  --shadow-sm: 0 2px 8px var(--overlay-medium);
-  --shadow-md: 0 4px 16px var(--overlay-dark);
-  --shadow-lg: 0 12px 32px var(--overlay-darker);
-  
-  /* Transitions */
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Border Radius - Квадратный стиль */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-full: 0;
+
+  /* Shadows - Мягкие и нежные */
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* Transitions - Плавные */
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -110,12 +130,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.01em;
-  overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
+  overflow-x: hidden;
+  /* Предотвращаем горизонтальный скролл */
   width: 100%;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
@@ -237,25 +263,25 @@ a.logo:hover {
   }
 }
 
-/* Button - Единый стиль для всех темных кнопок */
+/* Button - Мягкий и минималистичный стиль */
 .btn {
   display: inline-block;
   padding: clamp(0.875rem, 1vw + 0.25rem, 1.25rem) clamp(2rem, 2.5vw, 3rem);
   font-size: clamp(1rem, 1vw + 0.125rem, 1.125rem);
   font-weight: 600;
   text-align: center;
-  border: 2px solid var(--color-primary);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  border: 1px solid rgba(50, 50, 50, 0.15);
+  background: var(--color-primary);
   color: var(--color-bg);
   cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-smooth);
+  transition: var(--transition);
   font-family: inherit;
   border-radius: 0;
   position: relative;
   letter-spacing: -0.01em;
   line-height: 1.5;
   white-space: nowrap;
-  box-shadow: 0 2px 8px var(--overlay-medium);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn::before {
@@ -273,9 +299,9 @@ a.logo:hover {
 
 .btn:hover {
   opacity: 1;
-  border-color: var(--color-accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px var(--overlay-darker);
+  background: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn:hover::before {
@@ -283,14 +309,14 @@ a.logo:hover {
 }
 
 .btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px var(--overlay-darker);
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-outline {
   background: transparent;
   color: var(--color-primary);
-  border: 2px solid var(--color-primary);
+  border: 1px solid rgba(50, 50, 50, 0.2);
   box-shadow: none;
 }
 
@@ -301,32 +327,68 @@ a.logo:hover {
 
 .btn-outline:hover {
   color: var(--color-bg) !important;
-  border-color: var(--color-primary);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px var(--overlay-darker);
+  background: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-outline:hover::before {
   opacity: 1;
 }
 
-/* Card */
-.card {
-  padding: clamp(1.5rem, 2vw, 2.5rem);
+/* Кнопки для темных секций (инвертированные) */
+.btn-white {
   background: var(--color-bg);
-  border: 1px solid var(--color-gray-light);
+  color: var(--color-primary);
+  border-color: var(--color-bg);
+}
+
+.btn-white:hover {
+  background: var(--color-bg-soft) !important;
+  color: var(--color-primary) !important;
+  border-color: var(--color-bg-soft) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.btn-white::before {
+  display: none;
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: var(--color-bg);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+}
+
+.btn-outline-white:hover {
+  background: var(--color-bg);
+  color: var(--color-primary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+  border-color: var(--color-bg);
+}
+
+.btn-outline-white::before {
+  display: none;
+}
+
+/* Card - Мягкие и воздушные */
+.card {
+  padding: clamp(2rem, 2.5vw, 3rem);
+  background: var(--color-bg);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 0;
-  transition: border-color var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-normal) var(--ease-smooth),
-              box-shadow var(--duration-normal) var(--ease-smooth);
+  transition: var(--transition);
   width: 100%;
   box-sizing: border-box;
 }
 
 .card:hover {
-  border-color: var(--color-primary);
+  border-color: rgba(50, 50, 50, 0.12);
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px var(--overlay-medium);
+  box-shadow: var(--shadow-lg);
 }
 
 .card h3 {
@@ -370,7 +432,7 @@ a.logo:hover {
   .grid {
     gap: var(--spacing-sm);
   }
-  
+
   .grid-2,
   .grid-3 {
     grid-template-columns: 1fr;
@@ -382,7 +444,7 @@ a.logo:hover {
   .grid-2 {
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   }
-  
+
   .grid-3 {
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   }
@@ -409,6 +471,7 @@ a.logo:hover {
 
 /* Smooth scroll animations - Using unified animation system */
 @media (prefers-reduced-motion: no-preference) {
+
   .card,
   .case-card,
   .approach-item,
@@ -419,25 +482,53 @@ a.logo:hover {
 
   .card:nth-child(1),
   .case-card:nth-child(1),
-  .service-card:nth-child(1) { animation-delay: calc(var(--delay-step) * 0.5); }
-  
+  .service-card:nth-child(1) {
+    animation-delay: calc(var(--delay-step) * 0.5);
+  }
+
   .card:nth-child(2),
   .case-card:nth-child(2),
-  .service-card:nth-child(2) { animation-delay: calc(var(--delay-step) * 1); }
-  
+  .service-card:nth-child(2) {
+    animation-delay: calc(var(--delay-step) * 1);
+  }
+
   .card:nth-child(3),
   .case-card:nth-child(3),
-  .service-card:nth-child(3) { animation-delay: calc(var(--delay-step) * 1.5); }
-  
-  .card:nth-child(4) { animation-delay: calc(var(--delay-step) * 2); }
-  .card:nth-child(5) { animation-delay: calc(var(--delay-step) * 2.5); }
-  .card:nth-child(6) { animation-delay: calc(var(--delay-step) * 3); }
+  .service-card:nth-child(3) {
+    animation-delay: calc(var(--delay-step) * 1.5);
+  }
 
-  .approach-item:nth-child(1) { animation-delay: calc(var(--delay-step) * 0.5); }
-  .approach-item:nth-child(2) { animation-delay: calc(var(--delay-step) * 1); }
-  .approach-item:nth-child(3) { animation-delay: calc(var(--delay-step) * 1.5); }
-  .approach-item:nth-child(4) { animation-delay: calc(var(--delay-step) * 2); }
-  .approach-item:nth-child(5) { animation-delay: calc(var(--delay-step) * 2.5); }
+  .card:nth-child(4) {
+    animation-delay: calc(var(--delay-step) * 2);
+  }
+
+  .card:nth-child(5) {
+    animation-delay: calc(var(--delay-step) * 2.5);
+  }
+
+  .card:nth-child(6) {
+    animation-delay: calc(var(--delay-step) * 3);
+  }
+
+  .approach-item:nth-child(1) {
+    animation-delay: calc(var(--delay-step) * 0.5);
+  }
+
+  .approach-item:nth-child(2) {
+    animation-delay: calc(var(--delay-step) * 1);
+  }
+
+  .approach-item:nth-child(3) {
+    animation-delay: calc(var(--delay-step) * 1.5);
+  }
+
+  .approach-item:nth-child(4) {
+    animation-delay: calc(var(--delay-step) * 2);
+  }
+
+  .approach-item:nth-child(5) {
+    animation-delay: calc(var(--delay-step) * 2.5);
+  }
 }
 
 /* Selection color */
@@ -450,4 +541,3 @@ a.logo:hover {
   background-color: var(--color-primary);
   color: var(--color-bg);
 }
-

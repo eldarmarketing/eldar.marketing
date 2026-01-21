@@ -1,0 +1,57 @@
+/* Scroll Progress Bar - Минималистичный индикатор прогресса чтения */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  transition: width 0.1s ease-out;
+  transform-origin: left;
+  box-shadow: 0 0 8px rgba(50, 50, 50, 0.3);
+}
+
+/* Плавное появление при загрузке */
+@keyframes progressBarFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.scroll-progress-bar {
+  animation: progressBarFadeIn 0.5s ease-out;
+}
+
+/* Не показываем, если страница не прокручивается */
+@media (max-height: 2000px) {
+  .scroll-progress-bar {
+    display: block;
+  }
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .scroll-progress-bar {
+    height: 2px;
+  }
+}
+
+/* Accessibility - убираем при prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-fill {
+    transition: none;
+  }
+}
+
+
+

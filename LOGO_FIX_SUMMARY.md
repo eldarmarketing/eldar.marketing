@@ -108,3 +108,5 @@ document.querySelector('.logo-advanced img').style.transition
 
 **Теперь всё должно работать! 🎉**
 
+
+

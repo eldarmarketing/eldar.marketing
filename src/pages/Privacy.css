@@ -1,0 +1,274 @@
+/* Privacy Policy Page */
+.privacy {
+  min-height: calc(100vh - 200px);
+  padding: var(--spacing-lg) 0;
+}
+
+.privacy-container {
+  max-width: var(--max-width-text);
+}
+
+.privacy h1 {
+  font-size: clamp(2rem, 3vw + 1rem, 3.5rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  letter-spacing: -0.025em;
+}
+
+.privacy-date {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.privacy-date p {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.privacy-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.privacy-section h2 {
+  font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+.privacy-section p {
+  font-size: clamp(1rem, 1vw + 0.125rem, 1.125rem);
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.privacy-section ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-md);
+}
+
+.privacy-section li {
+  font-size: clamp(1rem, 1vw + 0.125rem, 1.125rem);
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.privacy-section li strong {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.privacy-section a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.2s ease;
+  font-weight: 500;
+}
+
+.privacy-section a:hover {
+  opacity: 0.7;
+}
+
+/* Operator Info */
+.operator-info,
+.bank-info {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-gray-light);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  border-radius: 0;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-value {
+  font-size: clamp(1rem, 1vw + 0.125rem, 1.125rem);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.info-value a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.info-value a:hover {
+  opacity: 0.7;
+}
+
+/* Contact Details */
+.contact-details {
+  background: var(--color-bg-soft);
+  border-left: 3px solid var(--color-primary);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+.contact-details p {
+  margin-bottom: var(--spacing-xs);
+  font-size: clamp(1rem, 1vw + 0.125rem, 1.125rem);
+}
+
+.contact-details p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-details strong {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.contact-details a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.contact-details a:hover {
+  opacity: 0.7;
+}
+
+/* Footer */
+.privacy-footer {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid var(--color-gray-light);
+  text-align: center;
+}
+
+.privacy-footer p {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .privacy {
+    padding: var(--spacing-md) 0;
+  }
+
+  .privacy-section {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .privacy-section ul {
+    padding-left: var(--spacing-sm);
+  }
+
+  .operator-info,
+  .bank-info {
+    padding: var(--spacing-sm);
+  }
+
+  .info-row {
+    gap: calc(var(--spacing-xs) / 2);
+    margin-bottom: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
+  }
+
+  .contact-details {
+    padding: var(--spacing-sm);
+  }
+
+  .privacy-footer {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+  }
+}
+
+/* Desktop large screens */
+@media (min-width: 1920px) {
+  .privacy-container {
+    max-width: 1200px;
+  }
+
+  .operator-info,
+  .bank-info {
+    padding: clamp(1.5rem, 2vw, 2.5rem);
+  }
+
+  .info-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .info-label {
+    flex: 0 0 200px;
+  }
+
+  .info-value {
+    flex: 1;
+    text-align: right;
+  }
+}
+
+/* Print styles */
+@media print {
+  .privacy {
+    padding: 0;
+  }
+
+  .privacy-section {
+    page-break-inside: avoid;
+  }
+
+  .privacy-section a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .privacy-section a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: var(--color-text-muted);
+  }
+}
+
+/* Smooth scroll for internal links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+.privacy ::selection {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+
+

@@ -73,26 +73,36 @@
   display: flex;
   align-items: center;
   gap: clamp(1.5rem, 2vw, 2rem);
-  padding: clamp(1.5rem, 2vw, 2rem);
+  padding: clamp(2rem, 2.5vw, 2.5rem);
   background: var(--color-bg);
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 0;
-  transition: border-color var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-normal) var(--ease-smooth),
-              box-shadow var(--duration-normal) var(--ease-smooth);
+  transition: var(--transition);
   animation: fadeInLeft var(--duration-slow) var(--ease-smooth) backwards;
   width: 100%;
   box-sizing: border-box;
 }
 
-.contact-method:nth-child(1) { animation-delay: 0.3s; }
-.contact-method:nth-child(2) { animation-delay: 0.35s; }
-.contact-method:nth-child(3) { animation-delay: 0.4s; }
+.contact-method:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.contact-method:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.contact-method:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.contact-method:nth-child(4) {
+  animation-delay: 0.45s;
+}
 
 .contact-method:hover {
-  border-color: var(--color-primary);
-  transform: translateX(8px);
-  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
+  border-color: rgba(50, 50, 50, 0.12);
+  transform: translateX(6px);
+  box-shadow: var(--shadow-md);
 }
 
 .contact-icon {
@@ -106,7 +116,7 @@
   color: var(--color-primary);
   border-radius: 0;
   transition: background var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-fast) var(--ease-smooth);
+    transform var(--duration-fast) var(--ease-smooth);
 }
 
 .contact-method:hover .contact-icon {
@@ -142,22 +152,20 @@
 
 /* Карточка информации о компании */
 .company-info-card {
-  padding: clamp(2rem, 3vw, 3.5rem);
+  padding: clamp(2.5rem, 3.5vw, 4rem);
   background: var(--color-bg);
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 0;
-  transition: border-color var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-normal) var(--ease-smooth),
-              box-shadow var(--duration-normal) var(--ease-smooth);
+  transition: var(--transition);
   animation: fadeInRight var(--duration-slow) var(--ease-smooth) 0.4s backwards;
   width: 100%;
   box-sizing: border-box;
 }
 
 .company-info-card:hover {
-  border-color: var(--color-primary);
+  border-color: rgba(50, 50, 50, 0.12);
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
 }
 
 .company-name {
@@ -195,8 +203,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: background var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-fast) var(--ease-smooth),
-              box-shadow var(--duration-normal) var(--ease-smooth);
+    transform var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-normal) var(--ease-smooth);
   font-family: inherit;
   letter-spacing: -0.01em;
   margin-bottom: var(--spacing-md);
@@ -277,28 +285,37 @@
 }
 
 .why-item {
-  padding: clamp(2rem, 3vw, 3.5rem);
+  padding: clamp(2.5rem, 3.5vw, 4rem);
   background: var(--color-bg);
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 0;
   text-align: center;
-  transition: border-color var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-normal) var(--ease-smooth),
-              box-shadow var(--duration-normal) var(--ease-smooth);
+  transition: var(--transition);
   animation: scaleFadeIn var(--duration-slow) var(--ease-smooth) backwards;
   width: 100%;
   box-sizing: border-box;
 }
 
-.why-item:nth-child(1) { animation-delay: 0.6s; }
-.why-item:nth-child(2) { animation-delay: 0.65s; }
-.why-item:nth-child(3) { animation-delay: 0.7s; }
-.why-item:nth-child(4) { animation-delay: 0.75s; }
+.why-item:nth-child(1) {
+  animation-delay: 0.6s;
+}
+
+.why-item:nth-child(2) {
+  animation-delay: 0.65s;
+}
+
+.why-item:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+.why-item:nth-child(4) {
+  animation-delay: 0.75s;
+}
 
 .why-item:hover {
-  border-color: var(--color-primary);
-  transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-color: rgba(50, 50, 50, 0.12);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
 }
 
 .why-icon {
@@ -312,8 +329,8 @@
   color: var(--color-primary);
   border-radius: 0;
   transition: transform var(--duration-fast) var(--ease-elastic),
-              background var(--duration-normal) var(--ease-smooth),
-              color var(--duration-normal) var(--ease-smooth);
+    background var(--duration-normal) var(--ease-smooth),
+    color var(--duration-normal) var(--ease-smooth);
 }
 
 .why-item:hover .why-icon {
@@ -352,7 +369,7 @@
 /* CTA блок */
 .contacts-cta {
   text-align: center;
-  padding: clamp(3rem, 5vw, 5rem);
+  padding: clamp(4rem, 6vw, 6rem);
   background: var(--color-primary);
   color: var(--color-bg);
   border-radius: 0;
@@ -390,30 +407,7 @@
   flex-wrap: wrap;
 }
 
-.btn-primary {
-  background: var(--color-bg);
-  color: var(--color-primary);
-  border-color: var(--color-bg);
-}
-
-.btn-primary:hover {
-  background: var(--color-bg-soft);
-  border-color: var(--color-bg-soft);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-}
-
-.contacts-cta .btn-outline {
-  border-color: var(--color-bg);
-  color: var(--color-bg);
-}
-
-.contacts-cta .btn-outline:hover {
-  background: var(--color-bg);
-  color: var(--color-primary);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-}
+/* Button styles now handled globally by .btn-white and .btn-outline-white in index.css */
 
 /* Мобильная версия */
 @media (max-width: 768px) {
@@ -480,4 +474,3 @@
     transform: translateX(4px);
   }
 }
-

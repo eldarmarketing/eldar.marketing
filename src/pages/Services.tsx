@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { SERVICES_FULL } from '../constants/data'
 import './Services.css'
 
@@ -16,14 +16,18 @@ export default function Services() {
 
           <div className="services-grid">
             {SERVICES_FULL.map((service) => (
-              <div key={service.id} className="service-card">
+              <Link
+                key={service.id}
+                to={`/services/${service.id}`}
+                className="service-card"
+              >
                 <h2>{service.title}</h2>
                 <ul>
                   {service.items.map((item, itemIndex) => (
                     <li key={itemIndex}>{item}</li>
                   ))}
                 </ul>
-              </div>
+              </Link>
             ))}
           </div>
 

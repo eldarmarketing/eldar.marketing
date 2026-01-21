@@ -1,0 +1,65 @@
+/* Scroll Reveal - Анимации появления при скролле */
+
+.scroll-reveal-wrapper {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+/* Fade In Up - базовая анимация */
+.scroll-reveal-wrapper.fadeInUp {
+  transform: translateY(40px);
+}
+
+.scroll-reveal-wrapper.fadeInUp.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade In Left - появление слева */
+.scroll-reveal-wrapper.fadeInLeft {
+  transform: translateX(-40px);
+}
+
+.scroll-reveal-wrapper.fadeInLeft.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade In Right - появление справа */
+.scroll-reveal-wrapper.fadeInRight {
+  transform: translateX(40px);
+}
+
+.scroll-reveal-wrapper.fadeInRight.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale In - увеличение */
+.scroll-reveal-wrapper.scaleIn {
+  transform: scale(0.9);
+}
+
+.scroll-reveal-wrapper.scaleIn.is-revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Revealed state */
+.scroll-reveal-wrapper.is-revealed {
+  opacity: 1;
+}
+
+/* Accessibility - убираем анимации при prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-wrapper {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+
+
