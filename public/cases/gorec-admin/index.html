@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Админка интернет-магазина Горец.Маркет — 26 контроллеров под ключ — Эльдар Маркетинг</title>
+    <meta name="description" content="Кастомная админ-панель для магазина натуральных продуктов: дашборд с KPI, заказы в модалках, каталог 150&#43; товаров, финансы, рассылки.">
+    <meta name="keywords" content="админка, горец маркет, rails, интернет-магазин, панель управления">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/gorec-admin/">
+    
+    
+    <meta property="og:title" content="Админка интернет-магазина Горец.Маркет — 26 контроллеров под ключ">
+    <meta property="og:description" content="Кастомная админ-панель для магазина натуральных продуктов: дашборд с KPI, заказы в модалках, каталог 150&#43; товаров, финансы, рассылки.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/gorec-admin/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Админка интернет-магазина Горец.Маркет — 26 контроллеров под ключ">
+    <meta name="twitter:description" content="Кастомная админ-панель для магазина натуральных продуктов: дашборд с KPI, заказы в модалках, каталог 150&#43; товаров, финансы, рассылки.">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>Админка интернет-магазина Горец.Маркет — 26 контроллеров под ключ</span>
+</nav>
+
+<article class="case-study">
+    <h2>Админка интернет-магазина Горец.Маркет — 26 контроллеров под ключ</h2>
+    <p class="meta">Март 2026</p>
+    <p>Горец.Маркет — магазин натуральных продуктов из гор Кавказа. Владелец вёл заказы в заметках телефона. Каталог — в Excel. Остатки путались, клиенты терялись.</p>
+<p>Мы собрали кастомную админку на Rails. 26 контроллеров, адаптивная — он управляет магазином с телефона между доставками.</p>
+<p><img src="/images/cases/gorec-admin/orders.png" alt="Заказы в админке Горец.Маркет"></p>
+<h2 id="задача">Задача</h2>
+<p>Владелец магазина работает один. Принимает заказы, ведёт каталог, запускает рассылки, считает закупки. Всё это было разбросано между Excel, заметками и мессенджерами.</p>
+<p>Нужна единая панель, которая закрывает все процессы — от приёма заказа до аналитики продаж. И чтобы работала с телефона.</p>
+<h2 id="что-было">Что было</h2>
+<ul>
+<li>Заказы — в заметках телефона и сообщениях</li>
+<li>Каталог товаров — Excel-таблица</li>
+<li>Остатки — в голове</li>
+<li>Аналитика — никакой</li>
+<li>Рассылки — вручную</li>
+</ul>
+<h2 id="что-сделали">Что сделали</h2>
+<h3 id="дашборд-с-живыми-kpi">Дашборд с живыми KPI</h3>
+<p>Выручка, количество заказов, средний чек, новые клиенты. Каждая метрика — с процентом роста относительно прошлого периода. Переключатель: неделя, месяц, 3 месяца, полгода, год. График выручки по дням. Топ-5 товаров.</p>
+<p>Владелец заметил, что по пятницам заказов вдвое больше — стал запускать рассылки по четвергам.</p>
+<h3 id="заказы-в-модалках">Заказы в модалках</h3>
+<p>15-20 заказов в день. Каждый переход на отдельную страницу крал секунды. Сделали модалки — поменял статус, отредактировал, закрыл — следующий. Turbo Stream, без перезагрузки страницы.</p>
+<p>Фильтрация по статусам, поиск, пагинация. Счётчики по каждому статусу прямо в шапке.</p>
+<h3 id="каталог-150-товаров">Каталог ~150 товаров</h3>
+<p>Дерево категорий. Массовое редактирование — поменять цены или остатки у 30 позиций за раз. Мягкое удаление с восстановлением, если ошибся. Фотки — drag-n-drop с автоматической генерацией превью.</p>
+<h3 id="продажи-и-коммуникации">Продажи и коммуникации</h3>
+<ul>
+<li>Рассылки — создание и отправка email-кампаний</li>
+<li>Отзывы — бейдж с числом непрочитанных, чтобы не забывать отвечать</li>
+<li>Подписки на товары — уведомления о появлении в наличии</li>
+<li>Чат с клиентами</li>
+</ul>
+<h3 id="финансы">Финансы</h3>
+<p>Закупки у поставщиков с позициями. Учёт расходов. Бонусная программа с историей начислений. Статистика продаж по каждому товару.</p>
+<h3 id="сервисная-секция">Сервисная секция</h3>
+<p>Вынесли в админку Sidekiq, PgHero и лог ошибок — чтобы видеть проблемы удалённо, не заходя на сервер.</p>
+<h2 id="результат">Результат</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Было</th>
+          <th>Стало</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Заказы в заметках</td>
+          <td>Единая панель с модалками</td>
+      </tr>
+      <tr>
+          <td>Каталог в Excel</td>
+          <td>150+ товаров, массовое редактирование</td>
+      </tr>
+      <tr>
+          <td>Аналитики нет</td>
+          <td>Дашборд с KPI и графиками</td>
+      </tr>
+      <tr>
+          <td>Рассылки вручную</td>
+          <td>Встроенный email-маркетинг</td>
+      </tr>
+      <tr>
+          <td>Только с ноутбука</td>
+          <td>Адаптивная — работает с телефона</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="технический-стек">Технический стек</h2>
+<ul>
+<li>Ruby on Rails 7.2</li>
+<li>React 19 + Vite</li>
+<li>TailwindCSS 4</li>
+<li>Turbo Stream (Hotwire)</li>
+<li>Stimulus</li>
+<li>Docker</li>
+<li>Sidekiq + PgHero</li>
+</ul>
+<h2 id="хотите-так-же">Хотите так же?</h2>
+<p>Напишите @eldarmarketing_bot — обсудим вашу задачу.</p>
+
+</article>
+
+<style>
+ 
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(0,0,0,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(0,0,0,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(0,0,0,0.2);
+}
+
+ 
+html.dark .breadcrumb { color: rgba(255,255,255,0.4); }
+html.dark .breadcrumb a { color: rgba(255,255,255,0.5); }
+html.dark .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+html.dark .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+ 
+@media (prefers-color-scheme: dark) {
+    html:not(.light) .breadcrumb { color: rgba(255,255,255,0.4); }
+    html:not(.light) .breadcrumb a { color: rgba(255,255,255,0.5); }
+    html:not(.light) .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    html:not(.light) .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+}
+
+ 
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+html.dark .case-study img {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+html.dark .case-study img:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+html.dark .case-study img[alt*="Мобильная"],
+html.dark .case-study img[alt*="mobile"] {
+    border-color: #333;
+}
+
+ 
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "Админка интернет-магазина Горец.Маркет — 26 контроллеров под ключ" }
+    ]
+}
+</script>
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

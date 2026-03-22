@@ -107,20 +107,34 @@
 .breadcrumb {
     font-size: 13px;
     margin-bottom: 32px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(0,0,0,0.4);
     font-family: "Fira Code", monospace;
 }
 .breadcrumb a {
-    color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.5);
     text-decoration: none;
     transition: color 0.15s;
 }
 .breadcrumb a:hover {
-    color: rgba(255,255,255,0.85);
+    color: rgba(0,0,0,0.85);
 }
 .breadcrumb .sep {
     margin: 0 8px;
-    color: rgba(255,255,255,0.25);
+    color: rgba(0,0,0,0.2);
+}
+
+ 
+html.dark .breadcrumb { color: rgba(255,255,255,0.4); }
+html.dark .breadcrumb a { color: rgba(255,255,255,0.5); }
+html.dark .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+html.dark .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+ 
+@media (prefers-color-scheme: dark) {
+    html:not(.light) .breadcrumb { color: rgba(255,255,255,0.4); }
+    html:not(.light) .breadcrumb a { color: rgba(255,255,255,0.5); }
+    html:not(.light) .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    html:not(.light) .breadcrumb .sep { color: rgba(255,255,255,0.25); }
 }
 
  
@@ -131,13 +145,10 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.06);
 }
-
 .case-study img:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-
- 
 .case-study img[alt*="Главная"],
 .case-study img[alt*="hero"],
 .case-study img[alt*="Результат"] {
@@ -147,8 +158,6 @@
     width: calc(100% + 80px);
     border-radius: 16px;
 }
-
- 
 .case-study img[alt*="Мобильная"],
 .case-study img[alt*="mobile"] {
     max-width: 360px;
@@ -158,32 +167,16 @@
     border: 8px solid #1a1a1a;
 }
 
- 
-@media (prefers-color-scheme: dark) {
-    .breadcrumb { color: rgba(255,255,255,0.4); }
-    .breadcrumb a { color: rgba(255,255,255,0.5); }
-    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-    .breadcrumb .sep { color: rgba(255,255,255,0.25); }
-
-    .case-study img {
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-        border-color: rgba(255, 255, 255, 0.08);
-    }
-    .case-study img:hover {
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    .case-study img[alt*="Мобильная"],
-    .case-study img[alt*="mobile"] {
-        border-color: #333;
-    }
+html.dark .case-study img {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.08);
 }
-
- 
-@media (prefers-color-scheme: light) {
-    .breadcrumb { color: rgba(0,0,0,0.4); }
-    .breadcrumb a { color: rgba(0,0,0,0.5); }
-    .breadcrumb a:hover { color: rgba(0,0,0,0.85); }
-    .breadcrumb .sep { color: rgba(0,0,0,0.2); }
+html.dark .case-study img:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+html.dark .case-study img[alt*="Мобильная"],
+html.dark .case-study img[alt*="mobile"] {
+    border-color: #333;
 }
 
  
