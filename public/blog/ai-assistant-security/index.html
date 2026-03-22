@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Безопасность AI-ассистента: как я защитил бота от взлома — Эльдар Маркетинг</title>
+    <meta name="description" content="Провёл аудит безопасности AI-ассистента на базе Claude Opus. Изолировал агентов, ограничил инструменты, настроил Docker-sandbox и защитил VPS. Без воды — только практика.">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/ai-assistant-security/">
+    
+    
+    <meta property="og:title" content="Безопасность AI-ассистента: как я защитил бота от взлома">
+    <meta property="og:description" content="Провёл аудит безопасности AI-ассистента на базе Claude Opus. Изолировал агентов, ограничил инструменты, настроил Docker-sandbox и защитил VPS. Без воды — только практика.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/ai-assistant-security/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Безопасность AI-ассистента: как я защитил бота от взлома">
+    <meta name="twitter:description" content="Провёл аудит безопасности AI-ассистента на базе Claude Opus. Изолировал агентов, ограничил инструменты, настроил Docker-sandbox и защитил VPS. Без воды — только практика.">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Безопасность AI-ассистента: как я …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Безопасность AI-ассистента: как я защитил бота от взлома", "item": "https:\/\/eldarmarketing.ru\/blog\/ai-assistant-security\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">4 февраля 2026</p>
+    <p>У меня работает AI-ассистент на базе Claude Opus через OpenClaw. Два бота в Telegram: личный (для себя) и клиентский (публичный бот для потенциальных клиентов). Сегодня провёл аудит безопасности и понял — нужна серьёзная защита.</p>
+<p>Если клиент попросит бота «покажи файлы владельца» или использует prompt injection, последствия могут быть катастрофическими. AI-ассистент имеет доступ к командной строке, файлам, переписке, API-ключам. Один удачный запрос — и вся инфраструктура открыта.</p>
+<p>Я внедрил семь уровней защиты. Делюсь опытом.</p>
+<h2 id="1-изоляция-агентов-два-мозга-вместо-одного">1. Изоляция агентов: два мозга вместо одного</h2>
+<p><strong>Проблема:</strong> раньше оба бота использовали одного агента. Клиентский бот теоретически мог получить доступ к личным данным через общую память или workspace.</p>
+<p><strong>Решение:</strong> создал два полностью независимых агента.</p>
+<p><strong>Личный агент</strong> — полный доступ ко всему. Он видит файлы, переписки, может выполнять команды на сервере, работать с проектами. Это мой главный помощник.</p>
+<p><strong>Клиентский агент</strong> — изолированная песочница. У него свой workspace, своя память, своя личность. Он не знает о существовании личного агента. Не видит файлов владельца. Не имеет доступа к переписке.</p>
+<p>Как это работает технически:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">agents</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">main</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">workspace</span>: <span style="color:#ae81ff">&lt;WORKSPACE_PATH&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">&lt;WORKSPACE_PATH&gt;/memory</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">client</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">workspace</span>: <span style="color:#ae81ff">/var/openclaw/client-workspace</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">/var/openclaw/client-workspace/memory</span>
+</span></span></code></pre></div><p>Каждый агент работает в своём контексте. Клиент пишет в публичный бот — отвечает клиентский агент. Я пишу в личный чат — отвечает основной агент.</p>
+<p>Даже если кто-то попытается через prompt injection заставить клиентского бота прочитать мои файлы, он их просто не увидит. Физически.</p>
+<h2 id="2-ограничение-инструментов-минимализм-как-защита">2. Ограничение инструментов: минимализм как защита</h2>
+<p>AI-ассистент управляется через набор инструментов (tools). Изначально у личного агента их более 20: <code>exec</code>, <code>read</code>, <code>write</code>, <code>edit</code>, <code>browser</code>, <code>web_search</code>, <code>memory_search</code>, <code>cron</code>, <code>sessions_spawn</code> и другие.</p>
+<p>Для клиентского бота оставил только <strong>7 безопасных инструментов</strong>:</p>
+<ul>
+<li><code>web_search</code> — поиск в интернете</li>
+<li><code>web_fetch</code> — получение содержимого страниц</li>
+<li><code>memory_search</code> — поиск в своей памяти (изолированной)</li>
+<li><code>memory_get</code> — чтение своих заметок</li>
+<li><code>message</code> — отправка сообщений</li>
+<li><code>tts</code> — синтез речи</li>
+<li><code>session_status</code> — информация о сессии</li>
+</ul>
+<p><strong>Что заблокировано:</strong></p>
+<ul>
+<li><code>exec</code> — выполнение команд в терминале</li>
+<li><code>read</code>, <code>write</code>, <code>edit</code> — файловые операции</li>
+<li><code>browser</code> — управление браузером</li>
+<li><code>gateway</code> — управление OpenClaw Gateway</li>
+<li><code>cron</code> — планирование задач</li>
+<li><code>image</code> — анализ изображений</li>
+<li><code>process</code> — управление процессами</li>
+<li><code>sessions_spawn</code> — создание подагентов</li>
+</ul>
+<p>Даже если злоумышленник напишет идеальный prompt injection, бот не сможет выполнить команду <code>rm -rf /</code> или прочитать файл с паролями. <strong>Инструмента физически нет.</strong></p>
+<p>Это как дать человеку молоток и попросить закрутить винт. Сколько ни проси — без отвёртки не получится.</p>
+<p>Настраивается через <code>toolPolicy</code> в конфигурации агента:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">toolPolicy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mode</span>: <span style="color:#ae81ff">allowlist</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">allow</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">web_search</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">web_fetch</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">memory_search</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">memory_get</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">message</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">tts</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">session_status</span>
+</span></span></code></pre></div><h2 id="3-docker-изоляция-контейнер-без-доступа-к-хосту">3. Docker-изоляция: контейнер без доступа к хосту</h2>
+<p>Клиентский бот работает в Docker-контейнере. Это ещё один уровень изоляции.</p>
+<p><strong>Настройки sandbox:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">sandbox</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">workspaceAccess</span>: <span style="color:#ae81ff">none</span>
+</span></span></code></pre></div><p><code>workspaceAccess: none</code> означает, что контейнер <strong>не видит файловую систему хоста</strong>. Даже если бы у бота был инструмент <code>read</code>, он не смог бы прочитать <code>&lt;SSH_KEY_PATH&gt;</code> или <code>/etc/passwd</code>.</p>
+<p>Контейнер живёт в своём мире. У него есть доступ к интернету (для <code>web_search</code> и <code>web_fetch</code>), но нет доступа к файлам на сервере.</p>
+<p>Это работает как виртуальная машина, только легче. Если кто-то взломает клиентского бота, он получит доступ только к пустому контейнеру. Реальная инфраструктура останется нетронутой.</p>
+<h2 id="4-закрытый-личный-канал-только-мои-telegram-id">4. Закрытый личный канал: только мои Telegram ID</h2>
+<p>Личный бот принимает сообщения только от меня. Настроено через <code>allowFrom</code> с конкретными ID:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">allowFrom</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;123456789&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;987654321&#34;</span>
+</span></span></code></pre></div><p>Никаких wildcard паттернов, никаких <code>&quot;*&quot;</code>. Только два конкретных идентификатора.</p>
+<p>Если кто-то узнает токен моего личного бота и попытается написать ему — бот проигнорирует сообщение. Telegram ID проверяется на уровне OpenClaw, до того как запрос попадёт к Claude.</p>
+<p><strong>Клиентский бот, наоборот, открыт для всех</strong> — это публичный канал связи. Но у него нет опасных инструментов (см. пункт 2).</p>
+<p>Двухфакторная безопасность: личный бот закрыт, но всемогущий. Клиентский бот открыт, но беззубый.</p>
+<h2 id="5-vps-безопасность-ключи-файрволлы-iptables">5. VPS-безопасность: ключи, файрволлы, iptables</h2>
+<p>AI-ассистент работает на VPS. Если сервер взломают, изоляция агентов не поможет.</p>
+<p><strong>Что сделал:</strong></p>
+<h3 id="ssh-только-по-ключу">SSH только по ключу</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PasswordAuthentication no
+</span></span><span style="display:flex;"><span>PubkeyAuthentication yes
+</span></span><span style="display:flex;"><span>PermitRootLogin no
+</span></span></code></pre></div><p>Пароли отключены полностью. Зайти можно только с SSH-ключом, который лежит на моём рабочий компьютер. Root-доступ запрещён — использую обычного пользователя с sudo.</p>
+<h3 id="ufw-для-внешних-портов">UFW для внешних портов</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw default deny incoming
+</span></span><span style="display:flex;"><span>ufw default allow outgoing
+</span></span><span style="display:flex;"><span>ufw allow 22/tcp    <span style="color:#75715e"># SSH</span>
+</span></span><span style="display:flex;"><span>ufw allow 80/tcp    <span style="color:#75715e"># HTTP</span>
+</span></span><span style="display:flex;"><span>ufw allow 443/tcp   <span style="color:#75715e"># HTTPS</span>
+</span></span><span style="display:flex;"><span>ufw enable
+</span></span></code></pre></div><p>Извне доступны только SSH, HTTP и HTTPS. Всё остальное закрыто.</p>
+<h3 id="iptables-для-внутренних-портов">iptables для внутренних портов</h3>
+<p>На сервере работают приложения на портах 3000-3005 (Next.js проекты) и 8090 (база данных). Эти порты должны быть доступны только через nginx reverse proxy, но не напрямую из интернета.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;APP_PORTS&gt; -s 127.0.0.1 -j ACCEPT
+</span></span><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;APP_PORTS&gt; -j DROP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;DB_PORT&gt; -s 127.0.0.1 -j ACCEPT
+</span></span><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;DB_PORT&gt; -j DROP
+</span></span></code></pre></div><p>Теперь к портам 3000-3005 и 8090 можно обратиться только с localhost. Извне — блокируется.</p>
+<h2 id="6-токены-не-в-коде-env-и-chmod-600">6. Токены не в коде: .env и chmod 600</h2>
+<p>Все API-ключи, токены Telegram, пароли вынесены в <code>.env</code> файлы.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># .env</span>
+</span></span><span style="display:flex;"><span>ANTHROPIC_API_KEY<span style="color:#f92672">=</span>sk-ant-xxxxx
+</span></span><span style="display:flex;"><span>TELEGRAM_BOT_TOKEN<span style="color:#f92672">=</span>123456:ABCdefgh
+</span></span><span style="display:flex;"><span>TELEGRAM_CLIENT_TOKEN<span style="color:#f92672">=</span>987654:XYZabcd
+</span></span></code></pre></div><p><strong>Права доступа:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">600</span> .env
+</span></span><span style="display:flex;"><span>chown myuser:myuser .env
+</span></span></code></pre></div><p>Файл может читать только владелец. Группа и остальные пользователи — нет доступа.</p>
+<p><code>.env</code> добавлен в <code>.gitignore</code>. Даже если случайно запушу код в публичный репозиторий, токены не утекут.</p>
+<p><strong>Почему это важно:</strong> если злоумышленник получит доступ к коду (например, через уязвимость в веб-приложении), он не найдёт токены в исходниках. Их там просто нет.</p>
+<h2 id="7-openclaw-gateway-loopback-и-токен">7. OpenClaw Gateway: loopback и токен</h2>
+<p>OpenClaw Gateway — это сервис, который управляет агентами. Он слушает HTTP-запросы и маршрутизирует их к нужным агентам.</p>
+<p><strong>Настройки:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">gateway</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bind</span>: <span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">3005</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">auth</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">token</span>: <span style="color:#e6db74">&#34;случайная_строка_64_символа&#34;</span>
+</span></span></code></pre></div><p><code>bind: 127.0.0.1</code> — Gateway доступен только с localhost. Из интернета к нему не подключиться.</p>
+<p><code>auth.enabled: true</code> — все запросы должны содержать заголовок <code>Authorization: Bearer &lt;token&gt;</code>. Без токена — отказ.</p>
+<p>Даже если кто-то получит доступ к серверу, он не сможет управлять Gateway без токена. А токен лежит в <code>.env</code> с правами 600.</p>
+<h2 id="что-изменилось-после-аудита">Что изменилось после аудита</h2>
+<p><strong>Было:</strong> один агент, все инструменты доступны, токены в коде, SSH по паролю.</p>
+<p><strong>Стало:</strong></p>
+<ul>
+<li>Два изолированных агента</li>
+<li>Клиентский бот без опасных инструментов</li>
+<li>Docker-sandbox без доступа к файлам</li>
+<li>Личный канал только для моих ID</li>
+<li>VPS защищён на уровне SSH, UFW, iptables</li>
+<li>Токены в <code>.env</code> с правами 600</li>
+<li>Gateway на loopback с авторизацией</li>
+</ul>
+<p>Теперь я могу спокойно давать клиентам ссылку на публичный бот. Даже если кто-то попытается взломать бота через prompt injection или эксплуатацию уязвимостей Claude, он упрётся в многослойную защиту.</p>
+<p><strong>Клиентский бот:</strong></p>
+<ul>
+<li>Не видит мои файлы (изоляция workspace)</li>
+<li>Не может выполнять команды (нет <code>exec</code>)</li>
+<li>Не может читать/писать файлы (нет <code>read</code>/<code>write</code>)</li>
+<li>Работает в контейнере (Docker)</li>
+<li>Не имеет доступа к хосту (<code>workspaceAccess: none</code>)</li>
+</ul>
+<p><strong>Личный бот:</strong></p>
+<ul>
+<li>Принимает команды только от меня (allowFrom)</li>
+<li>Работает на защищённом VPS (SSH-ключи, файрволлы)</li>
+<li>Токены спрятаны в <code>.env</code></li>
+<li>Gateway недоступен извне</li>
+</ul>
+<h2 id="выводы">Выводы</h2>
+<p>AI-ассистенты — мощный инструмент. Но мощь требует ответственности.</p>
+<p>Если ваш бот имеет доступ к файлам, командной строке, API — защитите его. Изолируйте публичные и приватные части. Ограничьте инструменты для публичных ботов. Используйте Docker. Закройте порты. Спрячьте токены.</p>
+<p>Prompt injection — это реальность. LLM можно обмануть. Но если у модели физически нет инструмента для выполнения опасной команды, никакой prompt не поможет.</p>
+<p>Многослойная защита. Изоляция. Принцип наименьших привилегий.</p>
+<p>Потратил три часа на аудит и настройку. Теперь сплю спокойно.</p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Безопасность AI-ассистента: как я защитил бота от взлома",
+    "description": "Провёл аудит безопасности AI-ассистента на базе Claude Opus. Изолировал агентов, ограничил инструменты, настроил Docker-sandbox и защитил VPS. Без воды — только практика.",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-04",
+    "dateModified": "2026-02-04",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/ai-assistant-security\/",
+    "wordCount":  1134 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/ai-assistant-security\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

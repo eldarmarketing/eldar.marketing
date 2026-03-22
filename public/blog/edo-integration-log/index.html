@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Как я подключил ЭДО за один вечер — Эльдар Маркетинг</title>
+    <meta name="description" content="Техническая история интеграции AI-ассистента с Saby ЭДО: от идеи до рабочего решения">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/edo-integration-log/">
+    
+    
+    <meta property="og:title" content="Как я подключил ЭДО за один вечер">
+    <meta property="og:description" content="Техническая история интеграции AI-ассистента с Saby ЭДО: от идеи до рабочего решения">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/edo-integration-log/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Как я подключил ЭДО за один вечер">
+    <meta name="twitter:description" content="Техническая история интеграции AI-ассистента с Saby ЭДО: от идеи до рабочего решения">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Как я подключил ЭДО за один вечер</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Как я подключил ЭДО за один вечер", "item": "https:\/\/eldarmarketing.ru\/blog\/edo-integration-log\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">4 февраля 2026</p>
+    <p>Клиент попросил договор. Я открыл Saby, начал заполнять форму вручную и подумал: почему это делаю я, а не мой AI?</p>
+<p>Через 4 часа у меня была рабочая интеграция.</p>
+<h2 id="задача">Задача</h2>
+<p>Автоматизировать цепочку: запрос клиента → договор → отправка по ЭДО.</p>
+<p>Ручной процесс занимал 30-40 минут:</p>
+<ul>
+<li>Найти реквизиты клиента</li>
+<li>Заполнить шаблон договора</li>
+<li>Экспортировать в PDF</li>
+<li>Загрузить в Saby</li>
+<li>Заполнить метаданные</li>
+<li>Подписать ЭЦП</li>
+<li>Отправить</li>
+</ul>
+<h2 id="решение">Решение</h2>
+<p>AI-ассистент берёт на себя всё, кроме подписи.</p>
+<h3 id="шаг-1-разобраться-с-api-saby">Шаг 1: Разобраться с API Saby</h3>
+<p>Документация разбросана, но суть простая — JSON-RPC.</p>
+<p>Два эндпоинта:</p>
+<ul>
+<li>Авторизация: <code>https://online.sbis.ru/auth/service/</code></li>
+<li>API: <code>https://online.sbis.ru/service/?srv=1</code></li>
+</ul>
+<p>Методы на русском: <code>СБИС.Аутентифицировать</code>, <code>СБИС.ЗаписатьДокумент</code>. Непривычно, но работает.</p>
+<h3 id="шаг-2-написать-клиент">Шаг 2: Написать клиент</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">authenticate</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">rpcCall</span>(<span style="color:#a6e22e">AUTH_URL</span>, <span style="color:#e6db74">&#39;СБИС.Аутентифицировать&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Параметр</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Логин</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">SABY_LOGIN</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Пароль</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">SABY_PASSWORD</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sessionId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Сессия живёт 30 минут. Храню в памяти, обновляю при необходимости.</p>
+<h3 id="шаг-3-поиск-контрагента">Шаг 3: Поиск контрагента</h3>
+<p>По ИНН получаю полные данные: название, КПП, адрес, ОГРН.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getContragentInfo</span>(<span style="color:#a6e22e">inn</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">rpcCall</span>(<span style="color:#a6e22e">API_URL</span>, <span style="color:#e6db74">&#39;СБИС.СписокКонтрагентов&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Фильтр</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">ИНН</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">inn</span> }
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="шаг-4-создание-документа">Шаг 4: Создание документа</h3>
+<p>Формирую структуру договора, прикладываю PDF, отправляю в Saby.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">doc</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Тип</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ДоговорИсх&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Номер</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">generateNumber</span>(),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Дата</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>().<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;T&#39;</span>)[<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Сумма</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">amount</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Контрагент</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">СвЮЛ</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">ИНН</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">inn</span>, <span style="color:#a6e22e">КПП</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">kpp</span> } },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Вложение</span><span style="color:#f92672">:</span> [{ <span style="color:#a6e22e">Файл</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">Имя</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;contract.pdf&#39;</span>, <span style="color:#a6e22e">ДвijДанworthy</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">base64pdf</span> } }]
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="шаг-5-интеграция-с-ai">Шаг 5: Интеграция с AI</h3>
+<p>AI-ассистент вызывает скрипт через CLI:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>node send-contract.js ./contract.pdf client-slug
+</span></span></code></pre></div><p>Получает ссылку на документ в Saby. Присылает мне в Telegram.</p>
+<h2 id="результат">Результат</h2>
+<p><strong>Было:</strong> 30-40 минут, ручная работа, риск ошибок.</p>
+<p><strong>Стало:</strong> 15 секунд генерация + проверка + подпись.</p>
+<p>Экономия 25-35 минут на каждом договоре. При 10 договорах в месяц — это 5-6 часов.</p>
+<h2 id="что-не-автоматизировано">Что не автоматизировано</h2>
+<p>Подпись ЭЦП — и не должна быть. Это точка контроля: я проверяю документ перед отправкой.</p>
+<h2 id="выводы">Выводы</h2>
+<ol>
+<li>
+<p><strong>API есть везде</strong> — даже у российских сервисов. Saby документирован, работает стабильно.</p>
+</li>
+<li>
+<p><strong>AI + API = автоматизация</strong> — нейросеть понимает задачу, API выполняет действие.</p>
+</li>
+<li>
+<p><strong>Начни с боли</strong> — я автоматизировал то, что раздражало каждый раз.</p>
+</li>
+</ol>
+<hr>
+<p>Хотите такую автоматизацию для своего бизнеса? Напишите в <a href="https://t.me/robot_eldar">@eldarmarketing_bot</a>.</p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как я подключил ЭДО за один вечер",
+    "description": "Техническая история интеграции AI-ассистента с Saby ЭДО: от идеи до рабочего решения",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-04",
+    "dateModified": "2026-02-04",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/edo-integration-log\/",
+    "wordCount":  326 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/edo-integration-log\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+{{ define "main" }}
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>{{ .Title }}</span>
+</nav>
+
+<article class="case-study">
+    <h2>{{ .Title }}</h2>
+    {{ with .Params.meta }}<p class="meta">{{ . }}</p>{{ end }}
+    {{ .Content }}
+</article>
+
+<style>
+/* === BREADCRUMB === */
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(255,255,255,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(255,255,255,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(255,255,255,0.25);
+}
+
+/* === CASE STUDY IMAGES === */
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Break out of max-width for hero impact */
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+
+/* Mobile screenshots — smaller, centered */
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .breadcrumb { color: rgba(255,255,255,0.4); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+    .case-study img {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    .case-study img:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        border-color: #333;
+    }
+}
+
+/* Light mode breadcrumbs */
+@media (prefers-color-scheme: light) {
+    .breadcrumb { color: rgba(0,0,0,0.4); }
+    .breadcrumb a { color: rgba(0,0,0,0.5); }
+    .breadcrumb a:hover { color: rgba(0,0,0,0.85); }
+    .breadcrumb .sep { color: rgba(0,0,0,0.2); }
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "{{ .Title }}" }
+    ]
+}
+</script>
+{{ end }}

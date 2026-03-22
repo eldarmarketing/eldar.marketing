@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /contact-thanks/
+Disallow: /thanks/
+
+Sitemap: https://eldarmarketing.ru/sitemap.xml
+Host: https://eldarmarketing.ru

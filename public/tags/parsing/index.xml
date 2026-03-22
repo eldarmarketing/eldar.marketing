@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Parsing on Эльдар Маркетинг</title>
+    <link>https://eldarmarketing.ru/tags/parsing/</link>
+    <description>Recent content in Parsing on Эльдар Маркетинг</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Sat, 14 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://eldarmarketing.ru/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Как вывести Telegram-канал на сайт без виджетов и iframe</title>
+      <link>https://eldarmarketing.ru/blog/telegram-channel-on-site/</link>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/telegram-channel-on-site/</guid>
+      <description>&lt;p&gt;Недавно столкнулся с интересной задачей для клиента — нужно было вывести последние посты из Telegram-канала на главную страницу сайта. Казалось бы, есть стандартные виджеты от Telegram, но реальность оказалась сложнее.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема-виджеты-не-вписываются-в-дизайн&#34;&gt;Проблема: виджеты не вписываются в дизайн&lt;/h2&gt;&#xA;&lt;p&gt;Стандартный путь — использовать официальный iframe-виджет от Telegram. Выглядит это примерно так:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;iframe&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://t.me/your_channel/embed&amp;#34;&lt;/span&gt; &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;100%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;300&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;iframe&lt;/span&gt;&amp;gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Но в реальности возникает куча проблем:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Стилизация невозможна&lt;/strong&gt; — iframe полностью изолирован, нельзя применить цвета и шрифты сайта&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Ломает дизайн&lt;/strong&gt; — фиксированные размеры не адаптируются под мобилку&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Тяжёлый&lt;/strong&gt; — грузит много лишнего JS и CSS от Telegram&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CSP проблемы&lt;/strong&gt; — Content Security Policy может заблокировать iframe&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;У сайта тёмный дизайн с жёлтыми акцентами, а виджет Telegram — белый и голубой. Смотрится как чужеродный элемент.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

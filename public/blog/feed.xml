@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Блог on Эльдар Маркетинг</title>
+    <link>https://eldarmarketing.ru/blog/</link>
+    <description>Recent content in Блог on Эльдар Маркетинг</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Sun, 22 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://eldarmarketing.ru/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Блог, который пишет себя сам</title>
+      <link>https://eldarmarketing.ru/blog/auto-blog-skill/</link>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/auto-blog-skill/</guid>
+      <description>&lt;p&gt;В каждой вайбкодинг-сессии два результата: код и понимание. Код пушится в git. Понимание — нет.&lt;/p&gt;&#xA;&lt;p&gt;&amp;ldquo;5 часов вайбкодил, а что сделал — вспомнить не могу.&amp;rdquo; 22 марта я дорабатывал скилл для публикации кейсов — к вечеру не мог вспомнить с чего начинал.&lt;/p&gt;&#xA;&lt;p&gt;Я завёл блог, который пишет себя сам. В конце рабочей сессии Claude Code генерирует статью и пост в Telegram-канал.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема--знания-растворяются&#34;&gt;Проблема — знания растворяются&lt;/h2&gt;&#xA;&lt;p&gt;Каждая сессия с Claude Code — решённая задача. Настроил деплой, разобрался с API, нашёл баг в конфиге. Через неделю — не вспомнишь.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Портфолио автосервиса из Telegram-канала: 18 видео на сайт за вечер</title>
+      <link>https://eldarmarketing.ru/blog/dsg-portfolio-telegram/</link>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/dsg-portfolio-telegram/</guid>
+      <description>&lt;p&gt;У клиента был Telegram-канал с видео ремонтов. Восемнадцать роликов: разборка коробки, замена мехатроника, диагностика на стенде. Хорошие видео, снятые в процессе работы.&lt;/p&gt;&#xA;&lt;p&gt;Проблема — видео лежали только в Telegram. На сайте портфолио не было. Потенциальные клиенты заходили на сайт, видели текст «мы ремонтируем DSG» и уходили. Без доказательств.&lt;/p&gt;&#xA;&lt;h2 id=&#34;задача&#34;&gt;Задача&lt;/h2&gt;&#xA;&lt;p&gt;Перенести видео-портфолио с канала на сайт. И сделать так, чтобы новые работы добавлялись автоматически — без разработчика, без FTP, без «пришлите видео на почту».&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как вывести Telegram-канал на сайт без виджетов и iframe</title>
+      <link>https://eldarmarketing.ru/blog/telegram-channel-on-site/</link>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/telegram-channel-on-site/</guid>
+      <description>&lt;p&gt;Недавно столкнулся с интересной задачей для клиента — нужно было вывести последние посты из Telegram-канала на главную страницу сайта. Казалось бы, есть стандартные виджеты от Telegram, но реальность оказалась сложнее.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема-виджеты-не-вписываются-в-дизайн&#34;&gt;Проблема: виджеты не вписываются в дизайн&lt;/h2&gt;&#xA;&lt;p&gt;Стандартный путь — использовать официальный iframe-виджет от Telegram. Выглядит это примерно так:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;iframe&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://t.me/your_channel/embed&amp;#34;&lt;/span&gt; &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;100%&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;300&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;iframe&lt;/span&gt;&amp;gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Но в реальности возникает куча проблем:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Стилизация невозможна&lt;/strong&gt; — iframe полностью изолирован, нельзя применить цвета и шрифты сайта&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Ломает дизайн&lt;/strong&gt; — фиксированные размеры не адаптируются под мобилку&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Тяжёлый&lt;/strong&gt; — грузит много лишнего JS и CSS от Telegram&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CSP проблемы&lt;/strong&gt; — Content Security Policy может заблокировать iframe&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;У сайта тёмный дизайн с жёлтыми акцентами, а виджет Telegram — белый и голубой. Смотрится как чужеродный элемент.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenClaw за 10 минут: от 2 часов мучений до автоустановки</title>
+      <link>https://eldarmarketing.ru/blog/openclaw-vps-install/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/openclaw-vps-install/</guid>
+      <description>&lt;p&gt;Вчера я потратил 2 часа на то, что сегодня занимает 10 минут.&lt;/p&gt;&#xA;&lt;p&gt;Задача простая: поставить AI-ассистента на VPS клиента, подключить Telegram-бота. Звучит на 15 минут. Получилось — на 2 часа. Зато второй раз — на 10 минут. Рассказываю, почему.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-я-ставил&#34;&gt;Что я ставил&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/openclaw/openclaw&#34;&gt;OpenClaw&lt;/a&gt; — open-source платформа, которая превращает Claude в Telegram-бота с памятью, инструментами и доступом к вашим данным. Не просто чат-обёртка — полноценный ассистент с файлами, скриптами и cron-задачами.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenClaw &#43; Claude: Как я автоматизирую бизнес с помощью AI</title>
+      <link>https://eldarmarketing.ru/blog/openclaw-claude-business-automation/</link>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/openclaw-claude-business-automation/</guid>
+      <description>&lt;h1 id=&#34;openclaw--claude-как-я-автоматизирую-бизнес-с-помощью-ai&#34;&gt;OpenClaw + Claude: Как я автоматизирую бизнес с помощью AI&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;Практический опыт внедрения AI-помощника на базе OpenClaw и Claude для автоматизации маркетингового агентства&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;что-такое-openclaw-и-зачем-он-нужен-бизнесу&#34;&gt;Что такое OpenClaw и зачем он нужен бизнесу&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;OpenClaw&lt;/strong&gt; — это платформа для создания AI-агентов, которые работают через популярные мессенджеры. В отличие от обычных чат-ботов, OpenClaw умеет:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Помнить контекст всех разговоров&lt;/li&gt;&#xA;&lt;li&gt;Выполнять реальные задачи в системах&lt;/li&gt;&#xA;&lt;li&gt;Обучаться на ошибках&lt;/li&gt;&#xA;&lt;li&gt;Работать с файлами и документами&lt;/li&gt;&#xA;&lt;li&gt;Интегрироваться с любыми сервисами&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Claude&lt;/strong&gt; — это AI-модель от Anthropic, которая обрабатывает текст, анализирует документы и принимает решения. В связке с OpenClaw получается мощный инструмент автоматизации.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как мы сделали CRM, где нейронка сама обрабатывает задачи</title>
+      <link>https://eldarmarketing.ru/blog/crm-ai-tasks/</link>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/crm-ai-tasks/</guid>
+      <description>&lt;h2 id=&#34;проблема-контекст-теряется&#34;&gt;Проблема: контекст теряется&lt;/h2&gt;&#xA;&lt;p&gt;У маркетингового агентства десятки клиентов. У каждого — свой проект, свои реквизиты, своя история переписки.&lt;/p&gt;&#xA;&lt;p&gt;Когда ставишь задачу помощнику — будь то человек или AI — он спрашивает: «Какой клиент? Какой ИНН? А что там было в последнем сообщении?»&lt;/p&gt;&#xA;&lt;p&gt;Это трата времени. Каждый раз.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-мы-построили&#34;&gt;Что мы построили&lt;/h2&gt;&#xA;&lt;p&gt;CRM-систему, где задача создаётся &lt;strong&gt;в контексте клиента&lt;/strong&gt;. Не просто «отправь счёт», а:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Клиент: Анна (ИП Иванова А.В.)&#xA;ИНН: 7712345678&#xA;Статус: клиент&#xA;Проект: Продвижение сайта — В работе, 50 000 ₽&#xA;&#xA;Последние сообщения:&#xA;  Клиент: Пришлите счёт, пожалуйста&#xA;  Бот: Счёт №7 от 05.02.2026.pdf&#xA;&#xA;Задание: Отправь счёт в ЭДО&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;AI-агент получает это и &lt;strong&gt;сразу действует&lt;/strong&gt;. Не задаёт вопросов. Не ищет реквизиты. Не перечитывает 50 сообщений.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>4 AI-критика правят мой текст параллельно</title>
+      <link>https://eldarmarketing.ru/blog/ai-critics-pipeline/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-critics-pipeline/</guid>
+      <description>&lt;p&gt;Тексты от AI воняют. Ты узнаёшь их с первого абзаца: «В современном мире&amp;hellip;», «Важно отметить&amp;hellip;», «Это не просто X — это Y». Я устал и собрал систему, которая бьёт по рукам.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема&#34;&gt;Проблема&lt;/h2&gt;&#xA;&lt;p&gt;Я пишу статьи для блога через AI-ассистента. Сажусь, диктую тему, получаю черновик за 3 минуты. Первые полгода радовался скорости. В январе 2026 перечитал свои 12 статей подряд — и меня затошнило.&lt;/p&gt;&#xA;&lt;p&gt;Каждый текст — одинаковый. Те же обороты. Тот же ритм. Предложения по 15-18 слов, ровненько, как забор. Абзацы начинаются с «Кроме того» и «Стоит отметить». Читатель уходит через 40 секунд — я видел это в аналитике.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>6 AI-агентов в одном Telegram</title>
+      <link>https://eldarmarketing.ru/blog/6-ai-agents-telegram/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/6-ai-agents-telegram/</guid>
+      <description>&lt;p&gt;У меня в Telegram живёт система из шести AI-агентов. Не один бот — а целая команда, где каждый занимается своим делом.&lt;/p&gt;&#xA;&lt;h2 id=&#34;архитектура&#34;&gt;Архитектура&lt;/h2&gt;&#xA;&lt;p&gt;Главный агент — стратег и координатор. Он принимает мои сообщения, разбивает задачи на этапы и раздаёт их пяти специализированным агентам:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Менеджер&lt;/strong&gt; сидит в клиентском боте. Принимает сообщения, пересылает мне, сохраняет историю в CRM. Клиент пишет — я вижу сообщение через секунду с полным контекстом: имя, предыдущие обращения, статус.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как AI-ассистент хранит базу знаний в Obsidian-подобной структуре</title>
+      <link>https://eldarmarketing.ru/blog/ai-obsidian-knowledge-base/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-obsidian-knowledge-base/</guid>
+      <description>&lt;p&gt;Сегодня я завершил реструктуризацию памяти своего AI-ассистента. Было 604 строки в одном файле — стало 78 строк навигации и модульная система. Экономия токенов на старте сессии — примерно в 8 раз. Расскажу, как я это сделал и почему это работает.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема-монолитная-память&#34;&gt;Проблема: монолитная память&lt;/h2&gt;&#xA;&lt;p&gt;Раньше память выглядела так: один файл &lt;code&gt;MEMORY.md&lt;/code&gt; на 604 строки (около 25 КБ), где были свалены в кучу:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Telegram-боты (3 штуки)&lt;/li&gt;&#xA;&lt;li&gt;Инфраструктура (VPS, CRM, база данных)&lt;/li&gt;&#xA;&lt;li&gt;Клиенты (с контактами и историей)&lt;/li&gt;&#xA;&lt;li&gt;Уроки и ошибки&lt;/li&gt;&#xA;&lt;li&gt;Счётчики и метрики&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Каждая сессия начиналась с прочтения всего этого массива. Результат:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как научить ИИ-ассистента помнить по смыслу</title>
+      <link>https://eldarmarketing.ru/blog/semantic-memory-search/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/semantic-memory-search/</guid>
+      <description>&lt;h2 id=&#34;проблема-бот-не-понимает-синонимы&#34;&gt;Проблема: бот не понимает синонимы&lt;/h2&gt;&#xA;&lt;p&gt;У меня работает ИИ-ассистент. Он ведёт заметки: что обсудили с клиентом, какие задачи взяли, что решили.&lt;/p&gt;&#xA;&lt;p&gt;Когда я спрашиваю «напомни, что там по автосервису?» — бот должен найти нужную заметку. Раньше он искал по словам. Буквально.&lt;/p&gt;&#xA;&lt;p&gt;Запрос «автосервис» не находил файл, где написано «СТО» или «ремонт машин». Для бота это разные вещи.&lt;/p&gt;&#xA;&lt;h2 id=&#34;решение-поиск-по-смыслу&#34;&gt;Решение: поиск по смыслу&lt;/h2&gt;&#xA;&lt;p&gt;Семантический поиск работает иначе. Он превращает текст в числа, которые описывают смысл. Похожие тексты — похожие числа.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Карточки для Telegram без Canva и дизайнера</title>
+      <link>https://eldarmarketing.ru/blog/carousel-cards-playwright/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/carousel-cards-playwright/</guid>
+      <description>&lt;p&gt;Мне нужна была картинка к посту про AI-критиков для Telegram-канала. С ASCII-диаграммой пайплайна и текстом в monospace. В Canva есть monospace-шрифты, но попробуй засунь туда ASCII-схему из 20 строк — поплывёт. Figma — минут 20 на макет. Фрилансер — от 1500 ₽ за карточку. Я сгенерировал за 3 секунды.&lt;/p&gt;&#xA;&lt;h2 id=&#34;идея&#34;&gt;Идея&lt;/h2&gt;&#xA;&lt;p&gt;Картинка для соцсетей — прямоугольник с текстом. Знаете, что ещё умеет рисовать прямоугольники с текстом? Браузер.&lt;/p&gt;&#xA;&lt;p&gt;HTML-файл + невидимый браузер + скриншот. Всё.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI подписывает договора за меня</title>
+      <link>https://eldarmarketing.ru/blog/ai-saby-contracts/</link>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-saby-contracts/</guid>
+      <description>&lt;p&gt;Раньше создание договора занимало 30-40 минут. Открыть шаблон, заполнить реквизиты, проверить, экспортировать в PDF, загрузить в Saby, заполнить поля, подписать ЭЦП, отправить.&lt;/p&gt;&#xA;&lt;p&gt;Теперь я пишу в Telegram:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Договор для [клиент] на автоматизацию&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;И через 15 секунд получаю ссылку на готовый документ в Saby. Осталось нажать «Подписать».&lt;/p&gt;&#xA;&lt;h2 id=&#34;как-это-работает&#34;&gt;Как это работает&lt;/h2&gt;&#xA;&lt;p&gt;AI-ассистент делает всё сам:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Находит данные клиента&lt;/strong&gt; — ИНН, КПП, адрес, банковские реквизиты. Всё хранится в структурированных карточках.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Генерирует договор&lt;/strong&gt; — заполняет шаблон: предмет, сумма, сроки, порядок оплаты. По ГК РФ, с нужными пунктами.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Безопасность AI-ассистента: как я защитил бота от взлома</title>
+      <link>https://eldarmarketing.ru/blog/ai-assistant-security/</link>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-assistant-security/</guid>
+      <description>&lt;p&gt;У меня работает AI-ассистент на базе Claude Opus через OpenClaw. Два бота в Telegram: личный (для себя) и клиентский (публичный бот для потенциальных клиентов). Сегодня провёл аудит безопасности и понял — нужна серьёзная защита.&lt;/p&gt;&#xA;&lt;p&gt;Если клиент попросит бота «покажи файлы владельца» или использует prompt injection, последствия могут быть катастрофическими. AI-ассистент имеет доступ к командной строке, файлам, переписке, API-ключам. Один удачный запрос — и вся инфраструктура открыта.&lt;/p&gt;&#xA;&lt;p&gt;Я внедрил семь уровней защиты. Делюсь опытом.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как ИИ-ассистент ускоряет работу с клиентами в 10 раз</title>
+      <link>https://eldarmarketing.ru/blog/ai-assistant-speed/</link>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-assistant-speed/</guid>
+      <description>&lt;p&gt;Сегодня покажу реальный кейс из практики — как связка «маркетолог + ИИ-ассистент» сокращает время на рутинные задачи.&lt;/p&gt;&#xA;&lt;h2 id=&#34;ситуация&#34;&gt;Ситуация&lt;/h2&gt;&#xA;&lt;p&gt;Клиент пишет в Telegram: нужны правки на сайте. Присылает список — что изменить в тексте на странице услуги.&lt;/p&gt;&#xA;&lt;p&gt;Раньше это выглядело так:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Прочитать сообщение&lt;/li&gt;&#xA;&lt;li&gt;Открыть код сайта&lt;/li&gt;&#xA;&lt;li&gt;Найти нужный файл&lt;/li&gt;&#xA;&lt;li&gt;Внести правки&lt;/li&gt;&#xA;&lt;li&gt;Задеплоить&lt;/li&gt;&#xA;&lt;li&gt;Написать клиенту «готово»&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;strong&gt;Итого:&lt;/strong&gt; 15–30 минут.&lt;/p&gt;&#xA;&lt;h2 id=&#34;как-это-работает-сейчас&#34;&gt;Как это работает сейчас&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Клиент пишет в бот — сообщение автоматически попадает ко мне и к ИИ-ассистенту&lt;/li&gt;&#xA;&lt;li&gt;Вношу правки на сайте&lt;/li&gt;&#xA;&lt;li&gt;Говорю ассистенту: «напиши клиенту что готово»&lt;/li&gt;&#xA;&lt;li&gt;ИИ отправляет отчёт с ссылкой на страницу&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;strong&gt;Итого:&lt;/strong&gt; 1 минута.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как я за день собрал CRM-бота для автосервиса</title>
+      <link>https://eldarmarketing.ru/blog/dsg-bot-case/</link>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/dsg-bot-case/</guid>
+      <description>&lt;p&gt;У меня есть AI-ассистент. Не ChatGPT в браузере, а полноценный рабочий инструмент, который живёт в моём Telegram, имеет доступ к серверам, файлам и API.&lt;/p&gt;&#xA;&lt;p&gt;Вчера я решил проверить: можно ли с его помощью собрать готовый продукт для клиента за один день?&lt;/p&gt;&#xA;&lt;p&gt;Спойлер: можно.&lt;/p&gt;&#xA;&lt;h2 id=&#34;задача&#34;&gt;Задача&lt;/h2&gt;&#xA;&lt;p&gt;Владельцы автосервисов по ремонту DSG (роботизированных коробок передач) — специфическая ниша. У них есть типовые проблемы:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Клиенты звонят, записываются в блокнот или в WhatsApp&lt;/li&gt;&#xA;&lt;li&gt;Нет системы учёта заказов и статусов ремонта&lt;/li&gt;&#xA;&lt;li&gt;Механики загружены неравномерно&lt;/li&gt;&#xA;&lt;li&gt;Запчасти заканчиваются внезапно&lt;/li&gt;&#xA;&lt;li&gt;Нет аналитики: сколько заработали, откуда клиенты&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;CRM-системы вроде AmoCRM или Битрикс24 — избыточны и дороги для сервиса на 3-5 человек.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как я подключил ЭДО за один вечер</title>
+      <link>https://eldarmarketing.ru/blog/edo-integration-log/</link>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/edo-integration-log/</guid>
+      <description>&lt;p&gt;Клиент попросил договор. Я открыл Saby, начал заполнять форму вручную и подумал: почему это делаю я, а не мой AI?&lt;/p&gt;&#xA;&lt;p&gt;Через 4 часа у меня была рабочая интеграция.&lt;/p&gt;&#xA;&lt;h2 id=&#34;задача&#34;&gt;Задача&lt;/h2&gt;&#xA;&lt;p&gt;Автоматизировать цепочку: запрос клиента → договор → отправка по ЭДО.&lt;/p&gt;&#xA;&lt;p&gt;Ручной процесс занимал 30-40 минут:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Найти реквизиты клиента&lt;/li&gt;&#xA;&lt;li&gt;Заполнить шаблон договора&lt;/li&gt;&#xA;&lt;li&gt;Экспортировать в PDF&lt;/li&gt;&#xA;&lt;li&gt;Загрузить в Saby&lt;/li&gt;&#xA;&lt;li&gt;Заполнить метаданные&lt;/li&gt;&#xA;&lt;li&gt;Подписать ЭЦП&lt;/li&gt;&#xA;&lt;li&gt;Отправить&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;&#xA;&lt;p&gt;AI-ассистент берёт на себя всё, кроме подписи.&lt;/p&gt;&#xA;&lt;h3 id=&#34;шаг-1-разобраться-с-api-saby&#34;&gt;Шаг 1: Разобраться с API Saby&lt;/h3&gt;&#xA;&lt;p&gt;Документация разбросана, но суть простая — JSON-RPC.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как научить AI-ассистента не повторять ошибки</title>
+      <link>https://eldarmarketing.ru/blog/ai-assistant-learning-rules/</link>
+      <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-assistant-learning-rules/</guid>
+      <description>&lt;p&gt;AI забывает всё после сессии. Объяснил, как работать — через час начинает с нуля. Знакомо?&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема&#34;&gt;Проблема&lt;/h2&gt;&#xA;&lt;p&gt;Каждый раз одно и то же:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;«Не используй эмодзи в деловой переписке» — использует&lt;/li&gt;&#xA;&lt;li&gt;«Всегда спрашивай перед отправкой» — отправляет сам&lt;/li&gt;&#xA;&lt;li&gt;«Цены не называй без согласования» — называет&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Модель не тупая. Она просто не помнит предыдущие сессии.&lt;/p&gt;&#xA;&lt;h2 id=&#34;решение-записывать-правила-в-файлы&#34;&gt;Решение: записывать правила в файлы&lt;/h2&gt;&#xA;&lt;p&gt;Вместо того чтобы объяснять каждый раз — запиши один раз в файл. AI читает файлы в начале сессии и следует правилам.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Бот для автоматического наполнения портфолио</title>
+      <link>https://eldarmarketing.ru/blog/telegram-bot-portfolio/</link>
+      <pubDate>Mon, 02 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/telegram-bot-portfolio/</guid>
+      <description>&lt;p&gt;Задача: клиент занимается профессиональной обтяжкой салонов автомобилей. У неё тонкий вкус к фотографиям и высокие требования к визуалу. Нужен был способ самостоятельно добавлять работы на сайт — без программиста, без админки, быстро и удобно.&lt;/p&gt;&#xA;&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;&#xA;&lt;p&gt;Telegram-бот, который превращает добавление работы в простой диалог.&lt;/p&gt;&#xA;&lt;h2 id=&#34;как-это-работает&#34;&gt;Как это работает&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Клиент открывает бота и отправляет фотографии работы&lt;/li&gt;&#xA;&lt;li&gt;Пишет название (например, «BMW X5 — перетяжка руля и консоли»)&lt;/li&gt;&#xA;&lt;li&gt;Выбирает категорию из списка (рули, салоны, потолки)&lt;/li&gt;&#xA;&lt;li&gt;Указывает марку и модель авто&lt;/li&gt;&#xA;&lt;li&gt;Добавляет описание работы&lt;/li&gt;&#xA;&lt;li&gt;Нажимает «Опубликовать» — и работа появляется на сайте&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;результат&#34;&gt;Результат&lt;/h2&gt;&#xA;&lt;p&gt;Клиент полностью контролирует своё портфолио. Новые работы публикуются за минуту — прямо с телефона, сразу после фотосессии. Никаких посредников и ожидания.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как AI-ассистент договорился на 200К вместо 1,3 млн</title>
+      <link>https://eldarmarketing.ru/blog/ai-negotiation-dtp/</link>
+      <pubDate>Mon, 02 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-negotiation-dtp/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://eldarmarketing.ru/images/blog/ai-dtp-expert.jpg&#34; alt=&#34;Экспертное заключение по ДТП&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;ситуация&#34;&gt;Ситуация&lt;/h2&gt;&#xA;&lt;p&gt;Юрист другой стороны прислал экспертизу. Сумма ущерба: 1,3 миллиона рублей. Автомобиль: Рено Логан 2021 года.&lt;/p&gt;&#xA;&lt;p&gt;Логан стоит 1,5 млн новый. Ремонт на 1,3 млн — это почти тотал. Явное завышение.&lt;/p&gt;&#xA;&lt;p&gt;Я подключил AI-ассистента. Теперь он ведёт переговоры с юристом. Анализирует каждое сообщение, готовит ответы, торгуется.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-делает-ai&#34;&gt;Что делает AI&lt;/h2&gt;&#xA;&lt;h3 id=&#34;анализирует-экспертизу&#34;&gt;Анализирует экспертизу&lt;/h3&gt;&#xA;&lt;p&gt;AI прочитал документ и нашёл слабые места:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Сумма завышена в 2–3 раза относительно рынка&lt;/li&gt;&#xA;&lt;li&gt;Нет детализации работ и запчастей&lt;/li&gt;&#xA;&lt;li&gt;Оценка из «дружественной» компании&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;проверяет-факты&#34;&gt;Проверяет факты&lt;/h3&gt;&#xA;&lt;p&gt;Средняя стоимость ремонта Логана после ДТП средней тяжести — 300–500 тысяч. Даже с заменой половины кузова — максимум 700 тысяч.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Первый клиент на внедрение AI-ассистента: разбор задачи</title>
+      <link>https://eldarmarketing.ru/blog/first-ai-client/</link>
+      <pubDate>Mon, 02 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/first-ai-client/</guid>
+      <description>&lt;p&gt;К нам пришёл владелец строительной компании. Проблема простая: бизнес растёт, а команда не справляется.&lt;/p&gt;&#xA;&lt;h2 id=&#34;ситуация&#34;&gt;Ситуация&lt;/h2&gt;&#xA;&lt;p&gt;Компания делает лестницы, двери, перегородки. Проекты длятся по полгода. Клиенты приходят через сарафан — много и постоянно.&lt;/p&gt;&#xA;&lt;p&gt;Менеджер справляется на 20-30%. Забывает задачи, не ведёт ежедневник, теряет договорённости. Монтажники тоже забывают — приходится звонить и напоминать. Владелец устаёт от ручного контроля.&lt;/p&gt;&#xA;&lt;p&gt;При этом он точно знает: если всё систематизировать — продажи вырастут вдвое.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-хочет-клиент&#34;&gt;Что хочет клиент&lt;/h2&gt;&#xA;&lt;p&gt;Мы собрали все его сообщения и выделили 8 задач для AI-ассистента:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как внедрить AI-ассистента в автосервис</title>
+      <link>https://eldarmarketing.ru/blog/ai-assistant-auto-service/</link>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-assistant-auto-service/</guid>
+      <description>&lt;p&gt;Автосервис — идеальная ниша для AI-ассистента. Много типовых вопросов, запись на услуги, напоминания о ТО.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-делает-ai-ассистент-в-автосервисе&#34;&gt;Что делает AI-ассистент в автосервисе&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Отвечает на вопросы&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Сколько стоит замена масла?&lt;/li&gt;&#xA;&lt;li&gt;Есть ли запись на завтра?&lt;/li&gt;&#xA;&lt;li&gt;Какие масла используете?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Записывает на услуги&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Понимает свободную речь («хочу записаться на субботу утром»)&lt;/li&gt;&#xA;&lt;li&gt;Проверяет свободные слоты&lt;/li&gt;&#xA;&lt;li&gt;Отправляет подтверждение&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Напоминает&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;За день до визита&lt;/li&gt;&#xA;&lt;li&gt;О плановом ТО по пробегу&lt;/li&gt;&#xA;&lt;li&gt;Об акциях и скидках&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;как-внедрить&#34;&gt;Как внедрить&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Собрать базу знаний&lt;/strong&gt; — прайс, услуги, частые вопросы&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Подключить к мессенджерам&lt;/strong&gt; — WhatsApp, Telegram&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Интегрировать с CRM&lt;/strong&gt; — чтобы видеть историю клиента&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Настроить эскалацию&lt;/strong&gt; — сложные вопросы передавать менеджеру&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;результат&#34;&gt;Результат&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;-50%&lt;/strong&gt; нагрузка на администратора&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;+30%&lt;/strong&gt; записей (бот отвечает ночью и в выходные)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;0&lt;/strong&gt; пропущенных напоминаний&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>5 процессов которые нужно автоматизировать первыми</title>
+      <link>https://eldarmarketing.ru/blog/5-processes-to-automate/</link>
+      <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/5-processes-to-automate/</guid>
+      <description>&lt;p&gt;Автоматизировать можно что угодно. Вопрос — с чего начать, чтобы получить результат быстро и без больших затрат.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-обработка-заявок&#34;&gt;1. Обработка заявок&lt;/h2&gt;&#xA;&lt;p&gt;Заявка с сайта должна автоматически попадать в CRM, создавать задачу менеджеру и отправлять клиенту подтверждение. Без ручного переноса данных.&lt;/p&gt;&#xA;&lt;h2 id=&#34;2-напоминания-клиентам&#34;&gt;2. Напоминания клиентам&lt;/h2&gt;&#xA;&lt;p&gt;SMS или сообщение в мессенджер за день до визита. Снижает неявки на 30–40%.&lt;/p&gt;&#xA;&lt;h2 id=&#34;3-follow-up-после-продажи&#34;&gt;3. Follow-up после продажи&lt;/h2&gt;&#xA;&lt;p&gt;Автоматическое письмо через неделю: «Всё ли в порядке?» Повышает лояльность и собирает обратную связь.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Почему AI-ассистенты — это не просто чат-боты</title>
+      <link>https://eldarmarketing.ru/blog/ai-assistants-not-chatbots/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/ai-assistants-not-chatbots/</guid>
+      <description>&lt;p&gt;Классические боты работают по скриптам: нажал кнопку — получил ответ. Клиент спросил что-то не по сценарию — бот завис или отправил к оператору.&lt;/p&gt;&#xA;&lt;p&gt;AI-ассистенты устроены иначе. Они понимают контекст, ведут диалог и решают нестандартные вопросы.&lt;/p&gt;&#xA;&lt;h2 id=&#34;как-работают-обычные-боты&#34;&gt;Как работают обычные боты&lt;/h2&gt;&#xA;&lt;p&gt;Стандартный бот — это дерево решений. Если клиент написал «цена» — показать прайс. Если «адрес» — показать карту. Всё остальное — «не понял, выберите из меню».&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Проблемы:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Не понимает свободный текст&lt;/li&gt;&#xA;&lt;li&gt;Не помнит предыдущие сообщения&lt;/li&gt;&#xA;&lt;li&gt;Ломается на нестандартных вопросах&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;как-работают-ai-ассистенты&#34;&gt;Как работают AI-ассистенты&lt;/h2&gt;&#xA;&lt;p&gt;AI-ассистент на базе GPT или Claude — это языковая модель, обученная на ваших материалах. Он читает всю переписку, понимает намерение клиента и отвечает по существу.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как подключить банк к CRM и автоматизировать счета</title>
+      <link>https://eldarmarketing.ru/blog/bank-api-integration/</link>
+      <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/bank-api-integration/</guid>
+      <description>&lt;p&gt;На прошлой неделе я настроил интеграцию с банковским API для клиента. Весь процесс — от регистрации приложения до первого автоматического счёта — занял 3 часа.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема-ручное-выставление-счетов&#34;&gt;Проблема: ручное выставление счетов&lt;/h2&gt;&#xA;&lt;p&gt;Типичный сценарий в малом бизнесе:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Клиент согласовал сумму&lt;/li&gt;&#xA;&lt;li&gt;Бухгалтер заходит в банк-клиент&lt;/li&gt;&#xA;&lt;li&gt;Заполняет реквизиты вручную&lt;/li&gt;&#xA;&lt;li&gt;Скачивает PDF&lt;/li&gt;&#xA;&lt;li&gt;Отправляет на почту или в мессенджер&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;На один счёт уходит 10–15 минут. При 20 клиентах в месяц — 5 часов чистого времени.&lt;/p&gt;&#xA;&lt;h2 id=&#34;решение-банковский-api&#34;&gt;Решение: банковский API&lt;/h2&gt;&#xA;&lt;p&gt;Большинство банков для бизнеса предоставляют API. Точка, Тинькофф, Сбер, Альфа — у всех есть документация.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Автоматизация документов: счета, акты и договоры</title>
+      <link>https://eldarmarketing.ru/blog/documents-automation/</link>
+      <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/documents-automation/</guid>
+      <description>&lt;p&gt;Ручное создание документов — это часы рутины каждый месяц. Копировать реквизиты, менять даты, проверять суммы. А потом ещё исправлять опечатки.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-можно-автоматизировать&#34;&gt;Что можно автоматизировать&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Счета&lt;/strong&gt; — генерация по данным из CRM&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Акты&lt;/strong&gt; — создание после закрытия сделки&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Договоры&lt;/strong&gt; — шаблоны с подстановкой данных&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;КП&lt;/strong&gt; — персонализированные предложения&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;как-это-работает&#34;&gt;Как это работает&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;В CRM хранятся реквизиты клиента&lt;/li&gt;&#xA;&lt;li&gt;При создании документа система берёт нужные данные&lt;/li&gt;&#xA;&lt;li&gt;Подставляет в шаблон&lt;/li&gt;&#xA;&lt;li&gt;Генерирует PDF&lt;/li&gt;&#xA;&lt;li&gt;Отправляет клиенту или сохраняет в папку&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;инструменты&#34;&gt;Инструменты&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Google Docs + Apps Script&lt;/strong&gt; — бесплатно, подходит для простых шаблонов&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как я построил «второй мозг» для работы с клиентами</title>
+      <link>https://eldarmarketing.ru/blog/second-brain-clients/</link>
+      <pubDate>Sun, 18 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/second-brain-clients/</guid>
+      <description>&lt;p&gt;Когда клиентов больше десяти, невозможно держать в голове все детали: кто что заказывал, о чём договаривались, какие есть особенности.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема&#34;&gt;Проблема&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Забываешь важные договорённости&lt;/li&gt;&#xA;&lt;li&gt;Путаешь клиентов между собой&lt;/li&gt;&#xA;&lt;li&gt;Тратишь время на поиск информации&lt;/li&gt;&#xA;&lt;li&gt;Новому сотруднику сложно войти в курс&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;решение-структурированная-база-знаний&#34;&gt;Решение: структурированная база знаний&lt;/h2&gt;&#xA;&lt;p&gt;Я создал систему, где на каждого клиента есть «карточка»:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Контакты&lt;/strong&gt; — телефоны, мессенджеры, email&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;История&lt;/strong&gt; — все проекты и взаимодействия&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Особенности&lt;/strong&gt; — предпочтения, важные детали&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Документы&lt;/strong&gt; — договоры, счета, акты&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;как-это-работает&#34;&gt;Как это работает&lt;/h2&gt;&#xA;&lt;p&gt;Перед созвоном открываю карточку клиента. Вижу всю историю: что делали, о чём договаривались, какие были проблемы.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Как выбрать CRM для малого бизнеса</title>
+      <link>https://eldarmarketing.ru/blog/crm-for-small-business/</link>
+      <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/crm-for-small-business/</guid>
+      <description>&lt;p&gt;CRM нужна не всем. Если у вас 5 клиентов в месяц, Excel справится. Но когда клиентов становится больше 20 — без системы начинается хаос.&lt;/p&gt;&#xA;&lt;h2 id=&#34;когда-пора-внедрять-crm&#34;&gt;Когда пора внедрять CRM&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Менеджеры забывают перезвонить клиентам&lt;/li&gt;&#xA;&lt;li&gt;Непонятно, на каком этапе сделка&lt;/li&gt;&#xA;&lt;li&gt;Нет истории общения с клиентом&lt;/li&gt;&#xA;&lt;li&gt;Руководитель не видит воронку продаж&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;что-выбрать&#34;&gt;Что выбрать&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Bitrix24&lt;/strong&gt; — если нужно всё в одном: CRM, задачи, чаты, диск. Бесплатный тариф до 12 человек.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;amoCRM&lt;/strong&gt; — если фокус только на продажах. Простой интерфейс, хорошие интеграции. От 499 ₽/мес.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

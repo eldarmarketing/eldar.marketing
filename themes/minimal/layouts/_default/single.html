@@ -1,0 +1,60 @@
+{{ define "main" }}
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {{ if .Parent }}{"@type": "ListItem", "position": 2, "name": "{{ .Parent.Title }}", "item": "{{ .Parent.Permalink }}"},
+        {"@type": "ListItem", "position": 3, "name": "{{ .Title }}", "item": "{{ .Permalink }}"}
+        {{ else }}{"@type": "ListItem", "position": 2, "name": "{{ .Title }}", "item": "{{ .Permalink }}"}
+        {{ end }}
+    ]
+}
+</script>
+
+{{ if eq .Section "blog" }}
+<!-- Article Schema for blog posts -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ .Title }}",
+    "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}",
+    "datePublished": "{{ .Date.Format "2006-01-02" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+    "author": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru/about/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар Маркетинг",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": "{{ .Permalink }}",
+    "wordCount": {{ countwords .Content }}
+}
+</script>
+{{ end }}
+
+<article>
+    <h2>{{ .Title }}</h2>
+    {{ if eq .Section "blog" }}
+    <div class="article-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+        <span>· {{ math.Round (div (countwords .Content) 200.0) }} мин чтения</span>
+    </div>
+    {{ end }}
+    {{ .Content }}
+</article>
+
+{{ if eq .Section "blog" }}
+<nav class="article-nav">
+    {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title }}</a>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .Permalink }}">{{ .Title }} →</a>{{ end }}
+</nav>
+{{ end }}
+{{ end }}

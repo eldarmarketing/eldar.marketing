@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h2>{{ .Title }}</h2>
+{{ .Content }}
+<div class="card-list">
+{{ range .Pages.ByDate.Reverse }}
+<a href="{{ .Permalink }}" class="card">
+    {{ if and (not .Date.IsZero) (ne (.Date.Format "2006") "0001") }}
+    <span class="card-meta">
+        <span class="date">{{ .Date.Format "02.01.2006" }}</span>
+        {{ if eq $.Section "blog" }}<span class="reading-time">· {{ math.Round (div (countwords .Content) 200.0) }} мин</span>{{ end }}
+    </span>
+    {{ end }}
+    <span class="card-title">{{ .Title }}</span>
+    {{ if .Description }}<span class="card-desc">{{ .Description | safeHTML }}</span>{{ end }}
+</a>
+{{ end }}
+</div>
+{{ end }}

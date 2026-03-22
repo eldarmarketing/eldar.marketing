@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Как мы сделали CRM, где нейронка сама обрабатывает задачи — Эльдар Маркетинг</title>
+    <meta name="description" content="Канбан-доска с AI-агентом, который знает контекст клиента и выполняет задачи без лишних вопросов.">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/crm-ai-tasks/">
+    
+    
+    <meta property="og:title" content="Как мы сделали CRM, где нейронка сама обрабатывает задачи">
+    <meta property="og:description" content="Канбан-доска с AI-агентом, который знает контекст клиента и выполняет задачи без лишних вопросов.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/crm-ai-tasks/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Как мы сделали CRM, где нейронка сама обрабатывает задачи">
+    <meta name="twitter:description" content="Канбан-доска с AI-агентом, который знает контекст клиента и выполняет задачи без лишних вопросов.">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Как мы сделали CRM, где нейронка сама …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Как мы сделали CRM, где нейронка сама обрабатывает задачи", "item": "https:\/\/eldarmarketing.ru\/blog\/crm-ai-tasks\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">6 февраля 2026</p>
+    <h2 id="проблема-контекст-теряется">Проблема: контекст теряется</h2>
+<p>У маркетингового агентства десятки клиентов. У каждого — свой проект, свои реквизиты, своя история переписки.</p>
+<p>Когда ставишь задачу помощнику — будь то человек или AI — он спрашивает: «Какой клиент? Какой ИНН? А что там было в последнем сообщении?»</p>
+<p>Это трата времени. Каждый раз.</p>
+<h2 id="что-мы-построили">Что мы построили</h2>
+<p>CRM-систему, где задача создаётся <strong>в контексте клиента</strong>. Не просто «отправь счёт», а:</p>
+<pre tabindex="0"><code>Клиент: Анна (ИП Иванова А.В.)
+ИНН: 7712345678
+Статус: клиент
+Проект: Продвижение сайта — В работе, 50 000 ₽
+
+Последние сообщения:
+  Клиент: Пришлите счёт, пожалуйста
+  Бот: Счёт №7 от 05.02.2026.pdf
+
+Задание: Отправь счёт в ЭДО
+</code></pre><p>AI-агент получает это и <strong>сразу действует</strong>. Не задаёт вопросов. Не ищет реквизиты. Не перечитывает 50 сообщений.</p>
+<h2 id="как-это-работает">Как это работает</h2>
+<h3 id="канбан-доска">Канбан-доска</h3>
+<p>У нас 7 колонок: Лид → Контакт → В работе → Ожидание → Пауза → Готово → Отмена.</p>
+<p>Каждая карточка — это клиент + задача + дедлайн + следующий шаг.</p>
+<p>Свайп между колонками. Долгое нажатие — быстрая смена статуса. Всё на телефоне, в PWA-приложении.</p>
+<h3 id="создание-задачи">Создание задачи</h3>
+<p>Нажимаешь «+ Добавить задачу» в любой колонке:</p>
+<ol>
+<li><strong>Выбираешь клиента</strong> — поиск с автодополнением из базы</li>
+<li><strong>Пишешь задачу</strong> — «Отправить акт за январь»</li>
+<li><strong>Описание</strong> — детали, если нужны</li>
+<li><strong>Дедлайн</strong> — когда должно быть готово</li>
+</ol>
+<p>Задача привязана к клиенту. При передаче AI-агенту — сервер <strong>автоматически</strong> подтягивает:</p>
+<ul>
+<li>Имя, компанию, ИНН клиента</li>
+<li>Текущий проект и его статус</li>
+<li>Последние 5 сообщений из чата</li>
+</ul>
+<h3 id="ai-в-чате">AI в чате</h3>
+<p>Прямо в переписке с клиентом можно дать задание AI. Пишешь <code>@ai отправь в ЭДО счёт</code> — и агент:</p>
+<ol>
+<li>Видит, с кем чат (имя, реквизиты)</li>
+<li>Видит, какой файл был отправлен</li>
+<li>Загружает счёт в систему ЭДО</li>
+<li>Отчитывается прямо в чате</li>
+</ol>
+<p>Без переключения между вкладками. Без копирования ИНН. Без «а какой именно счёт?»</p>
+<h2 id="чат-с-клиентом">Чат с клиентом</h2>
+<p>Чат в CRM — не просто мессенджер. Он умеет:</p>
+<ul>
+<li><strong>Ctrl+V</strong> — вставить скриншот из буфера, добавить подпись, отправить одним сообщением</li>
+<li><strong>Ссылки</strong> — автоматически кликабельные</li>
+<li><strong>Файлы</strong> — PDF, фото, видео через кнопку-скрепку</li>
+<li><strong>Реквизиты</strong> — карточка клиента с ИНН, счётом, адресом</li>
+<li><strong>Светлая/тёмная тема</strong> — переключатель, сохраняет выбор</li>
+</ul>
+<h2 id="экономия-токенов">Экономия токенов</h2>
+<p>Раньше: AI получал голую задачу → делал 2-3 запроса к API → читал переписку → тратил ~500 лишних токенов.</p>
+<p>Сейчас: контекст собирается на сервере. AI получает всё в одном пакете. <strong>Ноль дополнительных запросов.</strong></p>
+<p>На 10 задач в день это экономит ~5000 токенов. За месяц — ощутимо.</p>
+<h2 id="технические-решения">Технические решения</h2>
+<ul>
+<li><strong>PWA</strong> — работает с домашнего экрана как нативное приложение</li>
+<li><strong>Две темы</strong> — CSS-переменные, переключение без перезагрузки</li>
+<li><strong>Оффлайн</strong> — сообщения кешируются, отправляются при восстановлении связи</li>
+<li><strong>Push-уведомления</strong> — мгновенное оповещение о новых сообщениях клиентов</li>
+<li><strong>ЭДО интеграция</strong> — отправка документов через СБИС прямо из чата</li>
+</ul>
+<h2 id="итого">Итого</h2>
+<p>CRM для маркетингового агентства, которая:</p>
+<ol>
+<li>Хранит всё о клиенте в одном месте</li>
+<li>Позволяет ставить задачи с контекстом</li>
+<li>AI-агент работает без уточняющих вопросов</li>
+<li>Экономит время и токены</li>
+</ol>
+<p>Всё это — на своём сервере, под полным контролем. Никаких подписок на SaaS.</p>
+<hr>
+<p><em>Пишу о том, как автоматизирую маркетинговое агентство с помощью AI. Подписывайтесь: <a href="https://t.me/eldarmarketing">@eldarmarketing</a></em></p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как мы сделали CRM, где нейронка сама обрабатывает задачи",
+    "description": "Канбан-доска с AI-агентом, который знает контекст клиента и выполняет задачи без лишних вопросов.",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-06",
+    "dateModified": "2026-02-06",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/crm-ai-tasks\/",
+    "wordCount":  465 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/crm-ai-tasks\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

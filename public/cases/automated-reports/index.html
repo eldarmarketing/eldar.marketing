@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Автоматические отчёты владельцу бизнеса в Telegram — Эльдар Маркетинг</title>
+    <meta name="description" content="Как мы подключили Яндекс.Метрику, телефонию и речевую аналитику к Telegram-боту для ежедневных отчётов">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/automated-reports/">
+    
+    
+    <meta property="og:title" content="Автоматические отчёты владельцу бизнеса в Telegram">
+    <meta property="og:description" content="Как мы подключили Яндекс.Метрику, телефонию и речевую аналитику к Telegram-боту для ежедневных отчётов">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/automated-reports/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Автоматические отчёты владельцу бизнеса в Telegram">
+    <meta name="twitter:description" content="Как мы подключили Яндекс.Метрику, телефонию и речевую аналитику к Telegram-боту для ежедневных отчётов">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>Автоматические отчёты владельцу бизнеса в Telegram</span>
+</nav>
+
+<article class="case-study">
+    <h2>Автоматические отчёты владельцу бизнеса в Telegram</h2>
+    
+    <h2 id="проблема">Проблема</h2>
+<p>Владелец автоателье в Санкт-Петербурге каждый день задавала одни и те же вопросы:</p>
+<p>— Сколько людей зашло на сайт?
+— Откуда трафик — реклама или поиск?
+— Сколько звонков было? Сколько пропустили?</p>
+<p>Ответы приходилось собирать вручную: зайти в Метрику, открыть личный кабинет телефонии, посчитать. На это уходило 10–15 минут каждый день. А если забыл — картина за день терялась.</p>
+<h2 id="задача">Задача</h2>
+<p>Сделать так, чтобы владелец получала полную сводку по бизнесу каждое утро в Telegram. Без необходимости заходить в Метрику, телефонию или любой другой сервис.</p>
+<h2 id="что-подключили">Что подключили</h2>
+<h3 id="1-яндексметрика">1. Яндекс.Метрика</h3>
+<p>Через API Метрики бот забирает данные за вчерашний день:</p>
+<ul>
+<li><strong>Посетители и визиты</strong> — сколько людей было на сайте</li>
+<li><strong>Процент отказов</strong> — сколько ушли сразу</li>
+<li><strong>Глубина просмотра</strong> — сколько страниц в среднем смотрят</li>
+<li><strong>Время на сайте</strong> — насколько контент удерживает</li>
+<li><strong>Источники трафика</strong> — реклама, поиск, прямые заходы, соцсети</li>
+<li><strong>Топ страниц</strong> — какие страницы смотрят чаще всего (с кликабельными ссылками)</li>
+</ul>
+<p>Один запрос к API — и все цифры в сообщении.</p>
+<h3 id="2-телефония-sipuni">2. Телефония (Sipuni)</h3>
+<p>Автоателье принимает много звонков — клиенты узнают цены, записываются на работы. Через API телефонии бот собирает:</p>
+<ul>
+<li><strong>Общее количество звонков</strong> за день</li>
+<li><strong>Входящие и исходящие</strong> отдельно</li>
+<li><strong>Принятые и пропущенные</strong> — главный показатель для владельца</li>
+<li><strong>Средняя длительность разговора</strong> — косвенный показатель качества консультации</li>
+</ul>
+<p>Пропущенный звонок — это потенциально потерянный клиент. Теперь владелец видит это каждое утро.</p>
+<h3 id="3-речевая-аналитика-yandex-speechsense">3. Речевая аналитика (Yandex SpeechSense)</h3>
+<p>Следующий уровень — анализ содержания разговоров. Все звонки через телефонию автоматически отправляются в SpeechSense, который:</p>
+<ul>
+<li><strong>Транскрибирует</strong> каждый разговор в текст</li>
+<li><strong>Определяет настроение</strong> клиента (доволен, нейтрален, недоволен)</li>
+<li><strong>Оценивает качество</strong> обслуживания оператором</li>
+<li><strong>Выделяет ключевые темы</strong> — о чём спрашивают чаще всего</li>
+<li><strong>Считает соотношение</strong> речи оператора и клиента</li>
+</ul>
+<p>Это даёт владельцу понимание не только «сколько звонков», но и «о чём звонят» и «довольны ли клиенты».</p>
+<h2 id="как-выглядит-отчёт">Как выглядит отчёт</h2>
+<p>Каждое утро в 09:00 в Telegram приходит одно сообщение:</p>
+<pre tabindex="0"><code>📊 Отчёт за 25.02.2026
+
+👥 Посетители: 47
+👁 Визиты: 66
+📉 Отказы: 29%
+📄 Глубина: 3.4 стр.
+⏱ Время на сайте: 5:13
+
+📡 Источники:
+  Прямые заходы: 36 (22 чел.)
+  Реклама: 20 (19 чел.)
+  Поиск: 10 (9 чел.)
+
+📞 Звонки:
+  Всего: 19 (📥 7 вх. / 📤 12 исх.)
+  ✅ Принято: 15 / ❌ Пропущено: 4
+  ⏱ Средний разговор: 1:02
+</code></pre><p>Никаких дашбордов, логинов, паролей. Открыл Telegram — увидел картину дня.</p>
+<h2 id="техническая-реализация">Техническая реализация</h2>
+<ul>
+<li><strong>Node.js скрипт</strong> на сервере (~120 строк)</li>
+<li><strong>Cron</strong> запускает его раз в сутки в 09:00</li>
+<li><strong>Яндекс.Метрика API</strong> — 3 запроса (статистика, источники, страницы)</li>
+<li><strong>Sipuni API</strong> — 1 запрос (CSV со звонками за день)</li>
+<li><strong>Telegram Bot API</strong> — отправка сообщения</li>
+<li><strong>SpeechSense</strong> — автоматическая интеграция через Sipuni, без дополнительного кода</li>
+</ul>
+<p>Всё работает на одном сервере. Никаких внешних сервисов, подписок или no-code платформ.</p>
+<h2 id="результат">Результат</h2>
+<table>
+  <thead>
+      <tr>
+          <th>До</th>
+          <th>После</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Ручная проверка 3 сервисов</td>
+          <td>Один отчёт в Telegram</td>
+      </tr>
+      <tr>
+          <td>10–15 минут каждый день</td>
+          <td>0 минут</td>
+      </tr>
+      <tr>
+          <td>Забыл проверить — данные потеряны</td>
+          <td>Автоматически каждое утро</td>
+      </tr>
+      <tr>
+          <td>Только цифры посещений</td>
+          <td>+ звонки + аналитика разговоров</td>
+      </tr>
+  </tbody>
+</table>
+<p>Владелец тратит 30 секунд на чтение сводки вместо 15 минут на сбор данных. А с речевой аналитикой появилось понимание качества работы с клиентами, которого раньше не было вообще.</p>
+<h2 id="сколько-это-стоит">Сколько это стоит</h2>
+<ul>
+<li><strong>Яндекс.Метрика API</strong> — бесплатно</li>
+<li><strong>Sipuni API</strong> — входит в тариф телефонии</li>
+<li><strong>SpeechSense</strong> — от 3,2 ₽ за минуту разговора (~60 ₽/день при 20 звонках)</li>
+<li><strong>Разработка</strong> — 2 часа работы AI-ассистента</li>
+</ul>
+<p>Итого: практически бесплатно при уже подключенной телефонии.</p>
+
+</article>
+
+<style>
+ 
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(255,255,255,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(255,255,255,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(255,255,255,0.25);
+}
+
+ 
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+ 
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+
+ 
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+    .breadcrumb { color: rgba(255,255,255,0.4); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+    .case-study img {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    .case-study img:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        border-color: #333;
+    }
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .breadcrumb { color: rgba(0,0,0,0.4); }
+    .breadcrumb a { color: rgba(0,0,0,0.5); }
+    .breadcrumb a:hover { color: rgba(0,0,0,0.85); }
+    .breadcrumb .sep { color: rgba(0,0,0,0.2); }
+}
+
+ 
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "Автоматические отчёты владельцу бизнеса в Telegram" }
+    ]
+}
+</script>
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

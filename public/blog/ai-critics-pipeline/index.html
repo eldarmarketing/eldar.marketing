@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>4 AI-критика правят мой текст параллельно — Эльдар Маркетинг</title>
+    <meta name="description" content="Как я собрал пайплайн, где четыре агента одновременно проверяют черновик — и почему текст после этого перестаёт пахнуть ChatGPT">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/ai-critics-pipeline/">
+    
+    
+    <meta property="og:title" content="4 AI-критика правят мой текст параллельно">
+    <meta property="og:description" content="Как я собрал пайплайн, где четыре агента одновременно проверяют черновик — и почему текст после этого перестаёт пахнуть ChatGPT">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/ai-critics-pipeline/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="4 AI-критика правят мой текст параллельно">
+    <meta name="twitter:description" content="Как я собрал пайплайн, где четыре агента одновременно проверяют черновик — и почему текст после этого перестаёт пахнуть ChatGPT">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>4 AI-критика правят мой текст …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "4 AI-критика правят мой текст параллельно", "item": "https:\/\/eldarmarketing.ru\/blog\/ai-critics-pipeline\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">5 февраля 2026</p>
+    <p>Тексты от AI воняют. Ты узнаёшь их с первого абзаца: «В современном мире&hellip;», «Важно отметить&hellip;», «Это не просто X — это Y». Я устал и собрал систему, которая бьёт по рукам.</p>
+<h2 id="проблема">Проблема</h2>
+<p>Я пишу статьи для блога через AI-ассистента. Сажусь, диктую тему, получаю черновик за 3 минуты. Первые полгода радовался скорости. В январе 2026 перечитал свои 12 статей подряд — и меня затошнило.</p>
+<p>Каждый текст — одинаковый. Те же обороты. Тот же ритм. Предложения по 15-18 слов, ровненько, как забор. Абзацы начинаются с «Кроме того» и «Стоит отметить». Читатель уходит через 40 секунд — я видел это в аналитике.</p>
+<p>Дело не в AI. Один агент пишет и сам себя проверяет — это как попросить автора рецензировать свою книгу. Он слепой к своим штампам.</p>
+<h2 id="идея-пусть-правят-четверо">Идея: пусть правят четверо</h2>
+<p>Наткнулся на концепт «deaify» — пропускать текст через несколько независимых критиков. Каждый видит одну проблему. Никто не знает о замечаниях другого.</p>
+<p>Ключевое слово — <strong>параллельно</strong>. Не последовательно, где каждый следующий критик видит правки предыдущего и начинает подстраиваться. А одновременно, вслепую — как peer review в науке.</p>
+<p>По-моему, именно параллельность делает результат честным.</p>
+<h2 id="четыре-критика">Четыре критика</h2>
+<p>Я назвал их по ролям:</p>
+<pre tabindex="0"><code>┌─────────────┐
+│  ЧЕРНОВИК    │
+└──────┬──────┘
+       │
+  ┌────┼────┬────────┐
+  ▼    ▼    ▼        ▼
+┌───┐┌───┐┌───┐  ┌─────┐
+│ A ││ B ││ C │  │  D  │
+│   ││   ││   │  │     │
+│GPT││Rit││Spe│  │Fact │
+│Det││Ana││Chk│  │Chk  │
+└─┬─┘└─┬─┘└─┬─┘  └──┬──┘
+  │    │    │       │
+  └────┴────┴───┬───┘
+                ▼
+       ┌────────────────┐
+       │  ФИНАЛЬНАЯ     │
+       │  ВЕРСИЯ        │
+       └────────────────┘
+</code></pre><p><strong>Critic A — Generic Detector.</strong> Ищет AI-штампы. У меня список из 12 запрещённых оборотов: «важно понимать», «следует учитывать», «в рамках», «является», «осуществлять». Нашёл — флагит строку, предлагает замену.</p>
+<p><strong>Critic B — Rhythm Analyzer.</strong> Считает длину предложений. Три подряд по 15-18 слов? Красный флаг. Все абзацы начинаются одинаково? Красный флаг. Но пронумерованные списки не трогает — там единообразие уместно.</p>
+<p><strong>Critic C — Specificity Checker.</strong> Ищет абстракции без конкретики. «Быстро» → «за 12 минут». «Много клиентов» → «47 клиентов». «Недавно» → «3 февраля». Ещё проверяет: есть ли в тексте хотя бы одно «я думаю» или «по-моему». Без авторского голоса текст мёртвый.</p>
+<p><strong>Critic D — Fact Checker.</strong> Вытаскивает все версии, даты, названия технологий. Claude Sonnet? Проверяет — актуальна ли модель. SQLite 3.45? Существует ли вообще. Формат: <code>[CLAIM]</code> + <code>[OK/FLAG]</code>.</p>
+<h2 id="как-это-работает">Как это работает</h2>
+<p>Я использую OpenClaw — платформу для AI-агентов. У неё есть <code>sessions_spawn</code>: запуск субагентов в изолированных сессиях. Каждый критик — отдельный агент на Claude Sonnet.</p>
+<pre tabindex="0"><code>Opus (координатор)
+├── spawn(&#34;Critic A: найди AI-штампы...&#34;)
+├── spawn(&#34;Critic B: проверь ритм...&#34;)
+├── spawn(&#34;Critic C: где добавить конкретику...&#34;)
+└── spawn(&#34;Critic D: проверь факты...&#34;)
+</code></pre><p>Четыре запроса уходят одновременно. Каждый стоит ~$0.01-0.03. Через 30-60 секунд все четверо возвращают замечания. Opus собирает их в единый список и переписывает черновик.</p>
+<p>$0.15 за статью — вся деаификация. Ручная правка заняла бы час. Тут — 2 минуты.</p>
+<h2 id="полный-пайплайн-от-заметок-до-публикации">Полный пайплайн: от заметок до публикации</h2>
+<p>Критики — это фаза 4 из пяти:</p>
+<ol>
+<li><strong>Extract</strong> — вытаскиваю факты из дневных заметок (я веду daily log каждый день)</li>
+<li><strong>Research</strong> — субагент ищет аналоги и проверяет контекст через веб-поиск</li>
+<li><strong>Draft</strong> — пишу черновик по формулам хуков (об этом ниже)</li>
+<li><strong>Deaify</strong> — 4 критика параллельно</li>
+<li><strong>Finalize</strong> — типографика, Hugo frontmatter, деплой на сервер</li>
+</ol>
+<p>Заметки → статья за 15 минут. Минимум ручного вмешательства. Контроль качества на каждом этапе.</p>
+<h2 id="формулы-хуков-первые-30-слов-решают-всё">Формулы хуков: первые 30 слов решают всё</h2>
+<p>AI обожает начинать с «В современном мире цифровых технологий&hellip;». Это смерть. Я видел в аналитике: 60% читателей уходят после первого абзаца.</p>
+<p>Поэтому зашил три формулы в writing-guide:</p>
+<p><strong>SPY</strong> (Statement → Pain → whY):</p>
+<blockquote>
+<p>«Тексты от AI воняют. Ты узнаёшь их с первого абзаца.»</p></blockquote>
+<p><strong>PAS</strong> (Problem → Agitate → Solve):</p>
+<blockquote>
+<p>«Ты публикуешь 2 статьи в неделю. Все звучат одинаково. Вот как это починить.»</p></blockquote>
+<p><strong>APP</strong> (Agree → Promise → Preview):</p>
+<blockquote>
+<p>«Да, AI пишет быстрее тебя. Но вот как сделать, чтобы он писал <em>лучше</em> тебя.»</p></blockquote>
+<p>Короткое утверждение. Боль. Решение. Никаких «в современном мире».</p>
+<h2 id="что-это-меняет">Что это меняет</h2>
+<p>До пайплайна: черновик за 3 минуты → ручная правка 40-60 минут → результат «ну ок».</p>
+<p>После: черновик за 3 минуты → 4 критика за 1 минуту → финальная версия за 2 минуты → текст, который я не стесняюсь подписать своим именем.</p>
+<p>Экономия — 35-55 минут на статью. Я публикую две в неделю — это 5-8 часов в месяц. За $0.15 за штуку.</p>
+<p>Но время — не главное. Главное — текст перестаёт быть «одним из тысячи». Четыре независимых взгляда ловят то, что один автор пропускает. Это тот же принцип, что в code review: больше глаз — меньше багов.</p>
+<p>Я думаю, через год все будут делать что-то подобное. Пока — конкурентное преимущество.</p>
+<h2 id="takeaways">Takeaways</h2>
+<ol>
+<li><strong>Один агент не может себя проверить.</strong> Нужны независимые критики — как peer review в науке.</li>
+<li><strong>Параллельно &gt; последовательно.</strong> Когда критики работают вслепую, они честнее.</li>
+<li><strong>AI-детокс — это checklist.</strong> 12 запрещённых оборотов, конкретные правила замены. Не магия — инженерия.</li>
+<li><strong>$0.15 за статью.</strong> Стоимость деаификации четырьмя агентами. Дешевле эспрессо.</li>
+<li><strong>Пайплайн &gt; промпт.</strong> Один гениальный промпт не спасёт. Пять фаз с разными агентами — спасут.</li>
+</ol>
+<hr>
+<p><em>Эта статья прошла через тот самый пайплайн. Четыре критика нашли 11 замечаний в черновике. Вы читаете версию после правок.</em></p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "4 AI-критика правят мой текст параллельно",
+    "description": "Как я собрал пайплайн, где четыре агента одновременно проверяют черновик — и почему текст после этого перестаёт пахнуть ChatGPT",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-05",
+    "dateModified": "2026-02-05",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/ai-critics-pipeline\/",
+    "wordCount":  816 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/ai-critics-pipeline\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

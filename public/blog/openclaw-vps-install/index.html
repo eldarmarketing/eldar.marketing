@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>OpenClaw за 10 минут: от 2 часов мучений до автоустановки — Эльдар Маркетинг</title>
+    <meta name="description" content="Как я упаковал установку AI-ассистента на VPS в переиспользуемый скилл. История ошибок, DNS-трюк для России и готовый рецепт.">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/openclaw-vps-install/">
+    
+    
+    <meta property="og:title" content="OpenClaw за 10 минут: от 2 часов мучений до автоустановки">
+    <meta property="og:description" content="Как я упаковал установку AI-ассистента на VPS в переиспользуемый скилл. История ошибок, DNS-трюк для России и готовый рецепт.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/openclaw-vps-install/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OpenClaw за 10 минут: от 2 часов мучений до автоустановки">
+    <meta name="twitter:description" content="Как я упаковал установку AI-ассистента на VPS в переиспользуемый скилл. История ошибок, DNS-трюк для России и готовый рецепт.">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>OpenClaw за 10 минут: от 2 часов мучений …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "OpenClaw за 10 минут: от 2 часов мучений до автоустановки", "item": "https:\/\/eldarmarketing.ru\/blog\/openclaw-vps-install\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">11 февраля 2026</p>
+    <p>Вчера я потратил 2 часа на то, что сегодня занимает 10 минут.</p>
+<p>Задача простая: поставить AI-ассистента на VPS клиента, подключить Telegram-бота. Звучит на 15 минут. Получилось — на 2 часа. Зато второй раз — на 10 минут. Рассказываю, почему.</p>
+<h2 id="что-я-ставил">Что я ставил</h2>
+<p><a href="https://github.com/openclaw/openclaw">OpenClaw</a> — open-source платформа, которая превращает Claude в Telegram-бота с памятью, инструментами и доступом к вашим данным. Не просто чат-обёртка — полноценный ассистент с файлами, скриптами и cron-задачами.</p>
+<p>Клиенту нужен был личный AI-помощник для автоателье: спросил «сколько заказов в работе?» — получил ответ из CRM.</p>
+<h2 id="проблема-1-россия">Проблема №1: Россия</h2>
+<p>VPS в Москве. Anthropic API блокирует российские IP. Классика.</p>
+<p>Первая попытка — HTTP-прокси через US. Настроил <code>globalThis.fetch</code> с ProxyAgent. Anthropic заработал. Telegram — сломался. Потому что Telegram тоже использует fetch, и мой патч перехватывал все запросы.</p>
+<p>Вторая попытка — <code>EnvHttpProxyAgent</code> с <code>NO_PROXY</code> для Telegram. Не работает в Node.js 22 для undici. Telegram polling падает каждые 10 секунд.</p>
+<p>Третья попытка — <code>ANTHROPIC_BASE_URL</code> через nginx reverse proxy. Работает! Но Anthropic SDK видит, что URL не <code>api.anthropic.com</code>, и не отправляет OAuth-заголовки. Ответ: «OAuth authentication is currently not supported.»</p>
+<h2 id="решение-dns-трюк">Решение: DNS-трюк</h2>
+<p>Идея простая: пусть SDK думает, что общается с Anthropic напрямую.</p>
+<pre tabindex="0"><code># На VPS клиента
+echo &#34;&lt;IP_ВАШЕГО_ПРОКСИ&gt; api.anthropic.com&#34; &gt;&gt; /etc/hosts
+</code></pre><p>Теперь <code>api.anthropic.com</code> резолвится на мой VPS в Европе, где nginx проксирует к реальному Anthropic:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">api.anthropic.com</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ssl_certificate</span> <span style="color:#e6db74">/etc/nginx/anthropic-proxy-cert.pem</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/etc/nginx/anthropic-proxy-key.pem</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">allow</span> <span style="color:#e6db74">&lt;IP_КЛИЕНТА&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deny</span> <span style="color:#e6db74">all</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resolver</span> <span style="color:#ae81ff">8</span><span style="color:#e6db74">.8.8.8</span> <span style="color:#e6db74">ipv6=off</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">set</span> $backend <span style="color:#e6db74">&#34;https://api.anthropic.com&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_pass</span> $backend;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_ssl_server_name</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_ssl_name</span> <span style="color:#e6db74">api.anthropic.com</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> <span style="color:#e6db74">api.anthropic.com</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_pass_request_headers</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_buffering</span> <span style="color:#66d9ef">off</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_read_timeout</span> <span style="color:#e6db74">300s</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Self-signed сертификат для <code>api.anthropic.com</code>, <code>NODE_EXTRA_CA_CERTS</code> — и SDK даже не замечает подмены. Все заголовки проходят как есть, OAuth работает.</p>
+<h2 id="проблема-2-autoselectfamily">Проблема №2: autoSelectFamily</h2>
+<p>После прокси — новая ошибка: <code>sendMessage failed: Network request failed</code>. Telegram не может отправить сообщение. Но curl к Telegram API работает!</p>
+<p>Оказалось, OpenClaw ставит <code>autoSelectFamily=false</code> для Telegram по умолчанию. На некоторых VPS это ломает IPv4/IPv6 fallback. Фикс — одна строка:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw config set channels.telegram.network.autoSelectFamily true
+</span></span></code></pre></div><h2 id="проблема-3-формат-auth-profilesjson">Проблема №3: формат auth-profiles.json</h2>
+<p>Токен прописал. Gateway не видит. «No API key found for provider anthropic.»</p>
+<p>Оказалось, формат файла строгий:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;profiles&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;anthropic:default&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;token&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;provider&#34;</span>: <span style="color:#e6db74">&#34;anthropic&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;token&#34;</span>: <span style="color:#e6db74">&#34;sk-ant-oat01-...&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastGood&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;anthropic&#34;</span>: <span style="color:#e6db74">&#34;anthropic:default&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Не <code>&quot;type&quot;: &quot;api_key&quot;</code>, не плоский формат. Именно так — с <code>version: 1</code>, <code>lastGood</code> и вложенным <code>profiles</code>.</p>
+<h2 id="упаковка-в-скилл">Упаковка в скилл</h2>
+<p>Когда всё заработало, я записал каждый шаг и каждую ошибку в скилл — файл с инструкциями, который мой AI-ассистент использует при следующей установке.</p>
+<p>Результат: 10 шагов, таблица диагностики на 9 типичных ошибок, два варианта (с прокси и без). Второй деплой для другого клиента занял 7 минут вместо 2 часов.</p>
+<h2 id="мораль">Мораль</h2>
+<p>Каждая проблема, которую ты решил и не записал — это проблема, которую ты будешь решать снова. Скилл — это просто markdown-файл с пошаговыми инструкциями. Но разница между «я знаю как» и «у меня записано как» — это разница между 2 часами и 10 минутами.</p>
+<p>Принцип простой: <strong>Fix once → Rule forever.</strong></p>
+<hr>
+<p><em>Исходники OpenClaw: <a href="https://github.com/openclaw/openclaw">github.com/openclaw/openclaw</a></em>
+<em>Документация: <a href="https://docs.openclaw.ai">docs.openclaw.ai</a></em></p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "OpenClaw за 10 минут: от 2 часов мучений до автоустановки",
+    "description": "Как я упаковал установку AI-ассистента на VPS в переиспользуемый скилл. История ошибок, DNS-трюк для России и готовый рецепт.",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-11",
+    "dateModified": "2026-02-11",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/openclaw-vps-install\/",
+    "wordCount":  484 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/openclaw-vps-install\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

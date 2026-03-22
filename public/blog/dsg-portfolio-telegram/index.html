@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Портфолио автосервиса из Telegram-канала: 18 видео на сайт за вечер — Эльдар Маркетинг</title>
+    <meta name="description" content="Как мы собрали видео-портфолио DSG-сервиса из Telegram-канала и вывели на сайт — с ботом для загрузки, S3-хранилищем и автоматической публикацией">
+    <meta name="keywords" content="портфолио, автосервис, Telegram, автоматизация, AI-ассистент">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/dsg-portfolio-telegram/">
+    
+    
+    <meta property="og:title" content="Портфолио автосервиса из Telegram-канала: 18 видео на сайт за вечер">
+    <meta property="og:description" content="Как мы собрали видео-портфолио DSG-сервиса из Telegram-канала и вывели на сайт — с ботом для загрузки, S3-хранилищем и автоматической публикацией">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/dsg-portfolio-telegram/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Портфолио автосервиса из Telegram-канала: 18 видео на сайт за вечер">
+    <meta name="twitter:description" content="Как мы собрали видео-портфолио DSG-сервиса из Telegram-канала и вывели на сайт — с ботом для загрузки, S3-хранилищем и автоматической публикацией">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Портфолио автосервиса из …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Портфолио автосервиса из Telegram-канала: 18 видео на сайт за вечер", "item": "https:\/\/eldarmarketing.ru\/blog\/dsg-portfolio-telegram\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">6 марта 2026</p>
+    <p>У клиента был Telegram-канал с видео ремонтов. Восемнадцать роликов: разборка коробки, замена мехатроника, диагностика на стенде. Хорошие видео, снятые в процессе работы.</p>
+<p>Проблема — видео лежали только в Telegram. На сайте портфолио не было. Потенциальные клиенты заходили на сайт, видели текст «мы ремонтируем DSG» и уходили. Без доказательств.</p>
+<h2 id="задача">Задача</h2>
+<p>Перенести видео-портфолио с канала на сайт. И сделать так, чтобы новые работы добавлялись автоматически — без разработчика, без FTP, без «пришлите видео на почту».</p>
+<h2 id="что-было">Что было</h2>
+<ul>
+<li>18 видео в Telegram-канале @dsgclinicchannel</li>
+<li>Сайт на Next.js без портфолио</li>
+<li>Владелец сервиса загружает видео в канал с телефона</li>
+</ul>
+<h2 id="что-сделали">Что сделали</h2>
+<h3 id="шаг-1-скачали-видео-из-канала">Шаг 1. Скачали видео из канала</h3>
+<p>Через Telethon (Python-библиотека для Telegram API) скачали все 18 видео из канала. Общий объём — 1,15 ГБ.</p>
+<p>Каждое видео — конкретная работа: замена сцепления DSG7, ремонт мехатроника S-Tronic, диагностика DQ200. Для каждого определили тип КПП, марку автомобиля и вид работы.</p>
+<h3 id="шаг-2-загрузили-на-s3">Шаг 2. Загрузили на S3</h3>
+<p>Видео залили в облачное хранилище S3 — не на сервер напрямую. Это даёт:</p>
+<ul>
+<li>CDN-раздачу (видео грузится быстро из ближайшей точки)</li>
+<li>Сервер не забивается гигабайтами видео</li>
+<li>Резервное копирование на стороне хостинга</li>
+</ul>
+<p>Для каждого видео сгенерировали превью-картинку через ffmpeg: кадр на первой секунде, сжатый до 320px.</p>
+<h3 id="шаг-3-создали-базу-данных">Шаг 3. Создали базу данных</h3>
+<p>PostgreSQL-таблица portfolio_works хранит:</p>
+<ul>
+<li>Название работы</li>
+<li>Марку и модель автомобиля</li>
+<li>Тип КПП (DSG7, DSG6, S-Tronic)</li>
+<li>Описание проблемы и решения</li>
+<li>Ссылку на видео в S3</li>
+<li>Ссылку на превью</li>
+<li>Статус публикации (показывать на сайте или нет)</li>
+</ul>
+<h3 id="шаг-4-вывели-на-сайт">Шаг 4. Вывели на сайт</h3>
+<p>Компонент PortfolioClient.tsx: сетка карточек с превью, по клику — воспроизведение видео. Мобильная версия адаптирована — кнопка play поверх превью, потому что автоплей на iOS заблокирован.</p>
+<h3 id="шаг-5-сделали-бота-для-новых-работ">Шаг 5. Сделали бота для новых работ</h3>
+<p>Вот тут самое интересное. Владелец сервиса не должен звонить разработчику каждый раз, когда хочет добавить работу.</p>
+<p>Бот @dsgclinic_robot работает так:</p>
+<ol>
+<li>Отправляешь видео в бот</li>
+<li>Бот спрашивает: «Какая машина?»</li>
+<li>Предлагает выбрать тип КПП — кнопками (DSG7, DSG6, S-Tronic)</li>
+<li>Просит описать проблему</li>
+<li>Показывает превью поста и спрашивает подтверждение</li>
+<li>После подтверждения — одновременно:
+<ul>
+<li>Загружает видео на S3</li>
+<li>Генерирует превью через ffmpeg</li>
+<li>Сохраняет в PostgreSQL</li>
+<li>Публикует пост в Telegram-канал</li>
+<li>Обновляет портфолио на сайте (через API ревалидации Next.js)</li>
+</ul>
+</li>
+</ol>
+<p>Весь процесс — 2 минуты. С телефона. Без компьютера.</p>
+<h3 id="шаг-6-telegram-mini-app-для-управления">Шаг 6. Telegram Mini App для управления</h3>
+<p>Для удобства сделали веб-приложение прямо внутри Telegram:</p>
+<ul>
+<li>Список всех работ с поиском и фильтрами по типу КПП</li>
+<li>Редактирование — название, описание, машина</li>
+<li>Скрытие/показ на сайте одним тапом</li>
+<li>Удаление (из базы, с S3 и из канала одновременно)</li>
+<li>Статистика: сколько работ по каждому типу КПП</li>
+<li>Свайп-действия на карточках — как в почте iOS</li>
+</ul>
+<p>Тёмная тема, нативный вид. Открывается через кнопку «Управление» в боте.</p>
+<h2 id="результат">Результат</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Метрика</th>
+          <th>Значение</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Видео на сайте</td>
+          <td>18</td>
+      </tr>
+      <tr>
+          <td>Время добавления новой работы</td>
+          <td>2 минуты</td>
+      </tr>
+      <tr>
+          <td>Объём на S3</td>
+          <td>1,15 ГБ</td>
+      </tr>
+      <tr>
+          <td>Участие разработчика</td>
+          <td>0</td>
+      </tr>
+  </tbody>
+</table>
+<p>Владелец сервиса добавляет работы сам. Снял видео на телефон, отправил в бот, ответил на 3 вопроса — готово. На сайте, в канале и в базе.</p>
+<h2 id="зачем-это-автосервису">Зачем это автосервису</h2>
+<p>Портфолио — главный аргумент для клиента, который выбирает сервис. «Мы ремонтируем DSG» — это слова. Видео разборки коробки с комментариями механика — это доказательство.</p>
+<p>Раньше видео оседали в Telegram-канале и умирали через неделю. Теперь каждое видео работает на сайте постоянно: поисковики индексируют страницу портфолио, клиенты видят реальные работы.</p>
+<h2 id="технический-стек">Технический стек</h2>
+<ul>
+<li><strong>Бот:</strong> grammy (Node.js) + Express для API</li>
+<li><strong>Хранилище:</strong> S3 (Beget Cloud Storage)</li>
+<li><strong>База:</strong> PostgreSQL</li>
+<li><strong>Сайт:</strong> Next.js с ISR (обновление по запросу)</li>
+<li><strong>Превью:</strong> ffmpeg (кадр на 1 сек, 320px JPEG)</li>
+<li><strong>Mini App:</strong> HTML/CSS/JS, Telegram WebApp API</li>
+<li><strong>Деплой:</strong> PM2 + nginx</li>
+</ul>
+<h2 id="хотите-так-же">Хотите так же?</h2>
+<p>Если у вас автосервис, детейлинг, стоматология, салон красоты — любой бизнес, где важно показать результат работы:</p>
+<ol>
+<li>Вы снимаете видео/фото на телефон</li>
+<li>Отправляете в бот</li>
+<li>Бот публикует на сайт и в канал</li>
+</ol>
+<p>Без дизайнера, без разработчика, без FTP.</p>
+<p>Напишите в <a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a> — обсудим.</p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Портфолио автосервиса из Telegram-канала: 18 видео на сайт за вечер",
+    "description": "Как мы собрали видео-портфолио DSG-сервиса из Telegram-канала и вывели на сайт — с ботом для загрузки, S3-хранилищем и автоматической публикацией",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-03-06",
+    "dateModified": "2026-03-06",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/dsg-portfolio-telegram\/",
+    "wordCount":  598 ,
+    
+    "keywords": "портфолио, автосервис, Telegram, автоматизация, AI-ассистент",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/dsg-portfolio-telegram\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

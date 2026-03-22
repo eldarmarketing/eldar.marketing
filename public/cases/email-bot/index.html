@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Telegram-бот для управления почтой: 6 ящиков в одном месте — Эльдар Маркетинг</title>
+    <meta name="description" content="Кейс: как мы собрали 6 почтовых ящиков в одного Telegram-бота с AI-резюме, мгновенными уведомлениями и ответами прямо из мессенджера">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/email-bot/">
+    
+    
+    <meta property="og:title" content="Telegram-бот для управления почтой: 6 ящиков в одном месте">
+    <meta property="og:description" content="Кейс: как мы собрали 6 почтовых ящиков в одного Telegram-бота с AI-резюме, мгновенными уведомлениями и ответами прямо из мессенджера">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/email-bot/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Telegram-бот для управления почтой: 6 ящиков в одном месте">
+    <meta name="twitter:description" content="Кейс: как мы собрали 6 почтовых ящиков в одного Telegram-бота с AI-резюме, мгновенными уведомлениями и ответами прямо из мессенджера">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>Telegram-бот для управления почтой: 6 ящиков в одном месте</span>
+</nav>
+
+<article class="case-study">
+    <h2>Telegram-бот для управления почтой: 6 ящиков в одном месте</h2>
+    <p class="meta">Февраль 2026 · 3 дня</p>
+    <h2 id="проблема-6ящиков-20минут-вдень-напроверку">Проблема: 6 ящиков, 20 минут в день на проверку</h2>
+<p>У клиента — шесть рабочих почтовых ящиков. Один для клиентов, два на проекты, корпоративный, личный и спам-ловушка. Каждое утро начиналось одинаково: открыть браузер, зайти в каждый ящик, пролистать входящие. <strong>15–20 минут ежедневно</strong> уходило только на проверку.</p>
+<p>Главные боли:</p>
+<ul>
+<li><strong>Пропущенные письма.</strong> Важное сообщение от клиента тонуло среди рассылок и уведомлений</li>
+<li><strong>Потерянные коды.</strong> Одноразовые пароли и подтверждения платежей падали в спам-ловушку — и находились слишком поздно</li>
+<li><strong>Медленные ответы.</strong> Пока откроешь нужный ящик, найдёшь письмо, напишешь ответ — проходит полчаса</li>
+</ul>
+<p>Клиент попросил: «Хочу видеть всю почту в одном месте. В Telegram. И отвечать оттуда же».</p>
+<hr>
+<h2 id="решение-telegram-бот-который-заменил-6вкладок">Решение: Telegram-бот, который заменил 6 вкладок</h2>
+<p>Мы собрали бота на Node.js, который подключается ко всем шести ящикам и работает как единый почтовый центр прямо в мессенджере.</p>
+<h3 id="мгновенные-уведомления-через-imapidle">Мгновенные уведомления через IMAP IDLE</h3>
+<p>Никакого опроса раз в 5 минут. Бот использует протокол IMAP IDLE — сервер сам сообщает о новом письме. Уведомление в Telegram приходит <strong>через секунды</strong> после доставки.</p>
+<h3 id="ai-резюме-каждого-письма">AI-резюме каждого письма</h3>
+<p>Нейросеть читает входящее письмо и формирует:</p>
+<ul>
+<li><strong>Краткое содержание</strong> в 2–3 предложения</li>
+<li><strong>Рекомендуемое действие:</strong> ответить, переслать, проигнорировать</li>
+</ul>
+<p>Больше не нужно открывать длинные цепочки — суть видна сразу.</p>
+<h3 id="ответ-ипересылка-изtelegram">Ответ и пересылка из Telegram</h3>
+<p>Нажал кнопку — написал ответ — письмо ушло. Прямо из мессенджера, без переключения в почтовый клиент. Пересылка на другой адрес — тоже в один клик.</p>
+<h3 id="шаблоны-быстрых-ответов">Шаблоны быстрых ответов</h3>
+<p>Три кнопки для типовых ситуаций:</p>
+<ul>
+<li>✅ «Подтверждаю, спасибо»</li>
+<li>💰 «Пришлите стоимость»</li>
+<li>📩 «Получено, вернусь с ответом»</li>
+</ul>
+<p>80% переписки закрывается шаблоном за 5 секунд.</p>
+<h3 id="поиск-повсем-ящикам-одной-командой">Поиск по всем ящикам одной командой</h3>
+<p><code>/search договор аренда</code> — и бот ищет по всем шести ящикам одновременно. Результаты с указанием аккаунта, даты и отправителя.</p>
+<h3 id="мьют-рассылок-водин-клик">Мьют рассылок в один клик</h3>
+<p>Надоели уведомления от сервиса? Кнопка «Мьют» — и все письма с этого адреса больше не приходят в Telegram. Они по-прежнему сохраняются в ящике, но не отвлекают.</p>
+<h3 id="напоминания">Напоминания</h3>
+<p>«Ответить через 3 часа» — бот поставит таймер и напомнит. Ни одно письмо не зависнет без ответа.</p>
+<h3 id="коды-иплатежи-изспама">Коды и платежи из спама</h3>
+<p>Бот отдельно отслеживает одноразовые пароли, коды подтверждения и уведомления о платежах. Даже если письмо попало в спам — код придёт в Telegram отдельным сообщением.</p>
+<h3 id="вложения-вtelegram">Вложения в Telegram</h3>
+<p>PDF, изображения, документы — бот пересылает вложения прямо в чат. Не нужно скачивать из почты.</p>
+<h3 id="inline-режим">Inline-режим</h3>
+<p>Набираете <code>@botname счёт</code> в любом чате Telegram — и бот находит письма со счетами. Можно сразу переслать результат собеседнику.</p>
+<h3 id="статистика-поаккаунтам">Статистика по аккаунтам</h3>
+<p>Еженедельный отчёт: сколько писем пришло на каждый ящик, среднее время ответа, количество непрочитанных. Полная картина за 30 секунд.</p>
+<hr>
+<h2 id="результат">Результат</h2>
+<table>
+  <thead>
+      <tr>
+          <th>До</th>
+          <th>После</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>15–20 мин/день на проверку</td>
+          <td>0 минут — всё в Telegram</td>
+      </tr>
+      <tr>
+          <td>Пропущенные письма</td>
+          <td>0 пропущенных</td>
+      </tr>
+      <tr>
+          <td>Ответ через часы</td>
+          <td>Ответ за минуты</td>
+      </tr>
+      <tr>
+          <td>6 вкладок в браузере</td>
+          <td>1 чат в мессенджере</td>
+      </tr>
+  </tbody>
+</table>
+<p>Почта перестала быть рутиной. Стала инструментом, который работает на тебя, а не наоборот.</p>
+<hr>
+<h2 id="для-кого-это">Для кого это</h2>
+<ul>
+<li><strong>Предприниматели</strong> с несколькими проектами и ящиками</li>
+<li><strong>Маркетологи</strong>, которые ведут рассылки и следят за откликами</li>
+<li><strong>Агентства</strong>, где каждый клиент — отдельный email</li>
+<li><strong>Все</strong>, кто устал переключаться между почтовыми аккаунтами</li>
+</ul>
+<hr>
+<h2 id="сроки-истоимость">Сроки и стоимость</h2>
+<p><strong>2–3 дня</strong> на разработку и настройку. Подключаем любое количество ящиков — Gmail, Яндекс, Mail.ru, корпоративная почта.</p>
+<p>Бот разворачивается на вашем сервере. Ваши письма остаются вашими.</p>
+<p><strong><a href="https://t.me/eldarmarketing">Написать в Telegram →</a></strong></p>
+
+</article>
+
+<style>
+ 
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(255,255,255,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(255,255,255,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(255,255,255,0.25);
+}
+
+ 
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+ 
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+
+ 
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+    .breadcrumb { color: rgba(255,255,255,0.4); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+    .case-study img {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    .case-study img:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        border-color: #333;
+    }
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .breadcrumb { color: rgba(0,0,0,0.4); }
+    .breadcrumb a { color: rgba(0,0,0,0.5); }
+    .breadcrumb a:hover { color: rgba(0,0,0,0.85); }
+    .breadcrumb .sep { color: rgba(0,0,0,0.2); }
+}
+
+ 
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "Telegram-бот для управления почтой: 6 ящиков в одном месте" }
+    ]
+}
+</script>
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

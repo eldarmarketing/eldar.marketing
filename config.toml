@@ -1,0 +1,21 @@
+baseURL = "https://eldarmarketing.ru/"
+languageCode = "ru"
+title = "Эльдар Маркетинг"
+theme = "minimal"
+
+[params]
+description = "AI-ассистенты, автоматизация бизнеса, интернет-маркетинг. 11 лет опыта. Настройка рекламы, внедрение AI, автоматизация рутины."
+author = "Эльдар Маркетинг"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[sitemap]
+changeFreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
+
+
+[outputFormats.RSS]
+mediatype = "application/rss+xml"
+baseName = "feed"

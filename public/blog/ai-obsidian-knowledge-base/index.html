@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Как AI-ассистент хранит базу знаний в Obsidian-подобной структуре — Эльдар Маркетинг</title>
+    <meta name="description" content="От 604 строк монолита к 78 строкам навигации: как я реорганизовал память по принципу SSOT и экономлю тысячи токенов на каждой сессии">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/ai-obsidian-knowledge-base/">
+    
+    
+    <meta property="og:title" content="Как AI-ассистент хранит базу знаний в Obsidian-подобной структуре">
+    <meta property="og:description" content="От 604 строк монолита к 78 строкам навигации: как я реорганизовал память по принципу SSOT и экономлю тысячи токенов на каждой сессии">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/ai-obsidian-knowledge-base/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Как AI-ассистент хранит базу знаний в Obsidian-подобной структуре">
+    <meta name="twitter:description" content="От 604 строк монолита к 78 строкам навигации: как я реорганизовал память по принципу SSOT и экономлю тысячи токенов на каждой сессии">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Как AI-ассистент хранит базу знаний в …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Как AI-ассистент хранит базу знаний в Obsidian-подобной структуре", "item": "https:\/\/eldarmarketing.ru\/blog\/ai-obsidian-knowledge-base\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">5 февраля 2026</p>
+    <p>Сегодня я завершил реструктуризацию памяти своего AI-ассистента. Было 604 строки в одном файле — стало 78 строк навигации и модульная система. Экономия токенов на старте сессии — примерно в 8 раз. Расскажу, как я это сделал и почему это работает.</p>
+<h2 id="проблема-монолитная-память">Проблема: монолитная память</h2>
+<p>Раньше память выглядела так: один файл <code>MEMORY.md</code> на 604 строки (около 25 КБ), где были свалены в кучу:</p>
+<ul>
+<li>Telegram-боты (3 штуки)</li>
+<li>Инфраструктура (VPS, CRM, база данных)</li>
+<li>Клиенты (с контактами и историей)</li>
+<li>Уроки и ошибки</li>
+<li>Счётчики и метрики</li>
+</ul>
+<p>Каждая сессия начиналась с прочтения всего этого массива. Результат:</p>
+<ul>
+<li><strong>~3000 токенов</strong> только на загрузку контекста</li>
+<li><strong>Медленный старт</strong> — LLM читает всё, даже если нужна только одна деталь</li>
+<li><strong>Дублирование</strong> — одни и те же факты в разных местах</li>
+<li><strong>Сложно обновлять</strong> — приходилось искать, где что лежит</li>
+</ul>
+<h2 id="решение-ssot--модульность">Решение: SSOT + модульность</h2>
+<p>Два принципа, которые всё изменили:</p>
+<h3 id="1-ssot-single-source-of-truth">1. SSOT (Single Source of Truth)</h3>
+<p><strong>Один факт — одно место.</strong> Если что-то меняется (например, адрес сервера), это должно быть записано ровно в одном месте, а не продублировано в 5 файлах.</p>
+<h3 id="2-навигация-отдельно-от-данных">2. Навигация отдельно от данных</h3>
+<p><strong>Тонкий индекс + толстые модули.</strong> <code>MEMORY.md</code> стал лёгким навигационным хабом, который указывает, где искать детали. Сами детали живут в отдельных файлах.</p>
+<h2 id="как-это-работает-сейчас">Как это работает сейчас</h2>
+<p>Структура workspace:</p>
+<pre tabindex="0"><code>.
+├── MEMORY.md              (78 строк — навигация)
+├── memory/
+│   ├── YYYY-MM-DD.md      (дневной лог)
+│   ├── bots.md            (все боты)
+│   ├── infrastructure.md  (сервер, CRM, API)
+│   ├── clients-summary.md (сводка по клиентам)
+│   └── lessons.md         (уроки и ошибки)
+├── rules/
+│   ├── deploy.md
+│   ├── content.md
+│   └── clients.md
+├── clients/
+│   ├── client-a/
+│   │   ├── profile.md
+│   │   ├── history.md
+│   │   ├── projects.md
+│   │   └── requisites.md
+│   └── _template/
+└── TOOLS.md              (CLI, TTS, скрипты)
+</code></pre><h3 id="что-читается-при-старте-сессии">Что читается при старте сессии</h3>
+<p><strong>Раньше:</strong></p>
+<ol>
+<li><code>MEMORY.md</code> (604 строки, 25 КБ)</li>
+</ol>
+<p><strong>Сейчас:</strong></p>
+<ol>
+<li><code>MEMORY.md</code> (78 строк, 3.6 КБ — только навигация)</li>
+<li><code>memory/YYYY-MM-DD.md</code> (сегодняшний дневник)</li>
+</ol>
+<p><strong>Экономия:</strong> ~21 КБ текста, ~2500 токенов на каждом старте.</p>
+<h3 id="ленивая-загрузка-модулей">Ленивая загрузка модулей</h3>
+<p>Модули <strong>не читаются</strong> при старте. Они подгружаются только когда нужны:</p>
+<ul>
+<li>Работаю с ботами → читаю <code>memory/bots.md</code></li>
+<li>Деплою на сервер → читаю <code>memory/infrastructure.md</code> + <code>rules/deploy.md</code></li>
+<li>Клиент написал → читаю <code>clients/[slug]/profile.md</code></li>
+</ul>
+<p>Это аналог lazy loading в коде: не загружаем то, что не используется.</p>
+<h2 id="пример-работа-с-клиентом">Пример: работа с клиентом</h2>
+<p>Приходит сообщение от клиента.</p>
+<p><strong>Старый способ:</strong></p>
+<ol>
+<li>Прочитать весь <code>MEMORY.md</code> (604 строки)</li>
+<li>Найти нужного клиента среди всего остального</li>
+<li>Вспомнить контекст</li>
+</ol>
+<p><strong>Новый способ:</strong></p>
+<ol>
+<li>Прочитать <code>MEMORY.md</code> → узнать, что клиенты в <code>clients/</code></li>
+<li>Прочитать <code>clients/[slug]/profile.md</code> + <code>history.md</code> → полный контекст</li>
+</ol>
+<p><strong>Преимущества:</strong></p>
+<ul>
+<li>Только нужные данные загружаются в контекст</li>
+<li>Если клиент не пишет, его карточка не тратит токены</li>
+<li>Изоляция: данные одного клиента никогда не попадают в контекст при работе с другим</li>
+</ul>
+<h2 id="принципы-структурирования">Принципы структурирования</h2>
+<h3 id="1-daily-notes-как-raw-logs">1. Daily notes как raw logs</h3>
+<p><code>memory/YYYY-MM-DD.md</code> — сырые логи дня. Всё подряд: что сделал, что обсудил, ошибки, решения. Через неделю значимое мигрирует в модули.</p>
+<h3 id="2-модули-как-кураторская-память">2. Модули как кураторская память</h3>
+<p><code>bots.md</code>, <code>infrastructure.md</code>, <code>lessons.md</code> — дистиллированные знания. Не сырые логи, а выжимка: что важно помнить, какие ошибки не повторять.</p>
+<h3 id="3-правила-как-процедуры">3. Правила как процедуры</h3>
+<p><code>rules/*.md</code> — алгоритмы действий. <strong>Fix Once → Rule Forever:</strong> решил проблему правильно → записал в <code>rules/</code> → следующий раз просто следую процедуре.</p>
+<h3 id="4-клиенты-как-отдельные-хранилища">4. Клиенты как отдельные хранилища</h3>
+<p>Каждый клиент — папка с четырьмя файлами: профиль, история, проекты, реквизиты.</p>
+<h2 id="практический-результат">Практический результат</h2>
+<h3 id="экономия-токенов">Экономия токенов</h3>
+<ul>
+<li><strong>Старт сессии:</strong> 3000 → 400 токенов (экономия ~2600)</li>
+<li><strong>Стоимость:</strong> при 50 диалогах в день — экономия ~$75/месяц</li>
+</ul>
+<h3 id="скорость">Скорость</h3>
+<ul>
+<li><strong>Загрузка контекста:</strong> 2-3 секунды → 0.5 секунды</li>
+</ul>
+<h3 id="точность">Точность</h3>
+<ul>
+<li><strong>Меньше галлюцинаций:</strong> компактный контекст = меньше шума</li>
+</ul>
+<h3 id="масштабируемость">Масштабируемость</h3>
+<ul>
+<li><strong>Новый клиент:</strong> скопировать шаблон + заполнить 4 файла</li>
+<li><strong>Новый бот:</strong> добавить раздел в модуль</li>
+<li><strong>Новая процедура:</strong> создать файл в <code>rules/</code></li>
+</ul>
+<h2 id="выводы">Выводы</h2>
+<p>Переход от монолитной памяти к модульной структуре:</p>
+<ul>
+<li><strong>Экономит токены</strong> (~75% на старте сессии)</li>
+<li><strong>Ускоряет работу</strong> (только нужный контекст загружается)</li>
+<li><strong>Повышает точность</strong> (меньше шума, меньше ошибок)</li>
+<li><strong>Упрощает поддержку</strong> (SSOT — изменил в одном месте, работает везде)</li>
+</ul>
+<p>Если ваш AI-ассистент читает гигабайт контекста каждый раз — задумайтесь о структуре. Obsidian-подобный подход (навигация + модули + ленивая загрузка) — это не просто организация файлов, это экономия денег и времени.</p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как AI-ассистент хранит базу знаний в Obsidian-подобной структуре",
+    "description": "От 604 строк монолита к 78 строкам навигации: как я реорганизовал память по принципу SSOT и экономлю тысячи токенов на каждой сессии",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-05",
+    "dateModified": "2026-02-05",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/ai-obsidian-knowledge-base\/",
+    "wordCount":  636 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/ai-obsidian-knowledge-base\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

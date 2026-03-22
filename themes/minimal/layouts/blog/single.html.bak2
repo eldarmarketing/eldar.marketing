@@ -1,0 +1,80 @@
+{{ define "main" }}
+<article class="blog-post">
+    <h2>{{ .Title }}</h2>
+    {{ $months := dict "January" "января" "February" "февраля" "March" "марта" "April" "апреля" "May" "мая" "June" "июня" "July" "июля" "August" "августа" "September" "сентября" "October" "октября" "November" "ноября" "December" "декабря" }}
+    {{ $month := index $months (.Date.Format "January") }}
+    <p class="meta">{{ .Date.Day }} {{ $month }} {{ .Date.Year }}</p>
+    {{ .Content }}
+
+    <!-- Logo watermark -->
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+<!-- BlogPosting Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ .Title }}",
+    "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}",
+    {{ if .Params.image }}
+    "image": "{{ .Params.image | absURL }}",
+    {{ else }}
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    {{ end }}
+    "datePublished": "{{ .Date.Format "2006-01-02" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+    "url": "{{ .Permalink }}",
+    "wordCount": {{ .WordCount }},
+    {{ with .Params.keywords }}
+    "keywords": "{{ delimit . ", " }}",
+    {{ end }}
+    {{ with .Section }}
+    "articleSection": "{{ . }}",
+    {{ end }}
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар Абилвапов",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ .Permalink }}"
+    }
+}
+</script>
+{{ end }}

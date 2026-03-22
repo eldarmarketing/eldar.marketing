@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Карточки для Telegram без Canva и дизайнера — Эльдар Маркетинг</title>
+    <meta name="description" content="HTML-шаблон &#43; Playwright = брендированные картинки за 3 секунды. Бесплатно, без подписок, без Figma">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/carousel-cards-playwright/">
+    
+    
+    <meta property="og:title" content="Карточки для Telegram без Canva и дизайнера">
+    <meta property="og:description" content="HTML-шаблон &#43; Playwright = брендированные картинки за 3 секунды. Бесплатно, без подписок, без Figma">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/carousel-cards-playwright/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Карточки для Telegram без Canva и дизайнера">
+    <meta name="twitter:description" content="HTML-шаблон &#43; Playwright = брендированные картинки за 3 секунды. Бесплатно, без подписок, без Figma">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Карточки для Telegram без Canva и …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Карточки для Telegram без Canva и дизайнера", "item": "https:\/\/eldarmarketing.ru\/blog\/carousel-cards-playwright\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">5 февраля 2026</p>
+    <p>Мне нужна была картинка к посту про AI-критиков для Telegram-канала. С ASCII-диаграммой пайплайна и текстом в monospace. В Canva есть monospace-шрифты, но попробуй засунь туда ASCII-схему из 20 строк — поплывёт. Figma — минут 20 на макет. Фрилансер — от 1500 ₽ за карточку. Я сгенерировал за 3 секунды.</p>
+<h2 id="идея">Идея</h2>
+<p>Картинка для соцсетей — прямоугольник с текстом. Знаете, что ещё умеет рисовать прямоугольники с текстом? Браузер.</p>
+<p>HTML-файл + невидимый браузер + скриншот. Всё.</p>
+<h2 id="что-нужно">Что нужно</h2>
+<p>Две вещи:</p>
+<ul>
+<li><strong>HTML-шаблон</strong> — как выглядит карточка</li>
+<li><strong>Скрипт</strong> — открывает шаблон, делает скриншот</li>
+</ul>
+<p>Шаблон — обычный HTML с CSS. Никаких фреймворков. Минимальный пример:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-1&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width:1080px; height:1080px;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            background:#323232; color:#fff;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            font-family:&#39;Fira Code&#39;, monospace;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            display:flex; align-items:center;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            justify-content:center; text-align:center;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            padding:80px;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-size:50px; margin-bottom:30px;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      Заголовок карточки
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-size:26px; opacity:0.85;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      Подзаголовок или описание
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><p>1080×1080 — квадрат для Telegram и Instagram.</p>
+<h2 id="скрипт-20-строк-ядра">Скрипт: 20 строк ядра</h2>
+<p>Весь файл — 80 строк с обработкой ошибок и CLI. Но суть — вот:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">chromium</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;playwright&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">browser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">chromium</span>.<span style="color:#a6e22e">launch</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">page</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">browser</span>.<span style="color:#a6e22e">newPage</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">viewport</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1080</span>, <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1080</span> }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">page</span>.<span style="color:#66d9ef">goto</span>(<span style="color:#e6db74">`file://</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">htmlPath</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">waitForTimeout</span>(<span style="color:#ae81ff">1000</span>); <span style="color:#75715e">// ждём шрифты
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">card</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#card-1&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">card</span>.<span style="color:#a6e22e">screenshot</span>({ <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;card-1.png&#39;</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">browser</span>.<span style="color:#a6e22e">close</span>();
+</span></span></code></pre></div><p>Playwright запускает Chromium без окна, открывает HTML и снимает скриншот элемента по <code>id</code>. Пять карточек в файле — пять PNG на выходе.</p>
+<p>Установка:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm init -y
+</span></span><span style="display:flex;"><span>npm install playwright
+</span></span><span style="display:flex;"><span>npx playwright install chromium
+</span></span></code></pre></div><p>Три команды — и всё работает. Бесплатно, навсегда.</p>
+<h2 id="мой-шаблон">Мой шаблон</h2>
+<p>Стиль подогнал под сайт eldarmarketing.ru:</p>
+<ul>
+<li><strong>Фон:</strong> #323232</li>
+<li><strong>Шрифт:</strong> Fira Code (тот же, что на сайте)</li>
+<li><strong>Текст:</strong> белый, без неона и градиентов</li>
+<li><strong>Акцент:</strong> подчёркивание вместо цвета</li>
+<li><strong>Брендинг:</strong> @eldarmarketing_bot внизу</li>
+</ul>
+<p>Первая настройка заняла 5 минут — подобрать размеры, отступы, прозрачность. Каждая следующая карточка — 30 секунд: поменял текст, запустил скрипт, забрал PNG.</p>
+<h2 id="карусель">Карусель</h2>
+<p>Хочешь 5 слайдов? Пять <code>div</code> с <code>id=&quot;card-1&quot;</code> до <code>id=&quot;card-5&quot;</code> в одном HTML. Скрипт пройдётся по всем. Каждая карточка — свой текст, свой цвет акцента. Всё, что умеет CSS — умеет карточка.</p>
+<p>Я так сделал серию из 5 карточек про DSG-бот: заголовок, три фичи, CTA. Пять PNG по 20-62 КБ каждый.</p>
+<h2 id="почему-не-canva">Почему не Canva</h2>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Canva Pro</th>
+          <th>HTML + Playwright</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Цена</td>
+          <td>~$13/мес</td>
+          <td>$0</td>
+      </tr>
+      <tr>
+          <td>Monospace</td>
+          <td>есть, но базовые</td>
+          <td>любой с Google Fonts</td>
+      </tr>
+      <tr>
+          <td>ASCII-диаграммы</td>
+          <td>не предназначена</td>
+          <td><code>&lt;pre&gt;</code> и готово</td>
+      </tr>
+      <tr>
+          <td>Код в карточке</td>
+          <td>кривой рендер</td>
+          <td>идеальный</td>
+      </tr>
+      <tr>
+          <td>Автоматизация</td>
+          <td>API платный</td>
+          <td>бесплатный скрипт</td>
+      </tr>
+      <tr>
+          <td>Бренд-стиль</td>
+          <td>чужие шаблоны</td>
+          <td>свой CSS</td>
+      </tr>
+  </tbody>
+</table>
+<p>Canva — отличный инструмент. Monospace-шрифты там есть. Но попробуй собрать карточку с ASCII-диаграммой, блоком кода и точным <code>letter-spacing</code> — начнётся боль. А мне нужен именно этот контроль: мой CSS, мои шрифты, моя сетка.</p>
+<h2 id="как-начать">Как начать</h2>
+<ol>
+<li>Скопируй HTML-шаблон выше</li>
+<li>Поменяй текст, цвет, шрифт</li>
+<li><code>npm install playwright</code></li>
+<li>Запусти скрипт</li>
+<li>Забери PNG</li>
+</ol>
+<p>Пять минут от нуля до первой карточки. Потом — 30 секунд на каждую.</p>
+<h2 id="takeaways">Takeaways</h2>
+<ol>
+<li><strong>Браузер — лучший рендер для картинок.</strong> HTML+CSS → скриншот.</li>
+<li><strong>$0 навсегда.</strong> Playwright open source, шрифты бесплатные.</li>
+<li><strong>30 секунд на карточку</strong> после первой настройки.</li>
+<li><strong>Код и диаграммы в карточках</strong> — киллер-фича, которую Canva не даст.</li>
+<li><strong>Свой CSS = свой бренд.</strong> Без ограничений чужих шаблонов.</li>
+</ol>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Карточки для Telegram без Canva и дизайнера",
+    "description": "HTML-шаблон \u002b Playwright = брендированные картинки за 3 секунды. Бесплатно, без подписок, без Figma",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-05",
+    "dateModified": "2026-02-05",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/carousel-cards-playwright\/",
+    "wordCount":  487 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/carousel-cards-playwright\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

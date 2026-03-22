@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Как я за день собрал CRM-бота для автосервиса — Эльдар Маркетинг</title>
+    <meta name="description" content="Реальная история: AI-ассистент, Telegram-бот и веб-приложение для DSG-сервиса — от идеи до рабочего продукта за один день">
+    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/blog/dsg-bot-case/">
+    
+    
+    <meta property="og:title" content="Как я за день собрал CRM-бота для автосервиса">
+    <meta property="og:description" content="Реальная история: AI-ассистент, Telegram-бот и веб-приложение для DSG-сервиса — от идеи до рабочего продукта за один день">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/blog/dsg-bot-case/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Как я за день собрал CRM-бота для автосервиса">
+    <meta name="twitter:description" content="Реальная история: AI-ассистент, Telegram-бот и веб-приложение для DSG-сервиса — от идеи до рабочего продукта за один день">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/blog/">Блог</a> <span class="sep">→</span>
+    <span>Как я за день собрал CRM-бота для …</span>
+</nav>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Как я за день собрал CRM-бота для автосервиса", "item": "https:\/\/eldarmarketing.ru\/blog\/dsg-bot-case\/"}
+    ]
+}
+</script>
+<article class="blog-post">
+    
+    
+    <p class="meta">4 февраля 2026</p>
+    <p>У меня есть AI-ассистент. Не ChatGPT в браузере, а полноценный рабочий инструмент, который живёт в моём Telegram, имеет доступ к серверам, файлам и API.</p>
+<p>Вчера я решил проверить: можно ли с его помощью собрать готовый продукт для клиента за один день?</p>
+<p>Спойлер: можно.</p>
+<h2 id="задача">Задача</h2>
+<p>Владельцы автосервисов по ремонту DSG (роботизированных коробок передач) — специфическая ниша. У них есть типовые проблемы:</p>
+<ul>
+<li>Клиенты звонят, записываются в блокнот или в WhatsApp</li>
+<li>Нет системы учёта заказов и статусов ремонта</li>
+<li>Механики загружены неравномерно</li>
+<li>Запчасти заканчиваются внезапно</li>
+<li>Нет аналитики: сколько заработали, откуда клиенты</li>
+</ul>
+<p>CRM-системы вроде AmoCRM или Битрикс24 — избыточны и дороги для сервиса на 3-5 человек.</p>
+<h2 id="решение-telegram-бот--webapp">Решение: Telegram-бот + WebApp</h2>
+<p>Telegram уже стоит у всех. Бот внутри него — это CRM, которая не требует обучения.</p>
+<h3 id="что-я-сказал-ассистенту">Что я сказал ассистенту</h3>
+<p>Буквально: «Сделай CRM-бота для DSG-сервиса. Заказы, клиенты, механики, склад, аналитика. Telegram-бот с WebApp-лендингом».</p>
+<h3 id="что-получилось-за-день">Что получилось за день</h3>
+<p><strong>Бот</strong> <a href="https://t.me/dsg_robot">@dsg_robot</a> умеет:</p>
+<ul>
+<li><strong>Заказы</strong> — создание, назначение механика и подъёмника, статусы (новый → в работе → готов → выдан)</li>
+<li><strong>Клиенты</strong> — база с историей визитов, суммами, рейтингом лояльности</li>
+<li><strong>Автомобили</strong> — поиск по VIN, привязка к клиенту, полная история ремонтов</li>
+<li><strong>Склад</strong> — 9 категорий запчастей, оповещение при низком остатке</li>
+<li><strong>Калькулятор</strong> — расчёт стоимости ремонта DQ200, DQ250, DQ381, DQ500 по симптомам</li>
+<li><strong>Механики</strong> — загрузка, рейтинг, специализация</li>
+<li><strong>Аналитика</strong> — выручка, конверсия, источники клиентов</li>
+<li><strong>Рассылки</strong> — шаблоны для акций и уведомлений</li>
+</ul>
+<p><strong>WebApp</strong> — лендинг для клиентов сервиса. Описание услуг, типы DSG, симптомы неисправностей, отзывы, контакты. Открывается прямо в Telegram.</p>
+<h2 id="как-это-работает">Как это работает</h2>
+<p>Я описываю задачу голосом или текстом в Telegram. Ассистент:</p>
+<ol>
+<li>Пишет код (Node.js + Telegraf)</li>
+<li>Деплоит на сервер через SSH</li>
+<li>Настраивает nginx и SSL</li>
+<li>Запускает через PM2</li>
+<li>Создаёт WebApp и привязывает к боту</li>
+</ol>
+<p>Мне остаётся проверить результат и внести правки. Тоже голосом.</p>
+<h2 id="зачем-это-автосервису">Зачем это автосервису</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Было</th>
+          <th>Стало</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Записи в блокноте</td>
+          <td>Все заказы в боте</td>
+      </tr>
+      <tr>
+          <td>«Кто этот клиент?»</td>
+          <td>Карточка с историей</td>
+      </tr>
+      <tr>
+          <td>Запчасти кончились</td>
+          <td>Оповещение заранее</td>
+      </tr>
+      <tr>
+          <td>«Сколько заработали?»</td>
+          <td>Аналитика за период</td>
+      </tr>
+      <tr>
+          <td>Нет сайта</td>
+          <td>WebApp в Telegram</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="сколько-это-стоит">Сколько это стоит</h2>
+<p>Разработка такого бота с нуля у фрилансера — от 150 000 ₽. В студии — от 300 000 ₽.</p>
+<p>С AI-ассистентом я собрал рабочий прототип за день. Это позволяет предложить решение по адекватной цене, без месяцев разработки.</p>
+<h2 id="для-кого-это">Для кого это</h2>
+<p>Если у вас автосервис, детейлинг, шиномонтаж, автомойка — любой автобизнес, где нужно:</p>
+<ul>
+<li>Вести клиентов</li>
+<li>Управлять заказами</li>
+<li>Контролировать склад</li>
+<li>Видеть аналитику</li>
+</ul>
+<p>Напишите в <a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a> — соберу такого бота под ваш бизнес.</p>
+<p>Посмотреть демо: <a href="https://t.me/dsg_robot">@dsg_robot</a></p>
+
+
+    
+    <div class="blog-logo-watermark">
+        <img src="/images/em-logo-white.svg" alt="EM" />
+    </div>
+</article>
+
+<style>
+.blog-post {
+    position: relative;
+}
+.blog-logo-watermark {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 10;
+}
+.blog-logo-watermark img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .blog-logo-watermark {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как я за день собрал CRM-бота для автосервиса",
+    "description": "Реальная история: AI-ассистент, Telegram-бот и веб-приложение для DSG-сервиса — от идеи до рабочего продукта за один день",
+    
+    "image": "https://eldarmarketing.ru/images/eldar.jpg",
+    
+    "datePublished": "2026-02-04",
+    "dateModified": "2026-02-04",
+    "url": "https:\/\/eldarmarketing.ru\/blog\/dsg-bot-case\/",
+    "wordCount":  388 ,
+    
+    "keywords": "AI-ассистент, автоматизация, маркетинг",
+    
+    
+    "articleSection": "blog",
+    
+    "author": {
+        "@id": "#person"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Эльдар",
+        "url": "https://eldarmarketing.ru"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/eldarmarketing.ru\/blog\/dsg-bot-case\/"
+    }
+}
+</script>
+
+<style>
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #888;
+    border-radius: 6px 6px 0 0;
+    margin: 24px 0 0 0;
+}
+.code-header .lang {
+    text-transform: lowercase;
+}
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    float: none;
+}
+.code-header .copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ccc;
+}
+.code-header + .highlight {
+    margin-top: 0;
+}
+.code-header + .highlight pre {
+    border-radius: 0 0 6px 6px;
+}
+@media (max-width: 600px) {
+    .code-header {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 16px;
+    }
+    .code-header + .highlight pre {
+        border-radius: 0;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".highlight").forEach(function(block) {
+        var code = block.querySelector("code");
+        if (!code) return;
+        
+        
+        var lang = "";
+        var classes = code.className || "";
+        var m = classes.match(/language-(\w+)/);
+        if (m) lang = m[1];
+        
+        
+        var header = document.createElement("div");
+        header.className = "code-header";
+        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
+            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
+        
+        header.querySelector(".copy-btn").addEventListener("click", function() {
+            var btn = this;
+            navigator.clipboard.writeText(code.textContent).then(function() {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function() {
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        });
+        
+        block.parentNode.insertBefore(header, block);
+    });
+});
+</script>
+
+<style>
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: #999;
+}
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: #333;
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: #ccc;
+}
+</style>
+
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>
