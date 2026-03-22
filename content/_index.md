@@ -14,6 +14,8 @@ title: "Главная"
 
 [Реклама](/services/#реклама) — Яндекс, Telegram Ads, ВК, Авито
 
+[Разработка сайтов](/services/web-development/) — Next.js, React, Telegram-бот в&nbsp;комплекте
+
 **[Напишите — обсудим ваш проект →](/contact/)**
 
 ## Контакты
