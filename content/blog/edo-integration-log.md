@@ -111,4 +111,4 @@ node send-contract.js ./contract.pdf client-slug
 
 ---
 
-Хотите такую автоматизацию для своего бизнеса? Напишите в [@eldarmarketing_bot](https://t.me/robot_eldar).
+Хотите такую автоматизацию для своего бизнеса? Напишите в [@eldarmarketing](https://t.me/eldarmarketing).

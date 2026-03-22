@@ -47,4 +47,4 @@ readtime: 4
 
 ---
 
-Хотите настроить себе? [Напишите мне в Telegram](https://t.me/eldarmarketing_bot).
+Хотите настроить себе? [Напишите мне в Telegram](https://t.me/eldarmarketing).

@@ -83,6 +83,6 @@ Telegram уже стоит у всех. Бот внутри него — это 
 - Контролировать склад
 - Видеть аналитику
 
-Напишите в [@eldarmarketing_bot](https://t.me/eldarmarketing_bot) — соберу такого бота под ваш бизнес.
+Напишите в [@eldarmarketing](https://t.me/eldarmarketing) — соберу такого бота под ваш бизнес.
 
 Посмотреть демо: [@dsg_robot](https://t.me/dsg_robot)

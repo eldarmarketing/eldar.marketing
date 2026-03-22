@@ -27,4 +27,4 @@ description: "Оставьте заявку — свяжусь в течение
   </p>
 </form>
 
-Или напишите напрямую: [@eldarmarketing_bot](https://t.me/eldarmarketing_bot)
+Или напишите напрямую: [@eldarmarketing](https://t.me/eldarmarketing)

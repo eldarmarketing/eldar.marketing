@@ -82,4 +82,4 @@ readtime: 3
 
 ## Хотите так же?
 
-Напишите @eldarmarketing_bot — обсудим вашу задачу.
+Напишите @eldarmarketing — обсудим вашу задачу.

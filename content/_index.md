@@ -20,4 +20,4 @@ title: "Главная"
 
 **Телефон:** [+7 (903) 570-82-73](tel:+79035708273)
 
-**Telegram:** [@eldarmarketing_bot](https://t.me/eldarmarketing_bot)
+**Telegram:** [@eldarmarketing](https://t.me/eldarmarketing)

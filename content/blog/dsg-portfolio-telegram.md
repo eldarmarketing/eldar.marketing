@@ -123,4 +123,4 @@ PostgreSQL-таблица portfolio_works хранит:
 
 Без дизайнера, без разработчика, без FTP.
 
-Напишите в [@eldarmarketing_bot](https://t.me/eldarmarketing_bot) — обсудим.
+Напишите в [@eldarmarketing](https://t.me/eldarmarketing) — обсудим.

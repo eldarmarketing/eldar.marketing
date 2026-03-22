@@ -6,7 +6,7 @@ description: "Внедрение AI-ассистента в бизнес. Пол
 <div style="text-align:center; margin: 40px 0 48px;">
 
 <p style="color:#666; font-size:16px; margin-bottom:32px;">Не&nbsp;бот. Не&nbsp;чат. Полноценный ассистент, который работает 24/7 в&nbsp;Telegram.</p>
-<p><a href="https://t.me/eldarmarketing_bot" style="background:#1a1a1a; color:#fff; padding:12px 32px; text-decoration:none; font-size:15px;">Оставить заявку →</a></p>
+<p><a href="https://t.me/eldarmarketing" style="background:#1a1a1a; color:#fff; padding:12px 32px; text-decoration:none; font-size:15px;">Оставить заявку →</a></p>
 </div>
 
 ---
@@ -79,7 +79,7 @@ CRM-бот для центра ремонта трансмиссий. Внедр
 
 ## Как это работает
 
-1. **Оставляете заявку** — пишете в&nbsp;[@eldarmarketing_bot](https://t.me/eldarmarketing_bot)
+1. **Оставляете заявку** — пишете в&nbsp;[@eldarmarketing](https://t.me/eldarmarketing)
 2. **Созваниваемся** — обсуждаем задачи и&nbsp;процессы
 3. **Настраиваю AI-ассистента** — под ваш бизнес, ваши данные, ваши правила
 4. **Обучаю и&nbsp;передаю** — вы&nbsp;работаете, я&nbsp;поддерживаю
@@ -107,6 +107,6 @@ Telegram, WhatsApp, Discord, Signal.
 
 <div style="text-align:center; margin: 40px 0;">
 <p style="font-size:18px; font-weight:600; margin-bottom:16px;">Готовы попробовать?</p>
-<p style="margin-bottom:24px;">Напишите в&nbsp;<a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a> — расскажу подробнее.</p>
-<p><a href="https://t.me/eldarmarketing_bot" style="background:#1a1a1a; color:#fff; padding:12px 32px; text-decoration:none; font-size:15px;">Написать →</a></p>
+<p style="margin-bottom:24px;">Напишите в&nbsp;<a href="https://t.me/eldarmarketing">@eldarmarketing</a> — расскажу подробнее.</p>
+<p><a href="https://t.me/eldarmarketing" style="background:#1a1a1a; color:#fff; padding:12px 32px; text-decoration:none; font-size:15px;">Написать →</a></p>
 </div>

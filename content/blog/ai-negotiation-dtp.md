@@ -190,7 +190,7 @@ AI проанализировал ситуацию:
 - **Экономия:** 1 100 000 ₽
 - **Стоимость AI:** ~500 ₽
 
-Хотите попробовать AI-ассистента? → [@eldarmarketing\_bot](https://t.me/eldarmarketing_bot)
+Хотите попробовать AI-ассистента? → [@eldarmarketing\_bot](https://t.me/eldarmarketing)
 
 ---
 
