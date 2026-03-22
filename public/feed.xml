@@ -9,6 +9,13 @@
     <lastBuildDate>Sun, 22 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://eldarmarketing.ru/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>AI-модератор для Telegram-чата на 4000 участников</title>
+      <link>https://eldarmarketing.ru/cases/chat-moderator-bot/</link>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/cases/chat-moderator-bot/</guid>
+      <description>&lt;p&gt;Владелец тематического Telegram-чата на 4000 участников: форумные топики, живые обсуждения, и полный хаос без модератора. Спам, продажа запрещёнки, токсичность &amp;mdash; вручную не успеть.&lt;/p&gt;&#xA;&lt;h2 id=&#34;задача&#34;&gt;Задача&lt;/h2&gt;&#xA;&lt;p&gt;Нужен бот, который:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;сам ловит нарушения и удаляет сообщения&lt;/li&gt;&#xA;&lt;li&gt;эскалирует: предупреждение &amp;mdash; мут &amp;mdash; бан&lt;/li&gt;&#xA;&lt;li&gt;каждый вечер выдаёт дайджест, чтобы участники не скролили по 300 сообщений&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;ai-модерация&#34;&gt;AI-модерация&lt;/h2&gt;&#xA;&lt;p&gt;Каждое сообщение идёт через Claude Haiku. Модель дешёвая, быстрая &amp;mdash; ~$0.001 за 1000 сообщений, ответ за 1&amp;ndash;2 секунды.&lt;/p&gt;&#xA;&lt;p&gt;Четыре категории, по которым бот режет:&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Блог, который пишет себя сам</title>
       <link>https://eldarmarketing.ru/blog/auto-blog-skill/</link>
       <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>

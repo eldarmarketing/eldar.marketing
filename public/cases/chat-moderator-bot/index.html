@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>AI-модератор для Telegram-чата на 4000 участников — Эльдар Маркетинг</title>
+    <meta name="description" content="AI-бот модерирует чат с 4000 участников. Удаляет нарушения за 2 секунды, генерирует ежедневный дайджест со ссылками на обсуждения.">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/chat-moderator-bot/">
+    
+    
+    <meta property="og:title" content="AI-модератор для Telegram-чата на 4000 участников">
+    <meta property="og:description" content="AI-бот модерирует чат с 4000 участников. Удаляет нарушения за 2 секунды, генерирует ежедневный дайджест со ссылками на обсуждения.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/chat-moderator-bot/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-модератор для Telegram-чата на 4000 участников">
+    <meta name="twitter:description" content="AI-бот модерирует чат с 4000 участников. Удаляет нарушения за 2 секунды, генерирует ежедневный дайджест со ссылками на обсуждения.">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=04032026e">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>AI-модератор для Telegram-чата на 4000 участников</span>
+</nav>
+
+<article class="case-study">
+    <h2>AI-модератор для Telegram-чата на 4000 участников</h2>
+    <p class="meta">2026</p>
+    <p>Владелец тематического Telegram-чата на 4000 участников: форумные топики, живые обсуждения, и полный хаос без модератора. Спам, продажа запрещёнки, токсичность &mdash; вручную не успеть.</p>
+<h2 id="задача">Задача</h2>
+<p>Нужен бот, который:</p>
+<ul>
+<li>сам ловит нарушения и удаляет сообщения</li>
+<li>эскалирует: предупреждение &mdash; мут &mdash; бан</li>
+<li>каждый вечер выдаёт дайджест, чтобы участники не скролили по 300 сообщений</li>
+</ul>
+<h2 id="ai-модерация">AI-модерация</h2>
+<p>Каждое сообщение идёт через Claude Haiku. Модель дешёвая, быстрая &mdash; ~$0.001 за 1000 сообщений, ответ за 1&ndash;2 секунды.</p>
+<p>Четыре категории, по которым бот режет:</p>
+<ul>
+<li>продажа/покупка запрещённых товаров</li>
+<li>спам и реклама</li>
+<li>токсичность и оскорбления</li>
+<li>опасные советы без оговорок</li>
+</ul>
+<p>Обмен опытом, эмоции, вопросы &mdash; не нарушения. Это прописано в промпте отдельно, иначе Haiku косит всё подряд.</p>
+<h2 id="эскалация">Эскалация</h2>
+<p>1-е нарушение &mdash; сообщение удаляется, в чат летит предупреждение (само удаляется через 30 секунд). 2-е &mdash; мут на 24 часа. 3-е &mdash; бан навсегда.</p>
+<h2 id="панель-владельца">Панель владельца</h2>
+<p>При каждом нарушении владелец получает в личку уведомление: кто, что написал, какая категория. Там же кнопки &mdash; мут на 1 час, 24 часа, 7 дней, бан, разбан. Нажал &mdash; готово.</p>
+<h2 id="дайджест">Дайджест</h2>
+<p>Каждый день в 21:00 бот читает все сообщения за сутки и публикует саммари в отдельном топике. Разбивка по топикам чата, ключевые темы, ссылки на конкретные сообщения, имена участников.</p>
+<p>Для дайджеста используется Claude Sonnet &mdash; там нужен связный текст, не просто классификация.</p>
+<h2 id="стек">Стек</h2>
+<p>Python, python-telegram-bot, SQLite. Docker на VPS с автоперезапуском.</p>
+<h2 id="результат">Результат</h2>
+<p>Первая неделя: ноль ложных срабатываний на нормальных сообщениях. Нарушения улетают меньше чем за 3 секунды. Участники стали читать дайджест &mdash; скролл сотен сообщений больше не нужен.</p>
+
+</article>
+
+<style>
+ 
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(255,255,255,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(255,255,255,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(255,255,255,0.25);
+}
+
+ 
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+ 
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+
+ 
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+    .breadcrumb { color: rgba(255,255,255,0.4); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+    .case-study img {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    .case-study img:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        border-color: #333;
+    }
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .breadcrumb { color: rgba(0,0,0,0.4); }
+    .breadcrumb a { color: rgba(0,0,0,0.5); }
+    .breadcrumb a:hover { color: rgba(0,0,0,0.85); }
+    .breadcrumb .sep { color: rgba(0,0,0,0.2); }
+}
+
+ 
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "AI-модератор для Telegram-чата на 4000 участников" }
+    ]
+}
+</script>
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing_bot">@eldarmarketing_bot</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a></p>
+    </footer>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>
