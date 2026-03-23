@@ -6,8 +6,15 @@
     <description>Recent content in Блог on Эльдар Маркетинг</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Sun, 22 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://eldarmarketing.ru/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub Issues как внешняя память для AI</title>
+      <link>https://eldarmarketing.ru/blog/github-issues-ai-memory/</link>
+      <pubDate>Mon, 23 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/github-issues-ai-memory/</guid>
+      <description>&lt;p&gt;Утро. Открываю Claude Code в терминале — и первые пятнадцать минут трачу на объяснения. Какой проект, что сделали на прошлой неделе, почему перешли на S3 для картинок. Пятнадцать минут — а я ещё ничего не сделал.&lt;/p&gt;&#xA;&lt;h2 id=&#34;проблема&#34;&gt;Проблема&lt;/h2&gt;&#xA;&lt;p&gt;У AI нет памяти между сессиями. Закрыл терминал — всё исчезло. Решения, договорённости, прогресс. При трёх сессиях в день я терял около часа только на то, чтобы вернуть ассистента в контекст. Час чистых потерь — каждый день.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Блог, который пишет себя сам</title>
       <link>https://eldarmarketing.ru/blog/auto-blog-skill/</link>
