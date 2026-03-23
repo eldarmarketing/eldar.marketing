@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>PWA с push-уведомлениями для автоателье — мастера перестали бегать по паркингу — Эльдар Маркетинг</title>
+    <meta name="description" content="Как я заменил крик и хождение по паркингу на push-уведомления в PWA для автоателье Birson">
+    <meta name="keywords" content="PWA push уведомления, CRM автосервис, push вместо мессенджера">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/birson-pwa-push/">
+    
+    
+    <meta property="og:title" content="PWA с push-уведомлениями для автоателье — мастера перестали бегать по паркингу">
+    <meta property="og:description" content="Как я заменил крик и хождение по паркингу на push-уведомления в PWA для автоателье Birson">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/birson-pwa-push/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PWA с push-уведомлениями для автоателье — мастера перестали бегать по паркингу">
+    <meta name="twitter:description" content="Как я заменил крик и хождение по паркингу на push-уведомления в PWA для автоателье Birson">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=22032026a">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>PWA с push-уведомлениями для автоателье — мастера перестали бегать по паркингу</span>
+</nav>
+
+<article class="case-study">
+    <h2>PWA с push-уведомлениями для автоателье — мастера перестали бегать по паркингу</h2>
+    
+    <p>Автоателье Birson — перетяжка салонов, руля, потолков. 8 мастеров и 2 управляющих работают на подземном паркинге. Сотовая связь внутри не ловит, WhatsApp не грузится. Когда управляющий ставил задачу мастеру — шёл через весь паркинг искать его. Мастер закончил — шёл искать управляющего.</p>
+<h2 id="задача">Задача</h2>
+<p>Сделать так, чтобы управляющие и мастера общались без хождения по территории. Задачи, статусы, комментарии — всё на телефоне.</p>
+<h2 id="что-было">Что было</h2>
+<ul>
+<li>Связи на паркинге нет — бетонные перекрытия глушат сигнал</li>
+<li>Управляющий ищет мастера ногами, мастер ищет управляющего ногами</li>
+<li>Кто что делает — непонятно, пока не дойдёшь и не спросишь</li>
+<li>WhatsApp и Telegram внутри не работают</li>
+</ul>
+<h2 id="что-сделали">Что сделали</h2>
+<p>Я выбрал PWA, а не нативное приложение — App Store это долго, а PWA ставится с сайта за 10 секунд. Push-уведомления работают через Web Push API — нужен только Wi-Fi, не сотовая связь.</p>
+<h3 id="страница-мастера">Страница мастера</h3>
+<p>У каждого мастера своя страница с заказами: Очередь, В работе, Контроль. Минимум кнопок — мастерам с грязными руками не до сложных интерфейсов.</p>
+<p>На этапе Очередь — кнопка «Взять в работу». Нажал — заказ перешёл в работу, управляющему улетел push.</p>
+<p>На этапе В работе — кнопка «Работа выполнена». Нажал — заказ ушёл на контроль, управляющий получил уведомление с именем мастера и названием работы.</p>
+<h3 id="push-уведомления">Push-уведомления</h3>
+<p>Управляющий назначает мастера на заказ — мастеру push: «Назначена работа: перетяжка руля, заказ #142». Мастер открывает приложение прямо из уведомления.</p>
+<p>Комментарии к заказам — тоже push. Мастер увидел что кожа порвана сильнее чем думали — написал комментарий, приложил фото. Управляющий сразу видит и звонит клиенту. Раньше мастер бы бросил работу и пошёл искать управляющего.</p>
+<h3 id="почему-не-telegram-бот">Почему не Telegram-бот</h3>
+<p>Первая мысль была — Telegram-бот. Но в подземном паркинге Telegram тоже не ловит. PWA работает через локальный Wi-Fi, который уже был на паркинге.</p>
+<h2 id="результат">Результат</h2>
+<ul>
+<li>Мастер видит очередь заказов на телефоне — не нужно никуда ходить</li>
+<li>Управляющий видит кто что взял и на каком этапе</li>
+<li>Комментарии и фото по заказу — push всем участникам</li>
+<li>Работает на iPhone и Android — ставится за 10 секунд</li>
+</ul>
+<p>Пользуются 10 человек каждый день — 8 мастеров и 2 управляющих.</p>
+<h2 id="технический-стек">Технический стек</h2>
+<ul>
+<li>Next.js 16 — фронтенд и API</li>
+<li>Web Push API + Service Worker — push-уведомления</li>
+<li>PostgreSQL + Prisma 7 — база данных</li>
+<li>PWA — установка на iPhone и Android без App Store</li>
+</ul>
+<h2 id="хотите-так-же">Хотите так же?</h2>
+<p>Напишите @marketing_eldar — обсудим вашу задачу.</p>
+
+</article>
+
+<style>
+ 
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(0,0,0,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(0,0,0,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(0,0,0,0.2);
+}
+
+ 
+html.dark .breadcrumb { color: rgba(255,255,255,0.4); }
+html.dark .breadcrumb a { color: rgba(255,255,255,0.5); }
+html.dark .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+html.dark .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+ 
+@media (prefers-color-scheme: dark) {
+    html:not(.light) .breadcrumb { color: rgba(255,255,255,0.4); }
+    html:not(.light) .breadcrumb a { color: rgba(255,255,255,0.5); }
+    html:not(.light) .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    html:not(.light) .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+}
+
+ 
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+html.dark .case-study img {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+html.dark .case-study img:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+html.dark .case-study img[alt*="Мобильная"],
+html.dark .case-study img[alt*="mobile"] {
+    border-color: #333;
+}
+
+ 
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "PWA с push-уведомлениями для автоателье — мастера перестали бегать по паркингу" }
+    ]
+}
+</script>
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing">@eldarmarketing</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a>&nbsp;&nbsp;&nbsp; <a href="/privacy/">Политика конфиденциальности</a></p>
+    </footer>
+
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 24px;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5;transition:transform 0.3s ease">
+  <div style="max-width:680px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <p style="margin:0;flex:1;min-width:200px">Мы&nbsp;используем cookie и&nbsp;Яндекс.Метрику для&nbsp;улучшения работы сайта. Продолжая, вы&nbsp;соглашаетесь с&nbsp;<a href="/privacy/" style="text-decoration:underline">политикой конфиденциальности</a>.</p>
+    <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:6px;border:none;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit">Принять</button>
+  </div>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem("cookies_accepted","1");document.getElementById("cookie-banner").style.transform="translateY(100%)"}
+(function(){if(!localStorage.getItem("cookies_accepted")){var b=document.getElementById("cookie-banner");var isDark=document.documentElement.classList.contains("dark");b.style.background=isDark?"#2a2a2a":"#ffffff";b.style.borderColor=isDark?"#3a3a3a":"#e5e5e5";b.style.color=isDark?"#a0a4ab":"#1a1a1a";var btn=b.querySelector("button");btn.style.background=isDark?"#d1d5db":"#1a1a1a";btn.style.color=isDark?"#1a1a1a":"#ffffff";b.style.display="block"}})()
+</script>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>
