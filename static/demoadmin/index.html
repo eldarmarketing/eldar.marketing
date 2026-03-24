@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спектр — Админ-панель</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a1a'/><path d='M16 6l2 8h-1v4l3-2 1 2-5 3v5h-2v-5l-5-3 1-2 3 2v-4h-1l2-8z' fill='%23FFD100'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #1a1a1a;
+      --card: #242424;
+      --card-hover: #2a2a2a;
+      --accent: #FFD100;
+      --accent-dim: rgba(255,209,0,0.15);
+      --text: #ffffff;
+      --text-secondary: #999999;
+      --border: #333333;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --danger: #ef4444;
+      --radius: 8px;
+      --sidebar-width: 240px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== LAYOUT ===== */
+    .app {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-rows: 1fr;
+      height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 20px 28px;
+    }
+
+    .sidebar-logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .sidebar-logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sidebar-logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 12px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      background: var(--card-hover);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .nav-item.active svg {
+      stroke: var(--accent);
+    }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* ===== MAIN ===== */
+    .main {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 28px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--card);
+    }
+
+    .header-burger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: auto;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      transition: background 0.15s;
+    }
+
+    .header-burger:hover {
+      background: var(--card-hover);
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .header-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .header-logout {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      padding: 6px;
+      border-radius: var(--radius);
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logout:hover {
+      color: var(--danger);
+      background: rgba(239,68,68,0.1);
+    }
+
+    .header-logout svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    /* ===== CONTENT ===== */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+      animation: modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      transition: all 0.15s;
+    }
+
+    .modal-close:hover {
+      background: var(--card-hover);
+      color: var(--text);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-right: 32px;
+    }
+
+    .modal-body {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ===== MOBILE OVERLAY ===== */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 90;
+    }
+
+    .sidebar-backdrop.open {
+      display: block;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        width: var(--sidebar-width);
+        transition: left 0.25s ease;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .header-burger {
+        display: flex;
+      }
+
+      .content {
+        padding: 20px 16px;
+      }
+
+      .metrics-grid { grid-template-columns: 1fr !important; }
+      .seo-metrics { grid-template-columns: 1fr !important; }
+      .banners-grid { grid-template-columns: 1fr !important; }
+      .promotions-grid { grid-template-columns: 1fr !important; }
+      .pages-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ===== METRIC CARDS ===== */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.15s;
+    }
+
+    .metric-card:hover {
+      border-color: var(--accent);
+    }
+
+    .metric-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .metric-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* ===== CHART ===== */
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .chart-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* ===== TABLES ===== */
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .table-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 20px 24px 0;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .admin-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      cursor: default;
+      user-select: none;
+    }
+
+    .admin-table th.sortable {
+      cursor: pointer;
+    }
+
+    .admin-table th.sortable:hover {
+      color: var(--accent);
+    }
+
+    .admin-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .admin-table tbody tr {
+      transition: background 0.12s;
+      cursor: pointer;
+    }
+
+    .admin-table tbody tr:hover {
+      background: var(--card-hover);
+    }
+
+    .admin-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ===== STATUS BADGES ===== */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .badge-amber { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .badge-purple { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+    .badge-green { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .badge-yellow { background: var(--accent-dim); color: var(--accent); }
+    .badge-gray { background: rgba(153,153,153,0.15); color: #999; }
+
+    /* ===== TOOLBAR ===== */
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .toolbar input[type="text"],
+    .toolbar select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .toolbar input[type="text"]:focus,
+    .toolbar select:focus {
+      border-color: var(--accent);
+    }
+
+    .toolbar input[type="text"] {
+      width: 260px;
+    }
+
+    .btn {
+      padding: 8px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #1a1a1a;
+    }
+
+    .btn-accent:hover {
+      background: #e6bc00;
+    }
+
+    .btn-danger {
+      background: rgba(239,68,68,0.15);
+      color: #ef4444;
+      border-color: rgba(239,68,68,0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239,68,68,0.25);
+    }
+
+    .btn-secondary {
+      background: var(--card-hover);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    /* ===== PRODUCT IMAGE PLACEHOLDER ===== */
+    .product-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: var(--card-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-thumb svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-secondary);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* ===== FORM ===== */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      justify-content: flex-end;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 80px;
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .photo-placeholder:hover {
+      border-color: var(--accent);
+    }
+
+    /* ===== CATEGORIES TREE ===== */
+    .tree-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .tree-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      transition: background 0.12s;
+      cursor: default;
+    }
+
+    .tree-item:hover {
+      background: var(--card-hover);
+    }
+
+    .tree-item:last-child {
+      border-bottom: none;
+    }
+
+    .tree-toggle {
+      width: 20px;
+      text-align: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .tree-toggle:hover {
+      color: var(--accent);
+    }
+
+    .tree-icon {
+      flex-shrink: 0;
+    }
+
+    .tree-name {
+      flex: 1;
+    }
+
+    .tree-sub {
+      padding-left: 32px;
+    }
+
+    /* ===== CONTENT TABS ===== */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 12px 24px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ===== BANNERS / PROMO / PAGES GRIDS ===== */
+    .banners-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .promotions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .content-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+
+    .content-card:hover {
+      border-color: var(--accent);
+    }
+
+    .content-card-img {
+      width: 100%;
+      height: 100px;
+      background: var(--card-hover);
+      border-radius: 6px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .content-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .content-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .content-card .card-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .toggle-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-track {
+      width: 36px;
+      height: 20px;
+      background: var(--border);
+      border-radius: 10px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .toggle-track.on {
+      background: var(--accent);
+    }
+
+    .toggle-knob {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.2s;
+    }
+
+    .toggle-track.on .toggle-knob {
+      left: 18px;
+    }
+
+    .discount-badge {
+      display: inline-block;
+      background: rgba(239,68,68,0.15);
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* ===== SEO METRICS ===== */
+    .seo-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    /* ===== TOAST ===== */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+
+    .toast {
+      background: var(--accent);
+      color: #1a1a1a;
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      animation: toastIn 0.3s ease forwards;
+      max-width: 360px;
+    }
+
+    .toast.out {
+      animation: toastOut 0.3s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(40px); }
+    }
+
+    /* ===== MODAL EXTRAS ===== */
+    .modal-body .admin-table {
+      margin: 12px 0;
+    }
+
+    .modal-body .admin-table tbody tr {
+      cursor: default;
+    }
+
+    .modal-meta {
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .modal-meta strong {
+      color: var(--text);
+    }
+
+    .order-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .order-header .badge {
+      font-size: 13px;
+    }
+
+    .order-date {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gODUK/9sAQwAFAwQEBAMFBAQEBQUFBgcMCAcHBwcPCwsJDBEPEhIRDxERExYcFxMUGhURERghGBodHR8fHxMXIiQiHiQcHh8e/9sAQwEFBQUHBgcOCAgOHhQRFB4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4e/8AAEQgAfAJYAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+yq5TxF4tW2ke10tUnmQ4d2+6p9h3q/431JtN0NzE22ac+WhHUZ6n8q8vjHOa/OeNeKa2AksHhXaTV5Pqk9kvP8A4FjxswzR4atGnBX6s1LnWNWu2Jnv5yD/AAq21fyHFRxzXG7d58ufXec1HGwb/WDn+8Ov41aiiz0wR6ivyKvjsRWlz1Kjb822etg8ZSxMfd37Fqzv9RiI8u9uFHp5hI/KuU174jeOfBmpKt/Fba1pkp/cyyReXJj+6WTAyPUg5rr4IenFP1PSbPVNOksr6ISQyDGO4PYj0NdmV8T43Laqcajceqv+j0Po8pxOHw9b/aaSnTejTWvqnun89SHwn8afCmsFIdQ87RrhuMXAzGT/AL4/qBXpFtPDcQJPbyxzROMq6MGVh7EV8va74Mk0y+aB13p1jkA4Yf41a8MXniDwzP5mkX00KE5aE/NE/wBVPH49a/UcBx1Bpe3V0+q3+7/hj6bH8K5fiYe1y+py36PVffuvnc+m6K4Dwx8StPuoQmvommTDAMpP7liTjqfu9e/HvXexukiK8bK6MMhlOQR65r7rA5hhsdT9ph58y/L1R8JjMBiMHPlrRt+T9HsOoopK7DkFooooAKKKKACiiigArh/HHxX8CeDpXt9X1yJrxOtrbAyyg+hC/d/4ERXmn7VHxZvPDxHgzw1dNBqM0Qe+uozh4Eb7qKezEck9QMY68fJzszuzuxZmOSSckn1r9G4Z4F/tCjHFYyTjCWyW7Xe72XbTU8PH5v7Gbp0ldrdn1veftSeD45HW10HW5wD8rMI0B/8AHjiq3/DVHh7/AKFXVP8Av9HXyhRX20eAslS1g3/28zynnGK7/gj6u/4ao8Pf9Crqn/f+Oj/hqjw9/wBCrqn/AH/jr5Rop/6h5J/z7f8A4FL/ADD+2MX/ADfgj60t/wBqbwqx/f8AhvWY+f4Wjb/2YV23hH45fDnxHOltFrR065c4WLUE8nJ/3uV/WvhWg1zYnw8ymrG1Pmg+6d/zuXDOsTF+9Zn6aKwZQysGBGQQeDQeBmvjj9nH4w3/AIX1i18NeILx5/D9y4ijeVsmyY8Agn+D1HQdR3z9jt9w/SvyjPshxGS4n2NXVPVPo1+jXVH0eDxkMVDmjv1R41c/tJfDy3uZbeSHW98TlGxaLjIOP79R/wDDTHw5/wCeOu/+Aif/ABdfH+t/8hq+/wCviT/0I1Ur9Wh4fZRKKb5v/Av+AfOvOsSn0+4+y/8Ahpj4c/8APHXf/ARP/i6P+GmPhz/zx13/AMBE/wDi6+NKKr/iHmUf3v8AwL/gC/trE+X3H2X/AMNMfDn/AJ467/4CJ/8AF0f8NMfDn/njrv8A4CJ/8XXxpRR/xDzKP73/AIF/wA/trE+X3H2X/wANMfDn/njrv/gIn/xdH/DTHw5/5467/wCAif8AxdfGlFH/ABDzKP73/gX/AAA/trE+X3H2xoH7QvgLWtdsNGs4tZFzf3MdtCZLVQu92Crk7+BkivXa/PD4Tf8AJVPCX/Ybsv8A0elfoeelfnvGeRYXJ69KGGvaSbd3fqe1leLqYqEnU6HjV5+0j8PLW8mtZYdb8yGRo222qkZBwf46i/4aY+HP/PHXf/ARP/i6+Q/Ef/Iw6l/19y/+hmqFff0/D7KJQTfN/wCBf8A8Z51iU7afcfZf/DTHw5/5467/AOAif/F0f8NMfDn/AJ467/4CJ/8AF18aUVf/ABDzKP73/gX/AABf21ifL7j7L/4aY+HP/PHXf/ARP/i6P+GmPhz/AM8dd/8AARP/AIuvjSij/iHmUf3v/Av+AH9tYny+4+y/+GmPhz/zx13/AMBE/wDi69D+G/jfRvH2gy61oS3S20Vy1swuIwjb1VWPAJ4w4r88a+xP2K/+SUX/AP2Gpv8A0TDXzXFnCOX5Vl7xGH5ua6Wrvv8AI7suzKtiK3JO1rHqHxB8YaT4H8ONr2tLctaLKkRFugd8t04JFebf8NMfDn/njrv/AICJ/wDF1Z/a/wD+SNT/APX9B/M18V1HCPCeAzbAPEYjm5uZrR20SXkVmWY1sNW5IWtY/RL4d+MtI8deHv7d0RblbXzmhxcRhH3LjPAJ45FdHXjP7HP/ACR//uJT/wAkr2avhc6wlPB4+th6Xwxk0rnrYWpKrRjOW7QUUUjEKpLEADkknpXmHQLXNePvHHhrwPpf2/xDqCwBs+VAnzSzH0Rep+vQdzXlvxj/AGhNJ8Pedo/g/wAnVtVGVe6JzbwH2x/rGHoOPc9K+UvEeu6v4j1aXVdc1Ce/vJT80srZP0A6AegGAK+/4d4FxGPtWxl4U+32n/kvN/d1PGxubwo+5S1l+CPrr/hpj4c/88dd/wDARP8A4uj/AIaY+HP/ADx13/wET/4uvjQAkgAEk9BXufwb/Z91fxL5OseLfO0nSThkt8YuLgfQ/cU+p59B3r6bMuEeHcsoutiZSiv8Wr8kranBQzLG15ctNJ/I988AfGDw7451X+z/AA9pWvzleZZntFWKEertv4+nU9hVLxn8dvBPhPxNe+HtUi1ZryzZVlMNsrJkqGGCWHYjtXoHhrQNH8N6RFpOh6fBY2cQ+WOJcZPqT1Y+5yTXxD+0p/yW/wAS/wDXaL/0THXynDmU5ZneZVKUYSjTUbr3tb3Su3bz2/E9HHYnEYWhGTacm+2mx9D/APDTHw5/5467/wCAif8AxdH/AA0x8Of+eOu/+Aif/F18aUV93/xDzKP73/gX/API/trE+X3H2X/w0x8Of+eOu/8AgIn/AMXR/wANMfDn/njrv/gIn/xdfGlFH/EPMo/vf+Bf8AP7axPl9x9l/wDDTHw5/wCeOu/+Aif/ABdH/DTHw5/5467/AOAif/F18aUUf8Q8yj+9/wCBf8AP7axPl9x9l/8ADTHw5/5467/4CJ/8XUlt+0l8O7i5igSHWw0jhFzaLjJOP79fGFW9G/5DFl/18R/+hCpn4e5Qotrm/wDAv+ANZ1iW+n3H6B/Ejxvo3gHQotZ11bpraW4W3UW8Ydt5VmHBI4wprzz/AIaY+HP/ADx13/wET/4uoP20/wDklNj/ANhmL/0VNXx3XznCfCOX5rl6xGI5ua7Wjtt8jtzHMq2HrckLWsfZf/DTHw5/5467/wCAif8AxdH/AA0x8Of+eOuf+Aif/F18aUV9L/xDzKP73/gX/AOH+2sT5fcfZf8Aw0x8Of8Anjrv/gIn/wAXR/w0x8Of+eOu/wDgIv8A8XXxpRR/xDzKP73/AIF/wA/trE+X3H2pY/tH/DO5k2S3OqWg/vTWZI/8cLV6F4U8aeFfFaFvD2u2WoMoy0ccmJFHuhww/KvzpqfT7y70+9ivbC5mtbqFt0U0LlHQ+oI5FcWM8N8DOD+r1JRl52a/JP8AE1pZ7WT9+Ka+4/S6ivGf2aPivN4502XQ9ddDrtjGH80AD7VF034/vA4Bx6g+tFfkuZZdXy3Eyw1dWlH7n2a8mfR0K8K9NThszqPifcK1/Z2gblIzIR/vHAP/AI6a5WMVpfECd5PHs8LMCiWUQUeh3OT/AOhCs+MV/NfGNTnzmu/NL7kl+h8hjH7TGTfnb7tCaNatQFkOVNQRCrMYr5KUjvw0LNNGjZzxnAcbT+lXWZVXczAKOSSeKyo1qrrUrrbiEMdp5IrBRU5WPqMLiJtWlqO1fUtIuYzbylpSD8rImcH8a5JdY8ONO0T3DRFW25eM4P4ii9cx28rr94DC/U1yU1n7V72CwdPlacmfoHC+G+sUJyqyaV9Lfid5Lpmmarp80UM8U0UqFSUYNjI9q4fwb438T+ANQaw3Nf6bFIVks5mOFweSjfwn9PaqkSXNpMJrWWSGQdGRsGsnV9dSfVZFvk39A8yDq3ckV9NkU8RgK0nSndM+zweVqUZ0KqVWnLWz3Vu3+a1PqnwR4w0Txfp32rSbnMigedbycSxH0Yf1HFdBXx/pUt7pV9DrGhXrQzIcpLEevsR3HqDX0F8MPiNZ+KI10/UVSz1lV5jzhJ8fxJn9V6/Wv1XKs+p4u1OrpP8AB/8AB8j894h4UngL18LeVPqusfXuvP7+539FFFfQnxgUUUlAC0yaRYoXlc4VFLN9BT6wfiLP9l8AeIbjJGzTLggjqD5bVrRp+1qRh3aX3kzlyxbPgDxrrc/iTxdquu3DFnvbp5RnspPyj8BgfhU3gHwpqvjXxTa+HtHVPtNxkl5DhI0AyzsfQD+grBr6D/YhtIpPGOv3zLmWHT0iU+geQE/+gCv6PznF/wBk5XUrUV8EbLt0S+4+GwtL6ziIxl1ep0+k/sr6Klun9q+KtQnm/j+zQJGv0G7cfxrQ/wCGXPBv/Qd13/vqL/4ive6K/EJ8YZ1N3eIf3JfofWLLMKl8B4J/wy54N/6Duu/99Rf/ABFH/DLngz/oO67/AN9Rf/EV73RU/wCtuc/9BEvw/wAh/wBm4X+RHz7efss+F3jItPEurwvjgyJG4B+gA/nXhfxk+Fms/DXULdLy5iv9Pu932a7iUruK9VZTna3IPUj36197V4r+1/o2qa18O9Ng0fSr3UriPVkdo7W3aV1XypQSQoJAyRz7ivoeGeL8ynmFOjiavNCTs72087nFj8toKjKVONmux8aV+gHwR1yTxF8JPD+qTuZJ2sxDK56s8ZMbE+5K5/GviL/hAvHP/Ql+I/8AwVzf/E19j/s02Go6X8GNJsdUsbqxuonuN0FxC0cigzORlWAIznNfQeIs8PWy+nOEk5KfRp6NO/5I48kU41pJqya/VHxDrf8AyGb7/r4k/wDQjXSfCDwT/wALA8aReHDqf9m+ZDJL5/kebjaM427l6/Wub1v/AJDN9/18Sf8AoRr1P9kP/ks9r/15XH/oNfZ5tiamFyurWpO0owbT80vM8rDQjUxEYy2bO9/4ZRX/AKHw/wDgp/8At1H/AAygv/Q+H/wU/wD26vpmivxP/XjPf+f/AP5LD/5E+r/snCfyfi/8z5m/4ZQX/ofD/wCCn/7dR/wyiv8A0Ph/8FH/ANur6Zoo/wBd89/5/wD/AJLD/wCRD+ycJ/J+L/zPmb/hlBf+h8P/AIKf/t1eD/E3wv8A8IX451LwyL77d9hZF+0eV5e/civ93Jx97HU9K/RGvhH9pn/kuPiT/rrD/wCiI6+z4I4izLM8dOli6nNFQb2itbxXRLueXm2BoYekpU42d+77M5/4Tf8AJVPCX/Ycsv8A0elfocelfnj8Jv8AkqnhL/sN2X/o9K/Q49K87xM/3qh/hf5m+Q/w5+p+bPiP/kYdS/6+5f8A0M10Hwi8Fjx/42g8NtqR04SxSSeeIfNxsXONu5ev1rn/ABH/AMjDqX/X3L/6Ga9N/ZH/AOS1WP8A16XH/oBr9KzXEVMNldWtSdpRg2n5peZ4OHhGpiIxls2eg/8ADKMf/Q9t/wCCn/7dR/wyjH/0Pbf+Cn/7dX0xRX4n/rvnv/P/AP8AJYf/ACJ9X/ZOE/k/F/5nzP8A8Mox/wDQ9t/4Kf8A7dR/wyjH/wBD23/gp/8At1fTFFH+u+e/8/8A/wAlh/8AIh/ZOE/k/F/5nzP/AMMox/8AQ9t/4Kf/ALdXsPwX+H6/DfwpPoS6sdT829e6842/k43Ii7du5v7mc57129FcOYcTZnmNH2GJq80d7WitvRJmtHAYehLnpxs/Vnj37X//ACRqf/r+g/ma+K6+1P2v/wDkjU//AF/QfzNfFdfq3h1/yKH/AI3+SPns7/3n5L9T7P8A2Of+SP8A/cSn/klezV4z+x1/yR7/ALiU/wDJKh+Mfx+0Twp52keGvJ1jWVyrurZt7dv9ph95h/dH4kdK/OM1yzFZlnuIo4aHM+Z+i13b6I9zD4inQwkJVHZWPTfHHjHw94L0htU8Q6hHaxciNOskrf3UXqx/Qd8V8ifGL45eIfG5l03TPM0fQiceRG/72cf9NGHb/ZHHrmvOvFniTW/FWsSarr+oTX10/G5zwg/uqOij2FZNfpfDvBOFyy1bEfvKv4L0X6v5WPBxua1MR7sNI/iwrc8GeE9f8YawmleH9OlvLg8uRwka/wB52PCj6/hXpHwb+A+veMTDquuiXRtDbDKzLie4X/YU9Af7x/AGvrfwf4W0Lwjo6aVoGnRWdsv3toy0jf3mbqx9zUcRcb4bLb0cNapV/wDJV6vq/JfNoeCympX96ppH8Wec/Bz4E6B4LEOqax5Ws66MMJGT9zbn/pmp6kf3jz6AV7BRRX4zmGY4nMazrYmblL8vJLoj6mjQp0I8tNWQV4T8Sf2d08ZeN9S8THxc1ib51byP7O8zZtRV+95gz93PSvdqKvLc1xeWVHVwk+WTVtk9N+qfYmvhqeIjy1FdHzP/AMMox/8AQ9t/4Kf/ALdR/wAMox/9D23/AIKf/t1fTFFe1/rvnv8Az/8A/JYf/InL/ZOE/k/F/wCZ8f8AxT/Z9TwR4Hv/ABKPFjX5tNn7j+z/AC9+5wv3vMOOueleFV9z/tRf8kR13/tj/wCjkr4Yr9S4JzXF5ngJ1cVPmkpNXslpZdku58/muHp4eso01ZW/zPXPgf8ABlfiXod/qbeIzpf2S5EHliy87d8obOd64616D/wyjH/0Pbf+Cn/7dWv+xF/yI+uf9hIf+i1r6Br4jiTizN8HmlahQrWjF6Lli+i7q56uBy7DVcPGc43b83/mfM//AAyjH/0Pbf8Agp/+3VLZfsrx215Dcf8ACcs/lSK+3+ysZwc4z5tfSdFeG+Ns8as6/wD5LD/5E6/7Kwn8n4v/ADPDv20/+SU2H/YYi/8ARU1fHdfYn7af/JKbH/sMRf8Aoqavjuv03w+/5E6/xSPBzr/evkj3H4S/AJPHnge08St4rbTzcSSJ5H2Dzduxyv3vMXOcZ6V1n/DKMf8A0Pbf+Cn/AO3V6D+yd/yRHSv+u9x/6NavV6+Fzni/OcNmFejSrWjGUklyx2T03ievhcsws6MJSjq0ur/zPmf/AIZRj/6Htv8AwU//AG6j/hlGP/oe2/8ABT/9ur6Yorzf9d89/wCf/wD5LD/5E3/snCfyfi/8z5f1D9lO5S1ZtP8AGsM1wPupPp5jQ/VhIxH5GvnzxRoeo+G/EF7oWrQiK9s5DHKoORnqCD3BBBB9DX6R18TftcRxx/Gm9ZMZe0t2fHrsx/ICvs+CeKMwzLGSw2LlzLlbTsk1Zrsl3PLzXL6NCkp01bU5b4I67J4d+Kvh7UUkKRteJbze8ch2N9eGz+FFcppkskGpWs8RIkjmR0I9QwIor2OKeGYZtiIVr2aVvxucuX494aDj5n158Q72SPxxqt1Eiu0KhQhPDYRR/Ouf0/xtbPgXNjNEe5Rg388Vc8Tyi48QavODkPduFz1xvOP0Fcfq9l9muvNVf3cvP0Pev4Kx0aOLxlaVRXblJr72cHM3OdRdZN/ieiWPiLSLgDbdiM+kilf/AK1bVrPDMu6KaOQeqsDXkdqOBWtZ5VgVJB9RXi4jLKf2W0dtHFyh0PU4yKpa5yqt7YrmLC/vY8BbmTHoxz/OtcXk9zEI5dp98Yry3hXSne57WEzOHMoyVrmZcQGSIDHBOaz5rL2rrXtkKgDsMVUms/aumnirH69l9ZYajGkuhwevYsrJpB/rD8qfWuBntySSeprt/FUn2u/ZU5ii+Vff1Nc/Nbe1fVYGfJC73Z+gZXP2dJN7syLG5udPm3wn5T95D91qteJddEWmRyaTLJbahLzuRtrwqDyVI9Txn60l3HFBC80x2RRqWc+1ea6lf3Nxqr36ko2cIo6Ko6L+VfQYGm60+daW/M9CsqdZptevn6n13+z/APF5fFMUfhvxLKkWuxLiGY/Kt4o/k47jv1HevaK/PfTJzcCO+spHt7qBwwKNho2HIIPX6Gvrj4DfElfGekHTNWdE16zQeaMYFwnTzAPX+8PXnvx93lOa+2fsKvxL8f6/E/KeL+Ffqd8bhF+7e6/l815fl6beoUUUle+fnwtcv8W/+SX+J/8AsF3H/os11Fcv8W/+SX+J/wDsF3H/AKLNdeX/AO90v8S/NGdb+HL0Z+eVfRv7Dv8AyHfE3/XtB/6E1fOVfRv7Dn/Id8Tf9esH/oTV++cZ/wDIkr+i/wDSkfHZX/vcP66M+qKKKK/ng+1CiiigAooooAKR/uH6UtI/3D9KEB+a+t/8hm+/6+JP/QjXqf7If/JZ7X/ryuP/AEGvLNb/AOQzff8AXxJ/6Ea9T/ZD/wCSz2v/AF5XH/oNf0hn/wDyJq/+B/kfDYL/AHqHqj7Wooor+bz7kKKKKACvhH9pn/kuPiT/AK6Q/wDoiOvu6vhH9pj/AJLj4k/66w/+iI6/Q/DX/kZ1P8D/APSoniZ7/Aj6/oznvhN/yVTwl/2G7L/0elfocelfnl8Jv+SqeEv+w3Zf+j0r9DT0rp8TP96of4X+ZGQ/w5+p+bXiP/kYdS/6+5f/AEM0vh7W9W8Pamup6Jfz2F4ilVmhOGAIwR+NJ4j/AORh1L/r7l/9DNUVVmOFUk+gFfrkIRnRUZq6a1TPm22pXR23/C3PiV/0Oerf9/f/AK1L/wALc+JX/Q56t/39/wDrVxXky/8APJ/++TR5Mv8Azyf/AL5Ncv8AZeX/APPmH/gK/wAjT6xW/mf3s7T/AIW58Sv+hz1b/v7/APWpf+FufEr/AKHPVv8Av7/9auK8mX/nk/8A3yaPJl/55P8A98mj+y8B/wA+Yf8AgK/yD6xW/mf3s7X/AIW58Sv+hz1b/v7/APWr7B/Z/wBW1HXPhDoWq6veS3l7OkxlmlOWfE0ijP4AD8K+CfJl/wCeT/8AfJr7q/ZkUr8DfDYYEHZPwf8Ar4kr4PxCwWFoZdTlRpxi+dbJL7Mux6+S1ak67UpN6fqjG/a//wCSNT/9f0H8zXxXX2p+1/8A8kan/wCv6D+Zr4rr0fDr/kUP/G/yRjnf+8/JfqOV3UYV2A9jTa6DQPBPi7X7D7fovhvU9QtN5Tzre3Z13DqMjvzWHcwTW1xJb3ETwzRMUkjddrKw6gg9DX20K9KcnCEk2t0nqvU8lwkkm0XfDeian4i1q20bRrR7q+uW2xRKQM9ycngADkmvrT4NfADRvC/k6v4oEOr6wuGSIjNvbt7A/fYep49B3r4/tLm4s7qK6tJ5IJ4nDxyRsVZGHQgjkGvqv4C/H2DV/s/hzxvPHb6hxHb6g2FjuD0Cydlf36H2PX43jeGbywt8C/3f2kvi/wCG7pa+q29TKnhlU/erXpfb/hz6F4A4opBgjPWlr8IPrwooooAKKKKACiiigDzH9qP/AJIjrv8A2x/9HJXwxX3P+1F/yRHXf+2P/o5K+GK/bfDf/kVz/wAb/wDSYnyme/7wvT9WfWn7EX/Ij65/2Eh/6LWvoGvn/wDYi/5EfXP+wkP/AEWtfQFfm3F//I6xHr+iPdyz/dYBRRRXzZ3Hh37af/JKbH/sMRf+ipq+O6+xP20/+SU2P/YYi/8ARU1fHdfu/h9/yJ1/ikfIZ1/vXyR9DfBT46+GvA/w9svDmpaVqtxcwSSuzwLGUIZywxlgeh9K7X/hqPwZ/wBALXv++Iv/AIuvkSiurFcE5Tiq069SL5pNt+892Z081xNOChFqy8j67/4aj8Gf9ALXv++Iv/i6T/hqPwZ/0Ate/wC+Iv8A4uvkWisP9QMm/kl/4Ey/7ZxXdfcfW1z+1L4TWFjb+Hdbkkx8quYkUn3IY4/I183/ABP8XXHjnxtfeJLm3W2+0lVjhDbvLRVCqM9zgda5mivVynhnLspqOrhoNSatdtvQ5sTj6+Jjy1Hobvw80yTWPHmg6XEm9rnUIUIIyNu8ZJ9gMk0V71+yR8Mb6LUl8ea5aPBEkZXTIpFwzlhgy49MEgeuc9hRX55xpxLNY9UcJPSCs359vl+Z7eVYBOjzVFvt6E8V2t6r3AIYyTMWPv1/rVmW1jvLVoH4z0PofWq11pUmharf6bIu3y7yYp7oWO0/ioFXLaTpX8T46nKhWlDrFv70eFTpumuR9Dm/Jktp2hlXDocGtC1bpWpq1kl7CJI8CdBwf7w9KxIGKsVYEEHBB7UKoq0b9Qa5Wblq+MVqW8oHesC3l6VdinwOtcNWlc0izqdPuPOYRDJfsB3FVvEl59j01tpxJL8if1NYsd5JDKksUhSRCGVlOCDXZ2KaJ48s1tL4iy1mFSVkjAAk/wBrHQ+4611ZXkkcfV5IzSn0T2l5J9/J79z9A4b4kpKUKGM2XX/M8mlgB5qpLb+1dd4q8Map4duNl5FvgY4jnTlG/wAD7GuS8Q3w0/TnmABlb5Yh/tev4V6MqFejW9hUi1Lsz9rweJWJUXRfMntY4Tx5eb5P7MgPyod0xHduw/D+f0rjJYfat+5iZ3Z3JZmOST3NVJLcs20Lkk4Ar63CtUYKKPqI0eSNjJtJzp0zXrSeXDEu6U9tvp7n098V02heMk0e+s/EejyTxzwESxOFHI7qRnoeQR9a828a6kszfYLV828TZdh0kf1+g6D8T3qr4Vvz9mn06RuNpkiz69x/X8DXtrL5TpqvtJfl/meJTzejPGPB1FeEk18/8nsfo98IvH+lfEbwjFrumjyZFcxXVszZaCQdQfYjBB9D9a7Gvz4/Zt+JbfDv4nQLfTlNC1ZltdQBPyx5PyTf8BJ5/wBktX6DAggEcg9DX2GHqe0gm9z8UznALBYqUIfD0/y+Qtc18VY2l+GniWNASx0u4wP+2bV0tUPENl/aWgajp2SPtVrLBkdRuQr/AFruwtRU68Jvo0/xPGqLmg0fmzX0Z+w6w/4SDxKvc2sJ/wDH2r52nikgnkhlUrJGxVh6EHBFem/s0eOLDwR8RPtGsTmDTL+2a1nlwSsRyGRyB2BXHsGNf0RxRhamLyivSpK8mrpLrZp6fcfFZfUjTxMJS2ufctFUNJ1rR9XiWXStVsb6NxlWt7hZAR+Bq/X85ThKD5ZKzPt001dBRRRUjCuE+NfxCHw28MWutnSP7U8+8W18r7T5O3KO27O1v7mMY712l3d2tnH5l3cwW6f3pZAo/Wvl79rz4heH9fsNN8LaDqFvqJt7o3V1PA2+NCEZVUMOGPzsTjOMCvoeGcqeZZjTpzpuVO/vb2t5tbfecWPxHsKEpJ2fQvf8NXr/ANCEf/Bv/wDaa9v+FfjAeO/Alp4m/s7+z/tLSr9n87zdux2T721c5256V+etfdP7MlpLZ/A3QElXa0iTSj3V5nYH8iK+x424dyzK8DCrhafLJzS3k9LN9W+yPMyrG4jEVnGpK6t2XkfEWt/8hq+/6+JP/QjXqf7If/JZ7X/ryuP/AEGvLNb/AOQ1ff8AXxJ/6Ea9T/ZD/wCSzWv/AF5XH/oNffZ//wAiav8A4H+R42C/3qHqj7Wooor+bz7kKKKKACvhH9pj/kuPiT/rrD/6Ijr7ur4R/aY/5Lj4k/66w/8AoiOv0Pw1/wCRnU/wP/0qJ4me/wACPr+jOf8AhN/yVTwl/wBhyy/9HpX6GnpX55fCb/kqnhL/ALDdl/6PSv0OPSunxM/3qh/hf5kZD/Dn6n5s+I/+Rh1L/r7l/wDQzXpf7JcccnxnsVkRXX7LccMMj7hrzTxH/wAjDqP/AF9y/wDoZr0r9k2WKH4zWMk0iRoLW4+ZmAH3D61+i55f+xq9v+fb/I8TCf71D1X5n2r9js/+fWD/AL9ij7HZ/wDPrB/37FM/tHT/APn+tf8Av8v+NH9o6f8A8/1r/wB/l/xr+c7VPM+3vEf9js/+fWD/AL9ij7HZ/wDPrB/37FM/tHT/APn+tf8Av8v+NH9o6f8A8/1r/wB/l/xotU8wvEf9js/+fWD/AL9ipURI1CooVR0AGBVf+0dP/wCf61/7+r/jU0E0M6F4JY5VBxlGBGfwqZKdveuNW6HkX7X/APyRqf8A6/oP5mviuvtT9r//AJI1P/1/QfzNfFdfuHh1/wAih/43+SPk87/3n5L9T7P/AGOf+SP/APcSn/klXvjf8GNH8fQSanp/lab4hVfluAvyXGBwsoH5Buo9xxVH9jn/AJI//wBxKf8AklezV+a5vmGIy/Pq9fDy5ZKb/PZ90e7hqMK2DhCaurH5veKPD+r+Gdan0fXLGWzvIT8yOOo7Mp6EHsRWXX6DfFD4eeHviDopsdYg2XEYP2a8jA82A+x7j1U8H6818U/FH4d+Ifh7rP2LWIN9tIT9lvYwTFOo9D2b1U8j6YNfq/DXFuHziKpz92qt1384/wCW6/E+cx+Wzwr5lrHv/melfAf483fhwweHvGMst5o/CQ3hy0tqOwPd0/Uds9K+tNPvLTULKG9sbmK5tp0DxSxMGV1PQgjrX5o16X8Fvi7rfw8vltm33+hSvmeyZuU9XjJ+63t0Pf1rx+KeCIYzmxWBXLU6x6S9Oz/B+W51ZfmzpWp1tY9+3/APuqisXwZ4o0TxfoUOs6DfJdW0g5xw8bd0deqsPQ/y5rar8bq0p0ZunUVpLdPdH08ZKSunoFFFFZlBRRRQB5j+1F/yRHXf+2P/AKOSvhivuf8Aai/5Ijrv/bH/ANHJXwxX7b4b/wDIrn/jf/pMT5TPf94Xp+rPrX9iP/kR9c/7CQ/9FrX0BXz9+xF/yI+uf9hIf+i1r6Br824v/wCR1iPX9Ee7ln+6wCiiivmzuPDv20/+SU2P/YYi/wDRU1fHdfYn7af/ACSmx/7DEX/oqavjuv3fw+/5E6/xSPkM6/3r5I99+DfwG0jx14Bs/El3r19ZzXEkqGKKJWUbHK9T9K7H/hlfw/8A9DVqn/fhK7D9k3/kiOlf9d7j/wBGtXq9fA51xVm+HzGvSp12oxlJJWWiT9D2MLl2GnQhKUNWl3Pnj/hlfw//ANDVqn/fhKP+GV/D/wD0NWqf9+Er6HorzP8AXHO/+gh/dH/I6P7Mwn8n5nz7a/ss+FklBuvEusyx91jSNCfxIP8AKu68H/BH4deGZ47q30U391HgrPfv5xB9dvCZ99tekUVy4nibNsVHkq15W8nb8rGlPAYam7xghAAAABgDoKKWivDOs8n+N2jNFd22vQr8kgEM5HZh90/iOPwFefwTY719F63p1tq2lXGnXa5inQqfUHsR7g8185a7p91oWsT6ZeLiSFsBuzr2YexFfk/GeTujifrUF7s9/KX/AAd/vPms1wzp1PaLZ/mXY5/eqmowrMfNj4kHX/aqqk/vSm44618RGk4yujym7kUU2ODwRVlJ/eqUpWRi2dpAJJ9hXkPjv4laxFeS6XpdrLpaodryyj98w9R2Ue4yfevruGeDsx4mrOng4qy+KTdlH9X6JNkJuUuWOrPW9b8R6bpI23VwDMRkQocufw7fjWNZ+L9RkuxPZzvZAH5fKchvxNeJaZfvJIZZZGd2OWZjkk+pNddpV+FA+av6F4d8MMsyG1Wa9rWX2mtE/wC7Hp6u780Y1qc+rPrDwH8RNN8QWA0XxSIVlkXZ5sgAjm/3v7re/T6V5/8AHjwJf6LPHq1ipn0QAKMcmBif4vY9m+g+vmllqmFHzV3fhX4p6jo9o2mahHHq+kSKY5LS4OfkIwQrdh7HIrDiPgilmCc6KSmtv+A+3l+R9pwjxxiMkxMXWXNDr6f5+f33PM3jBrnPGN99gs2toTi4lX5iP4EP9T/L613vimHTvNu9U8NQ3lxpikMI3jJe3Y5+RyMggYPzZ5HvXkfiSR5ZpJJGLOxySfWvx2nllfC4t0cTFxcXs/62P6hw+Y4bNMueMwk1KDXT8n2a6nI33ep/DCJHrNkZlLebKqbc4+Vjgn8jUjWpeJ7l1/drwM/xGpvC0StrNve3O4W8Equ7Y7g5Ar9e4XyFYhLE4le50T6/8D8z8wzPFOjiYxg/eute3maPi7w2IpmezlyM52P/AEP+NfcP7JfjOfxf8I7KLUHZtT0dvsFyX6uFA8t/fKEDPqDXjXwJ0z4e634l1IeN5bF4xahrNLufy4nyTvOcjJAxgZ7k9q9A/Z70eDwJ4z8QrYa1pd54I12VW0e7hvlcLOrECBs8iQox+uz1ruznJsHQrTWFTi0k7bxd/wCV+W/32PBz3FxqylGa95df6/4B9BUtJS18wfNHw/8AtO+CJ/CfxGur+KBhpesO11byAfKHJzImfUMc49GFeVV+jfjPwvovi/QZtF16yW6tJeR2aNuzKeoYev8ASvmPxv8AsyeI7K4km8J6jbapak5SG4YQzKPTP3W+uR9K/aOF+NcJUw0MPjZ8k4q13s0ttej739T5bMMqqRqOdJXT/A8BRmQ5R2U+xxT/AD5v+e0n/fRruL74PfE2zOJfB2ovzjMIWX/0Emqn/CrfiN/0JWuf+Ajf4V9ss0wE1dVoP/t5f5nk/V6y+y/uZyXnzf8APaT/AL6NHnzf89pP++jXW/8ACrfiN/0JWuf+Ajf4Uf8ACrfiN/0JWuf+Ajf4VX9pYH/n7H/wJf5h7Ct/K/uZyDySOMPI7D3NNrt7X4SfEu5k2R+DNWU/9NIvLH5sQK7Hwr+zf4+1SVG1b7FolucbmmlEsmPZEzz9SK58Rn2WYaPNUrxXzTf3LUuGDr1HaMH9x5l4G8Naj4v8U2Ph/S4y091IAWxkRJ/E7ewGTX6GaLptro2h2ek2S7bayt0t4QeoVFCj9BXLfCn4Z+HPh3prw6VG097MALm+mA8yT2H91c9h+Oa7ZvukD0r8Z4v4ljnNeMKKtThtfq3u/wDL/gn1OWYB4WDcviZ+a+t/8hm+/wCviT/0I16n+yH/AMlntf8AryuP/Qax9W+D/wAS5dUu5Y/CF+yPO7KQU5BY4P3q9C/Zo+HXjbw18UrfVNd8O3djZLazIZpCuAxXgcGv1DPM0wVTKK8IVotuD0Ulfb1Pn8Jh6qxMG4u1+zPqyiiiv59PswooooASvhL9pj/kuPiT/rpD/wCiI6+7q+QPj18MvHmu/FrXdW0jwzeXljcSRGKZCu1wIkU4yfUEV974e4mjh8xqSrTUVyPVtL7Ue54+dU5ToRUVfX9GeYfCb/kqnhL/ALDdl/6PSv0NPSvif4b/AAo+ImnfEPw3qF94UvoLW11a1mnlYrhEWZWZjz0ABNfbBro8RMVQxOJoujNSSi9mn18iMkpzhTlzK2p+bXiP/kYdS/6+5f8A0M1QBI5Bx9K9J1z4QfEqfWr6aLwhfvHJcyMjApyCxIP3qp/8Kb+J3/Qnah+af/FV+qUs3y9U4p14bfzR/wAz52WGrXfuP7mcHvb+8fzo3t/eP513n/Cm/id/0J2ofmn/AMVR/wAKb+J3/Qnah+af/FVp/a+X/wDP+H/gUf8AMX1at/I/uZwe9v7x/Oje394/nXef8Kb+J3/Qnah+af8AxVH/AApv4nf9CdqH5p/8VR/a+X/8/wCH/gUf8w+rVv5H9zOE3t/eP519g/sVkn4Vahk5/wCJ1L/6Jgr55/4U38Tv+hO1D80/+Kr6d/ZU8Na74W+HV7p3iDTZtPupNVkmWKXGShiiAbgnjKn8q+N46zDCV8pcKVWMnzLRSTf4M9TKKNSGJvKLSs+hD+1//wAkan/6/oP5mviuvuf9pnQNZ8S/C6bTNC0+W/vDeQuIY8ZKgnJ5r5V/4U38Tv8AoTtQ/NP/AIqs+AcwwmHytwrVYxfM9G0nsu7HnFGpPEXjFvRdD6S/Y6/5I/8A9xKf+SV7LXl37MHh7WvDPwy/szXtPlsLz7dLJ5UmM7SFweCfQ16ka/MuI6kKma4icHdOTs1qj38DFxw8E+wVl+J9A0jxNos+j63YxXllOMNG46HsQeoI7EVqUV5FOpKnJTg7NbNHS0pKzPiL44fBjV/AU8mqacJdR8PM3yzhcvb5PCyAfkG6H2PFeT1+mNxDDcW8kFxEksMqlJI3UMrKRggg9QRXy/8AG79nm4iuX1v4f2xmhkbM2lhgGjJ7xknlf9k9O3HA/X+F+OoV0sNmLtLpLZP17Pz2fl1+ZzDKHD95QV12/wAjxX4c+Odf8B64uqaFdbN2BPbvkxTr/dYfyPUdq+1vhL8TPD/xE0nz9OkFvqESj7VYSN+8iPqP7y+jD8cHivj/AP4U38Tv+hO1D80/+Kq/oHwz+MOgatBq2j+G9Wsr23bdHLEyAj2+9yD0IPBr0OJMsybOYc6rwjVW0uaOvlLXVfivwMcDXxWFduRuPaz/AAPumiuL+FPiHxVrWjeV4x8MXWi6rAoDuQPJuP8AaXBO0+qn8PbtK/FMTh54arKlNptdmmvk1ofVU5qpFSQlLRRWBZ5j+1F/yRHXf+2P/o5K+GK+9/2g9G1TxB8J9X0rRrOS8vZvK8uFMbmxIpPX2Br5F/4U38Tv+hO1D80/+Kr9i8PsfhcPls41qsYvnejaXSPc+YzqjUnXTjFvTt5s93/Yi/5EfXP+wkP/AEWtfQNeMfsneFfEHhTwlq9p4i0ufTp5r4SRpLjLLsUZ4J717PX59xVVhVzevOnJNN7rVbI9rLouOGgpKzCkpaK+eO08O/bT/wCSU2P/AGGIv/RU1fHdfbn7U3hjXvFnw8tNN8O6dJqF2mpxzNEjKCEEcgJ+YgdWH518y/8AClPij/0J93/3+i/+Kr9q4FzLB4fKVCtVjF8z0ckn+LPlc3oVZ4m8Ytqy6H05+yd/yRHSv+u9x/6NavVq87/Zz0HV/DXwp0/SNcsXsr6KWdnhdgSA0jEcgkdCK9Fr8rz6pGpmeInB3TnKzWz1Z9Dg044eCfZBRRRXknSJRS0UAFFFFABXHfE/wgniXSxNahV1K2UmFv8AnoO6H+nofqa7GiubF4Wli6MqNVXizOrSjVg4S2Z8lzNLbzvBOjRyxsVdGGCpHUGmG4969x+LPw+XxBC2raQix6rGvzp0FyB2Po3ofwPt8/TCeK5a1lieOdX2NGwwwbOMEetfkWa5LVy6tyT1j0ff/g9z47GYWeFnyy26MtX9z5dljPzTNtH+6Ov9BWJrvhnS/E1iIb1Nkyj91cJ99D/Ue1M1K+WbU2jjbMcH7tSO+Op/PNaOn3GMc1/R3A+SyybJ6UbWnP35d7vZfJWXrc8ScpKXOnZninibw1rHhO82XsRktmP7q5jGUf8AwPsaXT9SwB81fQLfZb20e1vIY54JBh45FDKR9K8y8ZfC4oz3vhabjqbOVun+4x/kfzr7+hj41Pdq6Pv0/wCAdlHHRqe7V0ffp/wDFttVwB81Ttq3H3q4i6e+0+5a2vbeWCZPvJIpBFNOouR3rt+rJ6o7Pq6eqPpb9nm7E+maw2c4uIh/461d5rPg3whrgJ1XQLGd26uE8tz/AMCXB/WvJP2X7pn0HW3b/n7iH/jjV7Klzx1r89zzCxnjJqSvt+SPBrYvEYLFylh6jg+8W09vI4Txr8J/Ccvh6ZNF0rybqFd8K+fIwYDqmCx6+vrivANZhit0MUMSxIvAVRjFfW8tzx1r5++OWgf2dqp1S2TFpeklsDhJO4/Hr+denlOMlGjLDT26eVunofYcLZ/WxNSWGxdRyk9U5Nt+au/vXzPJzqbWuYZiWgP5ofUf4V337NWj2nin4u2vhnU/On0jULedp445WUZWJmRxj+JWAwf8SK8v1fvX0T/wT48MXl14u1vxbNGwsbG2+xwMRw00hBbB9lXn/eFcFfOKuFhOnfpo+qfSx9pVrc9J0qmq/rQ9sa5+IPwkOLv7V418Gp0mHN/Yp/tf31Hr+qjivTfBni3w/wCMNJXU/D+pRXkBxvVTh4z/AHXU8qfrW2emDXl3jT4SpJq7eKPAGpnwt4iHLNEMW1z6iRBxz6gH3BPNeOsRhMx0xP7up/Ol7r/xRW3+KPzT3PF5KtD+H70e3Vej/R/eepUV47/Y/wC0V/0Nngz/AL8P/wDGqP7G/aK/6Gzwb/34f/41U/2LD/oKpf8AgUv/AJEf1p/8+5fcv8z2KivHf7G/aK/6Gzwb/wB+H/8AjVH9jftE/wDQ2+Df/Ad//jVH9iw/6CqX/gUv/kQ+tP8A59y+5f5nsVFeO/2N+0T/ANDb4N/78P8A/GqP7G/aJ/6G3wb/AOA7/wDxqj+xYf8AQVS++X/yIfWn/wA+5fcv8z2KivHf7G/aJ/6G3wb/AOA7/wDxql/sb9oj/obfBv8A4Dv/APGqX9jQ/wCgql98v/kQ+tP/AJ9y+5f5nsNFeO/2N+0R/wBDb4O/8B3/APjVL/Y37RH/AEN3g7/wHf8A+NUf2ND/AKCqX3y/+RD60/8An3L7l/mew0V49/Y37RH/AEN3g7/wHf8A+NUf2N+0P/0N3g//AMBn/wDjVH9jQ/6CqX3y/wDkQ+tP/n3L7l/mew0V49/Y37Q//Q3+D/8AwGf/AONUf2N+0N/0N/g//wABn/8AjVH9jQ/6CqX3y/8AkQ+tP/n3L7l/mew0V49/Y37Q/wD0N/g//wABn/8AjVL/AGL+0N/0N/g//wABm/8AjVH9jQ/6CqX3y/8AkQ+tP/n3L7l/mewUV4//AGL+0N/0N/g//wABm/8AjVH9i/tC/wDQ4eEP/AVv/jVH9jQ/6CqX3y/+RD60/wDn3L7l/mewUV4//Yv7Qv8A0OHhD/wFb/41R/Yv7Qv/AEOHhD/wFb/41R/Y0P8AoKpffL/5EPrT/wCfcvuX+Z7BRXj/APYv7Qv/AEOHhD/wFb/41S/2L+0J/wBDj4Q/8BW/+NUf2ND/AKCqf3y/+RD60/8An3L7l/mev0V5B/Yv7Qn/AEOPhD/wFb/43R/Yv7Qf/Q4+Ef8AwEb/AON0f2ND/oKp/fL/AORD60/+fcvuX+Z6/RXkH9i/tB/9Dj4R/wDARv8A43S/2J+0H/0OXhH/AMBG/wDjdH9jw/6Cqf3y/wDkQ+tP/n3L8P8AM9eoryH+xP2g/wDocvCX/gI3/wAbo/sT9oL/AKHLwl/4Bt/8bo/sen/0FU/vl/8AIj+tP/n3L8P8z16ivIf7E/aB/wChy8Jf+Abf/G6X+xP2gcf8jn4S/wDANv8A43S/sen/ANBVP75f/Ih9af8Az7l+H+Z67RXkX9iftA/9Dn4T/wDANv8A43R/Yn7QGP8Akc/Cf/gG3/xuj+x6f/QVT++X/wAiH1l/8+5fh/meu0V5F/Yn7QH/AEOfhP8A8A2/+N0v9ifH/wD6HTwp/wCATf8AxFH9j0/+gqn98v8A5EPrL/59y/D/ADPXKK8j/sT4/wD/AEOnhT/wCb/4ij+xPj938aeFP/AJv/iKP7Hp/wDQVT++X/yIfWX/AM+5fh/meuUV5H/Yfx+/6Hbwr/4BH/4ij+wvj7/0O3hb/wAAT/8AEUf2RT/6Cqf3y/8AkQ+sv/n3L8P8z1yivIv7B+Pv/Q7+Fv8AwBP/AMRS/wBg/Hz/AKHjwuP+3E//ABFH9kU/+gqn98v/AJEPrMv+fcvw/wAz1yivIv7A+Pv/AEPPhj/wBP8A8RS/2B8fMf8AI9eGf/AE/wDxFH9kU/8AoKp/fL/5APrMv+fcvw/zPXKK8i/4R/4+f9D34a/8AT/8RR/wj3x7x/yPnhof9uH/ANhR/ZFL/oKp/fL/AOQD6zL/AJ9y/D/M9doryL/hHvj3/wBD74b/APAD/wCwo/4R349f9D74c/8AAD/7Cj+yKX/QVT++X/yAvrMv+fcvw/zPXaK8i/4R348/9D94d/8AAD/7Cj/hHPjyf+Z/8PD6af8A/YUf2RS/6Cqf3z/+QH9Zl/z7l+H+Z67RXkX/AAjfx5/6KB4e/wDBf/8AYUf8I38eD1+IPh8f9w//AOwo/sil/wBBVP75/wDyAfWZf8+5fh/meu0V5F/wjXx3/wCihaB/4Lh/8RR/wjXx3P8AzUPQR/3Dh/8AE0f2RS/6Cqf3z/8AkA+sy/59y/D/ADPXaK8i/wCEZ+O//RRNC/8ABcP/AImj/hGfjt/0UXQh/wBw0f8AxNH9kUf+gqn/AOT/APyAfWZf8+5fh/meu0V5F/wjHx1/6KLof/gtH/xNH/CMfHU9fiNon4aaP/iaP7Io/wDQVT/8n/8AkA+sy/59y/D/ADPXaK5n4e6f4w07TbiLxlrtprF2026GW3txEEj2j5SABk5yfxoryq9JUqjgpKSXVXs/S6T/AAOiEnKN2rHS0tFFZFCVwfxM+Hln4mgm1HT1S11xImEMucJI20hd/HY45613tJWVWhSrJRqxUlvZmVahCvBwqK6Z8Hanp2qeH9Wm0vWbSW0vITh45B+oPcHsRwau2d3jHNfX3xA8D6D420z7Jq9tiZAfIuo+JYT7HuPY8Gvl74i/DfxJ4Fnaa4iN7pe793fQqdoHYOP4D9ePQmv0zLc6oY9KEvdn27+n+W58hmGU1KHvR1j/AFuQW97wOatC+461yEN7x96rAvuPvV6joHiOiaevWumavB5Wo2kVwB90sPmX6EcivOde8BxKzSaVd4HaKb+jD/CuvlvuPvVd8M6XNr18VLNFZxYNxN6Dso9WPb8+1bQqyw0XK9kjanUlQV72Rb/Z+sb3R/DmqLewNF5t4pRsgqwVOcH8RXpy3PvUukG3toIre2iWGCJdqIvYf1PvWssOnyp+8tYifULg/mK+VxmL9rWlUlHc8TE1lXquptcwnufesHxdYQa9odzps+MSL8jf3GHQ1197Y6bywhK/RyB/OsjQfDWo+PdUlsNE36fotu/l3+sFcknvFbg8M/q/Rfc8DH6zTpR9o9LHXlWExFfEx+r6STvfovN/1qfO3w8+Efij4ieL59D0+H7NbWUuzUL6RcxWwz0/2nPZR19hk198fDjwbovgLwhZeGdBhMdrbLy7Y3zOfvSOe7E/4dBV7wp4d0bwtocOjaFYx2dnDkhF5LMerMx5Zj1LHk1q18zjMW8TNytZH63KTluJS0lLXISQW15aXSO9tdQToh2u0cgYKfQ46UWt3a3cLTWtzDPGpKl43DAEdRkV8geF/Eb/APCKan4BtJ2srrX/ABGY5ruQ+XFHb/KGG8/xHGMeh9xXpnxq0238N6N4S+GvhYNpOn6/qPlXbxMdzrmNTkk853gn1219fiOFvY4mOHlUs5t20+zFXcnr62XW26PKp5nz03UUdFvr1bske12etaPeXRtbTVrC4uF6xRXCM4/AHNTXt/ZWQU3l5b2wfO0zShN30ya8Z+Jnwe8H6H8PL/V/DtrPpmq6Rbm7gvI7h/MYxjcc5PUgHkYwelcT8VLq98f+B/hc902b7U5ZbeR8Y3SZRN34kZ/GssHkOFxsoTo1X7NtxbcUmmouV7JtNNLvoVVx1WipKcVzJJqz0etux9PXF3a29sLme6higOMSPIFU56cnio31PTktEu31C1W2c7UmMyhGPPAbOD0P5V8veKfEM3i74OeBvC0crfaSJzeD+JUs42Az9V5/CmeI0V/2T/BaMMq2ssCPbzLmumHCVlTVWpaUqjha3T3ve36uL0M3ml+bljoo3/LT8T6d/t7Q/wDoM6d/4FJ/jVm6v7G0jSS7vLeBJPuNLKqhvoSea+e/2gfhn4K8MfDGTWNE0VbS9E8KCQTSNwx54ZiK0v2hrWC90P4b2VynmQXGoQRSrnG5WVAR+Rrlo5HhcS6Lo1Zcs3NO8UmuWKeyk73v3NJ42rT51OKvFJ793bse2wazpE8qwwapYyyucKiXCMxPsAaJ9Y0i3maG41SxilQ4ZHuFVh9QTXgvirwZ4c8HfHb4fweHdOFlHczO8oEjPuI4H3ifWuZ10+ER8c/Gn/CW+G9T12HzV8iOxjdmjbAyTtYcYrehw5h8RadKpJxcOf4VzfHy2tzW89yJ5hUp6Sir3tu7bX7fofUdvqem3KSPb6haTJEN0jRzKwQepIPHQ09b2zez+2LdQNbYJ84SApgHH3uleMeGYfBf/CtfG914R8L6poROmyR3AvkdTLiNyu0Mx4GT+deffD3ULbxtpPgP4ZSu9vp1s895qglbyxd4ldkjj5y/U5x7/wB2sqfDcaiqTUpKNNpSuldLlcm7KT10slfW62KlmDi4ppNyWln1vbsfVP2yz+x/bftUH2Xbu87zBsx67umKj03U9N1JGfTtQtLxUOGaCZZAD74NeH+NtJs/EXxm8P8AwvYPa+FtN0/7U9lC5RZSAxAJ64+6Pb5sda7DTvhBouheOdO8S+FLyfQ47dSt1ZxZkjulPY7m4GPr2PUVxVcswdClF1arU5x5orlura8qbTvd26JpG0MTVnJ8sU0nZ6/fbyR6LFd2s1xJbxXMMk0X+sjVwWT6jqKRbu1a7e0W5ha4QbmiDjeo9SvUdRXzvo/jOy8G/Hrx5cXum6pfLcvGirY2/mlSMHLDIwKn+Hfii21r9oPxX4ltrO8tof7E8wQ3UXlyjy0hByvbO3j2rrqcMVoRnUu+RU1NO27fL7u/m9fIyjmUW1Hq5NfdfX8D3vUtW0vTdg1HUrOzL/dE86x7vpkjNWYpoZYVnilR4mG5XVgVI9c+lfP/AMEvA+jfEfSNQ8c+OIn1jUL+8kRFkmYJCi44AUjuSB6ADFWPAMcngn4t+Kfh5Y3M8uhS6Y97awyOW8h9qnAJ7YZh74Wor5FQjKrQp1W6tJXkuW0dGlKzvfS/VK5UMbNqM5RtGW2uvlf1Pav7e0P/AKDOnf8AgUn+NXbW5truETWtxFPETgPG4ZT+Ir48+FrfDoeGCPE/gjXtZ1D7S/8ApNnFI0ezjC5VwMjnt3r6f+FUGhQ+CLI+HNKutK06UvJHa3IYSISxzkMSRkjPWlnmRU8sTScm07XcUov0ak3+AYLGyxO9tr7u/wCR0lzcQW0Dz3M0cMSDLPIwVVHuTUOnalp+pRNLp1/a3kanDNBKsgB+oJrxbx1bL4//AGgrbwPq80x0HS7D7ZLapIVE8hAOTj/fUfQHHWur0X4R6R4d8e2niXwtez6PbpEY7qwjy8dz9Sx4/XkA1z1MswtChF16rVSUedLlvGz2Td73fpZdTSOIqzm+SN4p231838vU9Dgu7WeaWGG5hkliOJERwWQ+4HSiO7tZLqS1juYXuIxl4lkBdR7jqOtfOfhLxvY+DPjH8Q3vdM1W+F1fAKLG380rtZ87uRjr/OtX4K63B4i/aD8YazbW13bRXGnIViuY9ki4MQ5Xt0rrxHDNWjCpVbfJGEZJ23b5dN+l39xlTzGM3GPVtq3a19fwPdrm9s7aWKK4uoIZJTiNZJApc+gB60+eaK3haaeVIokGWd2CqPqTXy/8WrfUviF418WaxpNy6W3g21RbUofvyq+6THvxIeP7q16V408SReLf2ZtQ1+MruudNBmUdFlDBXH4MDUVeHnTjh256zcYyVvgcrNet07+qsOOP5nUVvhTa87aP8T0j+3tD/wCgzp3/AIFJ/jVldQsGmihW9tmkmXfEglXc6+qjPI9xXyn4Su/grB4V01vEfg/W5LwQILq7WKXymfuwIcDH0Fep/Ebwz4S8Q/Ce38TeGJra2l0mySTR9Q84p5SRNkRlmPHcc8hq2xfD9HDV4UpucVKXLzOCtfptJ/52IpY6dSDklFtK9k9fyPXBd2puzaC5h+0Bd3k7xvx67euKjfUdPSSaN762V4F3SqZVBjHqwzwPrXyefirEvxGn8bpaXIu38OC3VPK4FzgLu/657uc/hXfr4Q0zQf2c9b1kGK71nVNKaa+v0l8zzi7Bsbs4IHA47irxPC7wns1iJtObjFK32n8XXaPfq2KnmXtebkV7Xe/Rbfee0/29of8A0GdO/wDApP8AGrLX9ivkZvbYfaP9RmVf3v8Au889R0r5T8Ft8Kv+EV03+2Ph54kv9Q8gfaLmCCUxyv3ZSHAx+Fdf8b7rTfD+tfCq8s7C6TTrF/MitUQtKsa+SQgBOS2OMZ61VXhiCxUcNFzu+bVxST5U3paT3t1tuKOYt0nUaWltm+r9D6Auru1tdn2m5hg8xtqeZIF3H0GepoF1bG7NoLiH7QF3GLeN+PXb1xXzZ8YPiDp3jLU/B9rZaTrNi1vrMUjNfWvlKwLKMA5OTXTa5rVh4d/aV1jW9TlEdrZ+GPMkPc/MmAPcnAHua51wzWVKLndTcZS5bdYtJLfrc0/tGLk7bJpX9V+h7Y15aLdrZtdQi5cblhMg3kc8hevY/lVeXW9GikaKXVrBHQkMrXKAgjsRmvmb4ZXWvax+0T4e8Va8hibW4bq5tYif9XAIZUQfTC8evXvWZpp8Ej4h+N/+Eu8Kavrrf2vL9nNjG7CIeY+7dtYdePyrt/1SjCo4SqOTUIyfKk9XJxaV2lo1vcx/tRuKko2u2tX5Xvt1PrOzvrK9Vms7u3uQpwxhkD4Pvikvb+xsdn229t7bfnb50qpux1xk89a4f4Hw+ExoN7c+EvDuo6HBJc7Jor1XV3ZVBDAMx4w2Pzrjv2ldPtNV8c/DjTb+LzrW5v5opkyRuVmgBGRzXjYfKqdbMXhHJxir6tK+kXLa9unc7KmJlDD+1sm9Oumrt2/Q9iTXNFdwiaxp7MxwoFyhJP51JdarpdpMYbrUbOCUDJSWdVbH0Jr57+NngDwn4P1Lwbc+HdKFlLca1GkrCV33KCpA+YnvVb4pt4LX9o26Pjxd2kf2XHxiQ/vNo2/c59a9LD8PYbFKE6NSbjKM5W5Vze60rJKWt79zmqY+pTupxSaaW+mqvvY+k7a6trqHzra4inj/AL8bhh+Yqn/b2h/9BrTv/ApP8a8E+Biae3xa8QzeBI75PB32Ah/O37DLhcY3c5zuxnnGa4H4UN8Ox4Yb/hKPBOu61ffaGxcWcUjRhMDC5VwMjnt3raPCsOaonOT5VB2UVze+m7STkkmra6sl5m7R0Wt+umltnbW59hJqFi9o14l7bNbL96YSqUH/AALOKrf29of/AEGdO/8AApP8a8p8VL4ftP2Y9Ym8OaTdaRp1xC5S1ugwlVjMEOQxJGSM9emK88+I3gDwvo/7PujeJbTShDrFxHaNLP5rkt5i5bgnHP0rlwOQ4bESSqVJRvUdNe6t0lq/e036XNK2OqQV4xTtHmev5aH1Dd6lp9ns+139rb7xlPNmVdw9Rk81DFrejSyJFFq1g8jkKqrcoSSegAzXh3xk0ux1v4j/AAw0rU4PPs7mExzR7iNynZxkc1T+KfgXwt4O+IHw7fw7pYsmutbiExErvuCyxY+8T6mjDZFhakaUZ1ZKdSMpK0Vb3ebd819eXsFTG1IuTUVaLS311t5eZ9AXOraVazNBc6nZwSrjKSTqrDvyCanguraeD7RBcRSw4P7xHBXj3HFfM3jxvAi/tH+Ij8QF3ab9ig8oYkP73yosf6vnpuq78FUtj4r8dTeDo76PwWdPcQ+fu2mXYMY3c5+/15xjNaVOGYxwir88l7kZXcbRfNb3VK++u1iY5i3V5LLdrfXTra2x9GW1zb3UAntriKaI5w8bhl468jiktLu1u4jLaXMNxGG2lonDAH0yK+YfC/im+tfgToPgnw4S/iHxDczwRhDzDCZWDufTPIz6Bj2qx8M9L1+8/Zn8V6X4f8x9R/tWRNkJw8iBYd6r7lQeO/TvTrcK+xjOVSrypVFBXXTmced66K6f3MI5nztKMb+7f52vY+jZNb0WNij6vp6MOCGuUBH60+XV9KhSN5tTso1lXdGzTqA49RzyK+SNSm+D8Xw8uLGHQtVg8Ww2YR2nSX5LkABi3zbQM57fhXr/AIR8CeFvFfwZ8N3+vaWLu4tNHKwOZXXaPmPRSO9LG8PYfBU41aspqLly6wSe10172q+YUcfUrScYpN2vu/ueh6tDrWjzSrFDq1hJI5wqJcISx9AAeas291a3JkW3uYZjE22QRuG2N6HHQ14H+y74E8Lan4OsvFN7pYl1e21B2huPNcbShUrwDjj6Vk+F/Gi+CtG+I91bgSard+I5rbToQMl5WZ+cdwvX8h3qK3DsJV62Hws3KVNpapK7crd3ot7lQzCShCdRJKV3v5X7H0fHfWUjTrHeW7tB/rgsgJj/AN7njoevpXL6t4h8UR380Gj+HoNTs5ihs9RjvIxboOkhmy24beT8oOeO9eJfBDT9S0q2+Kthq7l9Qj0zNyS2T5jRzM2T3OTzUem+Jb9vgh4X+Hnhpi+ua8JkkKn/AFFt5r72PpkAj/dDe1dS4ajRryhCSmk4q7TStKHO5aNaJL5oy/tFzgm1y3Tem907W26n05Z3Vtdw+ba3ENxHnG+Jwy59MiivJv2SBt+E5U9RqM4/RaK+YzPBrBYuph078rav3PSw1X21KNS1ro9fooorhNgopKKAFpk0cc0TxSxrJG4KsrDIYHsR3p1KaAPGfiJ8BdD1kyX3hiVdFvWyTDjdbOf93qn4ce1fPvjbwP4w8HSsNa0edbcHi6hHmQt/wIdPocGvuekkRHRkdVdWGCrDIIr6HAcSYrDWjU9+Pnv9/wDnc8vE5TQrO8fdfl/kfn94dsrvXtSFpbHaoG+aVvuxJ3Y/0Hc4Feo2cdvYWsVlZIUtougP3nPd29Sf/rdq+h7/AOHng+6Wby9FtrJ52DyPZqIS7AYBIXg9T1Hc+pry7x94T03QXkFnNdOFYAea6nt7KK92Ocwx8rRi0l0Pi88y+vh3q1y/M5+zu8Ac1ojUEjjLu4VVGSScACsTSoFuL6KB2ZVdgCVPNe2+FfAHhuK0t7y4tXvpTiQC5bcqn/dAAP4g1y42pTw65pp/I83K8tlj6qgnZdTj/BfhC98W7L7VBNZ6CeUj5SW9H81j9+rdsDr7JaW1vZ2sVrawRwQRKEjjjUKqqOgAHQVIAAMAYAor5fF42eJfaK2X9bvz/Q/UMHg6ODpKlRVl+L835i0UlBrjOoWiiigDwPRPhDrNx8K/FHh/WbWCHUrnVHv9MYSq2GCjbyOmcFT9a2de8AeLPF/ww0KHVZItN8Y6DIHtbgyh0kK4wSy5xkBTn+8voa9jor358SY2c1U0upcy02drNLXZrdHCsuoqPLra1vxv966Hh3iG0+N3jPQ28KanpGi6Na3AEd9qKXG4yIDztUMSM45GOenFa/ij4cX8V38NrPw/Cs2n+Gr1XupJJFVtgaMlsHqTtY4FetUVH9v14uKpQjCKu7JOzck4tvVu9nprZdh/UYO/M227avydzwLw18Idc0z4geLtVeCL+zp7S9TRx5yn558gDGflwCRk07Vvhn4tuPgJ4Z8JRWUB1bT9SNxcRm4QKqb5jkNnB4dfzr3uit5cUY6c4zlZuLi1o/sppdevM2/MhZbRScVfW/4tP9Dz348+F9Y8W/DaTRNEgSa9aeFwjyBBhTzyeK57x14Q8a+J/FXhGw/s6xg0HRJ7e5kvDcAyOyqm9dufVSBxXsdFceEzqvhacYQiny8zV09HJJN79loa1cHCrJtt62/A81+IXhHXNZ+LPgvxDYW8b6fpTObtzKqlckYwDyfwrmG8PfFDw58VfFHiXwz4f0vULXVnUIbq7VflUDnAYEHOete40VdDPa1GmqThGUVHks09Vzc2tmtbingoTlzXad76d7W7djza3PxL8Q+GPEeleKPD2k6e1xp0kVkbW53mSVlIw2WOByOa4y++FHiVvhB4WgsoYbbxh4fuXlhImXBVpmYrvzjurdexHevfKKqjn1fDv9zCMVzKVkna6TjbVvRpu6FPAwmvfbelvxv28jyPxz4O8YXmt6B8RPDcVnb+KbK1EN7YTyAxTAg7lDA4/iYdRwRyCKNA0j4o+JfHum694reLw5pWmAlbCwuyTdMez4JBXIGc9hjHJNeuUVKzysqXs3CLaTipW1jF30Wvm7XTa7j+pQ5ua73u1fRvuea+AfCOt6R8XvGXiO+t4007VfL+yuJVYtjrlRyPxpmk+DdZi+PniDxXdWsR0W/01LaN/NUlmCRAgr1H3Wr02ispZxiJTnOyvKCg/RW89/dX+RSwkEkuzv8APX/M8O0Hwz8T/hjdahpng/TtN8Q+H7qdp7aO4n8uS3Y4GDkjsADjIOM8ZNbXw38BeI7fW9e8beMZ7aTxDq1s1vHb25zHbxkD5c+vyqPYDqcmvV6K3r5/iK0ZJxipTSUpJe9JK2+ttbK9kr9SIYGnBrV2Wy6I8B+Guk/GnwJ4cOhad4T0O6g895vMnvhuy2OOHA7V7D4HuvE93onm+LdNs9O1LzWHk2sm9NnG05yeetbtFY5jmzx7lKdKCk3dtJ3/ABbX4F4fCqhZKTaXR2/yPLPiX4K8Sp47sfiF4Fa0k1e3h+z3VncttS5j5HX1wcdR0B7cw+F9H+J3iD4gWfiXxdJH4f0zT4ysWmWN0WFwx/56YJBGcHn0Ax1Nes0VUc7rKgqTjFtR5VJr3lF9Frb0drroxPBw5+a7te9r6XPNfhj4R1zQviV441vUbeOOy1e5SSzdZVYuoZycgcj7w61n2vhTxdpfxV8b+LbCxhkTUNM8rTCZ0G+YLGF3AngZU9fSvWqKTzqu6s6jSfPFRas7Wjy26/3Vf5h9TgoqKb0bfzd/8zwzwJ8ANEbw3DL4yW9fW52d7ryL0hQSxwOOCcYyfU1Ho3w48YaR4B8deCIbaOfTryQyaLI1ymWBYZVufl+UKee+a93orqnxPmFSUnUlzJtSSd7Jp3XLrp29DNZbQikoq2jXrdW1PB7DT/jbb+Ao/BkXhbw6lqLL7F9oluwzbCu0sRuxnB9Pwpmr/CzxePh/4X+HljJE+mLcm51u8WYKOXzsRTyQMk9OSFNe90U/9ZcRGSlTpwj73NonrKzSbu3qrtrpcX9nU2rSk3pbfp22PJB8Np2+L89++m2//CKyaB/ZgUSL02hdu3r0HWsjw34D8c6Z8L/F/gK4t4rm2kDjRZ/tCfOGblSM/KDgNz3Jr3Kg9KyXEOL5VGSTS5LXvvB3T336Pui/qFK7av1/HdHiXhA/G/w14Z0/QbXwd4fmhsYRCkkl8NzAdzh8Vp+NPC/jDxN4h+HeuXOnWsM+lXPn6rHHOu2ElozhcnLcKema9aopSz2ftvbwpQjL3rtJ68yad7yff7wWCjycjk2tO3TXsea/HHwjrfiqXws2jW8cw07VUubnfKqbYxjJGevToK5b4lfCbWfGfxpt9WnVI/DjQQpdyCYB3CZJTbnPJAGe3XtXudFLB5/i8HGMaNlyqUU7a+87t77prQdXA0qzbl1af3Hm2seDtVk+OHhbxJY2cKaJpenS20hV1XyyUlVVC9cfMvSuQ0DQPiz4P8X+Kr/QPDekX1rrOovcK1zeKpC73K4AYYyG717xRRSz2vCHs5QjKPKo2aeqUnJbNa3YSwUG+ZNp3vp5q3Y5X4f33jm9juz410XTdMZCv2YWc/mbxzuz8xxjiuf+LfhHW/EPjbwNqml28ctrpF8814zSqpRS0RBAPX7jdK9KorkpZjOhivrNKCi7NWV7apxfW+z77mksOp0/Zybf56O55r8cfCOt+KpvCzaNbxzDTtVW5ud8qptjBGSM9enQVEfBWqTftAXHi26sbebRH0wW6u7Kx8wAfwHnsea9PoralnOIpUFRjayjKPnaTTfXfTQmWEpynzve6f3EJgjjtHgt4kjUqQFRQo5FeCfDHRvjR4C8ONomn+FNDuoWnaffPfDdlgBjhwMcV9A0VGCzSeFpTpOEZxm02pX3V7bNd2OthlVlGV2mr7efyPnb4x6n8SPEOjaL4E1HRNMstU1y4lYxW9xkMkIVlG4sQM8k/wC6Ki+JumfFvWPhq+ian4U0Sx0rToVmaS3vAzrHCh7FzngelfQs9hY3F5Bez2VtLc2+fImeJWeLPXaxGRn2qaeGKeCSCeNJYpFKOjqCrKeCCD1Br1qPEqoKiqdCC5G5dfib3XvdrLW+xyzy5zc3Kb106beene54jY6V4i8daj8LvG8Flbra2MLPe7ZQoj+YAYBOTwtdP8YPCOt+I/FfgjUNKt45bfSdUW5vGaVVKIHjOQD14U8CvRLK1trK1jtbO3htreMYSKJAiKPQAcCpu9cM87qrEQq0opKCkoryk5b69OZm6wcfZuMnva/qrf5HmGmeCdTHx813xZf2FtLo13YRwwO7K5LhYgfl6j7rc16Dqlp5mh3llaRIhkt5I40UBRkqQPp1q9RXDicfVxEoSn9hRivSKsvn3NqdCNNNLq2/vPE/2dPhNqHg+4utd8URRf2rgwWcSyCQQRHlmBHGWJx7DPrTPCnhP4ieFfhJrmiaTp8K67qOqSvC4u0AhhdEBk3Z+98pAHUE57V7fRXpVuI8XiK06tZRlzOLaadvdvZJX211XU54ZfShBRi2rX9ddzyiy+F76H8EdW8L6ZHFc67qVoxuZmYDzp27bj/COgz9e5rqvh/oeo6P8K9N0C+iRL+DTzBIiuGAfB4yOO9dbRXHiM2xOIhKFV3vLnb63tb7rdDWnhadNpx6K3yPPf2ffC2s+D/h6mj67BHBeC7llKpIHG1sY5HHauK+HPwf1S2+LWreK/E8MQso7+e602EShxI7yMQ5A6YGDg85x6V7vRW6z7FxniKkbJ1vit+munbqR9RpNQi9obf8E8n0XwT4htfEnxOvZraIQ+IICmnkTKTIdkg5Gfl5Ydaofs9/Cm+8HWt9q3iKKM61Oht7dBIJBBD1OCOMsfyA9zXs9FOpn+LnRqUdEp8qdu0Uklv1S17+gRwNJTjPqr2+buee/s/+FtY8IeAm0nXII4bs3ss21JA42ttwcjjsaK9CorzcZi54yvOvU3k7u2x0UaSpQUI7I//Z" alt="Спектр"></div>
+      <div class="sidebar-logo-text">Спектр</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-section="dashboard" onclick="showSection('dashboard')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Дашборд
+      </a>
+      <a class="nav-item" data-section="catalog" onclick="showSection('catalog')">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Каталог
+      </a>
+      <a class="nav-item" data-section="categories" onclick="showSection('categories')">
+        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        Категории
+      </a>
+      <a class="nav-item" data-section="orders" onclick="showSection('orders')">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        Заказы
+      </a>
+      <a class="nav-item" data-section="clients" onclick="showSection('clients')">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Клиенты
+      </a>
+      <a class="nav-item" data-section="content" onclick="showSection('content')">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Контент
+      </a>
+      <a class="nav-item" data-section="seo" onclick="showSection('seo')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        SEO
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="header">
+      <button class="header-burger" id="burgerBtn" onclick="toggleSidebar()">&#9776;</button>
+      <div class="header-user">
+        <span class="header-user-name">Александр С.</span>
+        <div class="header-avatar">АС</div>
+        <button class="header-logout" title="Выйти">
+          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- ===== DASHBOARD ===== -->
+      <div class="section active" id="section-dashboard">
+        <h2>Дашборд</h2>
+        <p style="margin-bottom:24px">Обзор ключевых показателей за март 2026</p>
+        <div class="metrics-grid" id="dashboardMetricsGrid"></div>
+        <div class="chart-card">
+          <div class="chart-title">Продажи за март 2026</div>
+          <svg id="salesChart" viewBox="0 0 700 200" style="width:100%;height:auto;display:block"></svg>
+        </div>
+        <div class="table-card">
+          <div class="table-card-title" style="margin-bottom:12px">Последние заказы</div>
+          <table class="admin-table">
+            <thead><tr><th>№</th><th>Дата</th><th>Клиент</th><th>Сумма</th><th>Статус</th></tr></thead>
+            <tbody id="recentOrdersBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CATALOG ===== -->
+      <div class="section" id="section-catalog">
+        <h2>Каталог</h2>
+        <p style="margin-bottom:20px">Управление товарами</p>
+        <div class="toolbar">
+          <input type="text" id="catalogSearch" placeholder="Поиск по названию..." oninput="renderCatalog()">
+          <select id="catalogCategory" onchange="renderCatalog()">
+            <option value="">Все категории</option>
+            <option value="Шуруповёрты">Шуруповёрты</option>
+            <option value="Перфораторы">Перфораторы</option>
+            <option value="УШМ угловые">УШМ угловые</option>
+          </select>
+          <button class="btn btn-accent" onclick="openProductModal(null)">+ Добавить товар</button>
+        </div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr>
+              <th>Фото</th>
+              <th class="sortable" onclick="showToast()">Название ▼</th>
+              <th class="sortable" onclick="showToast()">Артикул ▼</th>
+              <th>Категория</th>
+              <th class="sortable" onclick="showToast()">Цена ▼</th>
+              <th>Наличие</th>
+            </tr></thead>
+            <tbody id="catalogBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CATEGORIES ===== -->
+      <div class="section" id="section-categories">
+        <h2>Категории</h2>
+        <p style="margin-bottom:20px">Дерево категорий каталога</p>
+        <div class="tree-card" id="categoriesTree"></div>
+      </div>
+
+      <!-- ===== ORDERS ===== -->
+      <div class="section" id="section-orders">
+        <h2>Заказы</h2>
+        <p style="margin-bottom:20px">Все заказы магазина</p>
+        <div class="toolbar">
+          <input type="text" id="ordersSearch" placeholder="Поиск по номеру или клиенту..." oninput="renderOrders()">
+        </div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr><th>№</th><th>Дата</th><th>Клиент</th><th>Сумма</th><th>Статус</th></tr></thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CLIENTS ===== -->
+      <div class="section" id="section-clients">
+        <h2>Клиенты</h2>
+        <p style="margin-bottom:20px">База клиентов</p>
+        <div class="toolbar">
+          <input type="text" id="clientsSearch" placeholder="Поиск по имени или компании..." oninput="renderClients()">
+        </div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr><th>Клиент</th><th>Телефон</th><th>Email</th><th>Заказов</th><th>Сумма покупок</th></tr></thead>
+            <tbody id="clientsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CONTENT ===== -->
+      <div class="section" id="section-content">
+        <h2>Контент</h2>
+        <p style="margin-bottom:20px">Баннеры, акции и страницы сайта</p>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('banners',this)">Баннеры</button>
+          <button class="tab-btn" onclick="switchTab('promotions',this)">Акции</button>
+          <button class="tab-btn" onclick="switchTab('pages',this)">Страницы</button>
+        </div>
+        <div class="tab-content active" id="tab-banners"></div>
+        <div class="tab-content" id="tab-promotions"></div>
+        <div class="tab-content" id="tab-pages"></div>
+      </div>
+
+      <!-- ===== SEO ===== -->
+      <div class="section" id="section-seo">
+        <h2>SEO</h2>
+        <p style="margin-bottom:24px">Поисковая оптимизация страниц</p>
+        <div class="seo-metrics" id="seoMetrics"></div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr><th>URL</th><th>Title</th><th>Description</th><th>Индексация</th></tr></thead>
+            <tbody id="seoBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA LAYER =====
+
+const products = [
+  // Шуруповёрты (9)
+  { id:'p1', name:'Отвертка аккумуляторная бесщеточная DCK KDPL04–5 (TYPE E)', article:'KDPL04-5', category:'Шуруповёрты', categoryId:'shurupoverty', price:'3 800 ₽', priceNum:3800, availability:'В наличии', power:'4В', weight:'0.5 кг', voltage:'4В', description:'Компактная аккумуляторная отвёртка с бесщёточным двигателем для бытовых задач.' },
+  { id:'p2', name:'Дрель-шуруповерт DCK KDJZ23–10, 12В, 35Нм, 2×2А/ч', article:'KDJZ23-10', category:'Шуруповёрты', categoryId:'shurupoverty', price:'9 590 ₽', priceNum:9590, availability:'В наличии', power:'320Вт', weight:'1.2 кг', voltage:'12В', description:'Универсальная дрель-шуруповёрт 12В с двумя аккумуляторами 2А/ч.' },
+  { id:'p3', name:'Дрель-шуруповерт DCK KDJZ23–10, 12В, 35Нм, без АКБ', article:'KDJZ23-10Z', category:'Шуруповёрты', categoryId:'shurupoverty', price:'5 990 ₽', priceNum:5990, availability:'В наличии', power:'320Вт', weight:'0.9 кг', voltage:'12В', description:'Дрель-шуруповёрт 12В — версия без аккумуляторов для тех, у кого уже есть батареи DCK.' },
+  { id:'p4', name:'Дрель-шуруповерт ударная DCK KDJZ23–10i, 10.8В, 35Нм, 2×2А/ч', article:'KDJZ23-10i', category:'Шуруповёрты', categoryId:'shurupoverty', price:'9 990 ₽', priceNum:9990, availability:'В наличии', power:'350Вт', weight:'1.3 кг', voltage:'10.8В', description:'Ударная дрель-шуруповёрт 10.8В с функцией удара для работы с кирпичом.' },
+  { id:'p5', name:'Дрель-шуруповерт DCK KDPL04–8 Impact, HEX, 10.8В, 2×2А/ч, 140Нм', article:'KDPL04-8', category:'Шуруповёрты', categoryId:'shurupoverty', price:'11 590 ₽', priceNum:11590, availability:'В наличии', power:'400Вт', weight:'1.1 кг', voltage:'10.8В', description:'Импульсный шуруповёрт с HEX-патроном, 140 Нм крутящего момента.' },
+  { id:'p6', name:'Дрель-шуруповерт DCK KDPL04–8 Impact, HEX, 10.8В, без АКБ', article:'KDPL04-8Z', category:'Шуруповёрты', categoryId:'shurupoverty', price:'6 590 ₽', priceNum:6590, availability:'Под заказ', power:'400Вт', weight:'0.8 кг', voltage:'10.8В', description:'Версия без аккумуляторов импульсного шуруповёрта KDPL04-8.' },
+  { id:'p7', name:'Дрель-шуруповерт DCK KDPL208, 2×4А/ч, HEX-impact, 208Нм', article:'KDPL208', category:'Шуруповёрты', categoryId:'shurupoverty', price:'17 990 ₽', priceNum:17990, availability:'В наличии', power:'500Вт', weight:'1.5 кг', voltage:'18В', description:'Мощный импульсный шуруповёрт 18В с 208 Нм и двумя батареями 4А/ч.' },
+  { id:'p8', name:'Дрель-шуруповерт DCK KDPL208, 18В, без АКБ', article:'KDPL208Z', category:'Шуруповёрты', categoryId:'shurupoverty', price:'8 990 ₽', priceNum:8990, availability:'В наличии', power:'500Вт', weight:'1.2 кг', voltage:'18В', description:'KDPL208 без аккумуляторов — выгодная версия для владельцев батарей DCK 18В.' },
+  { id:'p9', name:'Дрель-шуруповерт DCK KDJZ2060, 18В, 60Нм, 2×2А/ч', article:'KDJZ2060', category:'Шуруповёрты', categoryId:'shurupoverty', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'450Вт', weight:'1.4 кг', voltage:'18В', description:'Профессиональная дрель-шуруповёрт 18В, 60Нм, два аккумулятора в комплекте.' },
+
+  // Перфораторы (14)
+  { id:'p10', name:'Перфоратор DCK KZC05–26B, SDS+, 800Вт, 2.8Дж', article:'KZC05-26B', category:'Перфораторы', categoryId:'perforatory', price:'10 990 ₽', priceNum:10990, availability:'В наличии', power:'800Вт', weight:'2.8 кг', voltage:'220В', description:'Компактный сетевой перфоратор SDS+ для сверления, штробления и лёгкого долбления.' },
+  { id:'p11', name:'Перфоратор DCK KZC04–28, SDS+, 820Вт, 3.3Дж', article:'KZC04-28', category:'Перфораторы', categoryId:'perforatory', price:'12 590 ₽', priceNum:12590, availability:'В наличии', power:'820Вт', weight:'3.0 кг', voltage:'220В', description:'Надёжный перфоратор 820Вт с энергией удара 3.3Дж для ежедневных строительных задач.' },
+  { id:'p12', name:'Перфоратор DCK KZC05–28B, SDS+, 1150Вт, 4.7Дж', article:'KZC05-28B', category:'Перфораторы', categoryId:'perforatory', price:'12 990 ₽', priceNum:12990, availability:'В наличии', power:'1150Вт', weight:'3.5 кг', voltage:'220В', description:'Мощный перфоратор 1150Вт для интенсивных работ по бетону и камню.' },
+  { id:'p13', name:'Перфоратор DCK KZC05–26XC с пылесборником, SDS+, 800Вт', article:'KZC05-26XC', category:'Перфораторы', categoryId:'perforatory', price:'16 990 ₽', priceNum:16990, availability:'Под заказ', power:'800Вт', weight:'3.2 кг', voltage:'220В', description:'Перфоратор с встроенным пылесборником для чистой работы в помещениях.' },
+  { id:'p14', name:'Перфоратор DCK KZC03–38, SDS max, 1100Вт, 7.9Дж', article:'KZC03-38', category:'Перфораторы', categoryId:'perforatory', price:'22 990 ₽', priceNum:22990, availability:'В наличии', power:'1100Вт', weight:'5.5 кг', voltage:'220В', description:'Тяжёлый перфоратор SDS max для демонтажных работ и бурения больших диаметров.' },
+  { id:'p15', name:'Перфоратор DCK KZC45, SDS max, 1500Вт, 14Дж', article:'KZC45', category:'Перфораторы', categoryId:'perforatory', price:'49 990 ₽', priceNum:49990, availability:'Под заказ', power:'1500Вт', weight:'8.2 кг', voltage:'220В', description:'Профессиональный отбойный перфоратор 1500Вт с энергией удара 14Дж.' },
+  { id:'p16', name:'Перфоратор акк. DCK KDZC22, 18В, 2.1Дж, 2×5А/ч', article:'KDZC22', category:'Перфораторы', categoryId:'perforatory', price:'27 990 ₽', priceNum:27990, availability:'В наличии', power:'18В', weight:'3.0 кг', voltage:'18В', description:'Аккумуляторный перфоратор 18В с двумя батареями 5А/ч — свобода без проводов.' },
+  { id:'p17', name:'Перфоратор акк. DCK KDZC22, 18В, 2.1Дж, без АКБ', article:'KDZC22Z', category:'Перфораторы', categoryId:'perforatory', price:'11 990 ₽', priceNum:11990, availability:'В наличии', power:'18В', weight:'2.5 кг', voltage:'18В', description:'KDZC22 без аккумуляторов — доступная версия для владельцев системы DCK 18В.' },
+  { id:'p18', name:'Перфоратор акк. DCK KDZC04–24, 18В, 2.7Дж, 2×5А/ч', article:'KDZC04-24', category:'Перфораторы', categoryId:'perforatory', price:'29 990 ₽', priceNum:29990, availability:'В наличии', power:'18В', weight:'3.2 кг', voltage:'18В', description:'Мощный аккумуляторный перфоратор с увеличенной энергией удара 2.7Дж.' },
+  { id:'p19', name:'Перфоратор акк. DCK KDZC04–24Z, 18В, без АКБ', article:'KDZC04-24Z', category:'Перфораторы', categoryId:'perforatory', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'18В', weight:'2.7 кг', voltage:'18В', description:'Версия KDZC04-24 без батарей — идеальна как дополнение к системе DCK.' },
+  { id:'p20', name:'Перфоратор акк. DCK KRH20V-26, SDS+, 18В, 3.6Дж, 2×6А/ч', article:'KRH20V-26', category:'Перфораторы', categoryId:'perforatory', price:'55 990 ₽', priceNum:55990, availability:'Под заказ', power:'18В', weight:'3.8 кг', voltage:'18В', description:'Флагманский аккумуляторный перфоратор серии KRH с батареями 6А/ч.' },
+  { id:'p21', name:'Перфоратор акк. DCK KRH20V-26, SDS+, без АКБ', article:'KRH20V-26Z', category:'Перфораторы', categoryId:'perforatory', price:'41 990 ₽', priceNum:41990, availability:'В наличии', power:'18В', weight:'3.3 кг', voltage:'18В', description:'KRH20V-26 без аккумуляторов — премиальный перфоратор для профессионалов.' },
+  { id:'p22', name:'Перфоратор акк. DCK KRH20V-28, SDS+, 18В, 3.6Дж, 2×6А/ч', article:'KRH20V-28', category:'Перфораторы', categoryId:'perforatory', price:'53 990 ₽', priceNum:53990, availability:'В наличии', power:'18В', weight:'4.0 кг', voltage:'18В', description:'Перфоратор KRH20V-28 с увеличенным диаметром бурения и двумя батареями.' },
+  { id:'p23', name:'Перфоратор акк. DCK KRH20V-28Z, SDS+, без АКБ', article:'KRH20V-28Z', category:'Перфораторы', categoryId:'perforatory', price:'34 990 ₽', priceNum:34990, availability:'В наличии', power:'18В', weight:'3.5 кг', voltage:'18В', description:'KRH20V-28 без батарей — для расширения линейки без лишних аккумуляторов.' },
+
+  // УШМ угловые (17)
+  { id:'p24', name:'Машина шлифовальная угловая DCK KSM125A, 850Вт, 125мм', article:'KSM125A', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'4 990 ₽', priceNum:4990, availability:'В наличии', power:'850Вт', weight:'1.8 кг', voltage:'220В', description:'Лёгкая УШМ 850Вт для резки и шлифовки металла, камня и плитки.' },
+  { id:'p25', name:'Машина шлифовальная угловая DCK KSM03–125S, 950Вт, 125мм', article:'KSM03-125S', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'5 990 ₽', priceNum:5990, availability:'В наличии', power:'950Вт', weight:'1.9 кг', voltage:'220В', description:'УШМ 950Вт с тонким корпусом и эргономичной рукояткой.' },
+  { id:'p26', name:'Машина шлифовальная угловая DCK KSM04–125S, 1020Вт, 125мм', article:'KSM04-125S', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'5 790 ₽', priceNum:5790, availability:'В наличии', power:'1020Вт', weight:'2.0 кг', voltage:'220В', description:'Болгарка 1020Вт с быстросъёмным защитным кожухом.' },
+  { id:'p27', name:'Машина шлифовальная угловая DCK KSM04–125, 1020Вт, 125мм, плавный пуск', article:'KSM04-125', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'6 490 ₽', priceNum:6490, availability:'В наличии', power:'1020Вт', weight:'2.1 кг', voltage:'220В', description:'УШМ 1020Вт с плавным пуском — исключает рывок при включении.' },
+  { id:'p28', name:'Машина шлифовальная угловая DCK KSM10–125, 1100Вт, 125мм', article:'KSM10-125', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'6 890 ₽', priceNum:6890, availability:'В наличии', power:'1100Вт', weight:'2.1 кг', voltage:'220В', description:'Мощная УШМ 1100Вт с высоким ресурсом для профессионального использования.' },
+  { id:'p29', name:'Машина шлифовальная угловая DCK KSM17–125P, 1100Вт, 125мм', article:'KSM17-125P', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'6 990 ₽', priceNum:6990, availability:'В наличии', power:'1100Вт', weight:'2.2 кг', voltage:'220В', description:'УШМ 1100Вт серии P с антивибрационной боковой рукояткой.' },
+  { id:'p30', name:'Машина шлифовальная угловая DCK KSM05–125, 1500Вт, 125мм', article:'KSM05-125', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'7 990 ₽', priceNum:7990, availability:'В наличии', power:'1500Вт', weight:'2.4 кг', voltage:'220В', description:'Профессиональная УШМ 1500Вт для тяжёлых резов и шлифовки.' },
+  { id:'p31', name:'Машина шлифовальная угловая DCK KSM03–150, 1400Вт, 150мм', article:'KSM03-150', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'9 590 ₽', priceNum:9590, availability:'В наличии', power:'1400Вт', weight:'2.8 кг', voltage:'220В', description:'УШМ 150мм для работы с увеличенными отрезными дисками.' },
+  { id:'p32', name:'Машина шлифовальная угловая DCK KSM06–180, 2100Вт, 180мм', article:'KSM06-180', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'12 990 ₽', priceNum:12990, availability:'В наличии', power:'2100Вт', weight:'4.2 кг', voltage:'220В', description:'Мощная УШМ 180мм для резки труб, арматуры и бетона.' },
+  { id:'p33', name:'Машина шлифовальная угловая DCK KSM230A, 2200Вт, 230мм', article:'KSM230A', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'12 990 ₽', priceNum:12990, availability:'В наличии', power:'2200Вт', weight:'5.0 кг', voltage:'220В', description:'Большая УШМ 230мм 2200Вт для промышленной резки.' },
+  { id:'p34', name:'Машина шлифовальная угловая DCK KSM05–230, 2800Вт, 230мм', article:'KSM05-230', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'2800Вт', weight:'5.5 кг', voltage:'220В', description:'Профессиональная УШМ 230мм с мощным двигателем 2800Вт.' },
+  { id:'p35', name:'Машина шлифовальная угловая DCK KSM06–230, 2100Вт, 230мм', article:'KSM06-230', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'2100Вт', weight:'4.8 кг', voltage:'220В', description:'УШМ 230мм 2100Вт с константной электроникой и защитой от перегрузки.' },
+  { id:'p36', name:'Машина шлифовальная угловая DCK KSM05–230S, 2800Вт, 230мм, антивибрация', article:'KSM05-230S', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'15 990 ₽', priceNum:15990, availability:'В наличии', power:'2800Вт', weight:'5.7 кг', voltage:'220В', description:'Топовая УШМ 230мм 2800Вт с системой гашения вибрации.' },
+  { id:'p37', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM03–125 FK, 18В, 2×4А/ч', article:'KDSM03-125FK', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'24 990 ₽', priceNum:24990, availability:'В наличии', power:'18В', weight:'2.0 кг', voltage:'18В', description:'Аккумуляторная УШМ 125мм с двумя батареями 4А/ч — полная свобода.' },
+  { id:'p38', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM03–125 Z, 18В, без АКБ', article:'KDSM03-125Z', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'9 990 ₽', priceNum:9990, availability:'В наличии', power:'18В', weight:'1.6 кг', voltage:'18В', description:'KDSM03-125 без батарей — для тех, кто расширяет систему DCK 18В.' },
+  { id:'p39', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM04–125 FK, 18В, 2×4А/ч', article:'KDSM04-125FK', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'26 990 ₽', priceNum:26990, availability:'В наличии', power:'18В', weight:'2.2 кг', voltage:'18В', description:'Продвинутая аккумуляторная УШМ 125мм с бесщёточным мотором и двумя АКБ.' },
+  { id:'p40', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM04–125 Z, 18В, без АКБ', article:'KDSM04-125Z', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'10 990 ₽', priceNum:10990, availability:'В наличии', power:'18В', weight:'1.8 кг', voltage:'18В', description:'KDSM04-125 без аккумуляторов — бесщёточная модель для системы DCK.' }
+];
+
+const categories = [
+  // Root categories
+  { id:'mashiny-shlifovalnye', name:'Машины шлифовальные', parentId:null, count:17 },
+  { id:'shurupoverty', name:'Шуруповёрты', parentId:null, count:9 },
+  { id:'gajkoverty', name:'Гайковёрты', parentId:null, count:0 },
+  { id:'dreli', name:'Дрели', parentId:null, count:0 },
+  { id:'perforatory', name:'Перфораторы', parentId:null, count:14 },
+  { id:'otbojnye-molotki', name:'Отбойные молотки', parentId:null, count:0 },
+  { id:'miksery', name:'Миксеры', parentId:null, count:0 },
+  { id:'shtroborezy', name:'Штроборезы', parentId:null, count:0 },
+  { id:'rubanki', name:'Рубанки', parentId:null, count:0 },
+  { id:'pily-diskovye', name:'Пилы дисковые', parentId:null, count:0 },
+  { id:'lobziki', name:'Лобзики', parentId:null, count:0 },
+  { id:'pily-sabelnye', name:'Пилы сабельные', parentId:null, count:0 },
+  { id:'pily-tortsovochnye', name:'Пилы торцовочные', parentId:null, count:0 },
+  { id:'feny', name:'Фены', parentId:null, count:0 },
+  { id:'stanki-sverlilnye', name:'Станки сверлильные', parentId:null, count:0 },
+  { id:'frezery', name:'Фрезеры', parentId:null, count:0 },
+  { id:'gravery', name:'Граверы', parentId:null, count:0 },
+  { id:'zaklyopochniki', name:'Заклёпочники', parentId:null, count:0 },
+  { id:'renovatory', name:'Реноваторы', parentId:null, count:0 },
+  { id:'akkumulyatornye-bloki', name:'Аккумуляторные блоки и ЗУ', parentId:null, count:0 },
+
+  // Sub under Машины шлифовальные
+  { id:'ushm-uglovye', name:'Угловые', parentId:'mashiny-shlifovalnye', count:17 },
+  { id:'ushm-pryamye', name:'Прямые', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-polirovalnye', name:'Полировальные', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-ploskie', name:'Плоские', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-lentochnye', name:'Ленточные', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-ekstsentrikovye', name:'Эксцентриковые', parentId:'mashiny-shlifovalnye', count:0 }
+];
+
+const clients = [
+  { id:'c1', name:'Иванов Сергей Петрович', company:'ООО «СтройМонтаж»', phone:'+7 921 345-67-89', email:'ivanov@stroymontazh.ru', ordersCount:5, totalSpent:287500 },
+  { id:'c2', name:'Петров Алексей Владимирович', company:'ИП Петров А.В.', phone:'+7 911 234-56-78', email:'petrov.av@mail.ru', ordersCount:3, totalSpent:124800 },
+  { id:'c3', name:'Смирнов Дмитрий Олегович', company:'ООО «Северная Строительная Компания»', phone:'+7 921 876-54-32', email:'smirnov@ssk-spb.ru', ordersCount:8, totalSpent:512000 },
+  { id:'c4', name:'Кузнецова Марина Игоревна', company:'ООО «БалтМонтаж»', phone:'+7 931 456-78-90', email:'kuznetsova@baltmontazh.ru', ordersCount:2, totalSpent:67900 },
+  { id:'c5', name:'Козлов Михаил Дмитриевич', company:'ИП Козлов М.Д.', phone:'+7 921 567-89-01', email:'kozlov.md@yandex.ru', ordersCount:4, totalSpent:198500 },
+  { id:'c6', name:'Фёдоров Андрей Николаевич', company:'ООО «НеваСтрой»', phone:'+7 911 678-90-12', email:'fedorov@nevastroy.ru', ordersCount:6, totalSpent:345000 },
+  { id:'c7', name:'Морозов Виктор Александрович', company:'ООО «ПромТехСервис»', phone:'+7 931 789-01-23', email:'morozov@promtechserv.ru', ordersCount:3, totalSpent:156700 },
+  { id:'c8', name:'Васильев Константин Сергеевич', company:'ИП Васильев К.С.', phone:'+7 921 890-12-34', email:'vasilev.ks@gmail.com', ordersCount:1, totalSpent:49990 }
+];
+
+const orders = [
+  { id:'o1', number:'СП-001', date:'2026-03-02', clientId:'c1', items:[{productId:'p10', name:'Перфоратор DCK KZC05–26B', qty:2, price:10990}, {productId:'p24', name:'УШМ DCK KSM125A', qty:3, price:4990}], total:36950, status:'Завершён', address:'г. Санкт-Петербург, ул. Строителей, д. 15', phone:'+7 921 345-67-89', comment:'Доставка до двери' },
+  { id:'o2', number:'СП-002', date:'2026-03-05', clientId:'c3', items:[{productId:'p14', name:'Перфоратор DCK KZC03–38', qty:1, price:22990}, {productId:'p30', name:'УШМ DCK KSM05–125', qty:2, price:7990}], total:38970, status:'Завершён', address:'г. Санкт-Петербург, Московский пр., д. 120, оф. 45', phone:'+7 921 876-54-32', comment:'' },
+  { id:'o3', number:'СП-003', date:'2026-03-07', clientId:'c2', items:[{productId:'p2', name:'Дрель-шуруповерт DCK KDJZ23–10', qty:5, price:9590}], total:47950, status:'Завершён', address:'г. Санкт-Петербург, ул. Маршала Казакова, д. 8', phone:'+7 911 234-56-78', comment:'Самовывоз со склада' },
+  { id:'o4', number:'СП-004', date:'2026-03-10', clientId:'c6', items:[{productId:'p7', name:'Дрель-шуруповерт DCK KDPL208', qty:3, price:17990}, {productId:'p12', name:'Перфоратор DCK KZC05–28B', qty:2, price:12990}], total:79950, status:'Отправлен', address:'г. Санкт-Петербург, наб. Обводного канала, д. 76', phone:'+7 911 678-90-12', comment:'Связаться перед доставкой' },
+  { id:'o5', number:'СП-005', date:'2026-03-12', clientId:'c5', items:[{productId:'p16', name:'Перфоратор акк. DCK KDZC22', qty:2, price:27990}], total:55980, status:'Отправлен', address:'г. Санкт-Петербург, пр. Энгельса, д. 33', phone:'+7 921 567-89-01', comment:'' },
+  { id:'o6', number:'СП-006', date:'2026-03-14', clientId:'c1', items:[{productId:'p34', name:'УШМ DCK KSM05–230', qty:4, price:13990}], total:55960, status:'Отправлен', address:'г. Санкт-Петербург, ул. Строителей, д. 15', phone:'+7 921 345-67-89', comment:'Оплата по счёту' },
+  { id:'o7', number:'СП-007', date:'2026-03-17', clientId:'c4', items:[{productId:'p37', name:'УШМ акк. DCK KDSM03–125 FK', qty:1, price:24990}, {productId:'p5', name:'Дрель-шуруповерт DCK KDPL04–8', qty:2, price:11590}], total:48170, status:'В обработке', address:'г. Санкт-Петербург, Лиговский пр., д. 56', phone:'+7 931 456-78-90', comment:'' },
+  { id:'o8', number:'СП-008', date:'2026-03-18', clientId:'c7', items:[{productId:'p22', name:'Перфоратор акк. DCK KRH20V-28', qty:1, price:53990}, {productId:'p39', name:'УШМ акк. DCK KDSM04–125 FK', qty:1, price:26990}], total:80980, status:'В обработке', address:'г. Санкт-Петербург, ул. Типанова, д. 21', phone:'+7 931 789-01-23', comment:'Нужна счёт-фактура' },
+  { id:'o9', number:'СП-009', date:'2026-03-20', clientId:'c3', items:[{productId:'p18', name:'Перфоратор акк. DCK KDZC04–24', qty:3, price:29990}, {productId:'p9', name:'Дрель-шуруповерт DCK KDJZ2060', qty:3, price:13990}], total:131940, status:'В обработке', address:'г. Санкт-Петербург, Московский пр., д. 120, оф. 45', phone:'+7 921 876-54-32', comment:'Срочный заказ' },
+  { id:'o10', number:'СП-010', date:'2026-03-21', clientId:'c8', items:[{productId:'p15', name:'Перфоратор DCK KZC45', qty:1, price:49990}], total:49990, status:'Новый', address:'г. Санкт-Петербург, ул. Савушкина, д. 112', phone:'+7 921 890-12-34', comment:'' },
+  { id:'o11', number:'СП-011', date:'2026-03-22', clientId:'c6', items:[{productId:'p20', name:'Перфоратор акк. DCK KRH20V-26', qty:2, price:55990}, {productId:'p36', name:'УШМ DCK KSM05–230S', qty:2, price:15990}], total:143960, status:'Новый', address:'г. Санкт-Петербург, наб. Обводного канала, д. 76', phone:'+7 911 678-90-12', comment:'Доставка после 14:00' },
+  { id:'o12', number:'СП-012', date:'2026-03-23', clientId:'c5', items:[{productId:'p11', name:'Перфоратор DCK KZC04–28', qty:5, price:12590}, {productId:'p28', name:'УШМ DCK KSM10–125', qty:5, price:6890}], total:97400, status:'Новый', address:'г. Санкт-Петербург, пр. Энгельса, д. 33', phone:'+7 921 567-89-01', comment:'Для объекта на Парнасе' }
+];
+
+const banners = [
+  { id:'b1', title:'Новинки DCK 2026', subtitle:'Аккумуляторная линейка 18В — 12 новых моделей', url:'/novosti/novinki-2026', active:true },
+  { id:'b2', title:'Скидка 15% на перфораторы', subtitle:'Только до конца марта на все сетевые перфораторы', url:'/aktsii/skidka-perforatory', active:true },
+  { id:'b3', title:'Бесплатная доставка по СПб', subtitle:'При заказе от 15 000 ₽ — доставим за 1 день', url:'/dostavka', active:true }
+];
+
+const promotions = [
+  { id:'pr1', title:'-15% на перфораторы', description:'Скидка 15% на все сетевые перфораторы DCK при заказе через сайт. Акция действует на модели KZC05-26B, KZC04-28, KZC05-28B, KZC03-38.', discount:15, startDate:'2026-03-01', endDate:'2026-03-31', active:true },
+  { id:'pr2', title:'Аккумулятор в подарок', description:'При покупке любого аккумуляторного шуруповёрта DCK — дополнительный аккумулятор 2А/ч в подарок. Количество подарков ограничено.', discount:0, startDate:'2026-03-10', endDate:'2026-04-10', active:true }
+];
+
+const pages = [
+  { id:'pg1', title:'О бренде', seoTitle:'DCK — профессиональный электроинструмент | Спектр', seoDescription:'DCK — китайский бренд профессионального электроинструмента. Надёжность, мощность и доступная цена для строителей и мастеров.', content:'DCK (Dongcheng) — один из крупнейших производителей электроинструмента в Китае. Компания основана в 1995 году и за это время стала лидером рынка. Инструмент DCK сочетает профессиональное качество с доступной ценой.' },
+  { id:'pg2', title:'О компании', seoTitle:'Компания Спектр — официальный дистрибьютор DCK в СПб', seoDescription:'Компания Спектр — авторизованный дистрибьютор инструмента DCK в Санкт-Петербурге. Продажа, сервис, гарантия.', content:'Компания «Спектр» — авторизованный дистрибьютор инструмента DCK в Санкт-Петербурге. Мы работаем с 2018 года и обеспечиваем полный цикл: от консультации до послепродажного сервиса.' },
+  { id:'pg3', title:'Контакты', seoTitle:'Контакты Спектр — адрес, телефон, график работы', seoDescription:'Магазин электроинструмента Спектр в Санкт-Петербурге. Адрес, телефон, email, график работы.', content:'Адрес: г. Санкт-Петербург, ул. Профессора Попова, д. 23. Телефон: +7 (812) 555-00-00. Email: info@spektr-tools.ru. Режим работы: Пн-Пт 9:00-19:00, Сб 10:00-17:00.' }
+];
+
+const seoPages = [
+  { url:'/', title:'Спектр — электроинструмент DCK в Санкт-Петербурге', description:'Официальный магазин электроинструмента DCK. Шуруповёрты, перфораторы, УШМ с доставкой по СПб.', indexed:true, speed:92, schema:'Organization, WebSite' },
+  { url:'/katalog', title:'Каталог электроинструмента DCK — Спектр', description:'Полный каталог инструмента DCK: шуруповёрты, перфораторы, болгарки, пилы и аксессуары.', indexed:true, speed:88, schema:'ItemList, BreadcrumbList' },
+  { url:'/shurupoverty', title:'Шуруповёрты DCK — купить в СПб | Спектр', description:'Аккумуляторные дрели-шуруповёрты DCK от 3 800 ₽. Доставка по Санкт-Петербургу за 1 день.', indexed:true, speed:90, schema:'ItemList, BreadcrumbList' },
+  { url:'/perforatory', title:'Перфораторы DCK — купить в СПб | Спектр', description:'Перфораторы DCK SDS+ и SDS max от 10 990 ₽. Сетевые и аккумуляторные модели.', indexed:true, speed:85, schema:'ItemList, BreadcrumbList' },
+  { url:'/ushm', title:'УШМ (болгарки) DCK — купить в СПб | Спектр', description:'Угловые шлифовальные машины DCK 125/150/180/230 мм от 4 990 ₽. Доставка и гарантия.', indexed:true, speed:87, schema:'ItemList, BreadcrumbList' },
+  { url:'/kontakty', title:'Контакты магазина Спектр — адрес, телефон', description:'Магазин Спектр: ул. Профессора Попова, 23, СПб. Тел: +7 (812) 555-00-00.', indexed:true, speed:95, schema:'LocalBusiness, BreadcrumbList' }
+];
+
+const dashboardMetrics = { revenue: 847500, ordersToday: 3, totalProducts: 40, newClients: 5 };
+
+const chartData = [
+  25000, 32000, 18000, 41000, 28000, 35000, 22000,
+  38000, 29000, 44000, 19000, 33000, 26000, 37000,
+  21000, 42000, 30000, 27000, 39000, 24000, 36000,
+  20000, 31000, 43000, 23000, 34000, 28000, 40000,
+  17000, 25500
+];
+
+
+// ===== NAVIGATION =====
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  const section = document.getElementById('section-' + id);
+  const navItem = document.querySelector('.nav-item[data-section="' + id + '"]');
+
+  if (section) section.classList.add('active');
+  if (navItem) navItem.classList.add('active');
+
+  closeSidebar();
+}
+
+// ===== MOBILE SIDEBAR =====
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  sidebar.classList.toggle('open');
+  backdrop.classList.toggle('open');
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  sidebar.classList.remove('open');
+  backdrop.classList.remove('open');
+}
+
+// ===== MODAL =====
+
+function openModal(title, contentHtml) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = contentHtml;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ===== TOAST SYSTEM =====
+
+function showToast(message) {
+  message = message || 'Демо-режим: действие недоступно';
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('out');
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
+
+// Wire logout button
+document.querySelector('.header-logout').addEventListener('click', () => showToast());
+
+// ===== HELPERS =====
+
+function fmt(n) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function statusBadge(s) {
+  const map = {'Новый':'badge-blue','В обработке':'badge-amber','Отправлен':'badge-purple','Завершён':'badge-green'};
+  return '<span class="badge '+(map[s]||'badge-gray')+'">'+s+'</span>';
+}
+
+function getClient(id) {
+  return clients.find(c => c.id === id);
+}
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return day+'.'+m+'.'+y;
+}
+
+function toggleSwitch(el) {
+  el.querySelector('.toggle-track').classList.toggle('on');
+  showToast();
+}
+
+// ===== DASHBOARD =====
+
+function renderDashboard() {
+  const cards = [
+    { label:'Выручка за март', value: fmt(dashboardMetrics.revenue)+' ₽', bg:'rgba(34,197,94,0.12)', color:'#22c55e', icon:'<svg viewBox="0 0 24 24" stroke="#22c55e"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>' },
+    { label:'Заказов сегодня', value: dashboardMetrics.ordersToday, bg:'rgba(59,130,246,0.12)', color:'#3b82f6', icon:'<svg viewBox="0 0 24 24" stroke="#3b82f6"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>' },
+    { label:'Товаров в каталоге', value: dashboardMetrics.totalProducts, bg:'rgba(255,209,0,0.12)', color:'#FFD100', icon:'<svg viewBox="0 0 24 24" stroke="#FFD100"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>' },
+    { label:'Новых клиентов', value: dashboardMetrics.newClients, bg:'rgba(139,92,246,0.12)', color:'#8b5cf6', icon:'<svg viewBox="0 0 24 24" stroke="#8b5cf6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>' }
+  ];
+  document.getElementById('dashboardMetricsGrid').innerHTML = cards.map(c =>
+    '<div class="metric-card"><div class="metric-icon" style="background:'+c.bg+'">'+c.icon+'</div><div><div class="metric-label">'+c.label+'</div><div class="metric-value" style="color:'+c.color+'">'+c.value+'</div></div></div>'
+  ).join('');
+}
+
+function renderChart() {
+  const svg = document.getElementById('salesChart');
+  const w = 700, h = 200, pad = 30, padBottom = 24;
+  const max = Math.max(...chartData);
+  const n = chartData.length;
+  const points = chartData.map((v,i) => {
+    const x = pad + (i/(n-1)) * (w - pad*2);
+    const y = padBottom + (1 - v/max) * (h - pad - padBottom);
+    return {x,y};
+  });
+  const linePath = points.map((p,i) => (i===0?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ');
+  const areaPath = linePath + ' L'+points[n-1].x.toFixed(1)+' '+(h-padBottom)+' L'+points[0].x.toFixed(1)+' '+(h-padBottom)+' Z';
+  const xLabels = [1,5,10,15,20,25,30];
+  const labelsHtml = xLabels.map(d => {
+    const x = pad + ((d-1)/(n-1)) * (w - pad*2);
+    return '<text x="'+x.toFixed(1)+'" y="'+(h-4)+'" fill="#999" font-size="11" text-anchor="middle">'+d+'</text>';
+  }).join('');
+  svg.innerHTML =
+    '<defs><linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD100" stop-opacity="0.3"/><stop offset="100%" stop-color="#FFD100" stop-opacity="0"/></linearGradient></defs>' +
+    '<path d="'+areaPath+'" fill="url(#chartGrad)"/>' +
+    '<path d="'+linePath+'" fill="none" stroke="#FFD100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    labelsHtml;
+}
+
+function renderRecentOrders() {
+  const sorted = [...orders].sort((a,b) => b.date.localeCompare(a.date)).slice(0,5);
+  document.getElementById('recentOrdersBody').innerHTML = sorted.map(o => {
+    const cl = getClient(o.clientId);
+    return '<tr onclick="openOrderModal(\''+o.id+'\')"><td style="font-weight:600">'+o.number+'</td><td>'+formatDate(o.date)+'</td><td>'+(cl?cl.name:'—')+'</td><td>'+fmt(o.total)+' ₽</td><td>'+statusBadge(o.status)+'</td></tr>';
+  }).join('');
+}
+
+// ===== CATALOG =====
+
+function renderCatalog() {
+  const search = document.getElementById('catalogSearch').value.toLowerCase();
+  const cat = document.getElementById('catalogCategory').value;
+  let list = products;
+  if (search) list = list.filter(p => p.name.toLowerCase().includes(search));
+  if (cat) list = list.filter(p => p.category === cat);
+  document.getElementById('catalogBody').innerHTML = list.map(p =>
+    '<tr onclick="openProductModal(\''+p.id+'\')">' +
+    '<td><div class="product-thumb"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div></td>' +
+    '<td style="font-weight:500">'+p.name+'</td>' +
+    '<td style="color:var(--text-secondary)">'+p.article+'</td>' +
+    '<td>'+p.category+'</td>' +
+    '<td style="white-space:nowrap">'+p.price+'</td>' +
+    '<td><span class="badge '+(p.availability==='В наличии'?'badge-green':'badge-yellow')+'">'+p.availability+'</span></td>' +
+    '</tr>'
+  ).join('');
+}
+
+function openProductModal(id) {
+  const p = id ? products.find(x => x.id === id) : null;
+  const title = p ? 'Редактирование товара' : 'Новый товар';
+  const cats = ['Шуруповёрты','Перфораторы','УШМ угловые'];
+  const catOptions = cats.map(c => '<option'+(p&&p.category===c?' selected':'')+'>'+c+'</option>').join('');
+  const availOptions = ['В наличии','Под заказ','Нет'].map(a => '<option'+(p&&p.availability===a?' selected':'')+'>'+a+'</option>').join('');
+  const html = '<div class="form-group"><label>Название</label><input type="text" value="'+(p?p.name:'')+'"></div>' +
+    '<div class="form-row"><div class="form-group"><label>Артикул</label><input type="text" value="'+(p?p.article:'')+'"></div><div class="form-group"><label>Категория</label><select>'+catOptions+'</select></div></div>' +
+    '<div class="form-row"><div class="form-group"><label>Цена</label><input type="text" value="'+(p?p.price:'')+'"></div><div class="form-group"><label>Наличие</label><select>'+availOptions+'</select></div></div>' +
+    '<div class="form-group"><label>Описание</label><textarea rows="3">'+(p?p.description:'')+'</textarea></div>' +
+    '<div class="form-row"><div class="form-group"><label>Мощность</label><input type="text" value="'+(p?p.power:'')+'"></div><div class="form-group"><label>Вес</label><input type="text" value="'+(p?p.weight:'')+'"></div></div>' +
+    '<div class="form-group"><label>Напряжение</label><input type="text" value="'+(p?p.voltage:'')+'"></div>' +
+    '<div class="form-group"><label>Фото</label><div class="photo-placeholder" onclick="showToast()"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Загрузить</div></div>' +
+    '<div class="form-actions">'+(p?'<button class="btn btn-danger" onclick="showToast();closeModal()">Удалить</button>':'')+
+    '<button class="btn btn-accent" onclick="showToast();closeModal()">Сохранить</button></div>';
+  openModal(title, html);
+}
+
+// ===== CATEGORIES =====
+
+function renderCategories() {
+  const roots = categories.filter(c => c.parentId === null);
+  const subs = categories.filter(c => c.parentId !== null);
+  let html = '';
+  roots.forEach(r => {
+    const children = subs.filter(s => s.parentId === r.id);
+    const hasChildren = children.length > 0;
+    const isShlifovalnye = r.id === 'mashiny-shlifovalnye';
+    html += '<div class="tree-item">' +
+      (hasChildren ? '<span class="tree-toggle" onclick="toggleTreeGroup(this)">'+( isShlifovalnye ? '▾' : '▸')+'</span>' : '<span style="width:20px;display:inline-block"></span>') +
+      '<span class="tree-icon">📁</span><span class="tree-name">'+r.name+'</span>' +
+      '<span class="badge '+(r.count>0?'badge-yellow':'badge-gray')+'">'+r.count+'</span></div>';
+    if (hasChildren) {
+      html += '<div class="tree-sub" id="tree-sub-'+r.id+'" style="display:'+(isShlifovalnye?'block':'none')+'">';
+      children.forEach(ch => {
+        html += '<div class="tree-item"><span style="width:20px;display:inline-block"></span><span class="tree-icon">📄</span><span class="tree-name">'+ch.name+'</span><span class="badge '+(ch.count>0?'badge-yellow':'badge-gray')+'">'+ch.count+'</span></div>';
+      });
+      html += '</div>';
+    }
+  });
+  document.getElementById('categoriesTree').innerHTML = html;
+}
+
+function toggleTreeGroup(el) {
+  const sub = el.closest('.tree-item').nextElementSibling;
+  if (!sub || !sub.classList.contains('tree-sub')) return;
+  const visible = sub.style.display !== 'none';
+  sub.style.display = visible ? 'none' : 'block';
+  el.textContent = visible ? '▸' : '▾';
+}
+
+// ===== ORDERS =====
+
+function renderOrders() {
+  const search = document.getElementById('ordersSearch').value.toLowerCase();
+  let list = orders;
+  if (search) {
+    list = list.filter(o => {
+      const cl = getClient(o.clientId);
+      return o.number.toLowerCase().includes(search) || (cl && cl.name.toLowerCase().includes(search));
+    });
+  }
+  const sorted = [...list].sort((a,b) => b.date.localeCompare(a.date));
+  document.getElementById('ordersBody').innerHTML = sorted.map(o => {
+    const cl = getClient(o.clientId);
+    return '<tr onclick="openOrderModal(\''+o.id+'\')"><td style="font-weight:600">'+o.number+'</td><td>'+formatDate(o.date)+'</td><td>'+(cl?cl.name:'—')+'</td><td>'+fmt(o.total)+' ₽</td><td>'+statusBadge(o.status)+'</td></tr>';
+  }).join('');
+}
+
+function openOrderModal(id) {
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+  const cl = getClient(o.clientId);
+  let html = '<div class="order-header"><span style="font-size:18px;font-weight:700">'+o.number+'</span>'+statusBadge(o.status)+'<span class="order-date">'+formatDate(o.date)+'</span></div>';
+  html += '<table class="admin-table"><thead><tr><th>Товар</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr></thead><tbody>';
+  o.items.forEach(it => {
+    html += '<tr><td>'+it.name+'</td><td>'+it.qty+'</td><td>'+fmt(it.price)+' ₽</td><td>'+fmt(it.price*it.qty)+' ₽</td></tr>';
+  });
+  html += '<tr><td colspan="3" style="text-align:right;font-weight:700">Итого:</td><td style="font-weight:700">'+fmt(o.total)+' ₽</td></tr>';
+  html += '</tbody></table>';
+  html += '<div class="modal-meta"><strong>Адрес:</strong> '+o.address+'<br><strong>Телефон:</strong> '+o.phone+'<br>';
+  if (o.comment) html += '<strong>Комментарий:</strong> '+o.comment;
+  html += '</div>';
+  html += '<div class="form-actions"><button class="btn btn-accent" onclick="showToast();closeModal()">Изменить статус</button></div>';
+  openModal('Заказ '+o.number, html);
+}
+
+// ===== CLIENTS =====
+
+function renderClients() {
+  const search = document.getElementById('clientsSearch').value.toLowerCase();
+  let list = clients;
+  if (search) {
+    list = list.filter(c => c.name.toLowerCase().includes(search) || c.company.toLowerCase().includes(search));
+  }
+  document.getElementById('clientsBody').innerHTML = list.map(c =>
+    '<tr onclick="openClientModal(\''+c.id+'\')">' +
+    '<td><div style="font-weight:500">'+c.name+'</div><div style="font-size:12px;color:var(--text-secondary)">'+c.company+'</div></td>' +
+    '<td>'+c.phone+'</td><td>'+c.email+'</td><td>'+c.ordersCount+'</td><td>'+fmt(c.totalSpent)+' ₽</td></tr>'
+  ).join('');
+}
+
+function openClientModal(id) {
+  const c = clients.find(x => x.id === id);
+  if (!c) return;
+  let html = '<div style="margin-bottom:16px"><div style="font-size:16px;font-weight:600;margin-bottom:4px">'+c.name+'</div><div style="color:var(--text-secondary);font-size:14px;margin-bottom:8px">'+c.company+'</div><div style="font-size:13px;color:var(--text-secondary)">'+c.phone+' &middot; '+c.email+'</div></div>';
+  const clientOrders = orders.filter(o => o.clientId === c.id).sort((a,b) => b.date.localeCompare(a.date));
+  if (clientOrders.length) {
+    html += '<div style="font-weight:600;margin-bottom:8px;font-size:14px">История заказов</div>';
+    html += '<table class="admin-table"><thead><tr><th>Дата</th><th>№</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>';
+    clientOrders.forEach(o => {
+      html += '<tr><td>'+formatDate(o.date)+'</td><td>'+o.number+'</td><td>'+fmt(o.total)+' ₽</td><td>'+statusBadge(o.status)+'</td></tr>';
+    });
+    html += '</tbody></table>';
+  } else {
+    html += '<p style="color:var(--text-secondary)">Заказов пока нет</p>';
+  }
+  openModal(c.name, html);
+}
+
+// ===== CONTENT =====
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('#section-content .tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#section-content .tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+function renderContent() {
+  // Banners
+  document.getElementById('tab-banners').innerHTML = '<div class="banners-grid">' + banners.map(b =>
+    '<div class="content-card">' +
+    '<div class="content-card-img"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#666" stroke-width="1.5" fill="none"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="2"/><path d="M22 15l-5-5L2 22"/></svg></div>' +
+    '<h4>'+b.title+'</h4><p>'+b.subtitle+'</p>' +
+    '<div class="card-meta">URL: '+b.url+'</div>' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">' +
+    '<span class="toggle-switch" onclick="toggleSwitch(this)"><span class="toggle-track'+(b.active?' on':'')+'"><span class="toggle-knob"></span></span> Активен</span>' +
+    '<button class="btn btn-secondary" onclick="showToast()">Редактировать</button></div></div>'
+  ).join('') + '</div>';
+
+  // Promotions
+  document.getElementById('tab-promotions').innerHTML = '<div class="promotions-grid">' + promotions.map(pr =>
+    '<div class="content-card">' +
+    (pr.discount ? '<div class="discount-badge">-'+pr.discount+'%</div>' : '') +
+    '<h4>'+pr.title+'</h4><p>'+pr.description+'</p>' +
+    '<div class="card-meta">'+formatDate(pr.startDate)+' — '+formatDate(pr.endDate)+'</div>' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">' +
+    '<span class="toggle-switch" onclick="toggleSwitch(this)"><span class="toggle-track'+(pr.active?' on':'')+'"><span class="toggle-knob"></span></span> Активна</span>' +
+    '<button class="btn btn-secondary" onclick="showToast()">Редактировать</button></div></div>'
+  ).join('') + '</div>';
+
+  // Pages
+  document.getElementById('tab-pages').innerHTML = '<div class="pages-grid">' + pages.map(pg =>
+    '<div class="content-card">' +
+    '<h4>'+pg.title+'</h4>' +
+    '<p style="font-size:12px;margin-bottom:8px">'+pg.seoTitle+'</p>' +
+    '<button class="btn btn-secondary" onclick="openPageModal(\''+pg.id+'\')">Редактировать</button></div>'
+  ).join('') + '</div>';
+}
+
+function openPageModal(id) {
+  const pg = pages.find(x => x.id === id);
+  if (!pg) return;
+  const html =
+    '<div class="form-group"><label>Заголовок</label><input type="text" value="'+pg.title+'"></div>' +
+    '<div class="form-group"><label>SEO Title</label><input type="text" value="'+pg.seoTitle+'"></div>' +
+    '<div class="form-group"><label>SEO Description</label><input type="text" value="'+pg.seoDescription+'"></div>' +
+    '<div class="form-group"><label>Контент</label><textarea rows="5">'+pg.content+'</textarea></div>' +
+    '<div class="form-actions"><button class="btn btn-accent" onclick="showToast();closeModal()">Сохранить</button></div>';
+  openModal('Редактирование: '+pg.title, html);
+}
+
+// ===== SEO =====
+
+function renderSeo() {
+  const indexed = seoPages.filter(p => p.indexed).length;
+  const total = seoPages.length;
+  const avgSpeed = Math.round(seoPages.reduce((s,p) => s+p.speed,0)/total);
+  document.getElementById('seoMetrics').innerHTML =
+    '<div class="metric-card"><div class="metric-icon" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24" stroke="#22c55e" stroke-width="1.8" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="metric-label">Индексация</div><div class="metric-value" style="color:#22c55e">'+indexed+'/'+total+' страниц</div></div></div>' +
+    '<div class="metric-card"><div class="metric-icon" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24" stroke="#22c55e" stroke-width="1.8" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><div class="metric-label">Скорость загрузки</div><div class="metric-value" style="color:#22c55e">'+avgSpeed+'/100</div></div></div>' +
+    '<div class="metric-card"><div class="metric-icon" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24" stroke="#22c55e" stroke-width="1.8" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="metric-label">Schema.org</div><div class="metric-value" style="color:#22c55e">Настроена</div></div></div>';
+
+  document.getElementById('seoBody').innerHTML = seoPages.map(p =>
+    '<tr><td style="font-weight:500;color:var(--accent)">'+p.url+'</td><td>'+p.title+'</td><td style="color:var(--text-secondary)">'+(p.description.length>50?p.description.slice(0,50)+'...':p.description)+'</td><td><span class="badge '+(p.indexed?'badge-green':'badge-red')+'">'+(p.indexed?'Да':'Нет')+'</span></td></tr>'
+  ).join('');
+}
+
+// ===== INIT =====
+
+(function init() {
+  renderDashboard();
+  renderChart();
+  renderRecentOrders();
+  renderCatalog();
+  renderCategories();
+  renderOrders();
+  renderClients();
+  renderContent();
+  renderSeo();
+})();
+</script>
+</body>
+</html>
