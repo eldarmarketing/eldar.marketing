@@ -83,4 +83,4 @@ readtime: 3
 - Docker + Nginx Proxy Manager — деплой на VPS
 - Inkscape — конвертация EPS в SVG
 
-Напишите @eldarmarketing_bot — обсудим вашу задачу.
+Звоните — поговорим.
