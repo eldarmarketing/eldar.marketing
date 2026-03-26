@@ -111,4 +111,4 @@ node send-contract.js ./contract.pdf client-slug
 
 ---
 
-Хотите такую автоматизацию для своего бизнеса? Напишите в [@eldarmarketing](https://t.me/eldarmarketing).
+[Звоните](tel:+79035708273) — поговорим.

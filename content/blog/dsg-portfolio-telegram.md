@@ -113,7 +113,6 @@ PostgreSQL-таблица portfolio_works хранит:
 - **Mini App:** HTML/CSS/JS, Telegram WebApp API
 - **Деплой:** PM2 + nginx
 
-## Хотите так же?
 
 Если у вас автосервис, детейлинг, стоматология, салон красоты — любой бизнес, где важно показать результат работы:
 
@@ -123,4 +122,4 @@ PostgreSQL-таблица portfolio_works хранит:
 
 Без дизайнера, без разработчика, без FTP.
 
-Напишите в [@eldarmarketing](https://t.me/eldarmarketing) — обсудим.
+[Звоните](tel:+79035708273) — поговорим.

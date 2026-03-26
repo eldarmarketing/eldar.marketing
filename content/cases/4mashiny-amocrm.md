@@ -83,4 +83,4 @@ readtime: 3
 - Docker + Nginx Proxy Manager — деплой на VPS
 - Inkscape — конвертация EPS в SVG
 
-Звоните — поговорим.
+[Звоните](tel:+79035708273) — поговорим.

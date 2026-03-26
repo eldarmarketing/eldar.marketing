@@ -80,6 +80,6 @@ readtime: 3
 - Docker
 - Sidekiq + PgHero
 
-## Хотите так же?
+## Хотите обсудить проект?
 
-Напишите [@eldarmarketing](https://t.me/eldarmarketing) — обсудим вашу задачу.
+[Звоните](tel:+79035708273) — поговорим.
