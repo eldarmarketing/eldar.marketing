@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>amoCRM &#43; сайт для автоателье — настройка с нуля за одну сессию — Эльдар Маркетинг</title>
+    <meta name="description" content="Настроил amoCRM и задеплоил логотип на сайт автоателье за одну сессию с Claude Code — поля, воронки, причины отказа, SVG-лого.">
+    <meta name="keywords" content="amoCRM настройка, CRM автосервис, детейлинг воронка продаж">
+    <meta name="author" content="Эльдар Маркетинг">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/4mashiny-amocrm/">
+    
+    
+    <meta property="og:title" content="amoCRM &#43; сайт для автоателье — настройка с нуля за одну сессию">
+    <meta property="og:description" content="Настроил amoCRM и задеплоил логотип на сайт автоателье за одну сессию с Claude Code — поля, воронки, причины отказа, SVG-лого.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/4mashiny-amocrm/">
+    <meta property="og:site_name" content="Эльдар Маркетинг">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="amoCRM &#43; сайт для автоателье — настройка с нуля за одну сессию">
+    <meta name="twitter:description" content="Настроил amoCRM и задеплоил логотип на сайт автоателье за одну сессию с Claude Code — поля, воронки, причины отказа, SVG-лого.">
+    
+    <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
+    
+    
+    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css?v=22032026a">
+    
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106070005", "ym");
+        ym(106070005, "init", {
+            ssr:true,
+            webvisor:true,
+            clickmap:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce:true,
+            trackLinks:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1><a href="/">Эльдар Маркетинг</a></h1>
+        <nav>
+            <a href="/about/">Обо мне</a>
+            <a href="/services/">Услуги</a>
+            <a href="/cases/">Кейсы</a>
+            <a href="/blog/">Блог</a>
+        </nav>
+    </header>
+    
+    <main>
+        
+<nav class="breadcrumb" aria-label="Навигация">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>amoCRM &#43; сайт для автоателье — настройка с нуля за одну сессию</span>
+</nav>
+
+<article class="case-study">
+    <h2>amoCRM &#43; сайт для автоателье — настройка с нуля за одну сессию</h2>
+    
+    <p>Пришёл клиент с автоателье в Питере — детейлинг, ксенон, тонировка, шумоизоляция. amoCRM куплена, сайт на Next.js запущен. Но CRM пустая, а на сайте вместо логотипа — текст.</p>
+<h2 id="что-было">Что было</h2>
+<ul>
+<li>В сделке 3 поля: бюджет, комментарий, причина отказа. Нет ни услуги, ни марки авто, ни источника обращения</li>
+<li>Воронка: КВАЛИФИКАЦИЯ → Передан партнёру → НЕ ДОЗВОНИЛИСЬ → ПЕРЕДАН ПАРТНЁРУ (дубль!) → ПАРТНЕР ВЗЯЛ В РАБОТУ → КЛИЕНТ ЗАБРАЛ АВТО</li>
+<li>«Не дозвонились» — это не этап, это статус. Сделки там зависают навсегда</li>
+<li>В компании 18 юридических полей (КПП, ОГРН, БИК, р/с) — для B2C-детейлинга это мусор</li>
+<li>На сайте вместо лого — текст «4машины»</li>
+</ul>
+<h2 id="что-сделали">Что сделали</h2>
+<h3 id="1-поля-сделки">1. Поля сделки</h3>
+<p>Исследовал кейсы внедрения amoCRM в автосервисах через Exa — собрал лучшие практики. Добавил 6 полей:</p>
+<ul>
+<li><strong>Услуга</strong> (список): Детейлинг, Полировка, Керамика, Химчистка, Тонировка, Ксенон, Ателье, Шумоизоляция</li>
+<li><strong>Источник обращения</strong> (список): Сайт, Яндекс, 2ГИС, Instagram, Рекомендация, Повторный, Авито</li>
+<li><strong>Марка авто</strong> и <strong>Модель авто</strong> — в сделке, а не в контакте, потому что один клиент может приезжать с разными машинами</li>
+<li><strong>Класс авто</strong> (список): Седан, Кроссовер, Внедорожник, Минивэн, Купе — влияет на цену</li>
+<li><strong>Желаемая дата</strong> — когда клиент хочет приехать</li>
+</ul>
+<h3 id="2-воронка-продаж">2. Воронка продаж</h3>
+<p>Удалил дубли и переименовал этапы:</p>
+<p><strong>Было:</strong> 6 хаотичных этапов с дублями</p>
+<p><strong>Стало:</strong></p>
+<ol>
+<li>Новая заявка</li>
+<li>Квалификация</li>
+<li>Записан на визит</li>
+<li>Авто в работе</li>
+<li>Готово, ждёт выдачу</li>
+</ol>
+<p>Каждый этап — совершённое действие. Нет процессных статусов вроде «думает» или «не дозвонились».</p>
+<h3 id="3-воронка-повторные-продажи">3. Воронка «Повторные продажи»</h3>
+<p>Создал вторую воронку для возврата клиентов через 3-6 месяцев:</p>
+<ol>
+<li>Пора напомнить — сюда попадает клиент после успешной сделки</li>
+<li>Клиент заинтересован — ответил, обсуждаем</li>
+<li>Записан повторно — дата визита согласована</li>
+</ol>
+<p>Керамика через полгода требует обслуживания — это готовая точка касания.</p>
+<h3 id="4-причины-отказа">4. Причины отказа</h3>
+<p>Было 4 причины. Добавил 3 критичных: «Не дозвонились», «Не подошли сроки», «Нецелевой». Через месяц-два будет видно главную причину потерь.</p>
+<h3 id="5-внешний-вид-карточки">5. Внешний вид карточки</h3>
+<p>Настроил канбан — на каждой карточке сразу видно услугу, марку авто и бюджет. Менеджер не открывает сделку, чтобы понять суть.</p>
+<h3 id="6-svg-логотип-на-сайт">6. SVG-логотип на сайт</h3>
+<p>Сконвертировал EPS-файл в SVG через Inkscape. Сделал React-компонент с currentColor — логотип автоматически синий на белом фоне (Header) и белый на тёмном (Footer). Задеплоил через Docker на VPS.</p>
+<h2 id="результат">Результат</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Было</th>
+          <th>Стало</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>3 поля в сделке</td>
+          <td>9 полей — вся инфа по заказу</td>
+      </tr>
+      <tr>
+          <td>6 этапов с дублями</td>
+          <td>5 чистых этапов + воронка повторных</td>
+      </tr>
+      <tr>
+          <td>4 причины отказа</td>
+          <td>7 причин с аналитикой</td>
+      </tr>
+      <tr>
+          <td>Текст вместо лого</td>
+          <td>SVG с адаптацией под фон</td>
+      </tr>
+      <tr>
+          <td>Пустой канбан</td>
+          <td>Информативные карточки</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="технический-стек">Технический стек</h2>
+<ul>
+<li>Claude Code — управление amoCRM через Playwright, деплой через SSH</li>
+<li>amoCRM — поля, воронки, причины отказа</li>
+<li>Next.js 16 + React 19 + Tailwind v4 — SVG-компонент логотипа</li>
+<li>Docker + Nginx Proxy Manager — деплой на VPS</li>
+<li>Inkscape — конвертация EPS в SVG</li>
+</ul>
+<p>Напишите @eldarmarketing_bot — обсудим вашу задачу.</p>
+
+</article>
+
+<style>
+ 
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 32px;
+    color: rgba(0,0,0,0.4);
+    font-family: "Fira Code", monospace;
+}
+.breadcrumb a {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.breadcrumb a:hover {
+    color: rgba(0,0,0,0.85);
+}
+.breadcrumb .sep {
+    margin: 0 8px;
+    color: rgba(0,0,0,0.2);
+}
+
+ 
+html.dark .breadcrumb { color: rgba(255,255,255,0.4); }
+html.dark .breadcrumb a { color: rgba(255,255,255,0.5); }
+html.dark .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+html.dark .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+ 
+@media (prefers-color-scheme: dark) {
+    html:not(.light) .breadcrumb { color: rgba(255,255,255,0.4); }
+    html:not(.light) .breadcrumb a { color: rgba(255,255,255,0.5); }
+    html:not(.light) .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    html:not(.light) .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+}
+
+ 
+.case-study img {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 32px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.case-study img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.case-study img[alt*="Главная"],
+.case-study img[alt*="hero"],
+.case-study img[alt*="Результат"] {
+    margin-left: -40px;
+    margin-right: -40px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    border-radius: 16px;
+}
+.case-study img[alt*="Мобильная"],
+.case-study img[alt*="mobile"] {
+    max-width: 360px;
+    margin: 32px auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 8px solid #1a1a1a;
+}
+
+html.dark .case-study img {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+html.dark .case-study img:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+html.dark .case-study img[alt*="Мобильная"],
+html.dark .case-study img[alt*="mobile"] {
+    border-color: #333;
+}
+
+ 
+@media (max-width: 600px) {
+    .case-study img[alt*="Главная"],
+    .case-study img[alt*="hero"],
+    .case-study img[alt*="Результат"] {
+        margin-left: -24px;
+        margin-right: -24px;
+        max-width: calc(100% + 48px);
+        width: calc(100% + 48px);
+        border-radius: 0;
+    }
+    .case-study img[alt*="Мобильная"],
+    .case-study img[alt*="mobile"] {
+        max-width: 280px;
+    }
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "amoCRM \u002b сайт для автоателье — настройка с нуля за одну сессию" }
+    ]
+}
+</script>
+
+    </main>
+    
+    <footer>
+        <p>© 2017–2026 Эльдар Маркетинг</p>
+        <p><a href="https://t.me/eldarmarketing">@eldarmarketing</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a>&nbsp;&nbsp;&nbsp; <a href="/privacy/">Политика конфиденциальности</a></p>
+    </footer>
+
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 24px;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5;transition:transform 0.3s ease">
+  <div style="max-width:680px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <p style="margin:0;flex:1;min-width:200px">Мы&nbsp;используем cookie и&nbsp;Яндекс.Метрику для&nbsp;улучшения работы сайта. Продолжая, вы&nbsp;соглашаетесь с&nbsp;<a href="/privacy/" style="text-decoration:underline">политикой конфиденциальности</a>.</p>
+    <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:6px;border:none;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit">Принять</button>
+  </div>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem("cookies_accepted","1");document.getElementById("cookie-banner").style.transform="translateY(100%)"}
+(function(){if(!localStorage.getItem("cookies_accepted")){var b=document.getElementById("cookie-banner");var isDark=document.documentElement.classList.contains("dark");b.style.background=isDark?"#2a2a2a":"#ffffff";b.style.borderColor=isDark?"#3a3a3a":"#e5e5e5";b.style.color=isDark?"#a0a4ab":"#1a1a1a";var btn=b.querySelector("button");btn.style.background=isDark?"#d1d5db":"#1a1a1a";btn.style.color=isDark?"#1a1a1a":"#ffffff";b.style.display="block"}})()
+</script>
+
+
+<script src="/js/theme-toggle.js"></script>
+<script src="/js/click-sound.js" defer></script>
+<script src="/js/typograf.js?v=1" defer></script>
+</body>
+</html>

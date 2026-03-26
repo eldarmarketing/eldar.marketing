@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спектр — Админ-панель</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a1a'/><path d='M16 6l2 8h-1v4l3-2 1 2-5 3v5h-2v-5l-5-3 1-2 3 2v-4h-1l2-8z' fill='%23FFD100'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #1a1a1a;
+      --card: #242424;
+      --card-hover: #2a2a2a;
+      --accent: #FFD100;
+      --accent-dim: rgba(255,209,0,0.15);
+      --text: #ffffff;
+      --text-secondary: #999999;
+      --border: #333333;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --danger: #ef4444;
+      --radius: 8px;
+      --sidebar-width: 240px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== LAYOUT ===== */
+    .app {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-rows: 1fr;
+      height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      padding: 20px 20px 28px;
+    }
+
+    .sidebar-logo-text {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.3px;
+    }
+    .sidebar-logo-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 12px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      background: var(--card-hover);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .nav-item.active svg {
+      stroke: var(--accent);
+    }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* ===== MAIN ===== */
+    .main {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 28px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--card);
+    }
+
+    .header-burger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: auto;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      transition: background 0.15s;
+    }
+
+    .header-burger:hover {
+      background: var(--card-hover);
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .header-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .header-logout {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      padding: 6px;
+      border-radius: var(--radius);
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logout:hover {
+      color: var(--danger);
+      background: rgba(239,68,68,0.1);
+    }
+
+    .header-logout svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    /* ===== CONTENT ===== */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+      animation: modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      transition: all 0.15s;
+    }
+
+    .modal-close:hover {
+      background: var(--card-hover);
+      color: var(--text);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-right: 32px;
+    }
+
+    .modal-body {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ===== MOBILE OVERLAY ===== */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 90;
+    }
+
+    .sidebar-backdrop.open {
+      display: block;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        width: var(--sidebar-width);
+        transition: left 0.25s ease;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .header-burger {
+        display: flex;
+      }
+
+      .content {
+        padding: 20px 16px;
+      }
+
+      .metrics-grid { grid-template-columns: 1fr !important; }
+      .seo-metrics { grid-template-columns: 1fr !important; }
+      .banners-grid { grid-template-columns: 1fr !important; }
+      .promotions-grid { grid-template-columns: 1fr !important; }
+      .pages-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ===== METRIC CARDS ===== */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.15s;
+    }
+
+    .metric-card:hover {
+      border-color: var(--accent);
+    }
+
+    .metric-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .metric-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* ===== CHART ===== */
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .chart-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* ===== TABLES ===== */
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .table-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 20px 24px 0;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .admin-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      cursor: default;
+      user-select: none;
+    }
+
+    .admin-table th.sortable {
+      cursor: pointer;
+    }
+
+    .admin-table th.sortable:hover {
+      color: var(--accent);
+    }
+
+    .admin-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .admin-table tbody tr {
+      transition: background 0.12s;
+      cursor: pointer;
+    }
+
+    .admin-table tbody tr:hover {
+      background: var(--card-hover);
+    }
+
+    .admin-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ===== STATUS BADGES ===== */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .badge-amber { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .badge-purple { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+    .badge-green { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .badge-yellow { background: var(--accent-dim); color: var(--accent); }
+    .badge-gray { background: rgba(153,153,153,0.15); color: #999; }
+
+    /* ===== TOOLBAR ===== */
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .toolbar input[type="text"],
+    .toolbar select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .toolbar input[type="text"]:focus,
+    .toolbar select:focus {
+      border-color: var(--accent);
+    }
+
+    .toolbar input[type="text"] {
+      width: 260px;
+    }
+
+    .btn {
+      padding: 8px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #1a1a1a;
+    }
+
+    .btn-accent:hover {
+      background: #e6bc00;
+    }
+
+    .btn-danger {
+      background: rgba(239,68,68,0.15);
+      color: #ef4444;
+      border-color: rgba(239,68,68,0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239,68,68,0.25);
+    }
+
+    .btn-secondary {
+      background: var(--card-hover);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    /* ===== PRODUCT IMAGE PLACEHOLDER ===== */
+    .product-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: var(--card-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-thumb svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-secondary);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* ===== FORM ===== */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      justify-content: flex-end;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 80px;
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .photo-placeholder:hover {
+      border-color: var(--accent);
+    }
+
+    /* ===== CATEGORIES TREE ===== */
+    .tree-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .tree-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      transition: background 0.12s;
+      cursor: default;
+    }
+
+    .tree-item:hover {
+      background: var(--card-hover);
+    }
+
+    .tree-item:last-child {
+      border-bottom: none;
+    }
+
+    .tree-toggle {
+      width: 20px;
+      text-align: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .tree-toggle:hover {
+      color: var(--accent);
+    }
+
+    .tree-icon {
+      flex-shrink: 0;
+    }
+
+    .tree-name {
+      flex: 1;
+    }
+
+    .tree-sub {
+      padding-left: 32px;
+    }
+
+    /* ===== CONTENT TABS ===== */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 12px 24px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ===== BANNERS / PROMO / PAGES GRIDS ===== */
+    .banners-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .promotions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .content-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+
+    .content-card:hover {
+      border-color: var(--accent);
+    }
+
+    .content-card-img {
+      width: 100%;
+      height: 100px;
+      background: var(--card-hover);
+      border-radius: 6px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .content-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .content-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .content-card .card-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .toggle-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-track {
+      width: 36px;
+      height: 20px;
+      background: var(--border);
+      border-radius: 10px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .toggle-track.on {
+      background: var(--accent);
+    }
+
+    .toggle-knob {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.2s;
+    }
+
+    .toggle-track.on .toggle-knob {
+      left: 18px;
+    }
+
+    .discount-badge {
+      display: inline-block;
+      background: rgba(239,68,68,0.15);
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* ===== SEO METRICS ===== */
+    .seo-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    /* ===== TOAST ===== */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+
+    .toast {
+      background: var(--accent);
+      color: #1a1a1a;
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      animation: toastIn 0.3s ease forwards;
+      max-width: 360px;
+    }
+
+    .toast.out {
+      animation: toastOut 0.3s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(40px); }
+    }
+
+    /* ===== MODAL EXTRAS ===== */
+    .modal-body .admin-table {
+      margin: 12px 0;
+    }
+
+    .modal-body .admin-table tbody tr {
+      cursor: default;
+    }
+
+    .modal-meta {
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .modal-meta strong {
+      color: var(--text);
+    }
+
+    .order-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .order-header .badge {
+      font-size: 13px;
+    }
+
+    .order-date {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">Spektr78</div>
+      <div class="sidebar-logo-sub">Admin Panel</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-section="dashboard" onclick="showSection('dashboard')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Дашборд
+      </a>
+      <a class="nav-item" data-section="catalog" onclick="showSection('catalog')">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Каталог
+      </a>
+      <a class="nav-item" data-section="categories" onclick="showSection('categories')">
+        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        Категории
+      </a>
+      <a class="nav-item" data-section="orders" onclick="showSection('orders')">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        Заказы
+      </a>
+      <a class="nav-item" data-section="clients" onclick="showSection('clients')">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Клиенты
+      </a>
+      <a class="nav-item" data-section="content" onclick="showSection('content')">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Контент
+      </a>
+      <a class="nav-item" data-section="seo" onclick="showSection('seo')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        SEO
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="header">
+      <button class="header-burger" id="burgerBtn" onclick="toggleSidebar()">&#9776;</button>
+      <div class="header-user">
+        <span class="header-user-name">Александр С.</span>
+        <div class="header-avatar">АС</div>
+        <button class="header-logout" title="Выйти">
+          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- ===== DASHBOARD ===== -->
+      <div class="section active" id="section-dashboard">
+        <h2>Дашборд</h2>
+        <p style="margin-bottom:24px">Обзор ключевых показателей за март 2026</p>
+        <div class="metrics-grid" id="dashboardMetricsGrid"></div>
+        <div class="chart-card">
+          <div class="chart-title">Продажи за март 2026</div>
+          <svg id="salesChart" viewBox="0 0 700 200" style="width:100%;height:auto;display:block"></svg>
+        </div>
+        <div class="table-card">
+          <div class="table-card-title" style="margin-bottom:12px">Последние заказы</div>
+          <table class="admin-table">
+            <thead><tr><th>№</th><th>Дата</th><th>Клиент</th><th>Сумма</th><th>Статус</th></tr></thead>
+            <tbody id="recentOrdersBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CATALOG ===== -->
+      <div class="section" id="section-catalog">
+        <h2>Каталог</h2>
+        <p style="margin-bottom:20px">Управление товарами</p>
+        <div class="toolbar">
+          <input type="text" id="catalogSearch" placeholder="Поиск по названию..." oninput="renderCatalog()">
+          <select id="catalogCategory" onchange="renderCatalog()">
+            <option value="">Все категории</option>
+            <option value="Шуруповёрты">Шуруповёрты</option>
+            <option value="Перфораторы">Перфораторы</option>
+            <option value="УШМ угловые">УШМ угловые</option>
+          </select>
+          <button class="btn btn-accent" onclick="openProductModal(null)">+ Добавить товар</button>
+        </div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr>
+              <th>Фото</th>
+              <th class="sortable" onclick="showToast()">Название ▼</th>
+              <th class="sortable" onclick="showToast()">Артикул ▼</th>
+              <th>Категория</th>
+              <th class="sortable" onclick="showToast()">Цена ▼</th>
+              <th>Наличие</th>
+            </tr></thead>
+            <tbody id="catalogBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CATEGORIES ===== -->
+      <div class="section" id="section-categories">
+        <h2>Категории</h2>
+        <p style="margin-bottom:20px">Дерево категорий каталога</p>
+        <div class="tree-card" id="categoriesTree"></div>
+      </div>
+
+      <!-- ===== ORDERS ===== -->
+      <div class="section" id="section-orders">
+        <h2>Заказы</h2>
+        <p style="margin-bottom:20px">Все заказы магазина</p>
+        <div class="toolbar">
+          <input type="text" id="ordersSearch" placeholder="Поиск по номеру или клиенту..." oninput="renderOrders()">
+        </div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr><th>№</th><th>Дата</th><th>Клиент</th><th>Сумма</th><th>Статус</th></tr></thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CLIENTS ===== -->
+      <div class="section" id="section-clients">
+        <h2>Клиенты</h2>
+        <p style="margin-bottom:20px">База клиентов</p>
+        <div class="toolbar">
+          <input type="text" id="clientsSearch" placeholder="Поиск по имени или компании..." oninput="renderClients()">
+        </div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr><th>Клиент</th><th>Телефон</th><th>Email</th><th>Заказов</th><th>Сумма покупок</th></tr></thead>
+            <tbody id="clientsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CONTENT ===== -->
+      <div class="section" id="section-content">
+        <h2>Контент</h2>
+        <p style="margin-bottom:20px">Баннеры, акции и страницы сайта</p>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('banners',this)">Баннеры</button>
+          <button class="tab-btn" onclick="switchTab('promotions',this)">Акции</button>
+          <button class="tab-btn" onclick="switchTab('pages',this)">Страницы</button>
+        </div>
+        <div class="tab-content active" id="tab-banners"></div>
+        <div class="tab-content" id="tab-promotions"></div>
+        <div class="tab-content" id="tab-pages"></div>
+      </div>
+
+      <!-- ===== SEO ===== -->
+      <div class="section" id="section-seo">
+        <h2>SEO</h2>
+        <p style="margin-bottom:24px">Поисковая оптимизация страниц</p>
+        <div class="seo-metrics" id="seoMetrics"></div>
+        <div class="table-card">
+          <table class="admin-table">
+            <thead><tr><th>URL</th><th>Title</th><th>Description</th><th>Индексация</th></tr></thead>
+            <tbody id="seoBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA LAYER =====
+
+const products = [
+  // Шуруповёрты (9)
+  { id:'p1', name:'Отвертка аккумуляторная бесщеточная DCK KDPL04–5 (TYPE E)', article:'KDPL04-5', category:'Шуруповёрты', categoryId:'shurupoverty', price:'3 800 ₽', priceNum:3800, availability:'В наличии', power:'4В', weight:'0.5 кг', voltage:'4В', description:'Компактная аккумуляторная отвёртка с бесщёточным двигателем для бытовых задач.' },
+  { id:'p2', name:'Дрель-шуруповерт DCK KDJZ23–10, 12В, 35Нм, 2×2А/ч', article:'KDJZ23-10', category:'Шуруповёрты', categoryId:'shurupoverty', price:'9 590 ₽', priceNum:9590, availability:'В наличии', power:'320Вт', weight:'1.2 кг', voltage:'12В', description:'Универсальная дрель-шуруповёрт 12В с двумя аккумуляторами 2А/ч.' },
+  { id:'p3', name:'Дрель-шуруповерт DCK KDJZ23–10, 12В, 35Нм, без АКБ', article:'KDJZ23-10Z', category:'Шуруповёрты', categoryId:'shurupoverty', price:'5 990 ₽', priceNum:5990, availability:'В наличии', power:'320Вт', weight:'0.9 кг', voltage:'12В', description:'Дрель-шуруповёрт 12В — версия без аккумуляторов для тех, у кого уже есть батареи DCK.' },
+  { id:'p4', name:'Дрель-шуруповерт ударная DCK KDJZ23–10i, 10.8В, 35Нм, 2×2А/ч', article:'KDJZ23-10i', category:'Шуруповёрты', categoryId:'shurupoverty', price:'9 990 ₽', priceNum:9990, availability:'В наличии', power:'350Вт', weight:'1.3 кг', voltage:'10.8В', description:'Ударная дрель-шуруповёрт 10.8В с функцией удара для работы с кирпичом.' },
+  { id:'p5', name:'Дрель-шуруповерт DCK KDPL04–8 Impact, HEX, 10.8В, 2×2А/ч, 140Нм', article:'KDPL04-8', category:'Шуруповёрты', categoryId:'shurupoverty', price:'11 590 ₽', priceNum:11590, availability:'В наличии', power:'400Вт', weight:'1.1 кг', voltage:'10.8В', description:'Импульсный шуруповёрт с HEX-патроном, 140 Нм крутящего момента.' },
+  { id:'p6', name:'Дрель-шуруповерт DCK KDPL04–8 Impact, HEX, 10.8В, без АКБ', article:'KDPL04-8Z', category:'Шуруповёрты', categoryId:'shurupoverty', price:'6 590 ₽', priceNum:6590, availability:'Под заказ', power:'400Вт', weight:'0.8 кг', voltage:'10.8В', description:'Версия без аккумуляторов импульсного шуруповёрта KDPL04-8.' },
+  { id:'p7', name:'Дрель-шуруповерт DCK KDPL208, 2×4А/ч, HEX-impact, 208Нм', article:'KDPL208', category:'Шуруповёрты', categoryId:'shurupoverty', price:'17 990 ₽', priceNum:17990, availability:'В наличии', power:'500Вт', weight:'1.5 кг', voltage:'18В', description:'Мощный импульсный шуруповёрт 18В с 208 Нм и двумя батареями 4А/ч.' },
+  { id:'p8', name:'Дрель-шуруповерт DCK KDPL208, 18В, без АКБ', article:'KDPL208Z', category:'Шуруповёрты', categoryId:'shurupoverty', price:'8 990 ₽', priceNum:8990, availability:'В наличии', power:'500Вт', weight:'1.2 кг', voltage:'18В', description:'KDPL208 без аккумуляторов — выгодная версия для владельцев батарей DCK 18В.' },
+  { id:'p9', name:'Дрель-шуруповерт DCK KDJZ2060, 18В, 60Нм, 2×2А/ч', article:'KDJZ2060', category:'Шуруповёрты', categoryId:'shurupoverty', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'450Вт', weight:'1.4 кг', voltage:'18В', description:'Профессиональная дрель-шуруповёрт 18В, 60Нм, два аккумулятора в комплекте.' },
+
+  // Перфораторы (14)
+  { id:'p10', name:'Перфоратор DCK KZC05–26B, SDS+, 800Вт, 2.8Дж', article:'KZC05-26B', category:'Перфораторы', categoryId:'perforatory', price:'10 990 ₽', priceNum:10990, availability:'В наличии', power:'800Вт', weight:'2.8 кг', voltage:'220В', description:'Компактный сетевой перфоратор SDS+ для сверления, штробления и лёгкого долбления.' },
+  { id:'p11', name:'Перфоратор DCK KZC04–28, SDS+, 820Вт, 3.3Дж', article:'KZC04-28', category:'Перфораторы', categoryId:'perforatory', price:'12 590 ₽', priceNum:12590, availability:'В наличии', power:'820Вт', weight:'3.0 кг', voltage:'220В', description:'Надёжный перфоратор 820Вт с энергией удара 3.3Дж для ежедневных строительных задач.' },
+  { id:'p12', name:'Перфоратор DCK KZC05–28B, SDS+, 1150Вт, 4.7Дж', article:'KZC05-28B', category:'Перфораторы', categoryId:'perforatory', price:'12 990 ₽', priceNum:12990, availability:'В наличии', power:'1150Вт', weight:'3.5 кг', voltage:'220В', description:'Мощный перфоратор 1150Вт для интенсивных работ по бетону и камню.' },
+  { id:'p13', name:'Перфоратор DCK KZC05–26XC с пылесборником, SDS+, 800Вт', article:'KZC05-26XC', category:'Перфораторы', categoryId:'perforatory', price:'16 990 ₽', priceNum:16990, availability:'Под заказ', power:'800Вт', weight:'3.2 кг', voltage:'220В', description:'Перфоратор с встроенным пылесборником для чистой работы в помещениях.' },
+  { id:'p14', name:'Перфоратор DCK KZC03–38, SDS max, 1100Вт, 7.9Дж', article:'KZC03-38', category:'Перфораторы', categoryId:'perforatory', price:'22 990 ₽', priceNum:22990, availability:'В наличии', power:'1100Вт', weight:'5.5 кг', voltage:'220В', description:'Тяжёлый перфоратор SDS max для демонтажных работ и бурения больших диаметров.' },
+  { id:'p15', name:'Перфоратор DCK KZC45, SDS max, 1500Вт, 14Дж', article:'KZC45', category:'Перфораторы', categoryId:'perforatory', price:'49 990 ₽', priceNum:49990, availability:'Под заказ', power:'1500Вт', weight:'8.2 кг', voltage:'220В', description:'Профессиональный отбойный перфоратор 1500Вт с энергией удара 14Дж.' },
+  { id:'p16', name:'Перфоратор акк. DCK KDZC22, 18В, 2.1Дж, 2×5А/ч', article:'KDZC22', category:'Перфораторы', categoryId:'perforatory', price:'27 990 ₽', priceNum:27990, availability:'В наличии', power:'18В', weight:'3.0 кг', voltage:'18В', description:'Аккумуляторный перфоратор 18В с двумя батареями 5А/ч — свобода без проводов.' },
+  { id:'p17', name:'Перфоратор акк. DCK KDZC22, 18В, 2.1Дж, без АКБ', article:'KDZC22Z', category:'Перфораторы', categoryId:'perforatory', price:'11 990 ₽', priceNum:11990, availability:'В наличии', power:'18В', weight:'2.5 кг', voltage:'18В', description:'KDZC22 без аккумуляторов — доступная версия для владельцев системы DCK 18В.' },
+  { id:'p18', name:'Перфоратор акк. DCK KDZC04–24, 18В, 2.7Дж, 2×5А/ч', article:'KDZC04-24', category:'Перфораторы', categoryId:'perforatory', price:'29 990 ₽', priceNum:29990, availability:'В наличии', power:'18В', weight:'3.2 кг', voltage:'18В', description:'Мощный аккумуляторный перфоратор с увеличенной энергией удара 2.7Дж.' },
+  { id:'p19', name:'Перфоратор акк. DCK KDZC04–24Z, 18В, без АКБ', article:'KDZC04-24Z', category:'Перфораторы', categoryId:'perforatory', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'18В', weight:'2.7 кг', voltage:'18В', description:'Версия KDZC04-24 без батарей — идеальна как дополнение к системе DCK.' },
+  { id:'p20', name:'Перфоратор акк. DCK KRH20V-26, SDS+, 18В, 3.6Дж, 2×6А/ч', article:'KRH20V-26', category:'Перфораторы', categoryId:'perforatory', price:'55 990 ₽', priceNum:55990, availability:'Под заказ', power:'18В', weight:'3.8 кг', voltage:'18В', description:'Флагманский аккумуляторный перфоратор серии KRH с батареями 6А/ч.' },
+  { id:'p21', name:'Перфоратор акк. DCK KRH20V-26, SDS+, без АКБ', article:'KRH20V-26Z', category:'Перфораторы', categoryId:'perforatory', price:'41 990 ₽', priceNum:41990, availability:'В наличии', power:'18В', weight:'3.3 кг', voltage:'18В', description:'KRH20V-26 без аккумуляторов — премиальный перфоратор для профессионалов.' },
+  { id:'p22', name:'Перфоратор акк. DCK KRH20V-28, SDS+, 18В, 3.6Дж, 2×6А/ч', article:'KRH20V-28', category:'Перфораторы', categoryId:'perforatory', price:'53 990 ₽', priceNum:53990, availability:'В наличии', power:'18В', weight:'4.0 кг', voltage:'18В', description:'Перфоратор KRH20V-28 с увеличенным диаметром бурения и двумя батареями.' },
+  { id:'p23', name:'Перфоратор акк. DCK KRH20V-28Z, SDS+, без АКБ', article:'KRH20V-28Z', category:'Перфораторы', categoryId:'perforatory', price:'34 990 ₽', priceNum:34990, availability:'В наличии', power:'18В', weight:'3.5 кг', voltage:'18В', description:'KRH20V-28 без батарей — для расширения линейки без лишних аккумуляторов.' },
+
+  // УШМ угловые (17)
+  { id:'p24', name:'Машина шлифовальная угловая DCK KSM125A, 850Вт, 125мм', article:'KSM125A', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'4 990 ₽', priceNum:4990, availability:'В наличии', power:'850Вт', weight:'1.8 кг', voltage:'220В', description:'Лёгкая УШМ 850Вт для резки и шлифовки металла, камня и плитки.' },
+  { id:'p25', name:'Машина шлифовальная угловая DCK KSM03–125S, 950Вт, 125мм', article:'KSM03-125S', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'5 990 ₽', priceNum:5990, availability:'В наличии', power:'950Вт', weight:'1.9 кг', voltage:'220В', description:'УШМ 950Вт с тонким корпусом и эргономичной рукояткой.' },
+  { id:'p26', name:'Машина шлифовальная угловая DCK KSM04–125S, 1020Вт, 125мм', article:'KSM04-125S', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'5 790 ₽', priceNum:5790, availability:'В наличии', power:'1020Вт', weight:'2.0 кг', voltage:'220В', description:'Болгарка 1020Вт с быстросъёмным защитным кожухом.' },
+  { id:'p27', name:'Машина шлифовальная угловая DCK KSM04–125, 1020Вт, 125мм, плавный пуск', article:'KSM04-125', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'6 490 ₽', priceNum:6490, availability:'В наличии', power:'1020Вт', weight:'2.1 кг', voltage:'220В', description:'УШМ 1020Вт с плавным пуском — исключает рывок при включении.' },
+  { id:'p28', name:'Машина шлифовальная угловая DCK KSM10–125, 1100Вт, 125мм', article:'KSM10-125', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'6 890 ₽', priceNum:6890, availability:'В наличии', power:'1100Вт', weight:'2.1 кг', voltage:'220В', description:'Мощная УШМ 1100Вт с высоким ресурсом для профессионального использования.' },
+  { id:'p29', name:'Машина шлифовальная угловая DCK KSM17–125P, 1100Вт, 125мм', article:'KSM17-125P', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'6 990 ₽', priceNum:6990, availability:'В наличии', power:'1100Вт', weight:'2.2 кг', voltage:'220В', description:'УШМ 1100Вт серии P с антивибрационной боковой рукояткой.' },
+  { id:'p30', name:'Машина шлифовальная угловая DCK KSM05–125, 1500Вт, 125мм', article:'KSM05-125', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'7 990 ₽', priceNum:7990, availability:'В наличии', power:'1500Вт', weight:'2.4 кг', voltage:'220В', description:'Профессиональная УШМ 1500Вт для тяжёлых резов и шлифовки.' },
+  { id:'p31', name:'Машина шлифовальная угловая DCK KSM03–150, 1400Вт, 150мм', article:'KSM03-150', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'9 590 ₽', priceNum:9590, availability:'В наличии', power:'1400Вт', weight:'2.8 кг', voltage:'220В', description:'УШМ 150мм для работы с увеличенными отрезными дисками.' },
+  { id:'p32', name:'Машина шлифовальная угловая DCK KSM06–180, 2100Вт, 180мм', article:'KSM06-180', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'12 990 ₽', priceNum:12990, availability:'В наличии', power:'2100Вт', weight:'4.2 кг', voltage:'220В', description:'Мощная УШМ 180мм для резки труб, арматуры и бетона.' },
+  { id:'p33', name:'Машина шлифовальная угловая DCK KSM230A, 2200Вт, 230мм', article:'KSM230A', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'12 990 ₽', priceNum:12990, availability:'В наличии', power:'2200Вт', weight:'5.0 кг', voltage:'220В', description:'Большая УШМ 230мм 2200Вт для промышленной резки.' },
+  { id:'p34', name:'Машина шлифовальная угловая DCK KSM05–230, 2800Вт, 230мм', article:'KSM05-230', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'2800Вт', weight:'5.5 кг', voltage:'220В', description:'Профессиональная УШМ 230мм с мощным двигателем 2800Вт.' },
+  { id:'p35', name:'Машина шлифовальная угловая DCK KSM06–230, 2100Вт, 230мм', article:'KSM06-230', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'13 990 ₽', priceNum:13990, availability:'В наличии', power:'2100Вт', weight:'4.8 кг', voltage:'220В', description:'УШМ 230мм 2100Вт с константной электроникой и защитой от перегрузки.' },
+  { id:'p36', name:'Машина шлифовальная угловая DCK KSM05–230S, 2800Вт, 230мм, антивибрация', article:'KSM05-230S', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'15 990 ₽', priceNum:15990, availability:'В наличии', power:'2800Вт', weight:'5.7 кг', voltage:'220В', description:'Топовая УШМ 230мм 2800Вт с системой гашения вибрации.' },
+  { id:'p37', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM03–125 FK, 18В, 2×4А/ч', article:'KDSM03-125FK', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'24 990 ₽', priceNum:24990, availability:'В наличии', power:'18В', weight:'2.0 кг', voltage:'18В', description:'Аккумуляторная УШМ 125мм с двумя батареями 4А/ч — полная свобода.' },
+  { id:'p38', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM03–125 Z, 18В, без АКБ', article:'KDSM03-125Z', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'9 990 ₽', priceNum:9990, availability:'В наличии', power:'18В', weight:'1.6 кг', voltage:'18В', description:'KDSM03-125 без батарей — для тех, кто расширяет систему DCK 18В.' },
+  { id:'p39', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM04–125 FK, 18В, 2×4А/ч', article:'KDSM04-125FK', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'26 990 ₽', priceNum:26990, availability:'В наличии', power:'18В', weight:'2.2 кг', voltage:'18В', description:'Продвинутая аккумуляторная УШМ 125мм с бесщёточным мотором и двумя АКБ.' },
+  { id:'p40', name:'Машина шлифовальная угловая аккумуляторная DCK KDSM04–125 Z, 18В, без АКБ', article:'KDSM04-125Z', category:'УШМ угловые', categoryId:'ushm-uglovye', price:'10 990 ₽', priceNum:10990, availability:'В наличии', power:'18В', weight:'1.8 кг', voltage:'18В', description:'KDSM04-125 без аккумуляторов — бесщёточная модель для системы DCK.' }
+];
+
+const categories = [
+  // Root categories
+  { id:'mashiny-shlifovalnye', name:'Машины шлифовальные', parentId:null, count:17 },
+  { id:'shurupoverty', name:'Шуруповёрты', parentId:null, count:9 },
+  { id:'gajkoverty', name:'Гайковёрты', parentId:null, count:0 },
+  { id:'dreli', name:'Дрели', parentId:null, count:0 },
+  { id:'perforatory', name:'Перфораторы', parentId:null, count:14 },
+  { id:'otbojnye-molotki', name:'Отбойные молотки', parentId:null, count:0 },
+  { id:'miksery', name:'Миксеры', parentId:null, count:0 },
+  { id:'shtroborezy', name:'Штроборезы', parentId:null, count:0 },
+  { id:'rubanki', name:'Рубанки', parentId:null, count:0 },
+  { id:'pily-diskovye', name:'Пилы дисковые', parentId:null, count:0 },
+  { id:'lobziki', name:'Лобзики', parentId:null, count:0 },
+  { id:'pily-sabelnye', name:'Пилы сабельные', parentId:null, count:0 },
+  { id:'pily-tortsovochnye', name:'Пилы торцовочные', parentId:null, count:0 },
+  { id:'feny', name:'Фены', parentId:null, count:0 },
+  { id:'stanki-sverlilnye', name:'Станки сверлильные', parentId:null, count:0 },
+  { id:'frezery', name:'Фрезеры', parentId:null, count:0 },
+  { id:'gravery', name:'Граверы', parentId:null, count:0 },
+  { id:'zaklyopochniki', name:'Заклёпочники', parentId:null, count:0 },
+  { id:'renovatory', name:'Реноваторы', parentId:null, count:0 },
+  { id:'akkumulyatornye-bloki', name:'Аккумуляторные блоки и ЗУ', parentId:null, count:0 },
+
+  // Sub under Машины шлифовальные
+  { id:'ushm-uglovye', name:'Угловые', parentId:'mashiny-shlifovalnye', count:17 },
+  { id:'ushm-pryamye', name:'Прямые', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-polirovalnye', name:'Полировальные', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-ploskie', name:'Плоские', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-lentochnye', name:'Ленточные', parentId:'mashiny-shlifovalnye', count:0 },
+  { id:'ushm-ekstsentrikovye', name:'Эксцентриковые', parentId:'mashiny-shlifovalnye', count:0 }
+];
+
+const clients = [
+  { id:'c1', name:'Иванов Сергей Петрович', company:'ООО «СтройМонтаж»', phone:'+7 921 345-67-89', email:'ivanov@stroymontazh.ru', ordersCount:5, totalSpent:287500 },
+  { id:'c2', name:'Петров Алексей Владимирович', company:'ИП Петров А.В.', phone:'+7 911 234-56-78', email:'petrov.av@mail.ru', ordersCount:3, totalSpent:124800 },
+  { id:'c3', name:'Смирнов Дмитрий Олегович', company:'ООО «Северная Строительная Компания»', phone:'+7 921 876-54-32', email:'smirnov@ssk-spb.ru', ordersCount:8, totalSpent:512000 },
+  { id:'c4', name:'Кузнецова Марина Игоревна', company:'ООО «БалтМонтаж»', phone:'+7 931 456-78-90', email:'kuznetsova@baltmontazh.ru', ordersCount:2, totalSpent:67900 },
+  { id:'c5', name:'Козлов Михаил Дмитриевич', company:'ИП Козлов М.Д.', phone:'+7 921 567-89-01', email:'kozlov.md@yandex.ru', ordersCount:4, totalSpent:198500 },
+  { id:'c6', name:'Фёдоров Андрей Николаевич', company:'ООО «НеваСтрой»', phone:'+7 911 678-90-12', email:'fedorov@nevastroy.ru', ordersCount:6, totalSpent:345000 },
+  { id:'c7', name:'Морозов Виктор Александрович', company:'ООО «ПромТехСервис»', phone:'+7 931 789-01-23', email:'morozov@promtechserv.ru', ordersCount:3, totalSpent:156700 },
+  { id:'c8', name:'Васильев Константин Сергеевич', company:'ИП Васильев К.С.', phone:'+7 921 890-12-34', email:'vasilev.ks@gmail.com', ordersCount:1, totalSpent:49990 }
+];
+
+const orders = [
+  { id:'o1', number:'СП-001', date:'2026-03-02', clientId:'c1', items:[{productId:'p10', name:'Перфоратор DCK KZC05–26B', qty:2, price:10990}, {productId:'p24', name:'УШМ DCK KSM125A', qty:3, price:4990}], total:36950, status:'Завершён', address:'г. Санкт-Петербург, ул. Строителей, д. 15', phone:'+7 921 345-67-89', comment:'Доставка до двери' },
+  { id:'o2', number:'СП-002', date:'2026-03-05', clientId:'c3', items:[{productId:'p14', name:'Перфоратор DCK KZC03–38', qty:1, price:22990}, {productId:'p30', name:'УШМ DCK KSM05–125', qty:2, price:7990}], total:38970, status:'Завершён', address:'г. Санкт-Петербург, Московский пр., д. 120, оф. 45', phone:'+7 921 876-54-32', comment:'' },
+  { id:'o3', number:'СП-003', date:'2026-03-07', clientId:'c2', items:[{productId:'p2', name:'Дрель-шуруповерт DCK KDJZ23–10', qty:5, price:9590}], total:47950, status:'Завершён', address:'г. Санкт-Петербург, ул. Маршала Казакова, д. 8', phone:'+7 911 234-56-78', comment:'Самовывоз со склада' },
+  { id:'o4', number:'СП-004', date:'2026-03-10', clientId:'c6', items:[{productId:'p7', name:'Дрель-шуруповерт DCK KDPL208', qty:3, price:17990}, {productId:'p12', name:'Перфоратор DCK KZC05–28B', qty:2, price:12990}], total:79950, status:'Отправлен', address:'г. Санкт-Петербург, наб. Обводного канала, д. 76', phone:'+7 911 678-90-12', comment:'Связаться перед доставкой' },
+  { id:'o5', number:'СП-005', date:'2026-03-12', clientId:'c5', items:[{productId:'p16', name:'Перфоратор акк. DCK KDZC22', qty:2, price:27990}], total:55980, status:'Отправлен', address:'г. Санкт-Петербург, пр. Энгельса, д. 33', phone:'+7 921 567-89-01', comment:'' },
+  { id:'o6', number:'СП-006', date:'2026-03-14', clientId:'c1', items:[{productId:'p34', name:'УШМ DCK KSM05–230', qty:4, price:13990}], total:55960, status:'Отправлен', address:'г. Санкт-Петербург, ул. Строителей, д. 15', phone:'+7 921 345-67-89', comment:'Оплата по счёту' },
+  { id:'o7', number:'СП-007', date:'2026-03-17', clientId:'c4', items:[{productId:'p37', name:'УШМ акк. DCK KDSM03–125 FK', qty:1, price:24990}, {productId:'p5', name:'Дрель-шуруповерт DCK KDPL04–8', qty:2, price:11590}], total:48170, status:'В обработке', address:'г. Санкт-Петербург, Лиговский пр., д. 56', phone:'+7 931 456-78-90', comment:'' },
+  { id:'o8', number:'СП-008', date:'2026-03-18', clientId:'c7', items:[{productId:'p22', name:'Перфоратор акк. DCK KRH20V-28', qty:1, price:53990}, {productId:'p39', name:'УШМ акк. DCK KDSM04–125 FK', qty:1, price:26990}], total:80980, status:'В обработке', address:'г. Санкт-Петербург, ул. Типанова, д. 21', phone:'+7 931 789-01-23', comment:'Нужна счёт-фактура' },
+  { id:'o9', number:'СП-009', date:'2026-03-20', clientId:'c3', items:[{productId:'p18', name:'Перфоратор акк. DCK KDZC04–24', qty:3, price:29990}, {productId:'p9', name:'Дрель-шуруповерт DCK KDJZ2060', qty:3, price:13990}], total:131940, status:'В обработке', address:'г. Санкт-Петербург, Московский пр., д. 120, оф. 45', phone:'+7 921 876-54-32', comment:'Срочный заказ' },
+  { id:'o10', number:'СП-010', date:'2026-03-21', clientId:'c8', items:[{productId:'p15', name:'Перфоратор DCK KZC45', qty:1, price:49990}], total:49990, status:'Новый', address:'г. Санкт-Петербург, ул. Савушкина, д. 112', phone:'+7 921 890-12-34', comment:'' },
+  { id:'o11', number:'СП-011', date:'2026-03-22', clientId:'c6', items:[{productId:'p20', name:'Перфоратор акк. DCK KRH20V-26', qty:2, price:55990}, {productId:'p36', name:'УШМ DCK KSM05–230S', qty:2, price:15990}], total:143960, status:'Новый', address:'г. Санкт-Петербург, наб. Обводного канала, д. 76', phone:'+7 911 678-90-12', comment:'Доставка после 14:00' },
+  { id:'o12', number:'СП-012', date:'2026-03-23', clientId:'c5', items:[{productId:'p11', name:'Перфоратор DCK KZC04–28', qty:5, price:12590}, {productId:'p28', name:'УШМ DCK KSM10–125', qty:5, price:6890}], total:97400, status:'Новый', address:'г. Санкт-Петербург, пр. Энгельса, д. 33', phone:'+7 921 567-89-01', comment:'Для объекта на Парнасе' }
+];
+
+const banners = [
+  { id:'b1', title:'Новинки DCK 2026', subtitle:'Аккумуляторная линейка 18В — 12 новых моделей', url:'/novosti/novinki-2026', active:true },
+  { id:'b2', title:'Скидка 15% на перфораторы', subtitle:'Только до конца марта на все сетевые перфораторы', url:'/aktsii/skidka-perforatory', active:true },
+  { id:'b3', title:'Бесплатная доставка по СПб', subtitle:'При заказе от 15 000 ₽ — доставим за 1 день', url:'/dostavka', active:true }
+];
+
+const promotions = [
+  { id:'pr1', title:'-15% на перфораторы', description:'Скидка 15% на все сетевые перфораторы DCK при заказе через сайт. Акция действует на модели KZC05-26B, KZC04-28, KZC05-28B, KZC03-38.', discount:15, startDate:'2026-03-01', endDate:'2026-03-31', active:true },
+  { id:'pr2', title:'Аккумулятор в подарок', description:'При покупке любого аккумуляторного шуруповёрта DCK — дополнительный аккумулятор 2А/ч в подарок. Количество подарков ограничено.', discount:0, startDate:'2026-03-10', endDate:'2026-04-10', active:true }
+];
+
+const pages = [
+  { id:'pg1', title:'О бренде', seoTitle:'DCK — профессиональный электроинструмент | Спектр', seoDescription:'DCK — китайский бренд профессионального электроинструмента. Надёжность, мощность и доступная цена для строителей и мастеров.', content:'DCK (Dongcheng) — один из крупнейших производителей электроинструмента в Китае. Компания основана в 1995 году и за это время стала лидером рынка. Инструмент DCK сочетает профессиональное качество с доступной ценой.' },
+  { id:'pg2', title:'О компании', seoTitle:'Компания Спектр — официальный дистрибьютор DCK в СПб', seoDescription:'Компания Спектр — авторизованный дистрибьютор инструмента DCK в Санкт-Петербурге. Продажа, сервис, гарантия.', content:'Компания «Спектр» — авторизованный дистрибьютор инструмента DCK в Санкт-Петербурге. Мы работаем с 2018 года и обеспечиваем полный цикл: от консультации до послепродажного сервиса.' },
+  { id:'pg3', title:'Контакты', seoTitle:'Контакты Спектр — адрес, телефон, график работы', seoDescription:'Магазин электроинструмента Спектр в Санкт-Петербурге. Адрес, телефон, email, график работы.', content:'Адрес: г. Санкт-Петербург, ул. Профессора Попова, д. 23. Телефон: +7 (812) 555-00-00. Email: info@spektr-tools.ru. Режим работы: Пн-Пт 9:00-19:00, Сб 10:00-17:00.' }
+];
+
+const seoPages = [
+  { url:'/', title:'Спектр — электроинструмент DCK в Санкт-Петербурге', description:'Официальный магазин электроинструмента DCK. Шуруповёрты, перфораторы, УШМ с доставкой по СПб.', indexed:true, speed:92, schema:'Organization, WebSite' },
+  { url:'/katalog', title:'Каталог электроинструмента DCK — Спектр', description:'Полный каталог инструмента DCK: шуруповёрты, перфораторы, болгарки, пилы и аксессуары.', indexed:true, speed:88, schema:'ItemList, BreadcrumbList' },
+  { url:'/shurupoverty', title:'Шуруповёрты DCK — купить в СПб | Спектр', description:'Аккумуляторные дрели-шуруповёрты DCK от 3 800 ₽. Доставка по Санкт-Петербургу за 1 день.', indexed:true, speed:90, schema:'ItemList, BreadcrumbList' },
+  { url:'/perforatory', title:'Перфораторы DCK — купить в СПб | Спектр', description:'Перфораторы DCK SDS+ и SDS max от 10 990 ₽. Сетевые и аккумуляторные модели.', indexed:true, speed:85, schema:'ItemList, BreadcrumbList' },
+  { url:'/ushm', title:'УШМ (болгарки) DCK — купить в СПб | Спектр', description:'Угловые шлифовальные машины DCK 125/150/180/230 мм от 4 990 ₽. Доставка и гарантия.', indexed:true, speed:87, schema:'ItemList, BreadcrumbList' },
+  { url:'/kontakty', title:'Контакты магазина Спектр — адрес, телефон', description:'Магазин Спектр: ул. Профессора Попова, 23, СПб. Тел: +7 (812) 555-00-00.', indexed:true, speed:95, schema:'LocalBusiness, BreadcrumbList' }
+];
+
+const dashboardMetrics = { revenue: 847500, ordersToday: 3, totalProducts: 40, newClients: 5 };
+
+const chartData = [
+  25000, 32000, 18000, 41000, 28000, 35000, 22000,
+  38000, 29000, 44000, 19000, 33000, 26000, 37000,
+  21000, 42000, 30000, 27000, 39000, 24000, 36000,
+  20000, 31000, 43000, 23000, 34000, 28000, 40000,
+  17000, 25500
+];
+
+
+// ===== NAVIGATION =====
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  const section = document.getElementById('section-' + id);
+  const navItem = document.querySelector('.nav-item[data-section="' + id + '"]');
+
+  if (section) section.classList.add('active');
+  if (navItem) navItem.classList.add('active');
+
+  closeSidebar();
+}
+
+// ===== MOBILE SIDEBAR =====
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  sidebar.classList.toggle('open');
+  backdrop.classList.toggle('open');
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  sidebar.classList.remove('open');
+  backdrop.classList.remove('open');
+}
+
+// ===== MODAL =====
+
+function openModal(title, contentHtml) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = contentHtml;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ===== TOAST SYSTEM =====
+
+function showToast(message) {
+  message = message || 'Демо-режим: действие недоступно';
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('out');
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
+
+// Wire logout button
+document.querySelector('.header-logout').addEventListener('click', () => showToast());
+
+// ===== HELPERS =====
+
+function fmt(n) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function statusBadge(s) {
+  const map = {'Новый':'badge-blue','В обработке':'badge-amber','Отправлен':'badge-purple','Завершён':'badge-green'};
+  return '<span class="badge '+(map[s]||'badge-gray')+'">'+s+'</span>';
+}
+
+function getClient(id) {
+  return clients.find(c => c.id === id);
+}
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return day+'.'+m+'.'+y;
+}
+
+function toggleSwitch(el) {
+  el.querySelector('.toggle-track').classList.toggle('on');
+  showToast();
+}
+
+// ===== DASHBOARD =====
+
+function renderDashboard() {
+  const cards = [
+    { label:'Выручка за март', value: fmt(dashboardMetrics.revenue)+' ₽', bg:'rgba(34,197,94,0.12)', color:'#22c55e', icon:'<svg viewBox="0 0 24 24" stroke="#22c55e"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>' },
+    { label:'Заказов сегодня', value: dashboardMetrics.ordersToday, bg:'rgba(59,130,246,0.12)', color:'#3b82f6', icon:'<svg viewBox="0 0 24 24" stroke="#3b82f6"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>' },
+    { label:'Товаров в каталоге', value: dashboardMetrics.totalProducts, bg:'rgba(255,209,0,0.12)', color:'#FFD100', icon:'<svg viewBox="0 0 24 24" stroke="#FFD100"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>' },
+    { label:'Новых клиентов', value: dashboardMetrics.newClients, bg:'rgba(139,92,246,0.12)', color:'#8b5cf6', icon:'<svg viewBox="0 0 24 24" stroke="#8b5cf6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>' }
+  ];
+  document.getElementById('dashboardMetricsGrid').innerHTML = cards.map(c =>
+    '<div class="metric-card"><div class="metric-icon" style="background:'+c.bg+'">'+c.icon+'</div><div><div class="metric-label">'+c.label+'</div><div class="metric-value" style="color:'+c.color+'">'+c.value+'</div></div></div>'
+  ).join('');
+}
+
+function renderChart() {
+  const svg = document.getElementById('salesChart');
+  const w = 700, h = 200, pad = 30, padBottom = 24;
+  const max = Math.max(...chartData);
+  const n = chartData.length;
+  const points = chartData.map((v,i) => {
+    const x = pad + (i/(n-1)) * (w - pad*2);
+    const y = padBottom + (1 - v/max) * (h - pad - padBottom);
+    return {x,y};
+  });
+  const linePath = points.map((p,i) => (i===0?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ');
+  const areaPath = linePath + ' L'+points[n-1].x.toFixed(1)+' '+(h-padBottom)+' L'+points[0].x.toFixed(1)+' '+(h-padBottom)+' Z';
+  const xLabels = [1,5,10,15,20,25,30];
+  const labelsHtml = xLabels.map(d => {
+    const x = pad + ((d-1)/(n-1)) * (w - pad*2);
+    return '<text x="'+x.toFixed(1)+'" y="'+(h-4)+'" fill="#999" font-size="11" text-anchor="middle">'+d+'</text>';
+  }).join('');
+  svg.innerHTML =
+    '<defs><linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD100" stop-opacity="0.3"/><stop offset="100%" stop-color="#FFD100" stop-opacity="0"/></linearGradient></defs>' +
+    '<path d="'+areaPath+'" fill="url(#chartGrad)"/>' +
+    '<path d="'+linePath+'" fill="none" stroke="#FFD100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    labelsHtml;
+}
+
+function renderRecentOrders() {
+  const sorted = [...orders].sort((a,b) => b.date.localeCompare(a.date)).slice(0,5);
+  document.getElementById('recentOrdersBody').innerHTML = sorted.map(o => {
+    const cl = getClient(o.clientId);
+    return '<tr onclick="openOrderModal(\''+o.id+'\')"><td style="font-weight:600">'+o.number+'</td><td>'+formatDate(o.date)+'</td><td>'+(cl?cl.name:'—')+'</td><td>'+fmt(o.total)+' ₽</td><td>'+statusBadge(o.status)+'</td></tr>';
+  }).join('');
+}
+
+// ===== CATALOG =====
+
+function renderCatalog() {
+  const search = document.getElementById('catalogSearch').value.toLowerCase();
+  const cat = document.getElementById('catalogCategory').value;
+  let list = products;
+  if (search) list = list.filter(p => p.name.toLowerCase().includes(search));
+  if (cat) list = list.filter(p => p.category === cat);
+  document.getElementById('catalogBody').innerHTML = list.map(p =>
+    '<tr onclick="openProductModal(\''+p.id+'\')">' +
+    '<td><div class="product-thumb"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div></td>' +
+    '<td style="font-weight:500">'+p.name+'</td>' +
+    '<td style="color:var(--text-secondary)">'+p.article+'</td>' +
+    '<td>'+p.category+'</td>' +
+    '<td style="white-space:nowrap">'+p.price+'</td>' +
+    '<td><span class="badge '+(p.availability==='В наличии'?'badge-green':'badge-yellow')+'">'+p.availability+'</span></td>' +
+    '</tr>'
+  ).join('');
+}
+
+function openProductModal(id) {
+  const p = id ? products.find(x => x.id === id) : null;
+  const title = p ? 'Редактирование товара' : 'Новый товар';
+  const cats = ['Шуруповёрты','Перфораторы','УШМ угловые'];
+  const catOptions = cats.map(c => '<option'+(p&&p.category===c?' selected':'')+'>'+c+'</option>').join('');
+  const availOptions = ['В наличии','Под заказ','Нет'].map(a => '<option'+(p&&p.availability===a?' selected':'')+'>'+a+'</option>').join('');
+  const html = '<div class="form-group"><label>Название</label><input type="text" value="'+(p?p.name:'')+'"></div>' +
+    '<div class="form-row"><div class="form-group"><label>Артикул</label><input type="text" value="'+(p?p.article:'')+'"></div><div class="form-group"><label>Категория</label><select>'+catOptions+'</select></div></div>' +
+    '<div class="form-row"><div class="form-group"><label>Цена</label><input type="text" value="'+(p?p.price:'')+'"></div><div class="form-group"><label>Наличие</label><select>'+availOptions+'</select></div></div>' +
+    '<div class="form-group"><label>Описание</label><textarea rows="3">'+(p?p.description:'')+'</textarea></div>' +
+    '<div class="form-row"><div class="form-group"><label>Мощность</label><input type="text" value="'+(p?p.power:'')+'"></div><div class="form-group"><label>Вес</label><input type="text" value="'+(p?p.weight:'')+'"></div></div>' +
+    '<div class="form-group"><label>Напряжение</label><input type="text" value="'+(p?p.voltage:'')+'"></div>' +
+    '<div class="form-group"><label>Фото</label><div class="photo-placeholder" onclick="showToast()"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Загрузить</div></div>' +
+    '<div class="form-actions">'+(p?'<button class="btn btn-danger" onclick="showToast();closeModal()">Удалить</button>':'')+
+    '<button class="btn btn-accent" onclick="showToast();closeModal()">Сохранить</button></div>';
+  openModal(title, html);
+}
+
+// ===== CATEGORIES =====
+
+function renderCategories() {
+  const roots = categories.filter(c => c.parentId === null);
+  const subs = categories.filter(c => c.parentId !== null);
+  let html = '';
+  roots.forEach(r => {
+    const children = subs.filter(s => s.parentId === r.id);
+    const hasChildren = children.length > 0;
+    const isShlifovalnye = r.id === 'mashiny-shlifovalnye';
+    html += '<div class="tree-item">' +
+      (hasChildren ? '<span class="tree-toggle" onclick="toggleTreeGroup(this)">'+( isShlifovalnye ? '▾' : '▸')+'</span>' : '<span style="width:20px;display:inline-block"></span>') +
+      '<span class="tree-icon">📁</span><span class="tree-name">'+r.name+'</span>' +
+      '<span class="badge '+(r.count>0?'badge-yellow':'badge-gray')+'">'+r.count+'</span></div>';
+    if (hasChildren) {
+      html += '<div class="tree-sub" id="tree-sub-'+r.id+'" style="display:'+(isShlifovalnye?'block':'none')+'">';
+      children.forEach(ch => {
+        html += '<div class="tree-item"><span style="width:20px;display:inline-block"></span><span class="tree-icon">📄</span><span class="tree-name">'+ch.name+'</span><span class="badge '+(ch.count>0?'badge-yellow':'badge-gray')+'">'+ch.count+'</span></div>';
+      });
+      html += '</div>';
+    }
+  });
+  document.getElementById('categoriesTree').innerHTML = html;
+}
+
+function toggleTreeGroup(el) {
+  const sub = el.closest('.tree-item').nextElementSibling;
+  if (!sub || !sub.classList.contains('tree-sub')) return;
+  const visible = sub.style.display !== 'none';
+  sub.style.display = visible ? 'none' : 'block';
+  el.textContent = visible ? '▸' : '▾';
+}
+
+// ===== ORDERS =====
+
+function renderOrders() {
+  const search = document.getElementById('ordersSearch').value.toLowerCase();
+  let list = orders;
+  if (search) {
+    list = list.filter(o => {
+      const cl = getClient(o.clientId);
+      return o.number.toLowerCase().includes(search) || (cl && cl.name.toLowerCase().includes(search));
+    });
+  }
+  const sorted = [...list].sort((a,b) => b.date.localeCompare(a.date));
+  document.getElementById('ordersBody').innerHTML = sorted.map(o => {
+    const cl = getClient(o.clientId);
+    return '<tr onclick="openOrderModal(\''+o.id+'\')"><td style="font-weight:600">'+o.number+'</td><td>'+formatDate(o.date)+'</td><td>'+(cl?cl.name:'—')+'</td><td>'+fmt(o.total)+' ₽</td><td>'+statusBadge(o.status)+'</td></tr>';
+  }).join('');
+}
+
+function openOrderModal(id) {
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+  const cl = getClient(o.clientId);
+  let html = '<div class="order-header"><span style="font-size:18px;font-weight:700">'+o.number+'</span>'+statusBadge(o.status)+'<span class="order-date">'+formatDate(o.date)+'</span></div>';
+  html += '<table class="admin-table"><thead><tr><th>Товар</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr></thead><tbody>';
+  o.items.forEach(it => {
+    html += '<tr><td>'+it.name+'</td><td>'+it.qty+'</td><td>'+fmt(it.price)+' ₽</td><td>'+fmt(it.price*it.qty)+' ₽</td></tr>';
+  });
+  html += '<tr><td colspan="3" style="text-align:right;font-weight:700">Итого:</td><td style="font-weight:700">'+fmt(o.total)+' ₽</td></tr>';
+  html += '</tbody></table>';
+  html += '<div class="modal-meta"><strong>Адрес:</strong> '+o.address+'<br><strong>Телефон:</strong> '+o.phone+'<br>';
+  if (o.comment) html += '<strong>Комментарий:</strong> '+o.comment;
+  html += '</div>';
+  html += '<div class="form-actions"><button class="btn btn-accent" onclick="showToast();closeModal()">Изменить статус</button></div>';
+  openModal('Заказ '+o.number, html);
+}
+
+// ===== CLIENTS =====
+
+function renderClients() {
+  const search = document.getElementById('clientsSearch').value.toLowerCase();
+  let list = clients;
+  if (search) {
+    list = list.filter(c => c.name.toLowerCase().includes(search) || c.company.toLowerCase().includes(search));
+  }
+  document.getElementById('clientsBody').innerHTML = list.map(c =>
+    '<tr onclick="openClientModal(\''+c.id+'\')">' +
+    '<td><div style="font-weight:500">'+c.name+'</div><div style="font-size:12px;color:var(--text-secondary)">'+c.company+'</div></td>' +
+    '<td>'+c.phone+'</td><td>'+c.email+'</td><td>'+c.ordersCount+'</td><td>'+fmt(c.totalSpent)+' ₽</td></tr>'
+  ).join('');
+}
+
+function openClientModal(id) {
+  const c = clients.find(x => x.id === id);
+  if (!c) return;
+  let html = '<div style="margin-bottom:16px"><div style="font-size:16px;font-weight:600;margin-bottom:4px">'+c.name+'</div><div style="color:var(--text-secondary);font-size:14px;margin-bottom:8px">'+c.company+'</div><div style="font-size:13px;color:var(--text-secondary)">'+c.phone+' &middot; '+c.email+'</div></div>';
+  const clientOrders = orders.filter(o => o.clientId === c.id).sort((a,b) => b.date.localeCompare(a.date));
+  if (clientOrders.length) {
+    html += '<div style="font-weight:600;margin-bottom:8px;font-size:14px">История заказов</div>';
+    html += '<table class="admin-table"><thead><tr><th>Дата</th><th>№</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>';
+    clientOrders.forEach(o => {
+      html += '<tr><td>'+formatDate(o.date)+'</td><td>'+o.number+'</td><td>'+fmt(o.total)+' ₽</td><td>'+statusBadge(o.status)+'</td></tr>';
+    });
+    html += '</tbody></table>';
+  } else {
+    html += '<p style="color:var(--text-secondary)">Заказов пока нет</p>';
+  }
+  openModal(c.name, html);
+}
+
+// ===== CONTENT =====
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('#section-content .tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#section-content .tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+function renderContent() {
+  // Banners
+  document.getElementById('tab-banners').innerHTML = '<div class="banners-grid">' + banners.map(b =>
+    '<div class="content-card">' +
+    '<div class="content-card-img"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#666" stroke-width="1.5" fill="none"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="2"/><path d="M22 15l-5-5L2 22"/></svg></div>' +
+    '<h4>'+b.title+'</h4><p>'+b.subtitle+'</p>' +
+    '<div class="card-meta">URL: '+b.url+'</div>' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">' +
+    '<span class="toggle-switch" onclick="toggleSwitch(this)"><span class="toggle-track'+(b.active?' on':'')+'"><span class="toggle-knob"></span></span> Активен</span>' +
+    '<button class="btn btn-secondary" onclick="showToast()">Редактировать</button></div></div>'
+  ).join('') + '</div>';
+
+  // Promotions
+  document.getElementById('tab-promotions').innerHTML = '<div class="promotions-grid">' + promotions.map(pr =>
+    '<div class="content-card">' +
+    (pr.discount ? '<div class="discount-badge">-'+pr.discount+'%</div>' : '') +
+    '<h4>'+pr.title+'</h4><p>'+pr.description+'</p>' +
+    '<div class="card-meta">'+formatDate(pr.startDate)+' — '+formatDate(pr.endDate)+'</div>' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">' +
+    '<span class="toggle-switch" onclick="toggleSwitch(this)"><span class="toggle-track'+(pr.active?' on':'')+'"><span class="toggle-knob"></span></span> Активна</span>' +
+    '<button class="btn btn-secondary" onclick="showToast()">Редактировать</button></div></div>'
+  ).join('') + '</div>';
+
+  // Pages
+  document.getElementById('tab-pages').innerHTML = '<div class="pages-grid">' + pages.map(pg =>
+    '<div class="content-card">' +
+    '<h4>'+pg.title+'</h4>' +
+    '<p style="font-size:12px;margin-bottom:8px">'+pg.seoTitle+'</p>' +
+    '<button class="btn btn-secondary" onclick="openPageModal(\''+pg.id+'\')">Редактировать</button></div>'
+  ).join('') + '</div>';
+}
+
+function openPageModal(id) {
+  const pg = pages.find(x => x.id === id);
+  if (!pg) return;
+  const html =
+    '<div class="form-group"><label>Заголовок</label><input type="text" value="'+pg.title+'"></div>' +
+    '<div class="form-group"><label>SEO Title</label><input type="text" value="'+pg.seoTitle+'"></div>' +
+    '<div class="form-group"><label>SEO Description</label><input type="text" value="'+pg.seoDescription+'"></div>' +
+    '<div class="form-group"><label>Контент</label><textarea rows="5">'+pg.content+'</textarea></div>' +
+    '<div class="form-actions"><button class="btn btn-accent" onclick="showToast();closeModal()">Сохранить</button></div>';
+  openModal('Редактирование: '+pg.title, html);
+}
+
+// ===== SEO =====
+
+function renderSeo() {
+  const indexed = seoPages.filter(p => p.indexed).length;
+  const total = seoPages.length;
+  const avgSpeed = Math.round(seoPages.reduce((s,p) => s+p.speed,0)/total);
+  document.getElementById('seoMetrics').innerHTML =
+    '<div class="metric-card"><div class="metric-icon" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24" stroke="#22c55e" stroke-width="1.8" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="metric-label">Индексация</div><div class="metric-value" style="color:#22c55e">'+indexed+'/'+total+' страниц</div></div></div>' +
+    '<div class="metric-card"><div class="metric-icon" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24" stroke="#22c55e" stroke-width="1.8" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><div class="metric-label">Скорость загрузки</div><div class="metric-value" style="color:#22c55e">'+avgSpeed+'/100</div></div></div>' +
+    '<div class="metric-card"><div class="metric-icon" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24" stroke="#22c55e" stroke-width="1.8" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="metric-label">Schema.org</div><div class="metric-value" style="color:#22c55e">Настроена</div></div></div>';
+
+  document.getElementById('seoBody').innerHTML = seoPages.map(p =>
+    '<tr><td style="font-weight:500;color:var(--accent)">'+p.url+'</td><td>'+p.title+'</td><td style="color:var(--text-secondary)">'+(p.description.length>50?p.description.slice(0,50)+'...':p.description)+'</td><td><span class="badge '+(p.indexed?'badge-green':'badge-red')+'">'+(p.indexed?'Да':'Нет')+'</span></td></tr>'
+  ).join('');
+}
+
+// ===== INIT =====
+
+(function init() {
+  renderDashboard();
+  renderChart();
+  renderRecentOrders();
+  renderCatalog();
+  renderCategories();
+  renderOrders();
+  renderClients();
+  renderContent();
+  renderSeo();
+})();
+</script>
+</body>
+</html>

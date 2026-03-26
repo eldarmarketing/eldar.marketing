@@ -6,8 +6,15 @@
     <description>Recent content in Кейсы on Эльдар Маркетинг</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Tue, 24 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://eldarmarketing.ru/cases/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>amoCRM &#43; сайт для автоателье — настройка с нуля за одну сессию</title>
+      <link>https://eldarmarketing.ru/cases/4mashiny-amocrm/</link>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/cases/4mashiny-amocrm/</guid>
+      <description>&lt;p&gt;Пришёл клиент с автоателье в Питере — детейлинг, ксенон, тонировка, шумоизоляция. amoCRM куплена, сайт на Next.js запущен. Но CRM пустая, а на сайте вместо логотипа — текст.&lt;/p&gt;&#xA;&lt;h2 id=&#34;что-было&#34;&gt;Что было&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;В сделке 3 поля: бюджет, комментарий, причина отказа. Нет ни услуги, ни марки авто, ни источника обращения&lt;/li&gt;&#xA;&lt;li&gt;Воронка: КВАЛИФИКАЦИЯ → Передан партнёру → НЕ ДОЗВОНИЛИСЬ → ПЕРЕДАН ПАРТНЁРУ (дубль!) → ПАРТНЕР ВЗЯЛ В РАБОТУ → КЛИЕНТ ЗАБРАЛ АВТО&lt;/li&gt;&#xA;&lt;li&gt;«Не дозвонились» — это не этап, это статус. Сделки там зависают навсегда&lt;/li&gt;&#xA;&lt;li&gt;В компании 18 юридических полей (КПП, ОГРН, БИК, р/с) — для B2C-детейлинга это мусор&lt;/li&gt;&#xA;&lt;li&gt;На сайте вместо лого — текст «4машины»&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;что-сделали&#34;&gt;Что сделали&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-поля-сделки&#34;&gt;1. Поля сделки&lt;/h3&gt;&#xA;&lt;p&gt;Исследовал кейсы внедрения amoCRM в автосервисах через Exa — собрал лучшие практики. Добавил 6 полей:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>100 уникальных страниц для автоателье — вместо 28 000 шаблонных</title>
       <link>https://eldarmarketing.ru/cases/birson-seo-uniqualization/</link>
