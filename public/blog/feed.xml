@@ -6,8 +6,15 @@
     <description>Recent content in Блог on Эльдар Маркетинг</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Mon, 23 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://eldarmarketing.ru/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Один человек может работать как агентство. Если перестанет работать как фрилансер.</title>
+      <link>https://eldarmarketing.ru/blog/personal-corp/</link>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://eldarmarketing.ru/blog/personal-corp/</guid>
+      <description>&lt;p&gt;Восемь клиентов одновременно. У одного — сайт на финальной стадии. У другого — правки, которые «срочно, вчера надо было». Третий ждёт проект, который ещё даже не обсудили толком. А четвёртому я что-то обещал на этой неделе — но что именно, уже не помню.&lt;/p&gt;&#xA;&lt;p&gt;Мне это знакомо. Не в прошлом — а буквально на прошлой неделе.&lt;/p&gt;&#xA;&lt;p&gt;Вечер среды. Клиент написал в телеграм три дня назад, я видел сообщение, подумал «отвечу после созвона» — и провалился. Три дня тишины. Неловко. Он не скандалил — просто написал «ну что там?» Вот этот момент и стал точкой.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>GitHub Issues как внешняя память для AI</title>
       <link>https://eldarmarketing.ru/blog/github-issues-ai-memory/</link>
