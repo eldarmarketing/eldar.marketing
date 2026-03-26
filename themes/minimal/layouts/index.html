@@ -1,6 +1,20 @@
 {{ define "main" }}
 {{ .Content }}
 
+<h2>Последние кейсы</h2>
+<div class="card-list">
+{{ range first 3 (where .Site.RegularPages "Section" "cases") }}
+<a href="{{ .Permalink }}" class="card">
+    <span class="card-meta">
+        <span class="date">{{ .Date.Format "02.01.2006" }}</span>
+    </span>
+    <span class="card-title">{{ .Title }}</span>
+    {{ if .Description }}<span class="card-desc">{{ .Description | safeHTML }}</span>{{ end }}
+</a>
+{{ end }}
+</div>
+<p><a href="/cases/">Все кейсы →</a></p>
+
 <h2>Последние статьи</h2>
 <ul class="post-list">
 {{ range first 5 (where .Site.RegularPages "Section" "blog") }}

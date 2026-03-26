@@ -267,3 +267,35 @@ html.dark #theme-toggle .tt-moon { display: block; }
     #theme-toggle { width: 36px; height: 36px; top: 12px; right: 12px; }
     #theme-toggle svg { width: 18px; height: 18px; }
 }
+
+/* Stats row on home page */
+.stats-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-row span {
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* Header phone */
+.header-phone {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.7;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.header-phone:hover { opacity: 1; }
+
+@media (max-width: 600px) {
+  .stats-row { gap: 1rem; }
+  .stats-row span { font-size: 0.85rem; }
+  .header-phone { display: none; }
+}
