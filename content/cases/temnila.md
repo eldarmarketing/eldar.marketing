@@ -49,7 +49,7 @@ readtime: 2
 - Nodemailer для отправки писем
 - Форма заявки
 
-<img src="/images/cases/temnila/mobile-screen.png" alt="Мобильная версия temnila.ru" style="max-width:390px;border-radius:8px;" />
+<video src="/images/cases/temnila/mobile.mp4" poster="/images/cases/temnila/mobile-poster.png" autoplay loop muted playsinline preload="auto" style="max-width:390px;border-radius:8px;background:#1a1a2e;"></video>
 
 ## Результат
 
