@@ -49,7 +49,7 @@ readtime: 2
 - Nodemailer для отправки писем
 - Форма заявки
 
-<div style="max-width:390px;border-radius:8px;overflow:hidden;aspect-ratio:9/16;background:#1a1a2e;"><video src="/images/cases/temnila/mobile.mp4" poster="/images/cases/temnila/mobile-poster.png" autoplay loop muted playsinline preload="auto" style="width:100%;height:120%;object-fit:cover;object-position:top;background:#1a1a2e;"></video></div>
+<div style="max-width:390px;border-radius:8px;overflow:hidden;aspect-ratio:9/16;background:#1a1a2e;"><video src="/images/cases/temnila/mobile.mp4" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='393' height='780'%3E%3Crect width='393' height='780' fill='%231a1a2e'/%3E%3C/svg%3E" autoplay loop muted playsinline preload="auto" style="width:100%;height:120%;object-fit:cover;object-position:top;background:#1a1a2e !important;"></video></div>
 
 ## Результат
 
