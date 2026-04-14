@@ -24,7 +24,7 @@ readtime: 2
 
 Стек: Next.js 16 + React 19 + Tailwind CSS 4. Шрифт — GT Eesti Pro Display.
 
-![Десктопная версия](/images/cases/temnila/desktop.png)
+<video src="/images/cases/temnila/desktop.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;"></video>
 
 ### 2. Страницы услуг
 
@@ -49,7 +49,7 @@ readtime: 2
 - Nodemailer для отправки писем
 - Форма заявки
 
-![Мобильная версия](/images/cases/temnila/mobile.png)
+<video src="/images/cases/temnila/mobile.mp4" autoplay loop muted playsinline style="max-width:390px;border-radius:8px;"></video>
 
 ## Результат
 
