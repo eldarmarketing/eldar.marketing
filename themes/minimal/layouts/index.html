@@ -1,76 +1,42 @@
 {{ define "main" }}
 
-<section class="hero">
-    <div class="hero__eyebrow">Эльдар&nbsp;Маркетинг&nbsp;· Санкт-Петербург</div>
-    <h1 class="hero__title">
-        Помогаю&nbsp;бизнесу зарабатывать больше <em>через&nbsp;интернет</em>
-    </h1>
-    <p class="hero__lead">
-        Настраиваю рекламу, внедряю <strong>AI-ассистентов</strong>, автоматизирую рутину. <strong>11&nbsp;лет</strong> в&nbsp;маркетинге &mdash; работаю напрямую с&nbsp;собственниками малого и&nbsp;среднего бизнеса.
-    </p>
-    <div class="hero__cta-row">
-        <a href="tel:+79035708273" class="btn btn--primary">
-            Позвонить
-            <span class="btn__arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="/services/" class="btn btn--ghost">
-            Что я&nbsp;делаю
-        </a>
-    </div>
-</section>
-
-<section class="stats">
-    <div class="stats__item">
-        <div class="stats__num">22</div>
-        <div class="stats__label">кейса в&nbsp;портфолио</div>
-    </div>
-    <div class="stats__item">
-        <div class="stats__num">11</div>
-        <div class="stats__label">лет в&nbsp;маркетинге</div>
-    </div>
-    <div class="stats__item">
-        <div class="stats__num">6</div>
-        <div class="stats__label">AI-ассистентов на&nbsp;проде</div>
-    </div>
-    <div class="stats__item">
-        <div class="stats__num">28</div>
-        <div class="stats__label">статей в&nbsp;блоге</div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-head">
-        <div>
-            <span class="section-head__num">01 / Услуги</span>
-            <h2 class="section-head__title">Что&nbsp;я делаю для&nbsp;бизнеса</h2>
+<section class="hero hero--split">
+    <div class="hero__copy">
+        <div class="hero__eyebrow">Эльдар&nbsp;Маркетинг&nbsp;· Санкт-Петербург</div>
+        <h1 class="hero__title">
+            Системный маркетинг и&nbsp;<em>AI</em> для&nbsp;малого и&nbsp;среднего бизнеса
+        </h1>
+        <p class="hero__lead">
+            Заменяю часть рутины менеджеров на&nbsp;<strong>AI-ассистентов</strong>, автоматизирую CRM, веду рекламу с&nbsp;предсказуемой ценой заявки и&nbsp;делаю сайты, которые продают. <strong>Работаете напрямую со&nbsp;мной</strong> &mdash; без менеджеров и&nbsp;потери информации.
+        </p>
+        <div class="hero__cta-row">
+            <a href="/contact/" class="btn btn--primary">
+                Записаться на&nbsp;созвон
+                <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="/cases/" class="btn btn--ghost">
+                Смотреть кейсы
+            </a>
         </div>
-        <p class="section-head__lead">Четыре направления &mdash; можно по&nbsp;отдельности, можно всё сразу. Работаю системно, с&nbsp;понятной отчётностью.</p>
+        <ul class="hero__trust">
+            <li><strong>11&nbsp;лет</strong> в&nbsp;маркетинге</li>
+            <li><strong>22&nbsp;кейса</strong> в&nbsp;портфолио</li>
+            <li><strong>6&nbsp;AI-ассистентов</strong> на&nbsp;проде</li>
+            <li><strong>5&nbsp;проектов</strong> max в&nbsp;работе</li>
+        </ul>
     </div>
-    <div class="services-grid">
-        <a href="/services/ai-assistants/" class="service-cell">
-            <div class="service-cell__num">01</div>
-            <div class="service-cell__title">AI-ассистенты</div>
-            <div class="service-cell__desc">Виртуальные сотрудники для бизнеса. Принимают заявки, квалифицируют клиентов, работают 24/7.</div>
-            <span class="service-cell__arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="/services/automation/" class="service-cell">
-            <div class="service-cell__num">02</div>
-            <div class="service-cell__title">Автоматизация</div>
-            <div class="service-cell__desc">CRM, боты, интеграции. Битрикс24, amoCRM, 1С &mdash; связываю между собой через n8n.</div>
-            <span class="service-cell__arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="/services/advertising/" class="service-cell">
-            <div class="service-cell__num">03</div>
-            <div class="service-cell__title">Реклама</div>
-            <div class="service-cell__desc">Яндекс&nbsp;Директ, Telegram&nbsp;Ads, ВКонтакте, Авито. От&nbsp;30&nbsp;000&nbsp;₽ бюджета.</div>
-            <span class="service-cell__arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="/services/web-development/" class="service-cell">
-            <div class="service-cell__num">04</div>
-            <div class="service-cell__title">Разработка сайтов</div>
-            <div class="service-cell__desc">Next.js + React + Tailwind. Telegram-бот в&nbsp;комплекте. Готовый сайт за&nbsp;7&ndash;14&nbsp;дней.</div>
-            <span class="service-cell__arrow" aria-hidden="true">→</span>
-        </a>
+    <div class="hero__visual">
+        <div class="hero__photo-frame">
+            <img src="/images/eldar-photo.jpg" alt="Эльдар, основатель Eldar Marketing" loading="eager" width="1200" height="800">
+            <div class="hero__photo-badge">
+                <span class="hero__photo-badge-dot" aria-hidden="true"></span>
+                <span>Сейчас на&nbsp;связи</span>
+            </div>
+            <div class="hero__photo-tag">
+                <span class="hero__photo-tag-num">11</span>
+                <span class="hero__photo-tag-label">лет<br>в&nbsp;маркетинге</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -90,7 +56,111 @@
 <section class="section">
     <div class="section-head">
         <div>
-            <span class="section-head__num">02 / Кейсы</span>
+            <span class="section-head__num">01 / Услуги</span>
+            <h2 class="section-head__title">Что&nbsp;я делаю для&nbsp;бизнеса</h2>
+        </div>
+        <p class="section-head__lead">Четыре направления &mdash; можно по&nbsp;отдельности, можно всё сразу. Системно, с&nbsp;понятной отчётностью.</p>
+    </div>
+    <div class="services-grid">
+        <a href="/services/ai-assistants/" class="service-cell">
+            <div class="service-cell__num">01</div>
+            <div class="service-cell__title">AI-ассистенты</div>
+            <div class="service-cell__desc">Виртуальные сотрудники для бизнеса. Принимают заявки, квалифицируют клиентов, работают 24/7. Бот для автосервиса сам заносит ремонты в&nbsp;Битрикс24.</div>
+            <span class="service-cell__arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/services/automation/" class="service-cell">
+            <div class="service-cell__num">02</div>
+            <div class="service-cell__title">Автоматизация</div>
+            <div class="service-cell__desc">Битрикс24, amoCRM, 1С &mdash; связываю между собой через n8n. Заявка падает в&nbsp;CRM, менеджер получает пуш, клиент &mdash; подтверждение.</div>
+            <span class="service-cell__arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/services/advertising/" class="service-cell">
+            <div class="service-cell__num">03</div>
+            <div class="service-cell__title">Реклама</div>
+            <div class="service-cell__desc">Яндекс&nbsp;Директ, Telegram&nbsp;Ads, ВК, Авито. Снизил стоимость заявки автосервису с&nbsp;1&thinsp;200 до&nbsp;780&thinsp;₽ за&nbsp;два месяца.</div>
+            <span class="service-cell__arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/services/web-development/" class="service-cell">
+            <div class="service-cell__num">04</div>
+            <div class="service-cell__title">Разработка сайтов</div>
+            <div class="service-cell__desc">Next.js + React + Tailwind. Telegram-бот в&nbsp;комплекте: заявки, портфолио. Готовый сайт за&nbsp;7&ndash;14&nbsp;дней.</div>
+            <span class="service-cell__arrow" aria-hidden="true">→</span>
+        </a>
+    </div>
+</section>
+
+<section class="section section--invert">
+    <div class="section-head">
+        <div>
+            <span class="section-head__num">02 / Как работаю</span>
+            <h2 class="section-head__title">Как проходит работа</h2>
+        </div>
+        <p class="section-head__lead">Ничего лишнего. Никаких PDF-отчётов на&nbsp;20&nbsp;страниц.</p>
+    </div>
+    <ol class="process">
+        <li class="process__step">
+            <div class="process__num">01</div>
+            <div class="process__title">Созвон 30&nbsp;минут</div>
+            <p class="process__desc">Разбираемся, где сейчас теряете деньги. Бесплатно. Если задача не&nbsp;моя &mdash; скажу честно.</p>
+            <div class="process__time">~&nbsp;день</div>
+        </li>
+        <li class="process__step">
+            <div class="process__num">02</div>
+            <div class="process__title">Предложение</div>
+            <p class="process__desc">За&nbsp;1&ndash;3 дня готовлю предложение: что делаем, сколько времени, сколько стоит, какой результат ждать.</p>
+            <div class="process__time">1&ndash;3&nbsp;дня</div>
+        </li>
+        <li class="process__step">
+            <div class="process__num">03</div>
+            <div class="process__title">Прототип</div>
+            <p class="process__desc">Через 3&ndash;10&nbsp;дней &mdash; рабочий прототип. Можно потрогать. Если что-то не&nbsp;так &mdash; меняем сразу.</p>
+            <div class="process__time">3&ndash;10&nbsp;дней</div>
+        </li>
+        <li class="process__step">
+            <div class="process__num">04</div>
+            <div class="process__title">Запуск + отчёты</div>
+            <p class="process__desc">Запускаем в&nbsp;прод. Раз в&nbsp;неделю короткий отчёт в&nbsp;Telegram &mdash; что сделано, что планирую.</p>
+            <div class="process__time">далее</div>
+        </li>
+    </ol>
+</section>
+
+<section class="section">
+    <div class="why">
+        <div class="why__intro">
+            <span class="section-head__num">03 / Почему&nbsp;я</span>
+            <h2 class="section-head__title">Работаете напрямую со&nbsp;мной</h2>
+            <p class="why__lead">Я&nbsp;не&nbsp;агентство. Это значит, что вашу задачу решаю лично, без менеджеров и&nbsp;цепочки исполнителей.</p>
+        </div>
+        <ul class="why__list">
+            <li class="why__item">
+                <span class="why__num">01</span>
+                <h3 class="why__title">Без потери информации</h3>
+                <p class="why__desc">Не&nbsp;нужно объяснять задачу трижды разным людям. Вы&nbsp;говорите &mdash; я&nbsp;делаю. С&nbsp;первого раза.</p>
+            </li>
+            <li class="why__item">
+                <span class="why__num">02</span>
+                <h3 class="why__title">Никакой воды</h3>
+                <p class="why__desc">11&nbsp;лет в&nbsp;маркетинге &mdash; вижу, что работает, а&nbsp;что нет. Не&nbsp;буду продавать ненужное.</p>
+            </li>
+            <li class="why__item">
+                <span class="why__num">03</span>
+                <h3 class="why__title">Технарь&nbsp;+ маркетолог</h3>
+                <p class="why__desc">Сам пишу боты, поднимаю серверы, делаю сайты. Не&nbsp;нужно нанимать ещё разработчика.</p>
+            </li>
+            <li class="why__item">
+                <span class="why__num">04</span>
+                <h3 class="why__title">Не&nbsp;беру больше 5&nbsp;проектов</h3>
+                <p class="why__desc">Качество важнее объёма. Если очередь &mdash; скажу честно и&nbsp;дам ориентировочный срок.</p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+        <div>
+            <span class="section-head__num">04 / Кейсы</span>
             <h2 class="section-head__title">Что&nbsp;я уже сделал</h2>
         </div>
         <a href="/cases/" class="btn btn--ghost btn--small">
@@ -105,6 +175,12 @@
             </span>
             <span class="case-card__title">{{ .Title }}</span>
             {{ if .Description }}<span class="case-card__desc">{{ .Description | safeHTML }}</span>{{ end }}
+            {{ with .Params.metric }}
+            <span class="case-card__metric">
+                <span class="case-card__metric-value">{{ .value }}</span>
+                <span class="case-card__metric-label">{{ .label }}</span>
+            </span>
+            {{ end }}
             <span class="case-card__cta">Читать <span aria-hidden="true">→</span></span>
         </a>
     {{ end }}
@@ -114,7 +190,7 @@
 <section class="section">
     <div class="section-head">
         <div>
-            <span class="section-head__num">03 / Блог</span>
+            <span class="section-head__num">05 / Блог</span>
             <h2 class="section-head__title">Пишу о&nbsp;том, что делаю руками</h2>
         </div>
         <a href="/blog/" class="btn btn--ghost btn--small">
@@ -132,14 +208,37 @@
     </ul>
 </section>
 
-<a href="/contact/" class="big-link">
-    <div class="big-link__label">04 / Контакт</div>
-    <div class="big-link__title">
-        Обсудим ваш проект
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-            <path d="M5 12h14M13 5l7 7-7 7"/>
-        </svg>
+<section class="cta-band">
+    <div class="cta-band__inner">
+        <div class="cta-band__copy">
+            <span class="cta-band__label">06 / Следующий шаг</span>
+            <h2 class="cta-band__title">Разберём вашу задачу за&nbsp;30&nbsp;минут</h2>
+            <p class="cta-band__lead">Бесплатный созвон. Покажу, где теряете деньги и&nbsp;что можно сделать. Если задача не&nbsp;моя &mdash; скажу честно и&nbsp;посоветую, к&nbsp;кому обратиться.</p>
+            <div class="cta-band__row">
+                <a href="/contact/" class="btn btn--primary btn--invert">
+                    Оставить заявку
+                    <span class="btn__arrow" aria-hidden="true">→</span>
+                </a>
+                <a href="tel:+79035708273" class="btn btn--ghost btn--invert">
+                    +7&nbsp;903&nbsp;570&nbsp;82&nbsp;73
+                </a>
+            </div>
+        </div>
+        <div class="cta-band__meta">
+            <div class="cta-band__meta-item">
+                <span class="cta-band__meta-label">Telegram</span>
+                <a href="https://t.me/eldarmarketing">@eldarmarketing</a>
+            </div>
+            <div class="cta-band__meta-item">
+                <span class="cta-band__meta-label">Email</span>
+                <a href="mailto:i@eldarmarketing.ru">i@eldarmarketing.ru</a>
+            </div>
+            <div class="cta-band__meta-item">
+                <span class="cta-band__meta-label">Время ответа</span>
+                <span>в&nbsp;течение часа в&nbsp;рабочее время</span>
+            </div>
+        </div>
     </div>
-</a>
+</section>
 
 {{ end }}
