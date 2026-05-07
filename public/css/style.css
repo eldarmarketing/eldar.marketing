@@ -536,8 +536,8 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
 
 .hero__photo-badge {
     position: absolute;
-    top: 18px;
-    right: 18px;
+    bottom: 18px;
+    left: 18px;
     background: var(--bg);
     color: var(--ink);
     padding: 8px 14px;
