@@ -15,7 +15,6 @@
 </script>
 
 {{ if eq .Section "blog" }}
-<!-- Article Schema for blog posts -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -24,28 +23,28 @@
     "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}",
     "datePublished": "{{ .Date.Format "2006-01-02" }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
-    "author": {
-        "@type": "Person",
-        "name": "Эльдар",
-        "url": "https://eldarmarketing.ru/about/"
-    },
-    "publisher": {
-        "@type": "Person",
-        "name": "Эльдар Маркетинг",
-        "url": "https://eldarmarketing.ru"
-    },
+    "author": { "@type": "Person", "name": "Эльдар", "url": "https://eldarmarketing.ru/about/" },
+    "publisher": { "@type": "Person", "name": "Эльдар Маркетинг", "url": "https://eldarmarketing.ru" },
     "mainEntityOfPage": "{{ .Permalink }}",
     "wordCount": {{ countwords .Content }}
 }
 </script>
 {{ end }}
 
-<article>
+{{ if .Parent }}
+<nav class="breadcrumb" aria-label="Хлебные крошки">
+    <a href="/">Главная</a> <span class="sep">→</span>
+    <a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a> <span class="sep">→</span>
+    <span>{{ .Title | truncate 50 }}</span>
+</nav>
+{{ end }}
+
+<article class="page-article markdown">
     <h2>{{ .Title }}</h2>
     {{ if eq .Section "blog" }}
     <div class="article-meta">
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
-        <span>· {{ math.Round (div (countwords .Content) 200.0) }} мин чтения</span>
+        <span>· {{ math.Round (div (countwords .Content) 200.0) }}&nbsp;мин чтения</span>
     </div>
     {{ end }}
     {{ .Content }}
@@ -53,8 +52,8 @@
 
 {{ if eq .Section "blog" }}
 <nav class="article-nav">
-    {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title }}</a>{{ end }}
-    {{ with .NextInSection }}<a href="{{ .Permalink }}">{{ .Title }} →</a>{{ end }}
+    {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title | truncate 40 }}</a>{{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .Permalink }}">{{ .Title | truncate 40 }} →</a>{{ else }}<span></span>{{ end }}
 </nav>
 {{ end }}
 {{ end }}

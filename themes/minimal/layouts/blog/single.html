@@ -1,11 +1,10 @@
 {{ define "main" }}
-<nav class="breadcrumb" aria-label="Навигация">
+<nav class="breadcrumb" aria-label="Хлебные крошки">
     <a href="/">Главная</a> <span class="sep">→</span>
     <a href="/blog/">Блог</a> <span class="sep">→</span>
-    <span>{{ .Title | truncate 40 }}</span>
+    <span>{{ .Title | truncate 50 }}</span>
 </nav>
 
-<!-- BreadcrumbList Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -17,164 +16,56 @@
     ]
 }
 </script>
-<article class="blog-post">
+
+<article class="page-article blog-post markdown">
+    <h2>{{ .Title }}</h2>
     {{ $months := dict "January" "января" "February" "февраля" "March" "марта" "April" "апреля" "May" "мая" "June" "июня" "July" "июля" "August" "августа" "September" "сентября" "October" "октября" "November" "ноября" "December" "декабря" }}
     {{ $month := index $months (.Date.Format "January") }}
-    <p class="meta">{{ .Date.Day }} {{ $month }} {{ .Date.Year }}</p>
-    {{ .Content }}
-
-    <!-- Logo watermark -->
-    <div class="blog-logo-watermark">
-        <img src="/images/em-logo-white.svg" alt="EM" />
+    <div class="article-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }}&nbsp;{{ $month }}&nbsp;{{ .Date.Year }}</time>
+        <span>·&nbsp;{{ math.Round (div (countwords .Content) 200.0) }}&nbsp;мин чтения</span>
     </div>
+    {{ .Content }}
 </article>
 
-<style>
-.blog-post {
-    position: relative;
-}
-.blog-logo-watermark {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    opacity: 0.12;
-    pointer-events: none;
-    z-index: 10;
-}
-.blog-logo-watermark img {
-    width: 100%;
-    height: 100%;
-    filter: invert(1);
-}
-@media (max-width: 768px) {
-    .blog-logo-watermark {
-        bottom: 15px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-    }
-}
-</style>
+<nav class="article-nav">
+    {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title | truncate 40 }}</a>{{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .Permalink }}">{{ .Title | truncate 40 }} →</a>{{ else }}<span></span>{{ end }}
+</nav>
 
-
-
-<!-- BlogPosting Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "{{ .Title }}",
-    "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}
-<!-- Article navigation -->
-<nav class="article-nav">
-    {{ with .PrevInSection }}<a href="{{ .Permalink }}" >← {{ .Title | truncate 40 }}</a>{{ end }}
-    <span></span>
-    {{ with .NextInSection }}<a href="{{ .Permalink }}" >{{ .Title | truncate 40 }} →</a>{{ end }}
-</nav>
-{{ end }}",
-    {{ if .Params.image }}
-    "image": "{{ .Params.image | absURL }}",
-    {{ else }}
-    "image": "https://eldarmarketing.ru/images/eldar.jpg",
-    {{ end }}
+    "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}",
+    {{ if .Params.image }}"image": "{{ .Params.image | absURL }}",{{ else }}"image": "https://eldarmarketing.ru/images/eldar.jpg",{{ end }}
     "datePublished": "{{ .Date.Format "2006-01-02" }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
     "url": "{{ .Permalink }}",
     "wordCount": {{ .WordCount }},
-    {{ with .Params.keywords }}
-    "keywords": "{{ delimit . ", " }}",
-    {{ end }}
-    {{ with .Section }}
-    "articleSection": "{{ . }}",
-    {{ end }}
-    "author": {
-        "@id": "#person"
-    },
-    "publisher": {
-        "@type": "Person",
-        "name": "Эльдар",
-        "url": "https://eldarmarketing.ru"
-    },
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ .Permalink }}"
-    }
+    {{ with .Params.keywords }}"keywords": "{{ delimit . ", " }}",{{ end }}
+    {{ with .Section }}"articleSection": "{{ . }}",{{ end }}
+    "author": { "@id": "#person" },
+    "publisher": { "@type": "Person", "name": "Эльдар", "url": "https://eldarmarketing.ru" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ .Permalink }}" }
 }
 </script>
-<!-- Code block header (Claude-style) -->
-<style>
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #1e1e1e;
-    padding: 8px 16px;
-    font-size: 12px;
-    color: #888;
-    border-radius: 6px 6px 0 0;
-    margin: 24px 0 0 0;
-}
-.code-header .lang {
-    text-transform: lowercase;
-}
-.code-header .copy-btn {
-    background: none;
-    border: none;
-    color: #888;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    position: static;
-    float: none;
-}
-.code-header .copy-btn:hover {
-    background: rgba(255,255,255,0.1);
-    color: #ccc;
-}
-.code-header + .highlight {
-    margin-top: 0;
-}
-.code-header + .highlight pre {
-    border-radius: 0 0 6px 6px;
-}
-@media (max-width: 600px) {
-    .code-header {
-        margin-left: 0;
-        margin-right: 0;
-        border-radius: 6px 6px 0 0;
-        padding: 8px 16px;
-    }
-    .code-header + .highlight pre {
-        border-radius: 0;
-    }
-}
-</style>
+
+<!-- Code block enhancement -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".highlight").forEach(function(block) {
         var code = block.querySelector("code");
         if (!code) return;
-        
-        // Detect language from class
         var lang = "";
         var classes = code.className || "";
         var m = classes.match(/language-(\w+)/);
         if (m) lang = m[1];
-        
-        // Create header
         var header = document.createElement("div");
         header.className = "code-header";
         header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
-            '<button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
-        
+            '<button class="copy-btn" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
         header.querySelector(".copy-btn").addEventListener("click", function() {
             var btn = this;
             navigator.clipboard.writeText(code.textContent).then(function() {
@@ -184,30 +75,43 @@ document.addEventListener("DOMContentLoaded", function() {
                 }, 2000);
             });
         });
-        
         block.parentNode.insertBefore(header, block);
     });
 });
 </script>
-
 <style>
-.breadcrumb {
-    font-size: 13px;
-    margin-bottom: 32px;
-    color: #999;
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-invert);
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--on-invert-muted);
+    border-radius: 8px 8px 0 0;
+    margin: 32px 0 0;
+    font-family: var(--font-mono);
+    max-width: var(--reading);
+    margin-left: auto;
+    margin-right: auto;
 }
-.breadcrumb a {
-    color: #888;
-    text-decoration: none;
-    transition: color 0.15s;
+.code-header .lang { text-transform: lowercase; }
+.code-header .copy-btn {
+    background: none;
+    border: none;
+    color: var(--on-invert-muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.15s, color 0.15s;
 }
-.breadcrumb a:hover {
-    color: #333;
-}
-.breadcrumb .sep {
-    margin: 0 8px;
-    color: #ccc;
-}
+.code-header .copy-btn:hover { background: rgba(255,255,255,0.1); color: var(--on-invert); }
+.code-header + .highlight { margin-top: 0; max-width: var(--reading); margin-left: auto; margin-right: auto; }
+.code-header + .highlight pre { border-radius: 0 0 8px 8px; margin-top: 0; }
 </style>
-
 {{ end }}

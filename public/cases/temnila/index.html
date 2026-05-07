@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     
     <title>Сайт для тонировки Темнила — с нуля до своего канала заявок — Эльдар Маркетинг</title>
     <meta name="description" content="Разработка сайта для сервиса тонировки в Петербурге: Next.js, блог, подарочные сертификаты, SEO.">
     <meta name="keywords" content="тонировка сайт, сайт автосервис, Next.js сайт">
     <meta name="author" content="Эльдар Маркетинг">
     <link rel="canonical" href="https://eldarmarketing.ru/cases/temnila/">
-    
+
     
     <meta property="og:title" content="Сайт для тонировки Темнила — с нуля до своего канала заявок">
     <meta property="og:description" content="Разработка сайта для сервиса тонировки в Петербурге: Next.js, блог, подарочные сертификаты, SEO.">
@@ -21,7 +21,7 @@
     
     <meta property="og:image" content="https://eldarmarketing.ru/images/eldar.jpg">
     
-    
+
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Сайт для тонировки Темнила — с нуля до своего канала заявок">
@@ -29,11 +29,11 @@
     
     <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
     
-    
-    <script>(function(){var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+
+    <script>(function(){document.documentElement.classList.add("js");var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="/css/style.css?v=26032026a">
-    
+    <link rel="stylesheet" href="/css/style.css?v=2026050701">
+
     
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -53,31 +53,50 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/106070005" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     
-    
+
     
 </head>
 <body>
-    <header>
-        <h1><a href="/">Эльдар Маркетинг</a></h1>
-        <nav>
+
+<header class="site-header">
+    <div class="site-header__inner">
+        <a href="/" class="site-header__logo" aria-label="Эльдар Маркетинг">
+            <svg width="28" height="28" viewBox="0 0 168 168" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M47.45 124.18L74.11 89.62C93.12 65.01 112.13 40.46 131.08 15.85L131.88 14.82L139.27 20.61L138.47 21.69C124.81 39.37 111.16 57.06 97.45 74.8C77.96 100 58.47 125.26 38.98 150.52L38.18 151.55L30.79 145.76L47.44 124.18H47.45ZM36.47 99.35C32.99 98.1 29.72 96.48 26.67 94.37C22.92 91.88 19.71 88.85 17.14 85.44C14.52 81.98 12.43 78.03 10.93 73.65L10.82 73.27H0L0.21 73.97C1.34 77.81 2.79 81.48 4.66 84.84C6.48 88.25 8.63 91.39 11.14 94.25C13.71 97.17 16.5 99.72 19.55 101.93C22.6 104.21 25.92 106.1 29.51 107.66C31.33 108.47 33.15 109.12 35.03 109.72C36.91 110.31 38.83 110.81 40.81 111.24L41.08 111.29L48.42 101.82L47.45 101.71C43.59 101.33 39.95 100.52 36.47 99.33V99.35ZM38.99 51.05H38.46V60.89H74.07V51.05H39H38.99ZM62.17 166.47V167.01H72.5V128.12L62.17 141.53V166.46V166.47ZM107.96 136.89L108.12 137.11H116.32L155.25 78.1V167.01H165.48V58.62H156.16L112.25 125.36L94.95 99.08L88.52 107.41L107.96 136.88V136.89ZM18.05 26.28H18.04C20.66 22.98 23.77 20.11 27.41 17.73C31.05 15.3 34.96 13.46 39.19 12.27C43.36 11.03 47.87 10.43 52.63 10.43C56.65 10.43 60.5 10.86 64.14 11.73C67.73 12.6 71.1 13.9 74.26 15.57C77.47 17.3 80.31 19.36 82.94 21.74C85.51 24.12 87.76 26.88 89.74 29.96C90.76 31.59 91.67 33.26 92.47 34.99C93.27 36.77 93.97 38.61 94.56 40.45L94.88 41.48L102.43 31.58L102.32 31.31C102 30.56 101.68 29.85 101.31 29.15C100.99 28.45 100.62 27.74 100.24 27.04C97.88 22.82 95.16 19.09 91.94 15.79C88.73 12.44 85.09 9.62 80.96 7.19C76.9 4.81 72.5 3.03 67.84 1.78C63.19 0.59 58.2 0 52.96 0C48.84 0 44.93 0.38 41.13 1.13C37.33 1.88 33.69 3.07 30.21 4.59C26.67 6.1 23.47 7.94 20.47 10.05C17.42 12.21 14.69 14.65 12.17 17.46C9.65 20.22 7.51 23.24 5.64 26.49C3.82 29.79 2.32 33.36 1.14 37.15L0.93 37.85H11.74L11.85 37.53C13.4 33.31 15.49 29.58 18.06 26.28H18.05Z"/>
+            </svg>
+            <span>Эльдар&nbsp;Маркетинг</span>
+        </a>
+        <nav class="site-header__nav" aria-label="Основная навигация">
             <a href="/about/">Обо мне</a>
             <a href="/services/">Услуги</a>
             <a href="/cases/">Кейсы</a>
             <a href="/blog/">Блог</a>
-        <a href="/contact/">Контакт</a>
+            <a href="/contact/">Контакт</a>
         </nav>
-        <a href="tel:+79035708273" class="header-phone">+7 903 570 82 73</a>
-    </header>
+        <a href="tel:+79035708273" class="site-header__cta">+7&nbsp;903&nbsp;570&nbsp;82&nbsp;73</a>
+        <button class="site-header__menu-btn" aria-label="Меню" onclick="document.querySelector('.site-header__mobile-nav').classList.toggle('open')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 17h18"/></svg>
+        </button>
+    </div>
+    <nav class="site-header__mobile-nav" aria-label="Мобильное меню">
+        <a href="/about/">Обо мне</a>
+        <a href="/services/">Услуги</a>
+        <a href="/cases/">Кейсы</a>
+        <a href="/blog/">Блог</a>
+        <a href="/contact/">Контакт</a>
+        <a href="tel:+79035708273" class="site-header__cta">Позвонить</a>
+    </nav>
+</header>
+
+<main>
     
-    <main>
-        
-<nav class="breadcrumb" aria-label="Навигация">
+<nav class="breadcrumb" aria-label="Хлебные крошки">
     <a href="/">Главная</a> <span class="sep">→</span>
     <a href="/cases/">Кейсы</a> <span class="sep">→</span>
-    <span>Сайт для тонировки Темнила — с нуля до своего канала заявок</span>
+    <span>Сайт для тонировки Темнила — с нуля до своего …</span>
 </nav>
 
-<article class="case-study">
+<article class="page-article case-study markdown">
     <h2>Сайт для тонировки Темнила — с нуля до своего канала заявок</h2>
     
     <h2 id="задача">Задача</h2>
@@ -134,101 +153,15 @@
 
 </article>
 
-<style>
- 
-.breadcrumb {
-    font-size: 13px;
-    margin-bottom: 32px;
-    color: rgba(0,0,0,0.4);
-    font-family: "Fira Code", monospace;
-}
-.breadcrumb a {
-    color: rgba(0,0,0,0.5);
-    text-decoration: none;
-    transition: color 0.15s;
-}
-.breadcrumb a:hover {
-    color: rgba(0,0,0,0.85);
-}
-.breadcrumb .sep {
-    margin: 0 8px;
-    color: rgba(0,0,0,0.2);
-}
-
- 
-html.dark .breadcrumb { color: rgba(255,255,255,0.4); }
-html.dark .breadcrumb a { color: rgba(255,255,255,0.5); }
-html.dark .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-html.dark .breadcrumb .sep { color: rgba(255,255,255,0.25); }
-
- 
-@media (prefers-color-scheme: dark) {
-    html:not(.light) .breadcrumb { color: rgba(255,255,255,0.4); }
-    html:not(.light) .breadcrumb a { color: rgba(255,255,255,0.5); }
-    html:not(.light) .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-    html:not(.light) .breadcrumb .sep { color: rgba(255,255,255,0.25); }
-}
-
- 
-.case-study img {
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
-    margin: 32px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-}
-.case-study img:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-.case-study img[alt*="Главная"],
-.case-study img[alt*="hero"],
-.case-study img[alt*="Результат"] {
-    margin-left: -40px;
-    margin-right: -40px;
-    max-width: calc(100% + 80px);
-    width: calc(100% + 80px);
-    border-radius: 16px;
-}
-.case-study img[alt*="Мобильная"],
-.case-study img[alt*="mobile"] {
-    max-width: 360px;
-    margin: 32px auto;
-    border-radius: 24px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 8px solid #1a1a1a;
-}
-
-html.dark .case-study img {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-html.dark .case-study img:hover {
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-html.dark .case-study img[alt*="Мобильная"],
-html.dark .case-study img[alt*="mobile"] {
-    border-color: #333;
-}
-
- 
-@media (max-width: 600px) {
-    .case-study img[alt*="Главная"],
-    .case-study img[alt*="hero"],
-    .case-study img[alt*="Результат"] {
-        margin-left: -24px;
-        margin-right: -24px;
-        max-width: calc(100% + 48px);
-        width: calc(100% + 48px);
-        border-radius: 0;
-    }
-    .case-study img[alt*="Мобильная"],
-    .case-study img[alt*="mobile"] {
-        max-width: 280px;
-    }
-}
-</style>
-
+<a href="/cases/" class="big-link">
+    <div class="big-link__label">Все кейсы</div>
+    <div class="big-link__title">
+        Смотреть остальное портфолио
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+    </div>
+</a>
 
 <script type="application/ld+json">
 {
@@ -242,28 +175,84 @@ html.dark .case-study img[alt*="mobile"] {
 }
 </script>
 
-    </main>
-    
-    <footer>
-        <p>© 2017–2026 Эльдар Маркетинг</p>
-        <p><a href="https://t.me/eldarmarketing">@eldarmarketing</a>&nbsp;&nbsp;&nbsp; <a href="tel:+79035708273">+7 903 570 82 73</a>&nbsp;&nbsp;&nbsp; <a href="/privacy/">Политика конфиденциальности</a></p>
-    </footer>
+</main>
+
+<footer class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__brand">
+            <h2>Системный маркетинг для бизнеса с&nbsp;2015&nbsp;года</h2>
+            <p>AI-ассистенты, автоматизация процессов, контекстная реклама и&nbsp;разработка сайтов. Работаю напрямую с&nbsp;собственниками.</p>
+        </div>
+        <div class="site-footer__col">
+            <h3>Услуги</h3>
+            <ul>
+                <li><a href="/services/ai-assistants/">AI-ассистенты</a></li>
+                <li><a href="/services/automation/">Автоматизация</a></li>
+                <li><a href="/services/advertising/">Реклама</a></li>
+                <li><a href="/services/web-development/">Разработка сайтов</a></li>
+                <li><a href="/services/max-bots/">Боты в&nbsp;MAX</a></li>
+            </ul>
+        </div>
+        <div class="site-footer__col">
+            <h3>Сайт</h3>
+            <ul>
+                <li><a href="/about/">Обо мне</a></li>
+                <li><a href="/cases/">Кейсы</a></li>
+                <li><a href="/blog/">Блог</a></li>
+                <li><a href="/contact/">Контакт</a></li>
+            </ul>
+        </div>
+        <div class="site-footer__col">
+            <h3>Связь</h3>
+            <ul>
+                <li><a href="tel:+79035708273">+7&nbsp;903&nbsp;570&nbsp;82&nbsp;73</a></li>
+                <li><a href="https://t.me/eldarmarketing">Telegram</a></li>
+                <li><a href="mailto:i@eldarmarketing.ru">i@eldarmarketing.ru</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="site-footer__bottom">
+        <span>© 2017–2026 Эльдар Маркетинг</span>
+        <span><a href="/privacy/">Политика конфиденциальности</a></span>
+    </div>
+</footer>
 
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 24px;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5;transition:transform 0.3s ease">
-  <div style="max-width:680px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-    <p style="margin:0;flex:1;min-width:200px">Мы&nbsp;используем cookie и&nbsp;Яндекс.Метрику для&nbsp;улучшения работы сайта. Продолжая, вы&nbsp;соглашаетесь с&nbsp;<a href="/privacy/" style="text-decoration:underline">политикой конфиденциальности</a>.</p>
-    <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:6px;border:none;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit">Принять</button>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 24px;border-top:1px solid var(--line);font-size:14px;line-height:1.5;background:var(--bg);color:var(--ink);transition:transform 0.3s ease">
+  <div style="max-width:920px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <p style="margin:0;flex:1;min-width:200px">Мы&nbsp;используем cookie и&nbsp;Яндекс.Метрику для&nbsp;улучшения работы сайта. Продолжая, вы&nbsp;соглашаетесь с&nbsp;<a href="/privacy/" style="text-decoration:underline;color:inherit">политикой конфиденциальности</a>.</p>
+    <button onclick="acceptCookies()" style="padding:10px 22px;border-radius:999px;border:none;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;background:var(--ink);color:var(--bg)">Принять</button>
   </div>
 </div>
 <script>
 function acceptCookies(){localStorage.setItem("cookies_accepted","1");document.getElementById("cookie-banner").style.transform="translateY(100%)"}
-(function(){if(!localStorage.getItem("cookies_accepted")){var b=document.getElementById("cookie-banner");var isDark=document.documentElement.classList.contains("dark");b.style.background=isDark?"#2a2a2a":"#ffffff";b.style.borderColor=isDark?"#3a3a3a":"#e5e5e5";b.style.color=isDark?"#a0a4ab":"#1a1a1a";var btn=b.querySelector("button");btn.style.background=isDark?"#d1d5db":"#1a1a1a";btn.style.color=isDark?"#1a1a1a":"#ffffff";b.style.display="block"}})()
+(function(){if(!localStorage.getItem("cookies_accepted")){document.getElementById("cookie-banner").style.display="block"}})()
 </script>
 
+<style>.site-header__mobile-nav.open { display: flex !important; }</style>
 
 <script src="/js/theme-toggle.js"></script>
 <script src="/js/click-sound.js" defer></script>
 <script src="/js/typograf.js?v=1" defer></script>
+<script>
+
+(function(){
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+
+
+(function(){
+    document.querySelectorAll('.marquee__track').forEach(function(t){
+        var clone = t.innerHTML;
+        t.innerHTML = clone + clone;
+    });
+})();
+</script>
 </body>
 </html>

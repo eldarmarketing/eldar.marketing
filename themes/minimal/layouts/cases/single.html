@@ -1,112 +1,26 @@
 {{ define "main" }}
-<nav class="breadcrumb" aria-label="Навигация">
+<nav class="breadcrumb" aria-label="Хлебные крошки">
     <a href="/">Главная</a> <span class="sep">→</span>
     <a href="/cases/">Кейсы</a> <span class="sep">→</span>
-    <span>{{ .Title }}</span>
+    <span>{{ .Title | truncate 50 }}</span>
 </nav>
 
-<article class="case-study">
+<article class="page-article case-study markdown">
     <h2>{{ .Title }}</h2>
-    {{ with .Params.meta }}<p class="meta">{{ . }}</p>{{ end }}
+    {{ with .Params.meta }}<div class="article-meta">{{ . }}</div>{{ end }}
     {{ .Content }}
 </article>
 
-<style>
-/* === BREADCRUMB === */
-.breadcrumb {
-    font-size: 13px;
-    margin-bottom: 32px;
-    color: rgba(0,0,0,0.4);
-    font-family: "Fira Code", monospace;
-}
-.breadcrumb a {
-    color: rgba(0,0,0,0.5);
-    text-decoration: none;
-    transition: color 0.15s;
-}
-.breadcrumb a:hover {
-    color: rgba(0,0,0,0.85);
-}
-.breadcrumb .sep {
-    margin: 0 8px;
-    color: rgba(0,0,0,0.2);
-}
+<a href="/cases/" class="big-link">
+    <div class="big-link__label">Все кейсы</div>
+    <div class="big-link__title">
+        Смотреть остальное портфолио
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+    </div>
+</a>
 
-/* Dark mode (html.dark class) */
-html.dark .breadcrumb { color: rgba(255,255,255,0.4); }
-html.dark .breadcrumb a { color: rgba(255,255,255,0.5); }
-html.dark .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-html.dark .breadcrumb .sep { color: rgba(255,255,255,0.25); }
-
-/* Auto fallback for system dark mode */
-@media (prefers-color-scheme: dark) {
-    html:not(.light) .breadcrumb { color: rgba(255,255,255,0.4); }
-    html:not(.light) .breadcrumb a { color: rgba(255,255,255,0.5); }
-    html:not(.light) .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-    html:not(.light) .breadcrumb .sep { color: rgba(255,255,255,0.25); }
-}
-
-/* === CASE STUDY IMAGES === */
-.case-study img {
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
-    margin: 32px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-}
-.case-study img:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-.case-study img[alt*="Главная"],
-.case-study img[alt*="hero"],
-.case-study img[alt*="Результат"] {
-    margin-left: -40px;
-    margin-right: -40px;
-    max-width: calc(100% + 80px);
-    width: calc(100% + 80px);
-    border-radius: 16px;
-}
-.case-study img[alt*="Мобильная"],
-.case-study img[alt*="mobile"] {
-    max-width: 360px;
-    margin: 32px auto;
-    border-radius: 24px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 8px solid #1a1a1a;
-}
-
-html.dark .case-study img {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-html.dark .case-study img:hover {
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-html.dark .case-study img[alt*="Мобильная"],
-html.dark .case-study img[alt*="mobile"] {
-    border-color: #333;
-}
-
-/* Mobile responsive */
-@media (max-width: 600px) {
-    .case-study img[alt*="Главная"],
-    .case-study img[alt*="hero"],
-    .case-study img[alt*="Результат"] {
-        margin-left: -24px;
-        margin-right: -24px;
-        max-width: calc(100% + 48px);
-        width: calc(100% + 48px);
-        border-radius: 0;
-    }
-    .case-study img[alt*="Мобильная"],
-    .case-study img[alt*="mobile"] {
-        max-width: 280px;
-    }
-}
-</style>
-
-<!-- BreadcrumbList Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",

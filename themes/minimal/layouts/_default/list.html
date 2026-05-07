@@ -1,18 +1,57 @@
 {{ define "main" }}
-<h2>{{ .Title }}</h2>
-{{ .Content }}
-<div class="card-list">
-{{ range .Pages.ByDate.Reverse }}
-<a href="{{ .Permalink }}" class="card">
-    {{ if and (not .Date.IsZero) (ne (.Date.Format "2006") "0001") }}
-    <span class="card-meta">
-        <span class="date">{{ .Date.Format "02.01.2006" }}</span>
-        {{ if eq $.Section "blog" }}<span class="reading-time">· {{ math.Round (div (countwords .Content) 200.0) }} мин</span>{{ end }}
-    </span>
-    {{ end }}
-    <span class="card-title">{{ .Title }}</span>
-    {{ if .Description }}<span class="card-desc">{{ .Description | safeHTML }}</span>{{ end }}
-</a>
-{{ end }}
+
+<section class="hero">
+    <div class="hero__eyebrow">{{ if eq .Section "blog" }}Блог{{ else if eq .Section "cases" }}Портфолио{{ else if eq .Section "services" }}Услуги{{ else }}Раздел{{ end }}</div>
+    <h1 class="hero__title">{{ .Title }}</h1>
+    {{ if .Description }}<p class="hero__lead">{{ .Description | safeHTML }}</p>{{ end }}
+</section>
+
+{{ if .Content }}
+<div class="page-content markdown">
+    {{ .Content }}
 </div>
+{{ end }}
+
+<section class="section">
+{{ if eq .Section "cases" }}
+    <div class="cases-grid">
+    {{ range .Pages.ByDate.Reverse }}
+        <a href="{{ .Permalink }}" class="case-card">
+            <span class="case-card__meta">
+                {{ if .Params.meta }}{{ .Params.meta }}{{ else if and (not .Date.IsZero) (ne (.Date.Format "2006") "0001") }}{{ .Date.Format "02.01.2006" }}{{ end }}
+            </span>
+            <span class="case-card__title">{{ .Title }}</span>
+            {{ if .Description }}<span class="case-card__desc">{{ .Description | safeHTML }}</span>{{ end }}
+            <span class="case-card__cta">Читать <span aria-hidden="true">→</span></span>
+        </a>
+    {{ end }}
+    </div>
+{{ else if eq .Section "blog" }}
+    <ul class="post-list">
+    {{ range .Pages.ByDate.Reverse }}
+        <li>
+            {{ if and (not .Date.IsZero) (ne (.Date.Format "2006") "0001") }}
+            <span class="date">{{ .Date.Format "02.01.2006" }}</span>
+            {{ else }}<span class="date"></span>{{ end }}
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }}&nbsp;мин</span>
+        </li>
+    {{ end }}
+    </ul>
+{{ else }}
+    <div class="cases-grid">
+    {{ range .Pages.ByDate.Reverse }}
+        <a href="{{ .Permalink }}" class="case-card">
+            {{ if and (not .Date.IsZero) (ne (.Date.Format "2006") "0001") }}
+            <span class="case-card__meta">{{ .Date.Format "02.01.2006" }}</span>
+            {{ end }}
+            <span class="case-card__title">{{ .Title }}</span>
+            {{ if .Description }}<span class="case-card__desc">{{ .Description | safeHTML }}</span>{{ end }}
+            <span class="case-card__cta">Открыть <span aria-hidden="true">→</span></span>
+        </a>
+    {{ end }}
+    </div>
+{{ end }}
+</section>
+
 {{ end }}
