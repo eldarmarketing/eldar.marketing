@@ -758,6 +758,11 @@ html.dark .hero__photo-frame { box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6); }
     object-fit: cover;
     display: block;
     transition: filter var(--transition-med);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    pointer-events: none;
 }
 html.dark .hero__photo-frame img { filter: brightness(0.9); }
 
