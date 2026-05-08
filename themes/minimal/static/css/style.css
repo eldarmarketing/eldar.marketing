@@ -166,7 +166,7 @@ main > blockquote {
 }
 
 /* === TYPOGRAPHY HIERARCHY === */
-h1, h2, h3, h4 {
+h1, h2, h3 {
     color: var(--ink);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -193,13 +193,14 @@ h3 {
     line-height: 1.2;
 }
 
-p {
+:where(main) p {
     color: var(--ink-3);
     font-size: var(--t-base);
     line-height: 1.6;
 }
 
 .lead {
+    /* upper cap 23px — намеренно ниже --t-lg (27px) чтобы lead не разрастался */
     font-size: clamp(var(--t-md), 1.4vw, 23px);
     line-height: 1.5;
     color: var(--ink-3);
@@ -207,6 +208,7 @@ p {
 }
 
 .eyebrow,
+.hero__eyebrow,
 .section-head__num {
     font-family: var(--font-mono);
     font-size: var(--t-xs);
