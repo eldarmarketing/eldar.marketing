@@ -208,7 +208,6 @@ h3 {
 }
 
 .eyebrow,
-.hero__eyebrow,
 .section-head__num {
     font-family: var(--font-mono);
     font-size: var(--t-xs);
@@ -649,6 +648,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 
 @media (min-width: 1024px) {
     .hero--split {
+        /* 1.618 = φ golden ratio (62/38 split) */
         grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr);
         gap: var(--s-5);
     }
@@ -667,8 +667,13 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 }
 
 .hero__eyebrow {
-    /* base styles via global .eyebrow group */
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-weight: 500;
     letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: inline-block;
 }
 
 .hero__title {
@@ -767,7 +772,7 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     right: var(--s-2);
     background: var(--ink);
     color: var(--bg);
-    padding: var(--s-3) var(--s-3);
+    padding: var(--s-3);
     border-radius: var(--s-2);
     display: inline-flex;
     align-items: center;
