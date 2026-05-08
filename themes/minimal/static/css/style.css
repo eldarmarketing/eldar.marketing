@@ -1932,7 +1932,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .markdown > * + * { margin-top: var(--s-3); }
 
 /* === SCROLL SNAP (homepage, all viewports) === */
-.is-home {
+html:has(body.is-home) {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 }
@@ -1941,22 +1941,19 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .is-home .section,
 .is-home .cta-band {
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
     scroll-margin-top: 72px;
 }
 
-/* Длинные секции — не snap-align (чтобы не ломалось при контенте выше viewport) */
-@media (max-width: 768px) {
-    /* На mobile секции выше 100vh — снимаем snap-align с них */
-    .is-home .section:has(.cases-grid),
-    .is-home .section:has(.post-list),
-    .is-home .section:has(.why) {
-        scroll-snap-align: none;
-    }
+/* Длинные секции — мягкий snap (можно проскролить через них) */
+.is-home .section:has(.cases-grid),
+.is-home .section:has(.post-list),
+.is-home .section:has(.why) {
+    scroll-snap-stop: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .is-home {
+    html:has(body.is-home) {
         scroll-snap-type: none;
         scroll-behavior: auto;
     }
