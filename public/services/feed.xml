@@ -1,74 +1,434 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Услуги интернет-маркетинга в Санкт-Петербурге on Эльдар Маркетинг</title>
-    <link>https://eldarmarketing.ru/services/</link>
-    <description>Recent content in Услуги интернет-маркетинга в Санкт-Петербурге on Эльдар Маркетинг</description>
-    <generator>Hugo</generator>
-    <language>ru</language>
-    <atom:link href="https://eldarmarketing.ru/services/feed.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>AI-ассистенты для бизнеса в Санкт-Петербурге</title>
-      <link>https://eldarmarketing.ru/services/ai-assistants/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/ai-assistants/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;AI-ассистенты для бизнеса&#34;,&#xA;    &#34;description&#34;: &#34;Внедрение AI-ассистентов и чат-ботов для автоматизации клиентского сервиса&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Сколько времени занимает внедрение?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Простой бот — 3–5 дней. AI-ассистент с интеграциями — 7–14 дней. Сложная система с обучением на базе знаний компании — 2–4 недели.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Какие задачи может решать AI-ассистент?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Ответы на типовые вопросы клиентов, запись на услуги, квалификация заявок, генерация документов и счетов, работа с CRM, отправка уведомлений, сбор обратной связи.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;AI-ассистент заменит менеджера?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Не заменит, но возьмёт на себя до 80% типовых вопросов. Менеджер подключается только к сложным случаям. Это экономит 2–3 часа в день.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Работаете только в Петербурге?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Работаю с бизнесом из Санкт-Петербурга и удалённо по всей России. Внедрение полностью дистанционное — не требует встреч.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Внедряю виртуальных сотрудников на базе нейросетей. Они работают 24/7, не болеют, не уходят в отпуск и не забывают перезвонить клиенту.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>CRM и автоматизация для автосервиса в Санкт-Петербурге</title>
-      <link>https://eldarmarketing.ru/services/auto-crm/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/auto-crm/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;CRM и автоматизация для автосервисов&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Зачем автосервису CRM?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;CRM хранит историю каждого клиента: какие работы делались, когда следующее ТО, какие запчасти заказывали. Автоматические напоминания о ТО возвращают клиентов без расходов на рекламу.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Можно интегрировать с 1С?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Да, CRM может обмениваться данными с 1С, складскими системами и бухгалтерией. Заказ-наряды, запчасти, оплаты — всё синхронизируется.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Telegram-бот заменит администратора?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Не заменит, но возьмёт на себя рутину: ответы на типовые вопросы, запись на свободное время, напоминания. Администратор занимается сложными случаями.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Внедряю CRM-системы и автоматизацию для автосервисов в Санкт-Петербурге. Клиенты не теряются, записи не забываются, напоминания о ТО отправляются автоматически.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Автоматизация бизнес-процессов в Санкт-Петербурге</title>
-      <link>https://eldarmarketing.ru/services/automation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/automation/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;Автоматизация бизнес-процессов&#34;,&#xA;    &#34;description&#34;: &#34;Внедрение CRM, ботов и интеграций для автоматизации рутинных процессов&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Какие процессы можно автоматизировать?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Выставление счетов, отправка уведомлений, формирование отчётов, обработка заявок, синхронизация данных между сервисами, отслеживание оплат, документооборот.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Какие CRM системы внедряете?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Работаю с любыми: собственные решения на базе PocketBase, Битрикс24, AmoCRM. Выбор зависит от задач и бюджета. Для малого бизнеса часто выгоднее собственная CRM.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Сколько времени занимает внедрение?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Одна интеграция — 1–3 дня. CRM с нуля — 5–10 дней. Комплексная система — 2–4 недели.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Убираю ручную рутину из бизнеса. Счета формируются автоматически, клиенты получают уведомления вовремя, отчёты собираются сами. Вы занимаетесь бизнесом — система занимается рутиной.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Контекстная реклама в Санкт-Петербурге — Яндекс Директ</title>
-      <link>https://eldarmarketing.ru/services/advertising/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/advertising/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;Контекстная и таргетированная реклама&#34;,&#xA;    &#34;description&#34;: &#34;Настройка и ведение рекламных кампаний в Яндекс Директ, Telegram Ads, ВКонтакте для бизнеса в Санкт-Петербурге&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Через сколько будут заявки?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Первые заявки — в день запуска. Стабильный поток — через 2–3 недели после оптимизации. Полная оптимизация кампании — 1–2 месяца.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Работаете с Telegram Ads?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Как отслеживаете результат?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Яндекс Метрика + сквозная аналитика. Отслеживаю не просто клики, а реальные заявки и продажи. Еженедельные отчёты с ключевыми метриками: стоимость заявки, конверсия, ROI.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Настраиваю и веду рекламу в Яндекс Директ, Telegram Ads, ВКонтакте и на Авито. Не просто «запускаю рекламу» — выстраиваю систему, которая приносит заявки по предсказуемой цене.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Маркетинг для автосервисов в Санкт-Петербурге</title>
-      <link>https://eldarmarketing.ru/services/auto-marketing/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/auto-marketing/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;Маркетинг для автосервисов&#34;,&#xA;    &#34;description&#34;: &#34;Комплексный интернет-маркетинг для автосервисов в Санкт-Петербурге: реклама, сайты, AI-боты, CRM&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Через сколько будут клиенты?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Первые заявки — в день запуска рекламы. Стабильный поток — через 2–3 недели. Выход на плановые показатели — 1–2 месяца.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Работаете только с автосервисами в Петербурге?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Специализируюсь на автосервисах в Санкт-Петербурге и Ленинградской области, но работаю и удалённо по всей России. Локальный бизнес — основной профиль.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Что входит в комплексный маркетинг?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Сайт или лендинг, настройка и ведение рекламы (Яндекс Директ, 2ГИС, Авито), AI-бот для приёма заявок, CRM для учёта клиентов, аналитика и отчётность.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;У нас уже есть сайт, можно только рекламу?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Да, можно подключить отдельные услуги. Проведу аудит текущего сайта — если он конвертирует, запущу рекламу. Если нет — предложу доработки, чтобы не сливать бюджет.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Занимаюсь маркетингом для автосервисов в Санкт-Петербурге. Не разовая настройка рекламы, а система: сайт + реклама + бот + аналитика. Каждый элемент усиливает остальные.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Разработка ботов в MAX для бизнеса</title>
-      <link>https://eldarmarketing.ru/services/max-bots/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/max-bots/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;Разработка ботов в MAX&#34;,&#xA;    &#34;description&#34;: &#34;Создание чат-ботов и Mini App в мессенджере MAX для автоматизации бизнеса&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Россия&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Что такое MAX и зачем там бот?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;MAX — российский мессенджер от VK. Работает стабильно на территории РФ, интегрирован с Госуслугами и банковскими сервисами. Бот в MAX — это канал продаж и поддержки, который работает 24/7 внутри мессенджера.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Можно ли перенести бота из Telegram в MAX?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Да. Переношу логику, сценарии и интеграции из Telegram-ботов в MAX. Бот работает в обоих мессенджерах параллельно — клиенты пишут туда, где им удобно.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Сколько времени занимает разработка?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Простой бот — 5-7 дней. Бот с CRM и оплатой — 2-3 недели. Mini App с каталогом и личным кабинетом — 3-4 недели.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Нужно ли ИП или юрлицо для бота в MAX?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Да, платформа MAX доступна только для юрлиц и ИП — резидентов РФ. Помогу пройти верификацию и модерацию бота.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Telegram в России работает всё хуже. Бизнес, который строил автоматизацию на его ботах, теряет канал связи с клиентами. MAX — российский мессенджер от VK с полноценным Bot API, оплатой через СБП и интеграцией с Госуслугами. Делаю ботов, которые продают и обслуживают клиентов внутри мессенджера.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Разработка сайтов на Next.js в Санкт-Петербурге</title>
-      <link>https://eldarmarketing.ru/services/web-development/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/web-development/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;{&#xA;  &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;  &#34;@type&#34;: &#34;Service&#34;,&#xA;  &#34;name&#34;: &#34;Разработка сайтов на Next.js&#34;,&#xA;  &#34;description&#34;: &#34;Создание быстрых сайтов на Next.js с Telegram-ботом и CRM для бизнеса в Санкт-Петербурге&#34;,&#xA;  &#34;provider&#34;: {&#xA;    &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;    &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;    &#34;address&#34;: {&#xA;      &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;      &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;      &#34;addressCountry&#34;: &#34;RU&#34;&#xA;    }&#xA;  },&#xA;  &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;}&#xA;&lt;/script&gt;&#xA;&lt;p&gt;11 лет в маркетинге, последние полгода строю сайты на Next.js. Не шаблоны из конструктора. Код на React, деплой на VPS, никакой абонентской платы.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;стек&#34;&gt;Стек&lt;/h2&gt;&#xA;&lt;p&gt;Next.js + React + Tailwind CSS. Страницы генерируются статически — загрузка меньше 1.5 секунды. По моим проектам в нише автосервисов — 70%+ мобильного трафика, поэтому всё mobile-first.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Реклама для автосервиса в Санкт-Петербурге — Яндекс Директ</title>
-      <link>https://eldarmarketing.ru/services/auto-advertising/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/auto-advertising/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;Реклама для автосервисов&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Какие каналы рекламы работают для автосервисов?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Лучшие каналы: Яндекс Директ (поиск + РСЯ), Яндекс Карты/2ГИС (карточка организации), Авито (размещение услуг). Дополнительно: ретаргетинг, Telegram для постоянных клиентов.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Настраиваю рекламу для автосервисов в Санкт-Петербурге. Не просто «запускаю Директ» — строю систему привлечения клиентов через все каналы: поиск, карты, доски объявлений, ретаргетинг.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Сайт для автосервиса в Санкт-Петербурге</title>
-      <link>https://eldarmarketing.ru/services/auto-website/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://eldarmarketing.ru/services/auto-website/</guid>
-      <description>&lt;script type=&#34;application/ld+json&#34;&gt;&#xA;[&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;Service&#34;,&#xA;    &#34;name&#34;: &#34;Создание сайтов для автосервисов&#34;,&#xA;    &#34;provider&#34;: {&#xA;      &#34;@type&#34;: &#34;LocalBusiness&#34;,&#xA;      &#34;name&#34;: &#34;Eldar Marketing&#34;,&#xA;      &#34;address&#34;: {&#xA;        &#34;@type&#34;: &#34;PostalAddress&#34;,&#xA;        &#34;addressLocality&#34;: &#34;Санкт-Петербург&#34;,&#xA;        &#34;addressCountry&#34;: &#34;RU&#34;&#xA;      }&#xA;    },&#xA;    &#34;areaServed&#34;: &#34;Санкт-Петербург&#34;&#xA;  },&#xA;  {&#xA;    &#34;@context&#34;: &#34;https://schema.org&#34;,&#xA;    &#34;@type&#34;: &#34;FAQPage&#34;,&#xA;    &#34;mainEntity&#34;: [&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Сколько дней делается сайт?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Лендинг — 5–7 дней. Полноценный сайт — 7–14 дней. Сложный проект с интеграциями — 3–4 недели.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Сайт будет работать на телефоне?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Да, все сайты адаптивные — корректно отображаются на смартфонах, планшетах и компьютерах. Более 70% трафика автосервисов — мобильный.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Можно добавить онлайн-запись?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Да. Клиент выбирает услугу, дату и время — заявка попадает в CRM или Telegram. Можно интегрировать с вашей системой учёта.&#34;&#xA;        }&#xA;      },&#xA;      {&#xA;        &#34;@type&#34;: &#34;Question&#34;,&#xA;        &#34;name&#34;: &#34;Чем Next.js лучше обычного сайта?&#34;,&#xA;        &#34;acceptedAnswer&#34;: {&#xA;          &#34;@type&#34;: &#34;Answer&#34;,&#xA;          &#34;text&#34;: &#34;Next.js — это технология от создателей Vercel, которую используют Nike, Netflix, Uber. Сайт загружается мгновенно, отлично индексируется поисковиками и может расти вместе с бизнесом — от лендинга до полноценной платформы.&#34;&#xA;        }&#xA;      }&#xA;    ]&#xA;  }&#xA;]&#xA;&lt;/script&gt;&#xA;&lt;p&gt;Делаю сайты для автосервисов на современных технологиях. Не шаблоны из конструктора — а быстрые, профессиональные сайты, которые приносят клиентов и выглядят как у крупных компаний.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Услуги интернет-маркетинга в Санкт-Петербурге on Эльдар Маркетинг</title><link>https://eldarmarketing.ru/services/</link><description>Recent content in Услуги интернет-маркетинга в Санкт-Петербурге on Эльдар Маркетинг</description><generator>Hugo</generator><language>ru</language><atom:link href="https://eldarmarketing.ru/services/feed.xml" rel="self" type="application/rss+xml"/><item><title>AI-ассистенты для бизнеса в Санкт-Петербурге</title><link>https://eldarmarketing.ru/services/ai-assistants/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/ai-assistants/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "AI-ассистенты для бизнеса",
+ "description": "Внедрение AI-ассистентов и чат-ботов для автоматизации клиентского сервиса",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Сколько времени занимает внедрение?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Простой бот — 3–5 дней. AI-ассистент с интеграциями — 7–14 дней. Сложная система с обучением на базе знаний компании — 2–4 недели."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Какие задачи может решать AI-ассистент?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Ответы на типовые вопросы клиентов, запись на услуги, квалификация заявок, генерация документов и счетов, работа с CRM, отправка уведомлений, сбор обратной связи."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "AI-ассистент заменит менеджера?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Не заменит, но возьмёт на себя до 80% типовых вопросов. Менеджер подключается только к сложным случаям. Это экономит 2–3 часа в день."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Работаете только в Петербурге?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Работаем с бизнесом из Санкт-Петербурга и удалённо по всей России. Внедрение полностью дистанционное — не требует встреч."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Внедряю виртуальных сотрудников на базе нейросетей. Они работают 24/7, не болеют, не уходят в отпуск и не забывают перезвонить клиенту.&lt;/p&gt;</description></item><item><title>CRM и автоматизация для автосервиса в Санкт-Петербурге</title><link>https://eldarmarketing.ru/services/auto-crm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/auto-crm/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "CRM и автоматизация для автосервисов",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Зачем автосервису CRM?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "CRM хранит историю каждого клиента: какие работы делались, когда следующее ТО, какие запчасти заказывали. Автоматические напоминания о ТО возвращают клиентов без расходов на рекламу."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Можно интегрировать с 1С?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Да, CRM может обмениваться данными с 1С, складскими системами и бухгалтерией. Заказ-наряды, запчасти, оплаты — всё синхронизируется."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Telegram-бот заменит администратора?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Не заменит, но возьмёт на себя рутину: ответы на типовые вопросы, запись на свободное время, напоминания. Администратор занимается сложными случаями."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Внедряю CRM-системы и автоматизацию для автосервисов в Санкт-Петербурге. Клиенты не теряются, записи не забываются, напоминания о ТО отправляются автоматически.&lt;/p&gt;</description></item><item><title>Автоматизация бизнес-процессов в Санкт-Петербурге</title><link>https://eldarmarketing.ru/services/automation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/automation/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Автоматизация бизнес-процессов",
+ "description": "Внедрение CRM, ботов и интеграций для автоматизации рутинных процессов",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Какие процессы можно автоматизировать?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Выставление счетов, отправка уведомлений, формирование отчётов, обработка заявок, синхронизация данных между сервисами, отслеживание оплат, документооборот."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Какие CRM системы внедряете?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Работаем с любыми: собственные решения на базе PocketBase, Битрикс24, AmoCRM. Выбор зависит от задач и бюджета. Для малого бизнеса часто выгоднее собственная CRM."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Сколько времени занимает внедрение?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Одна интеграция — 1–3 дня. CRM с нуля — 5–10 дней. Комплексная система — 2–4 недели."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Убираем ручную рутину из бизнеса. Счета формируются автоматически, клиенты получают уведомления вовремя, отчёты собираются сами. Вы занимаетесь бизнесом — система занимается рутиной.&lt;/p&gt;</description></item><item><title>Контекстная реклама в Санкт-Петербурге — Яндекс Директ</title><link>https://eldarmarketing.ru/services/advertising/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/advertising/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Контекстная и таргетированная реклама",
+ "description": "Настройка и ведение рекламных кампаний в Яндекс Директ, Telegram Ads, ВКонтакте для бизнеса в Санкт-Петербурге",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Через сколько будут заявки?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Первые заявки — в день запуска. Стабильный поток — через 2–3 недели после оптимизации. Полная оптимизация кампании — 1–2 месяца."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Работаете с Telegram Ads?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Как отслеживаете результат?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Яндекс Метрика + сквозная аналитика. Отслеживаю не просто клики, а реальные заявки и продажи. Еженедельные отчёты с ключевыми метриками: стоимость заявки, конверсия, ROI."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Настраиваем и ведём рекламу в Яндекс Директ, Telegram Ads, ВКонтакте и на Авито. Не просто «запускаем рекламу» — выстраиваем систему, которая приносит заявки по предсказуемой цене.&lt;/p&gt;</description></item><item><title>Маркетинг для автосервисов в Санкт-Петербурге</title><link>https://eldarmarketing.ru/services/auto-marketing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/auto-marketing/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Маркетинг для автосервисов",
+ "description": "Комплексный интернет-маркетинг для автосервисов в Санкт-Петербурге: реклама, сайты, AI-боты, CRM",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Через сколько будут клиенты?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Первые заявки — в день запуска рекламы. Стабильный поток — через 2–3 недели. Выход на плановые показатели — 1–2 месяца."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Работаете только с автосервисами в Петербурге?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Специализируемся на автосервисах в Санкт-Петербурге и Ленинградской области, но работаем и удалённо по всей России. Локальный бизнес — основной профиль."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Что входит в комплексный маркетинг?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Сайт или лендинг, настройка и ведение рекламы (Яндекс Директ, 2ГИС, Авито), AI-бот для приёма заявок, CRM для учёта клиентов, аналитика и отчётность."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "У нас уже есть сайт, можно только рекламу?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Да, можно подключить отдельные услуги. Проведу аудит текущего сайта — если он конвертирует, запущу рекламу. Если нет — предложу доработки, чтобы не сливать бюджет."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Занимаюсь маркетингом для автосервисов в Санкт-Петербурге. Не разовая настройка рекламы, а система: сайт + реклама + бот + аналитика. Каждый элемент усиливает остальные.&lt;/p&gt;</description></item><item><title>Разработка ботов в MAX для бизнеса</title><link>https://eldarmarketing.ru/services/max-bots/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/max-bots/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Разработка ботов в MAX",
+ "description": "Создание чат-ботов и Mini App в мессенджере MAX для автоматизации бизнеса",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Россия"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Что такое MAX и зачем там бот?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "MAX — российский мессенджер от VK. Работает стабильно на территории РФ, интегрирован с Госуслугами и банковскими сервисами. Бот в MAX — это канал продаж и поддержки, который работает 24/7 внутри мессенджера."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Можно ли перенести бота из Telegram в MAX?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Да. Переносим логику, сценарии и интеграции из Telegram-ботов в MAX. Бот работает в обоих мессенджерах параллельно — клиенты пишут туда, где им удобно."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Сколько времени занимает разработка?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Простой бот — 5-7 дней. Бот с CRM и оплатой — 2-3 недели. Mini App с каталогом и личным кабинетом — 3-4 недели."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Нужно ли ИП или юрлицо для бота в MAX?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Да, платформа MAX доступна только для юрлиц и ИП — резидентов РФ. Помогу пройти верификацию и модерацию бота."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Telegram в России работает всё хуже. Бизнес, который строил автоматизацию на его ботах, теряет канал связи с клиентами. MAX — российский мессенджер от VK с полноценным Bot API, оплатой через СБП и интеграцией с Госуслугами. Делаем ботов, которые продают и обслуживают клиентов внутри мессенджера.&lt;/p&gt;</description></item><item><title>Разработка сайтов на Next.js в Санкт-Петербурге</title><link>https://eldarmarketing.ru/services/web-development/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/web-development/</guid><description>&lt;script type="application/ld+json"&gt;
+{
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Разработка сайтов на Next.js",
+ "description": "Создание быстрых сайтов на Next.js с Telegram-ботом и CRM для бизнеса в Санкт-Петербурге",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+}
+&lt;/script&gt;
+&lt;p&gt;11 лет в маркетинге, последние полгода строим сайты на Next.js. Не шаблоны из конструктора. Код на React, деплой на VPS, никакой абонентской платы.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="стек"&gt;Стек&lt;/h2&gt;
+&lt;p&gt;Next.js + React + Tailwind CSS. Страницы генерируются статически — загрузка меньше 1.5 секунды. По моим проектам в нише автосервисов — 70%+ мобильного трафика, поэтому всё mobile-first.&lt;/p&gt;</description></item><item><title>Реклама для автосервиса в Санкт-Петербурге — Яндекс Директ</title><link>https://eldarmarketing.ru/services/auto-advertising/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/auto-advertising/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Реклама для автосервисов",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Какие каналы рекламы работают для автосервисов?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Лучшие каналы: Яндекс Директ (поиск + РСЯ), Яндекс Карты/2ГИС (карточка организации), Авито (размещение услуг). Дополнительно: ретаргетинг, Telegram для постоянных клиентов."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Настраиваем рекламу для автосервисов в Санкт-Петербурге. Не просто «запускаем Директ» — строим систему привлечения клиентов через все каналы: поиск, карты, доски объявлений, ретаргетинг.&lt;/p&gt;</description></item><item><title>Сайт для автосервиса в Санкт-Петербурге</title><link>https://eldarmarketing.ru/services/auto-website/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://eldarmarketing.ru/services/auto-website/</guid><description>&lt;script type="application/ld+json"&gt;
+[
+ {
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Создание сайтов для автосервисов",
+ "provider": {
+ "@type": "LocalBusiness",
+ "name": "Eldar Marketing",
+ "address": {
+ "@type": "PostalAddress",
+ "addressLocality": "Санкт-Петербург",
+ "addressCountry": "RU"
+ }
+ },
+ "areaServed": "Санкт-Петербург"
+ },
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "Сколько дней делается сайт?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Лендинг — 5–7 дней. Полноценный сайт — 7–14 дней. Сложный проект с интеграциями — 3–4 недели."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Сайт будет работать на телефоне?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Да, все сайты адаптивные — корректно отображаются на смартфонах, планшетах и компьютерах. Более 70% трафика автосервисов — мобильный."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Можно добавить онлайн-запись?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Да. Клиент выбирает услугу, дату и время — заявка попадает в CRM или Telegram. Можно интегрировать с вашей системой учёта."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Чем Next.js лучше обычного сайта?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Next.js — это технология от создателей Vercel, которую используют Nike, Netflix, Uber. Сайт загружается мгновенно, отлично индексируется поисковиками и может расти вместе с бизнесом — от лендинга до полноценной платформы."
+ }
+ }
+ ]
+ }
+]
+&lt;/script&gt;
+&lt;p&gt;Делаем сайты для автосервисов на современных технологиях. Не шаблоны из конструктора — а быстрые, профессиональные сайты, которые приносят клиентов и выглядят как у крупных компаний.&lt;/p&gt;</description></item></channel></rss>

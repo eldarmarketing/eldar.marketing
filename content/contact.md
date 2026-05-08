@@ -1,9 +1,9 @@
 ---
 title: "Обсудить проект"
-description: "Оставьте заявку — свяжусь в течение дня"
+description: "Оставьте заявку — свяжемся в течение дня"
 ---
 
-Расскажите о&nbsp;задаче&nbsp;— отвечу в&nbsp;течение дня.
+Расскажите о&nbsp;задаче&nbsp;— ответим в&nbsp;течение дня.
 
 <form id="contact-form" action="https://formsubmit.co/i@eldarmarketing.ru" method="POST">
   <input type="hidden" name="_subject" value="Заявка с сайта eldarmarketing.ru">
@@ -19,7 +19,7 @@ description: "Оставьте заявку — свяжусь в течение
     <input type="text" name="contact" required placeholder="+7... или @username">
   </p>
   <p>
-    <label>Чем могу помочь?</label>
+    <label>Чем можем помочь?</label>
     <textarea name="message" rows="4" placeholder="Опишите задачу"></textarea>
   </p>
   <p style="margin-top:1em">

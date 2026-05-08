@@ -21,12 +21,42 @@
     <h2>{{ .Title }}</h2>
     {{ $months := dict "January" "января" "February" "февраля" "March" "марта" "April" "апреля" "May" "мая" "June" "июня" "July" "июля" "August" "августа" "September" "сентября" "October" "октября" "November" "ноября" "December" "декабря" }}
     {{ $month := index $months (.Date.Format "January") }}
-    <div class="article-meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }}&nbsp;{{ $month }}&nbsp;{{ .Date.Year }}</time>
-        <span>·&nbsp;{{ math.Round (div (countwords .Content) 200.0) }}&nbsp;мин чтения</span>
+    <div class="article-byline">
+        <a href="/about/" class="article-byline__avatar" aria-label="Об авторе — Эльдар">
+            <img src="/images/eldar-photo.jpg" alt="Эльдар, фаундер Eldar Marketing" width="44" height="44" loading="lazy">
+        </a>
+        <div class="article-byline__meta">
+            <div class="article-byline__line">
+                <a href="/about/" class="article-byline__author">Эльдар</a>
+                <span class="article-byline__role">·&nbsp;фаундер Eldar&nbsp;Marketing</span>
+            </div>
+            <div class="article-byline__line article-byline__line--muted">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }}&nbsp;{{ $month }}&nbsp;{{ .Date.Year }}</time>
+                <span>·&nbsp;{{ math.Round (div (countwords .Content) 200.0) }}&nbsp;мин чтения</span>
+            </div>
+        </div>
     </div>
     {{ .Content }}
 </article>
+
+<aside class="author-card" aria-label="Об авторе">
+    <a href="/about/" class="author-card__photo" aria-hidden="true" tabindex="-1">
+        <img src="/images/eldar-photo.jpg" alt="Эльдар, фаундер Eldar Marketing" width="96" height="96" loading="lazy">
+    </a>
+    <div class="author-card__body">
+        <div class="author-card__head">
+            <a href="/about/" class="author-card__name">Эльдар</a>
+            <span class="author-card__role">фаундер Eldar&nbsp;Marketing</span>
+        </div>
+        <p class="author-card__bio">
+            Веду этот блог как авторский&nbsp;— рассказываю, что делаем руками с&nbsp;командой AI-ассистентов в&nbsp;Eldar&nbsp;Marketing. 11&nbsp;лет в&nbsp;маркетинге, AI и&nbsp;автоматизация для&nbsp;малого бизнеса. <a href="/about/">О&nbsp;команде →</a>
+        </p>
+        <div class="author-card__cta">
+            <a href="https://t.me/eldarmarketing" class="author-card__btn">Telegram</a>
+            <a href="/contact/" class="author-card__btn author-card__btn--primary">Обсудить проект&nbsp;→</a>
+        </div>
+    </div>
+</aside>
 
 <nav class="article-nav">
     {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title | truncate 40 }}</a>{{ else }}<span></span>{{ end }}
@@ -80,6 +110,134 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <style>
+/* Article byline (top of post) */
+.article-byline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: var(--reading);
+    margin: 18px auto 28px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--bg-soft, transparent);
+}
+.article-byline__avatar {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    line-height: 0;
+    border: 1px solid var(--line);
+    transition: transform 0.18s ease;
+}
+.article-byline__avatar:hover { transform: scale(1.05); }
+.article-byline__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.article-byline__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.article-byline__line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px; font-size: 14px; line-height: 1.4; }
+.article-byline__line--muted { color: var(--ink-muted, #777); font-size: 13px; }
+.article-byline__author {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+.article-byline__author:hover { border-bottom-color: var(--ink); }
+.article-byline__role { color: var(--ink-muted, #777); }
+
+/* Author card (end of post) */
+.author-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: var(--reading);
+    margin: 56px auto 32px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--bg-soft, transparent);
+    position: relative;
+}
+.author-card::before {
+    content: "Об авторе";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    padding: 2px 10px;
+    background: var(--bg);
+    color: var(--ink-muted, #888);
+    font-size: 11px;
+    font-family: var(--font-mono, monospace);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+}
+.author-card__photo {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    line-height: 0;
+    border: 1px solid var(--line);
+}
+.author-card__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.author-card__body { flex: 1; min-width: 0; }
+.author-card__head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.author-card__name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.1;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+.author-card__name:hover { border-bottom-color: var(--ink); }
+.author-card__role { color: var(--ink-muted, #777); font-size: 14px; }
+.author-card__bio {
+    margin: 0 0 16px;
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+}
+.author-card__bio a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.author-card__cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.author-card__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.author-card__btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.author-card__btn--primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+}
+.author-card__btn--primary:hover { background: transparent; color: var(--ink); }
+
+@media (max-width: 600px) {
+    .article-byline { padding: 12px 14px; gap: 12px; }
+    .article-byline__avatar { width: 40px; height: 40px; }
+    .author-card { flex-direction: column; padding: 24px 20px 22px; gap: 16px; }
+    .author-card__photo { width: 72px; height: 72px; }
+    .author-card__name { font-size: 19px; }
+    .author-card__cta { width: 100%; }
+    .author-card__btn { flex: 1; justify-content: center; }
+}
+
 .code-header {
     display: flex;
     justify-content: space-between;
