@@ -26,6 +26,9 @@
     --on-invert: #f5f5f5;
     --on-invert-muted: #a8a8a8;
 
+    /* Accent */
+    --color-online: #28c76f;
+
     /* Spacing scale (8pt + φ на верхних ступенях) */
     --s-0: 4px;
     --s-1: 8px;
@@ -43,6 +46,7 @@
     --gutter: clamp(20px, 4vw, 32px);
 
     /* Typography scale (modular 1.250) */
+    --t-2xs: 11px;
     --t-xs: 13px;
     --t-sm: 15px;
     --t-base: 17px;
@@ -53,6 +57,9 @@
     --t-3xl: 54px;
     --t-4xl: 68px;
     --t-5xl: 86px;
+
+    /* Layout */
+    --header-h: 88px;
 
     /* Section vertical rhythm */
     --section-pad-block: clamp(64px, 7vw, 104px);
@@ -308,7 +315,7 @@ section[id] {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #28c76f;
+    background: var(--color-online);
     box-shadow: 0 0 0 0 rgba(40, 199, 111, 0.7);
     animation: pulse 2.2s infinite;
 }
@@ -501,7 +508,7 @@ html.dark .mobile-menu__link::before { background: linear-gradient(90deg, rgba(0
 .mobile-menu__link:focus-visible { padding-left: 36px; }
 
 .mobile-menu__link-num {
-    font-size: 11px;
+    font-size: var(--t-2xs);
     color: var(--on-invert-muted);
     font-feature-settings: 'tnum';
     letter-spacing: 0.06em;
@@ -562,7 +569,7 @@ html.dark .mobile-menu__foot { border-top-color: rgba(0,0,0,0.08); }
     gap: 16px;
 }
 .mobile-menu__foot-label {
-    font-size: 11px;
+    font-size: var(--t-2xs);
     color: var(--on-invert-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -582,7 +589,7 @@ html.dark .mobile-menu__foot { border-top-color: rgba(0,0,0,0.08); }
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #28c76f;
+    background: var(--color-online);
     box-shadow: 0 0 0 0 rgba(40, 199, 111, 0.7);
     animation: pulse 2.2s infinite;
 }
@@ -766,7 +773,7 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #28c76f;
+    background: var(--color-online);
     box-shadow: 0 0 0 0 rgba(40, 199, 111, 0.7);
     animation: pulse 2.2s infinite;
 }
@@ -792,7 +799,7 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     font-feature-settings: 'tnum';
 }
 .hero__photo-tag-label {
-    font-size: 11px;
+    font-size: var(--t-2xs);
     line-height: 1.25;
     color: var(--on-invert-muted);
     text-transform: uppercase;
@@ -1246,7 +1253,7 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     flex-direction: column;
     gap: var(--s-2);
     position: sticky;
-    top: 88px;
+    top: var(--header-h);
 }
 
 @media (max-width: 1023.98px) {
