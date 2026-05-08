@@ -1510,6 +1510,8 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     background: var(--bg-invert);
     border-color: var(--line-2);
     padding-block: var(--s-4);
+    mask-image: none;
+    -webkit-mask-image: none;
 }
 .marquee--accent .marquee__item {
     color: var(--on-invert);
