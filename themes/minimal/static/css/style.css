@@ -957,7 +957,7 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     transition: transform var(--transition-fast);
     align-self: flex-start;
 }
-.service-cell:hover .service-cell__arrow { transform: translateX(4px); }
+.service-cell:hover .service-cell__arrow { transform: translateX(var(--s-0)); }
 
 /* === CASES GRID === */
 .cases-grid {
