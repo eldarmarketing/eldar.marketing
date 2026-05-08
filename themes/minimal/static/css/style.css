@@ -1931,29 +1931,4 @@ html.js .reveal.in { opacity: 1; transform: none; }
 }
 .markdown > * + * { margin-top: var(--s-3); }
 
-/* === SCROLL SNAP (homepage, all viewports) === */
-html:has(body.is-home) {
-    scroll-snap-type: y mandatory;
-}
-
-.is-home .hero,
-.is-home .section,
-.is-home .cta-band {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    scroll-margin-top: 72px;
-}
-
-/* Длинные секции — мягкий snap (можно проскролить через них) */
-.is-home .section:has(.cases-grid),
-.is-home .section:has(.post-list),
-.is-home .section:has(.why) {
-    scroll-snap-stop: normal;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html:has(body.is-home) {
-        scroll-snap-type: none;
-    }
-}
 .cookie-banner__btn:hover { transform: translateY(-1px); }
