@@ -1499,6 +1499,24 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     .marquee__track { animation: none; }
 }
 
+/* Marquee variants */
+.marquee--alt {
+    background: var(--bg);
+    border-color: var(--line);
+}
+.marquee--alt .marquee__item { color: var(--ink-3); }
+
+.marquee--accent {
+    background: var(--bg-invert);
+    border-color: var(--line-2);
+    padding-block: var(--s-4);
+}
+.marquee--accent .marquee__item {
+    color: var(--on-invert);
+    font-size: var(--t-md);
+}
+.marquee--accent .marquee__item::after { color: var(--on-invert-muted); }
+
 /* === ARTICLE CONTENT (single page) === */
 article.page-article {
     max-width: var(--reading);
