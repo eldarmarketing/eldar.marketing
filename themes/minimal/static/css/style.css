@@ -12,6 +12,7 @@
 
 /* === DESIGN TOKENS === */
 :root {
+    /* Colors (без изменений) */
     --bg: #ffffff;
     --bg-alt: #fafafa;
     --bg-invert: #0a0a0a;
@@ -25,13 +26,46 @@
     --on-invert: #f5f5f5;
     --on-invert-muted: #a8a8a8;
 
-    --container: 1240px;
-    --reading: 720px;
-    --gutter: 32px;
+    /* Spacing scale (8pt + φ на верхних ступенях) */
+    --s-0: 4px;
+    --s-1: 8px;
+    --s-2: 16px;
+    --s-3: 24px;
+    --s-4: 40px;
+    --s-5: 64px;
+    --s-6: 104px;
+    --s-7: 168px;
 
+    /* Containers (golden ratio) */
+    --container: 1240px;
+    --reading: 768px;
+    --narrow: 480px;
+    --gutter: clamp(20px, 4vw, 32px);
+
+    /* Typography scale (modular 1.250) */
+    --t-xs: 13px;
+    --t-sm: 15px;
+    --t-base: 17px;
+    --t-md: 21px;
+    --t-lg: 27px;
+    --t-xl: 34px;
+    --t-2xl: 42px;
+    --t-3xl: 54px;
+    --t-4xl: 68px;
+    --t-5xl: 86px;
+
+    /* Section vertical rhythm */
+    --section-pad-block: clamp(64px, 7vw, 104px);
+
+    /* Grid */
+    --grid-cols: 12;
+    --grid-gap: var(--s-3);
+
+    /* Fonts */
     --font-sans: 'GT Eesti', -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
     --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
+    /* Transitions */
     --t-fast: 0.18s cubic-bezier(.4, 0, .2, 1);
     --t-med: 0.32s cubic-bezier(.4, 0, .2, 1);
 }
