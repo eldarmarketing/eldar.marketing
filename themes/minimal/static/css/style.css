@@ -719,10 +719,15 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     padding: var(--s-3) 0 0;
     border-top: 1px solid var(--line);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--s-3);
     font-size: var(--t-sm);
     color: var(--muted);
+}
+@media (min-width: 640px) {
+    .hero__trust {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 .hero__trust li {
     line-height: 1.4;
