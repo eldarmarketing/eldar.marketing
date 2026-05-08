@@ -1230,6 +1230,50 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
 }
 .section--invert .process__time { color: var(--on-invert-muted); }
 
+/* === PROCESS SCROLLJACKING (desktop) === */
+@media (min-width: 1024px) {
+    .section--invert {
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        column-gap: var(--s-5);
+        align-items: start;
+    }
+
+    .section--invert .section-head {
+        position: sticky;
+        top: var(--header-h);
+        margin-bottom: 0;
+        grid-template-columns: 1fr;
+        gap: var(--s-3);
+    }
+
+    .section--invert .section-head__lead {
+        max-width: none;
+    }
+
+    .section--invert .process {
+        grid-template-columns: 1fr;
+        gap: var(--s-4);
+    }
+
+    .section--invert .process__step {
+        min-height: 280px;
+        padding-top: var(--s-4);
+        padding-bottom: var(--s-4);
+        justify-content: flex-start;
+    }
+
+    .section--invert .process__title {
+        font-size: var(--t-lg);
+    }
+
+    .section--invert .process__desc {
+        font-size: var(--t-md);
+        line-height: 1.5;
+        max-width: 56ch;
+    }
+}
+
 /* === WHY === */
 .why {
     display: grid;
