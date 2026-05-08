@@ -1862,3 +1862,55 @@ html.js .reveal.in { opacity: 1; transform: none; }
     outline-offset: 2px;
     border-radius: 4px;
 }
+
+/* === COOKIE BANNER === */
+.cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: var(--s-2) var(--s-3);
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: var(--t-sm);
+    line-height: 1.5;
+    transition: transform var(--transition-med);
+}
+.cookie-banner.is-visible { display: block; }
+.cookie-banner.is-hidden { transform: translateY(100%); }
+
+.cookie-banner__inner {
+    max-width: 920px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+}
+.cookie-banner__text {
+    margin: 0;
+    flex: 1;
+    min-width: 200px;
+}
+.cookie-banner__text a {
+    text-decoration: underline;
+    color: inherit;
+}
+.cookie-banner__btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    font-weight: 600;
+    font-size: var(--t-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    background: var(--ink);
+    color: var(--bg);
+    min-height: 44px;
+    transition: transform var(--transition-fast);
+}
+.cookie-banner__btn:hover { transform: translateY(-1px); }
