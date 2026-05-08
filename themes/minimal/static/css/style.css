@@ -163,13 +163,9 @@ main > blockquote {
 .section--invert {
     background: var(--bg-invert);
     color: var(--on-invert);
-    max-width: none;
-    padding-inline: 0;
-}
-.section--invert > * {
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
+    /* Full-bleed background trick — фон выезжает за пределы секции, контент ведёт себя как в .section */
+    box-shadow: 0 0 0 100vmax var(--bg-invert);
+    clip-path: inset(0 -100vmax);
 }
 
 /* === TYPOGRAPHY HIERARCHY === */
