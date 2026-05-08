@@ -328,6 +328,50 @@ function acceptCookies(){
         t.innerHTML = clone + clone;
     });
 })();
+
+// Animated number counters
+(function(){
+    if (!('IntersectionObserver' in window)) return;
+    var counters = document.querySelectorAll('.js-counter');
+    if (!counters.length) return;
+
+    var animateCounter = function(el) {
+        var target = el.dataset.target || el.textContent;
+        var match = target.match(/(\d+(?:[.,]\d+)?)(.*)/);
+        if (!match) return;
+        var num = parseFloat(match[1].replace(',', '.'));
+        var suffix = match[2] || '';
+        var duration = 1400;
+        var start = null;
+        var initial = 0;
+
+        var step = function(timestamp) {
+            if (!start) start = timestamp;
+            var elapsed = timestamp - start;
+            var progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = initial + (num - initial) * eased;
+            var formatted = (num % 1 === 0) ? Math.floor(current) : current.toFixed(1);
+            el.textContent = formatted + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target;
+        };
+
+        requestAnimationFrame(step);
+    };
+
+    var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(function(c){ observer.observe(c); });
+})();
 </script>
 </body>
 </html>

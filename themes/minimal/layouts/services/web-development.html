@@ -19,7 +19,7 @@
     <ul class="service-hero__metrics">
       {{ range $hero.metrics }}
       <li>
-        <strong>{{ .value }}</strong>
+        <strong class="js-counter" data-target="{{ .value }}">{{ .value }}</strong>
         <span>{{ .label }}</span>
       </li>
       {{ end }}
@@ -97,6 +97,96 @@
   </ol>
 </section>
 
-<!-- Phase C: compare, faq, cta here -->
+<section class="section" id="compare">
+  {{ $cmp := .Params.compare }}
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">04 / Сравнение</span>
+      <h2 class="section-head__title">{{ $cmp.title }}</h2>
+    </div>
+    <p class="section-head__lead">{{ $cmp.description }}</p>
+  </div>
+  <div class="compare-table">
+    <div class="compare-table__head">
+      <div class="compare-table__col compare-table__col--feat">&nbsp;</div>
+      <div class="compare-table__col compare-table__col--ours">
+        <strong>Next.js</strong>
+        <span>наш стек</span>
+      </div>
+      <div class="compare-table__col compare-table__col--theirs">
+        <strong>WordPress</strong>
+        <span>классика</span>
+      </div>
+    </div>
+    {{ range $cmp.rows }}
+    <div class="compare-table__row">
+      <div class="compare-table__col compare-table__col--feat">{{ .feature }}</div>
+      <div class="compare-table__col compare-table__col--ours">
+        <span class="compare-table__check" aria-hidden="true">✓</span>
+        {{ .next }}
+      </div>
+      <div class="compare-table__col compare-table__col--theirs">{{ .wp }}</div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section" id="faq">
+  {{ $faq := .Params.faq }}
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">05 / Вопросы</span>
+      <h2 class="section-head__title">{{ $faq.title }}</h2>
+    </div>
+  </div>
+  <ul class="faq-list">
+    {{ range $faq.items }}
+    <li class="faq-item">
+      <details>
+        <summary class="faq-item__q">
+          <span>{{ .q }}</span>
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-item__a">
+          <p>{{ .a }}</p>
+        </div>
+      </details>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+
+<section class="cta-band" id="contact">
+  {{ $cta := .Params.cta }}
+  <div class="cta-band__inner">
+    <div class="cta-band__copy">
+      <span class="cta-band__label">06 / Дальше</span>
+      <h2 class="cta-band__title">{{ $cta.title }}</h2>
+      <p class="cta-band__lead">{{ $cta.lead }}</p>
+      <div class="cta-band__row">
+        <a href="/contact/" class="btn btn--primary btn--invert">
+          Оставить заявку <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="https://t.me/eldarmarketing" class="btn btn--ghost btn--invert">
+          Telegram
+        </a>
+      </div>
+    </div>
+    <div class="cta-band__meta">
+      <div class="cta-band__meta-item">
+        <span class="cta-band__meta-label">Email</span>
+        <a href="mailto:i@eldarmarketing.ru">i@eldarmarketing.ru</a>
+      </div>
+      <div class="cta-band__meta-item">
+        <span class="cta-band__meta-label">Телефон</span>
+        <a href="tel:+79035708273">+7&nbsp;903&nbsp;570&nbsp;82&nbsp;73</a>
+      </div>
+      <div class="cta-band__meta-item">
+        <span class="cta-band__meta-label">Время ответа</span>
+        <span>в течение часа в рабочее время</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 {{ end }}
