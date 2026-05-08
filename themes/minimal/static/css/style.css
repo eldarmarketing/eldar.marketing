@@ -818,7 +818,8 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     background: var(--ink);
     color: var(--bg);
 }
-.btn--primary:hover { transform: translateY(-1px); }
+.btn--primary:hover,
+.btn--invert.btn--primary:hover { transform: translateY(-1px); }
 
 .btn--ghost {
     background: transparent;
