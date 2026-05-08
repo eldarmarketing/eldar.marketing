@@ -165,6 +165,63 @@ main > blockquote {
     padding-inline: var(--gutter);
 }
 
+/* === TYPOGRAPHY HIERARCHY === */
+h1, h2, h3, h4 {
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: clamp(var(--t-3xl), 5.6vw, var(--t-5xl));
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    overflow-wrap: anywhere;
+}
+
+h2 {
+    font-size: clamp(var(--t-xl), 3.4vw, var(--t-3xl));
+    line-height: 1.05;
+}
+
+h3 {
+    font-size: clamp(var(--t-md), 1.8vw, var(--t-lg));
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+p {
+    color: var(--ink-3);
+    font-size: var(--t-base);
+    line-height: 1.6;
+}
+
+.lead {
+    font-size: clamp(var(--t-md), 1.4vw, 23px);
+    line-height: 1.5;
+    color: var(--ink-3);
+    text-wrap: balance;
+}
+
+.eyebrow,
+.section-head__num {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: inline-block;
+}
+
+/* Russian hyphens на узких экранах */
+@media (max-width: 480px) {
+    h1, h2 { hyphens: auto; }
+}
+
 /* Anchor offset под sticky header */
 .section[id],
 section[id] {
@@ -699,10 +756,7 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     align-items: center;
     gap: 10px;
     font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
     letter-spacing: 0.04em;
-    text-transform: uppercase;
     margin-bottom: 36px;
 }
 .hero__eyebrow::before {
@@ -714,13 +768,9 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
 }
 .hero__title {
     font-size: clamp(40px, 6vw, 78px);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
     font-weight: 500;
-    color: var(--ink);
     max-width: 14ch;
     margin-bottom: 32px;
-    text-wrap: balance;
 }
 .hero__title em {
     font-style: normal;
@@ -819,8 +869,6 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
 .section-head__num {
     display: block;
     font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
     margin-bottom: 12px;
     letter-spacing: 0.04em;
     font-feature-settings: 'tnum';
@@ -829,9 +877,6 @@ html.dark .hero__photo-frame img { filter: grayscale(100%) brightness(0.9); }
     font-size: clamp(28px, 3.2vw, 44px);
     font-weight: 500;
     letter-spacing: -0.025em;
-    line-height: 1.05;
-    color: var(--ink);
-    text-wrap: balance;
 }
 .section-head__lead {
     font-size: 16px;
@@ -1359,11 +1404,9 @@ article.page-article > h2:first-of-type,
 article.case-study > h2:first-of-type,
 article.blog-post > h2:first-of-type {
     font-size: clamp(32px, 4vw, 52px);
-    line-height: 1.05;
     letter-spacing: -0.025em;
     font-weight: 500;
     margin-bottom: 24px;
-    text-wrap: balance;
 }
 .article-meta,
 article.page-article .meta,
@@ -1380,11 +1423,8 @@ article.case-study .meta {
 article h2, article h3, article h4,
 .markdown h2, .markdown h3, .markdown h4 {
     font-weight: 500;
-    letter-spacing: -0.02em;
     line-height: 1.2;
     margin: 56px 0 16px;
-    text-wrap: balance;
-    color: var(--ink);
 }
 article h2, .markdown h2 { font-size: 26px; }
 article h3, .markdown h3 { font-size: 20px; margin: 40px 0 14px; }
@@ -1624,11 +1664,9 @@ article tbody tr:hover, .markdown tbody tr:hover { background: var(--bg-alt); }
 .site-footer__brand h2 {
     font-size: 28px;
     font-weight: 500;
-    letter-spacing: -0.02em;
     margin-bottom: 16px;
     line-height: 1.1;
     color: var(--on-invert);
-    text-wrap: balance;
 }
 .site-footer__brand p { font-size: 14px; line-height: 1.6; color: var(--on-invert-muted); max-width: 36ch; }
 .site-footer__col h3 {
