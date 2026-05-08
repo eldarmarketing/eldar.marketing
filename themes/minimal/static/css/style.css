@@ -1730,9 +1730,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
 
 /* === RESPONSIVE TWEAKS === */
 @media (max-width: 768px) {
-    body { font-size: 16px; }
     .hero { padding: 64px var(--gutter) 48px; }
-    .section { padding: 64px var(--gutter); }
     .section--tight { padding: 48px var(--gutter); }
     .stats__num { font-size: 36px; }
     .stats__item { padding: 24px 16px; }
@@ -1746,7 +1744,6 @@ html.js .reveal.in { opacity: 1; transform: none; }
     .hero__eyebrow { margin-bottom: 24px; }
     .hero__title { margin-bottom: 24px; }
     .hero__lead { margin-bottom: 28px; }
-    .section { padding: 56px var(--gutter); }
     .section-head { margin-bottom: 32px; }
 }
 
