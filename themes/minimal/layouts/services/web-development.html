@@ -45,7 +45,58 @@
   </ul>
 </section>
 
-<!-- Phase B: projects, process here -->
+<section class="section section--invert" id="projects">
+  {{ $projects := .Params.projects }}
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">02 / Проекты</span>
+      <h2 class="section-head__title">{{ $projects.title }}</h2>
+    </div>
+    <p class="section-head__lead">{{ $projects.description }}</p>
+  </div>
+  <ol class="process">
+    {{ range $i, $p := $projects.items }}
+    <li class="process__step service-project">
+      <div class="process__num">{{ printf "%02d" (add $i 1) }}</div>
+      <h3 class="process__title">{{ .name }}</h3>
+      <p class="process__desc">{{ .desc }}</p>
+      <div class="service-project__footer">
+        <div class="service-project__metric">
+          <strong>{{ .metric }}</strong>
+          <span>{{ .metric_label }}</span>
+        </div>
+        {{ if .slug }}
+        <a href="/cases/{{ .slug }}/" class="service-project__link">Кейс →</a>
+        {{ else if .url }}
+        <a href="{{ .url }}" class="service-project__link" rel="noopener">{{ replace (replace .url "https://" "") "/" "" }} →</a>
+        {{ end }}
+      </div>
+    </li>
+    {{ end }}
+  </ol>
+</section>
+
+<section class="section service-process" id="process">
+  {{ $proc := .Params.process }}
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">03 / Процесс</span>
+      <h2 class="section-head__title">{{ $proc.title }}</h2>
+    </div>
+    <p class="section-head__lead">{{ $proc.description }}</p>
+  </div>
+  <ol class="process">
+    {{ range $proc.steps }}
+    <li class="process__step">
+      <div class="process__num">{{ .num }}</div>
+      <h3 class="process__title">{{ .title }}</h3>
+      <p class="process__desc">{{ .desc }}</p>
+      <div class="process__time">{{ .time }}</div>
+    </li>
+    {{ end }}
+  </ol>
+</section>
+
 <!-- Phase C: compare, faq, cta here -->
 
 {{ end }}

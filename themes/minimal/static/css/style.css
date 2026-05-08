@@ -2122,4 +2122,85 @@ html.js .reveal.in { opacity: 1; transform: none; }
     line-height: 1.5;
 }
 
+/* === SERVICE PROJECT CARD (внутри section--invert process) === */
+.service-project {
+    /* Использует базовую .process__step разметку, но с extra footer */
+}
+.service-project__footer {
+    margin-top: auto;
+    padding-top: var(--s-3);
+    border-top: 1px solid rgba(255,255,255,0.16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+}
+.service-project__metric {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.service-project__metric strong {
+    font-size: var(--t-md);
+    font-weight: 600;
+    color: var(--on-invert);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+.service-project__metric span {
+    font-size: var(--t-xs);
+    color: var(--on-invert-muted);
+}
+.service-project__link {
+    font-size: var(--t-sm);
+    color: var(--on-invert);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    transition: border-color var(--transition-fast);
+    white-space: nowrap;
+}
+.service-project__link:hover {
+    border-bottom-color: var(--on-invert);
+}
+
+/* Service-process секция (3-я секция, белая) — увеличить process step минимальную высоту */
+.service-process .process__step {
+    min-height: 240px;
+}
+
+/* Section--invert внутри service landing — отменить scrolljacking из главной (только для invert на главной) */
+body:not(.is-home) .section--invert {
+    display: block;
+}
+body:not(.is-home) .section--invert .section-head {
+    position: static;
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+    margin-bottom: var(--s-4);
+}
+body:not(.is-home) .section--invert .process {
+    grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+    body:not(.is-home) .section--invert .process {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width: 1024px) {
+    body:not(.is-home) .section--invert .process {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+body:not(.is-home) .section--invert .process__step {
+    min-height: auto;
+}
+body:not(.is-home) .section--invert .process__title {
+    font-size: var(--t-md);
+}
+body:not(.is-home) .section--invert .process__desc {
+    font-size: var(--t-sm);
+}
+
 .cookie-banner__btn:hover { transform: translateY(-1px); }
