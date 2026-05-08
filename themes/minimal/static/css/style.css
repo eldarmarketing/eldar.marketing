@@ -1930,4 +1930,25 @@ html.js .reveal.in { opacity: 1; transform: none; }
     color: var(--ink);
 }
 .markdown > * + * { margin-top: var(--s-3); }
+
+/* === SCROLL SNAP (homepage, desktop only) === */
+@media (min-width: 1024px) {
+    .is-home {
+        scroll-snap-type: y proximity;
+    }
+
+    .is-home .hero,
+    .is-home .section,
+    .is-home .cta-band {
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
+        scroll-margin-top: 80px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .is-home {
+        scroll-snap-type: none;
+    }
+}
 .cookie-banner__btn:hover { transform: translateY(-1px); }
