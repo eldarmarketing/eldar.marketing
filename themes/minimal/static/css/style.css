@@ -725,15 +725,21 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .hero__trust li { line-height: 1.4; }
 .hero__trust strong { color: var(--ink); font-weight: 600; }
 
-/* Photo frame — вертикальный портрет (√φ ratio) */
+/* Photo frame — квадрат под новое фото 1254×1254 */
 .hero__photo-frame {
     position: relative;
     border-radius: var(--s-2);
     overflow: hidden;
     border: 1px solid var(--line);
-    aspect-ratio: 1 / 1.272;
+    aspect-ratio: 1 / 1;
     background: var(--bg-alt);
-    box-shadow: 0 30px 80px -30px rgba(0,0,0,0.18);
+    box-shadow: 0 24px 60px -24px rgba(0,0,0,0.22);
+}
+
+@media (min-width: 1024px) {
+    .hero__photo-frame {
+        max-height: 580px;
+    }
 }
 
 html.dark .hero__photo-frame { box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6); }
@@ -771,34 +777,6 @@ html.dark .hero__photo-frame img { filter: brightness(0.9); }
     background: var(--color-online);
     box-shadow: 0 0 0 0 rgba(40, 199, 111, 0.7);
     animation: pulse 2.2s infinite;
-}
-
-.hero__photo-tag {
-    position: absolute;
-    bottom: var(--s-2);
-    right: var(--s-2);
-    background: var(--ink);
-    color: var(--bg);
-    padding: var(--s-3);
-    border-radius: var(--s-2);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-2);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-}
-.hero__photo-tag-num {
-    font-size: clamp(28px, 3.4vw, 42px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    font-feature-settings: 'tnum';
-}
-.hero__photo-tag-label {
-    font-size: var(--t-2xs);
-    line-height: 1.25;
-    color: var(--on-invert-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
 }
 
 /* === BUTTONS === */
