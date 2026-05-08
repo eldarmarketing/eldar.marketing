@@ -106,7 +106,7 @@ body {
     background: var(--bg);
     font-variant-numeric: tabular-nums;
     transition: background var(--transition-med), color var(--transition-med);
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 main {
@@ -1934,7 +1934,6 @@ html.js .reveal.in { opacity: 1; transform: none; }
 /* === SCROLL SNAP (homepage, all viewports) === */
 html:has(body.is-home) {
     scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
 }
 
 .is-home .hero,
@@ -1955,7 +1954,6 @@ html:has(body.is-home) {
 @media (prefers-reduced-motion: reduce) {
     html:has(body.is-home) {
         scroll-snap-type: none;
-        scroll-behavior: auto;
     }
 }
 .cookie-banner__btn:hover { transform: translateY(-1px); }
