@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
-    <title>Как внедрить AI-ассистента в автосервис — Эльдар Маркетинг</title>
-    <meta name="description" content="Как внедрить AI-ассистента в автосервис">
-    <meta name="keywords" content="AI-ассистент, автоматизация, маркетинг">
+    <title>Интернет-магазин на 1456 товаров с нуля — без конструктора — Эльдар Маркетинг</title>
+    <meta name="description" content="Кастомный e-commerce на Next.js 16 для продавца сварочного оборудования: своя база товаров, облачное хранилище фото и админка с визуальным редактором.">
+    <meta name="keywords" content="интернет-магазин под ключ, разработка ecommerce, Next.js магазин">
     <meta name="author" content="Эльдар Маркетинг">
-    <link rel="canonical" href="https://eldarmarketing.ru/blog/ai-assistant-auto-service/">
+    <link rel="canonical" href="https://eldarmarketing.ru/cases/ecommerce-svarka/">
 
     
-    <meta property="og:title" content="Как внедрить AI-ассистента в автосервис">
-    <meta property="og:description" content="Как внедрить AI-ассистента в автосервис">
+    <meta property="og:title" content="Интернет-магазин на 1456 товаров с нуля — без конструктора">
+    <meta property="og:description" content="Кастомный e-commerce на Next.js 16 для продавца сварочного оборудования: своя база товаров, облачное хранилище фото и админка с визуальным редактором.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://eldarmarketing.ru/blog/ai-assistant-auto-service/">
+    <meta property="og:url" content="https://eldarmarketing.ru/cases/ecommerce-svarka/">
     <meta property="og:site_name" content="Эльдар Маркетинг">
     <meta property="og:locale" content="ru_RU">
     
@@ -24,8 +24,8 @@
 
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Как внедрить AI-ассистента в автосервис">
-    <meta name="twitter:description" content="Как внедрить AI-ассистента в автосервис">
+    <meta name="twitter:title" content="Интернет-магазин на 1456 товаров с нуля — без конструктора">
+    <meta name="twitter:description" content="Кастомный e-commerce на Next.js 16 для продавца сварочного оборудования: своя база товаров, облачное хранилище фото и админка с визуальным редактором.">
     
     <meta name="twitter:image" content="https://eldarmarketing.ru/images/eldar.jpg">
     
@@ -163,310 +163,69 @@
     
 <nav class="breadcrumb" aria-label="Хлебные крошки">
     <a href="/">Главная</a> <span class="sep">→</span>
-    <a href="/blog/">Блог</a> <span class="sep">→</span>
-    <span>Как внедрить AI-ассистента в автосервис</span>
+    <a href="/cases/">Кейсы</a> <span class="sep">→</span>
+    <span>Интернет-магазин на 1456 товаров с нуля — без …</span>
 </nav>
+
+<article class="page-article case-study markdown">
+    <h2>Интернет-магазин на 1456 товаров с нуля — без конструктора</h2>
+    
+    <h2 id="задача">Задача</h2>
+<p>Магазин сварочного оборудования, электроинструмента и абразивов в Петербурге. Нужен интернет-магазин, который не упрётся в потолок шаблонного решения — со своей базой товаров, нормальной админкой и возможностью дорабатывать что угодно.</p>
+<h2 id="что-было">Что было</h2>
+<ul>
+<li>Большой ассортимент без удобной витрины</li>
+<li>Готовые конструкторы не тянули нужную логику и кастомизацию</li>
+<li>Контент некому было обновлять без программиста</li>
+</ul>
+<h2 id="что-сделали">Что сделали</h2>
+<h3 id="витрина">Витрина</h3>
+<p>Каталог на 1456 товаров и 249 категорий: карточки, поиск, фильтры, корзина, избранное, сравнение. Страницы собираются на сервере (Next.js 16 + React 19) — открываются быстро, работают плавно.</p>
+<h3 id="хранилище">Хранилище</h3>
+<p>Товары, заказы, пользователи и новости — в базе MySQL. Фотографии товаров вынесены в облако (S3), чтобы сайт не тормозил на картинках.</p>
+<h3 id="личный-кабинет-и-заказы">Личный кабинет и заказы</h3>
+<p>Регистрация и вход с безопасным хранением паролей (bcrypt), оформление заказов, письма-подтверждения через nodemailer.</p>
+<h3 id="админка">Админка</h3>
+<p>Панель управления с визуальным редактором Tiptap — владелец правит описания товаров, новости и страницы «как в Word»: таблицы, картинки, ссылки. Без программиста.</p>
+<h2 id="результат">Результат</h2>
+<ul>
+<li>Свой движок вместо «коробки» — никаких лимитов подписки</li>
+<li>1456 товаров и 249 категорий в управляемой базе</li>
+<li>Контент обновляется самим клиентом</li>
+<li>Магазин держится онлайн круглосуточно (PM2 + Node 20)</li>
+</ul>
+<h2 id="технический-стек">Технический стек</h2>
+<ul>
+<li>Next.js 16 (App Router) + React 19 + TypeScript</li>
+<li>Tailwind CSS v4</li>
+<li>MySQL + AWS S3</li>
+<li>Tiptap, nodemailer, bcrypt</li>
+<li>Деплой: PM2 + Node 20</li>
+</ul>
+
+</article>
+
+<a href="/cases/" class="big-link">
+    <div class="big-link__label">Все кейсы</div>
+    <div class="big-link__title">
+        Смотреть остальное портфолио
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+    </div>
+</a>
 
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/"},
-        {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://eldarmarketing.ru/blog/"},
-        {"@type": "ListItem", "position": 3, "name": "Как внедрить AI-ассистента в автосервис", "item": "https:\/\/eldarmarketing.ru\/blog\/ai-assistant-auto-service\/"}
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://eldarmarketing.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Кейсы", "item": "https://eldarmarketing.ru/cases/" },
+        { "@type": "ListItem", "position": 3, "name": "Интернет-магазин на 1456 товаров с нуля — без конструктора" }
     ]
 }
 </script>
-
-<article class="page-article blog-post markdown">
-    <h2>Как внедрить AI-ассистента в автосервис</h2>
-    
-    
-    <div class="article-byline">
-        <a href="/about/" class="article-byline__avatar" aria-label="Об авторе — Эльдар">
-            <img src="/images/eldar-photo.jpg" alt="Эльдар, CEO Eldar Marketing" width="44" height="44" loading="lazy">
-        </a>
-        <div class="article-byline__meta">
-            <div class="article-byline__line">
-                <a href="/about/" class="article-byline__author">Эльдар</a>
-                <span class="article-byline__role">·&nbsp;CEO Eldar&nbsp;Marketing</span>
-            </div>
-            <div class="article-byline__line article-byline__line--muted">
-                <time datetime="2026-02-01">1&nbsp;февраля&nbsp;2026</time>
-                <span>·&nbsp;1&nbsp;мин чтения</span>
-            </div>
-        </div>
-    </div>
-    <p>Автосервис — идеальная ниша для AI-ассистента. Много типовых вопросов, запись на услуги, напоминания о ТО.</p>
-<h2 id="что-делает-ai-ассистент-в-автосервисе">Что делает AI-ассистент в автосервисе</h2>
-<p><strong>Отвечает на вопросы</strong></p>
-<ul>
-<li>Сколько стоит замена масла?</li>
-<li>Есть ли запись на завтра?</li>
-<li>Какие масла используете?</li>
-</ul>
-<p><strong>Записывает на услуги</strong></p>
-<ul>
-<li>Понимает свободную речь («хочу записаться на субботу утром»)</li>
-<li>Проверяет свободные слоты</li>
-<li>Отправляет подтверждение</li>
-</ul>
-<p><strong>Напоминает</strong></p>
-<ul>
-<li>За день до визита</li>
-<li>О плановом ТО по пробегу</li>
-<li>Об акциях и скидках</li>
-</ul>
-<h2 id="как-внедрить">Как внедрить</h2>
-<ol>
-<li><strong>Собрать базу знаний</strong> — прайс, услуги, частые вопросы</li>
-<li><strong>Подключить к мессенджерам</strong> — Telegram</li>
-<li><strong>Интегрировать с CRM</strong> — чтобы видеть историю клиента</li>
-<li><strong>Настроить эскалацию</strong> — сложные вопросы передавать менеджеру</li>
-</ol>
-<h2 id="результат">Результат</h2>
-<ul>
-<li><strong>-50%</strong> нагрузка на администратора</li>
-<li><strong>+30%</strong> записей (бот отвечает ночью и в выходные)</li>
-<li><strong>0</strong> пропущенных напоминаний</li>
-</ul>
-
-</article>
-
-<aside class="author-card" aria-label="Об авторе">
-    <a href="/about/" class="author-card__photo" aria-hidden="true" tabindex="-1">
-        <img src="/images/eldar-photo.jpg" alt="Эльдар, CEO Eldar Marketing" width="96" height="96" loading="lazy">
-    </a>
-    <div class="author-card__body">
-        <div class="author-card__head">
-            <a href="/about/" class="author-card__name">Эльдар</a>
-            <span class="author-card__role">CEO Eldar&nbsp;Marketing</span>
-        </div>
-        <p class="author-card__bio">
-            Веду этот блог как авторский&nbsp;— рассказываю, что делаем руками с&nbsp;командой AI-ассистентов в&nbsp;Eldar&nbsp;Marketing. 11&nbsp;лет в&nbsp;маркетинге, AI и&nbsp;автоматизация для&nbsp;малого бизнеса. <a href="/about/">О&nbsp;команде →</a>
-        </p>
-        <div class="author-card__cta">
-            <a href="https://t.me/eldarmarketing" class="author-card__btn">Telegram</a>
-            <a href="/contact/" class="author-card__btn author-card__btn--primary">Обсудить проект&nbsp;→</a>
-        </div>
-    </div>
-</aside>
-
-<nav class="article-nav">
-    <a href="https://eldarmarketing.ru/blog/5-processes-to-automate/">← 5 процессов которые нужно …</a>
-    <a href="https://eldarmarketing.ru/blog/first-ai-client/">Первый клиент на внедрение … →</a>
-</nav>
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Как внедрить AI-ассистента в автосервис",
-    "description": "Как внедрить AI-ассистента в автосервис",
-    "image": "https://eldarmarketing.ru/images/eldar.jpg",
-    "datePublished": "2026-02-01",
-    "dateModified": "2026-02-01",
-    "url": "https:\/\/eldarmarketing.ru\/blog\/ai-assistant-auto-service\/",
-    "wordCount":  111 ,
-    "keywords": "AI-ассистент, автоматизация, маркетинг",
-    "articleSection": "blog",
-    "author": { "@id": "#person" },
-    "publisher": { "@type": "Person", "name": "Эльдар", "url": "https://eldarmarketing.ru" },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https:\/\/eldarmarketing.ru\/blog\/ai-assistant-auto-service\/" }
-}
-</script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".highlight").forEach(function(block) {
-        var code = block.querySelector("code");
-        if (!code) return;
-        var lang = "";
-        var classes = code.className || "";
-        var m = classes.match(/language-(\w+)/);
-        if (m) lang = m[1];
-        var header = document.createElement("div");
-        header.className = "code-header";
-        header.innerHTML = '<span class="lang">' + (lang || "code") + '</span>' +
-            '<button class="copy-btn" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>';
-        header.querySelector(".copy-btn").addEventListener("click", function() {
-            var btn = this;
-            navigator.clipboard.writeText(code.textContent).then(function() {
-                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-                setTimeout(function() {
-                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
-                }, 2000);
-            });
-        });
-        block.parentNode.insertBefore(header, block);
-    });
-});
-</script>
-<style>
- 
-.article-byline {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    max-width: var(--reading);
-    margin: 18px auto 28px;
-    padding: 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: var(--bg-soft, transparent);
-}
-.article-byline__avatar {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: block;
-    line-height: 0;
-    border: 1px solid var(--line);
-    transition: transform 0.18s ease;
-}
-.article-byline__avatar:hover { transform: scale(1.05); }
-.article-byline__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
-.article-byline__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
-.article-byline__line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px; font-size: 14px; line-height: 1.4; }
-.article-byline__line--muted { color: var(--ink-muted, #777); font-size: 13px; }
-.article-byline__author {
-    color: var(--ink);
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-}
-.article-byline__author:hover { border-bottom-color: var(--ink); }
-.article-byline__role { color: var(--ink-muted, #777); }
-
- 
-.author-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    max-width: var(--reading);
-    margin: 56px auto 32px;
-    padding: 28px;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: var(--bg-soft, transparent);
-    position: relative;
-}
-.author-card::before {
-    content: "Об авторе";
-    position: absolute;
-    top: -10px;
-    left: 24px;
-    padding: 2px 10px;
-    background: var(--bg);
-    color: var(--ink-muted, #888);
-    font-size: 11px;
-    font-family: var(--font-mono, monospace);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-}
-.author-card__photo {
-    flex-shrink: 0;
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: block;
-    line-height: 0;
-    border: 1px solid var(--line);
-}
-.author-card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
-.author-card__body { flex: 1; min-width: 0; }
-.author-card__head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-.author-card__name {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--ink);
-    text-decoration: none;
-    line-height: 1.1;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-}
-.author-card__name:hover { border-bottom-color: var(--ink); }
-.author-card__role { color: var(--ink-muted, #777); font-size: 14px; }
-.author-card__bio {
-    margin: 0 0 16px;
-    color: var(--ink);
-    line-height: 1.55;
-    font-size: 15px;
-}
-.author-card__bio a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.author-card__cta { display: flex; flex-wrap: wrap; gap: 10px; }
-.author-card__btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 9px 18px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-}
-.author-card__btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.author-card__btn--primary {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
-}
-.author-card__btn--primary:hover { background: transparent; color: var(--ink); }
-
-@media (max-width: 600px) {
-    .article-byline { padding: 12px 14px; gap: 12px; }
-    .article-byline__avatar { width: 40px; height: 40px; }
-    .author-card { flex-direction: column; padding: 24px 20px 22px; gap: 16px; }
-    .author-card__photo { width: 72px; height: 72px; }
-    .author-card__name { font-size: 19px; }
-    .author-card__cta { width: 100%; }
-    .author-card__btn { flex: 1; justify-content: center; }
-}
-
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--bg-invert);
-    padding: 8px 16px;
-    font-size: 12px;
-    color: var(--on-invert-muted);
-    border-radius: 8px 8px 0 0;
-    margin: 32px 0 0;
-    font-family: var(--font-mono);
-    max-width: var(--reading);
-    margin-left: auto;
-    margin-right: auto;
-}
-.code-header .lang { text-transform: lowercase; }
-.code-header .copy-btn {
-    background: none;
-    border: none;
-    color: var(--on-invert-muted);
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    transition: background 0.15s, color 0.15s;
-}
-.code-header .copy-btn:hover { background: rgba(255,255,255,0.1); color: var(--on-invert); }
-.code-header + .highlight { margin-top: 0; max-width: var(--reading); margin-left: auto; margin-right: auto; }
-.code-header + .highlight pre { border-radius: 0 0 8px 8px; margin-top: 0; }
-</style>
 
 </main>
 
