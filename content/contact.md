@@ -7,6 +7,7 @@ description: "Оставьте заявку — свяжемся в течени
 
 <form id="contact-form" action="/api/lead" method="POST">
   <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+  <input type="hidden" name="js_check" id="lead-js" value="">
   <p>
     <label>Имя</label>
     <input type="text" name="name" required placeholder="Как к вам обращаться">
@@ -29,5 +30,14 @@ description: "Оставьте заявку — свяжемся в течени
     <button type="submit">Отправить заявку</button>
   </p>
 </form>
+
+<script>
+  // анти-спам: токен заполняется только в браузере с JS; боты без JS его не пришлют
+  (function(){
+    var f = document.getElementById('contact-form');
+    var j = document.getElementById('lead-js');
+    if (f && j) f.addEventListener('submit', function(){ j.value = Date.now().toString(36); });
+  })();
+</script>
 
 Или напишите напрямую: [@eldarmarketing](https://t.me/eldarmarketing)
