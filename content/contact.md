@@ -5,11 +5,8 @@ description: "Оставьте заявку — свяжемся в течени
 
 Расскажите о&nbsp;задаче&nbsp;— ответим в&nbsp;течение дня.
 
-<form id="contact-form" action="https://formsubmit.co/i@eldarmarketing.ru" method="POST">
-  <input type="hidden" name="_subject" value="Заявка с сайта eldarmarketing.ru">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://eldarmarketing.ru/thanks/">
-  <input type="hidden" name="_template" value="box">
+<form id="contact-form" action="/api/lead" method="POST">
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
   <p>
     <label>Имя</label>
     <input type="text" name="name" required placeholder="Как к вам обращаться">
