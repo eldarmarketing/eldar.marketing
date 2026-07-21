@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <section class="hero">
-    <div class="hero__eyebrow">{{ if eq .Section "blog" }}Блог{{ else if eq .Section "cases" }}Портфолио{{ else if eq .Section "services" }}Услуги{{ else }}Раздел{{ end }}</div>
+    <div class="hero__eyebrow">{{ if eq .Section "blog" }}Блог{{ else if eq .Section "cases" }}Портфолио{{ else if eq .Section "services" }}Услуги{{ else if eq .Section "industries" }}Отрасли{{ else }}Раздел{{ end }}</div>
     <h1 class="hero__title">{{ .Title }}</h1>
     {{ if .Description }}<p class="hero__lead">{{ .Description | safeHTML }}</p>{{ end }}
 </section>
