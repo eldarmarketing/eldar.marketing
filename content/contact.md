@@ -42,15 +42,72 @@ description: "Оставьте заявку — свяжемся в течени
 
 Или напишите напрямую: [@eldarmarketing](https://t.me/eldarmarketing)
 
-<div style="margin-top:2.5em;border:1px solid rgba(128,128,128,0.25);border-radius:16px;padding:1.5em 1.75em">
-  <div style="font-weight:700;font-size:1.05em;margin-bottom:0.9em">Реквизиты</div>
-  <table style="width:100%;border-collapse:collapse;font-size:0.95em;line-height:1.5">
-    <tr><td style="padding:0.35em 0;opacity:0.65;white-space:nowrap;vertical-align:top">Наименование</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">Индивидуальный предприниматель Малышев Максим Александрович</td></tr>
-    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">ИНН</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">780162236049</td></tr>
-    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">ОГРНИП</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">325784700365064</td></tr>
-    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">Расчётный счёт</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">40802810420000798697</td></tr>
-    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">Банк</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">ООО «Банк Точка»</td></tr>
-    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">БИК</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">044525104</td></tr>
-    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">Корр. счёт</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">30101810745374525104</td></tr>
-  </table>
+<style>
+.req-card { border: 1px solid var(--line, #e8e8e8); margin-top: 48px; }
+.req-card__head { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--line, #e8e8e8); }
+.req-card__label { font-family: var(--font-mono, monospace); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted, #6b6b6b); }
+.req-card__copy { font-family: inherit; font-size: 13px; font-weight: 600; background: transparent; color: var(--ink, #0a0a0a); border: 1px solid var(--line-2, #d4d4d4); padding: 8px 16px; cursor: pointer; transition: background .15s, color .15s; }
+.req-card__copy:hover { background: var(--ink, #0a0a0a); color: var(--bg, #fff); }
+.req-card__name { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; padding: 20px 24px 4px; color: var(--ink, #0a0a0a); }
+.req-card__geo { font-size: 14px; color: var(--muted, #6b6b6b); padding: 0 24px 16px; }
+.req-card__grid { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-top: 1px solid var(--line, #e8e8e8); }
+.req-card__cell { padding: 14px 24px; border-bottom: 1px solid var(--line, #e8e8e8); cursor: copy; transition: background .15s; position: relative; }
+.req-card__cell:nth-child(odd) { border-right: 1px solid var(--line, #e8e8e8); }
+.req-card__cell:nth-last-child(-n+2) { border-bottom: none; }
+.req-card__cell:hover { background: var(--bg-alt, #fafafa); }
+.req-card__cell dt { font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-2, #999); margin: 0 0 4px; }
+.req-card__cell dd { font-size: 15px; font-weight: 500; color: var(--ink, #0a0a0a); margin: 0; font-variant-numeric: tabular-nums; word-break: break-all; }
+.req-card__cell.is-copied::after { content: 'Скопировано'; position: absolute; top: 8px; right: 12px; font-family: var(--font-mono, monospace); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted, #6b6b6b); }
+@media (max-width: 560px) {
+  .req-card__grid { grid-template-columns: 1fr; }
+  .req-card__cell:nth-child(odd) { border-right: none; }
+  .req-card__cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--line, #e8e8e8); }
+  .req-card__cell:last-child { border-bottom: none; }
+}
+</style>
+
+<div class="req-card">
+  <div class="req-card__head">
+    <span class="req-card__label">Реквизиты</span>
+    <button class="req-card__copy" id="req-copy" type="button">Скопировать всё</button>
+  </div>
+  <div class="req-card__name">ИП&nbsp;Малышев Максим Александрович</div>
+  <div class="req-card__geo">Санкт-Петербург, Россия · <a href="mailto:i@eldarmarketing.ru">i@eldarmarketing.ru</a></div>
+  <dl class="req-card__grid" id="req-grid">
+    <div class="req-card__cell"><dt>ИНН</dt><dd>780162236049</dd></div>
+    <div class="req-card__cell"><dt>ОГРНИП</dt><dd>325784700365064</dd></div>
+    <div class="req-card__cell"><dt>Расчётный счёт</dt><dd>40802810420000798697</dd></div>
+    <div class="req-card__cell"><dt>Банк</dt><dd>ООО «Банк Точка»</dd></div>
+    <div class="req-card__cell"><dt>БИК</dt><dd>044525104</dd></div>
+    <div class="req-card__cell"><dt>Корр. счёт</dt><dd>30101810745374525104</dd></div>
+  </dl>
 </div>
+
+<script>
+(function(){
+  function copy(text, done){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){});
+    }
+  }
+  document.querySelectorAll('.req-card__cell').forEach(function(cell){
+    cell.addEventListener('click', function(){
+      copy(cell.querySelector('dd').textContent.trim(), function(){
+        cell.classList.add('is-copied');
+        setTimeout(function(){ cell.classList.remove('is-copied'); }, 1600);
+      });
+    });
+  });
+  var btn = document.getElementById('req-copy');
+  btn.addEventListener('click', function(){
+    var lines = ['ИП Малышев Максим Александрович', 'Санкт-Петербург, Россия'];
+    document.querySelectorAll('.req-card__cell').forEach(function(cell){
+      lines.push(cell.querySelector('dt').textContent.trim() + ': ' + cell.querySelector('dd').textContent.trim());
+    });
+    copy(lines.join('\n'), function(){
+      btn.textContent = 'Скопировано ✓';
+      setTimeout(function(){ btn.textContent = 'Скопировать всё'; }, 1600);
+    });
+  });
+})();
+</script>
