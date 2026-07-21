@@ -207,7 +207,7 @@
 <p><strong>Личный агент</strong> — полный доступ ко всему. Он видит файлы, переписки, может выполнять команды на сервере, работать с проектами. Это мой главный помощник.</p>
 <p><strong>Клиентский агент</strong> — изолированная песочница. У него свой workspace, своя память, своя личность. Он не знает о существовании личного агента. Не видит файлов владельца. Не имеет доступа к переписке.</p>
 <p>Как это работает технически:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">agents</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">agents</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">main</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">workspace</span>: <span style="color:#ae81ff">&lt;WORKSPACE_PATH&gt;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">&lt;WORKSPACE_PATH&gt;/memory</span>
@@ -243,7 +243,7 @@
 <p>Даже если злоумышленник напишет идеальный prompt injection, бот не сможет выполнить команду <code>rm -rf /</code> или прочитать файл с паролями. <strong>Инструмента физически нет.</strong></p>
 <p>Это как дать человеку молоток и попросить закрутить винт. Сколько ни проси — без отвёртки не получится.</p>
 <p>Настраивается через <code>toolPolicy</code> в конфигурации агента:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">toolPolicy</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">toolPolicy</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">mode</span>: <span style="color:#ae81ff">allowlist</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">allow</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">web_search</span>
@@ -256,7 +256,7 @@
 </span></span></code></pre></div><h2 id="3-docker-изоляция-контейнер-без-доступа-к-хосту">3. Docker-изоляция: контейнер без доступа к хосту</h2>
 <p>Клиентский бот работает в Docker-контейнере. Это ещё один уровень изоляции.</p>
 <p><strong>Настройки sandbox:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">sandbox</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">sandbox</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">workspaceAccess</span>: <span style="color:#ae81ff">none</span>
 </span></span></code></pre></div><p><code>workspaceAccess: none</code> означает, что контейнер <strong>не видит файловую систему хоста</strong>. Даже если бы у бота был инструмент <code>read</code>, он не смог бы прочитать <code>&lt;SSH_KEY_PATH&gt;</code> или <code>/etc/passwd</code>.</p>
@@ -264,7 +264,7 @@
 <p>Это работает как виртуальная машина, только легче. Если кто-то взломает клиентского бота, он получит доступ только к пустому контейнеру. Реальная инфраструктура останется нетронутой.</p>
 <h2 id="4-закрытый-личный-канал-только-мои-telegram-id">4. Закрытый личный канал: только мои Telegram ID</h2>
 <p>Личный бот принимает сообщения только от меня. Настроено через <code>allowFrom</code> с конкретными ID:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">allowFrom</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">allowFrom</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;123456789&#34;</span>
 </span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;987654321&#34;</span>
 </span></span></code></pre></div><p>Никаких wildcard паттернов, никаких <code>&quot;*&quot;</code>. Только два конкретных идентификатора.</p>
@@ -275,12 +275,12 @@
 <p>AI-ассистент работает на VPS. Если сервер взломают, изоляция агентов не поможет.</p>
 <p><strong>Что сделал:</strong></p>
 <h3 id="ssh-только-по-ключу">SSH только по ключу</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PasswordAuthentication no
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PasswordAuthentication no
 </span></span><span style="display:flex;"><span>PubkeyAuthentication yes
 </span></span><span style="display:flex;"><span>PermitRootLogin no
 </span></span></code></pre></div><p>Пароли отключены полностью. Зайти можно только с SSH-ключом, который лежит на моём рабочий компьютер. Root-доступ запрещён — использую обычного пользователя с sudo.</p>
 <h3 id="ufw-для-внешних-портов">UFW для внешних портов</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw default deny incoming
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw default deny incoming
 </span></span><span style="display:flex;"><span>ufw default allow outgoing
 </span></span><span style="display:flex;"><span>ufw allow 22/tcp    <span style="color:#75715e"># SSH</span>
 </span></span><span style="display:flex;"><span>ufw allow 80/tcp    <span style="color:#75715e"># HTTP</span>
@@ -289,7 +289,7 @@
 </span></span></code></pre></div><p>Извне доступны только SSH, HTTP и HTTPS. Всё остальное закрыто.</p>
 <h3 id="iptables-для-внутренних-портов">iptables для внутренних портов</h3>
 <p>На сервере работают приложения на портах 3000-3005 (Next.js проекты) и 8090 (база данных). Эти порты должны быть доступны только через nginx reverse proxy, но не напрямую из интернета.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;APP_PORTS&gt; -s 127.0.0.1 -j ACCEPT
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;APP_PORTS&gt; -s 127.0.0.1 -j ACCEPT
 </span></span><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;APP_PORTS&gt; -j DROP
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>iptables -A INPUT -p tcp --dport &lt;DB_PORT&gt; -s 127.0.0.1 -j ACCEPT
@@ -297,12 +297,12 @@
 </span></span></code></pre></div><p>Теперь к портам 3000-3005 и 8090 можно обратиться только с localhost. Извне — блокируется.</p>
 <h2 id="6-токены-не-в-коде-env-и-chmod-600">6. Токены не в коде: .env и chmod 600</h2>
 <p>Все API-ключи, токены Telegram, пароли вынесены в <code>.env</code> файлы.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># .env</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># .env</span>
 </span></span><span style="display:flex;"><span>ANTHROPIC_API_KEY<span style="color:#f92672">=</span>sk-ant-xxxxx
 </span></span><span style="display:flex;"><span>TELEGRAM_BOT_TOKEN<span style="color:#f92672">=</span>123456:ABCdefgh
 </span></span><span style="display:flex;"><span>TELEGRAM_CLIENT_TOKEN<span style="color:#f92672">=</span>987654:XYZabcd
 </span></span></code></pre></div><p><strong>Права доступа:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">600</span> .env
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">600</span> .env
 </span></span><span style="display:flex;"><span>chown myuser:myuser .env
 </span></span></code></pre></div><p>Файл может читать только владелец. Группа и остальные пользователи — нет доступа.</p>
 <p><code>.env</code> добавлен в <code>.gitignore</code>. Даже если случайно запушу код в публичный репозиторий, токены не утекут.</p>
@@ -310,7 +310,7 @@
 <h2 id="7-openclaw-gateway-loopback-и-токен">7. OpenClaw Gateway: loopback и токен</h2>
 <p>OpenClaw Gateway — это сервис, который управляет агентами. Он слушает HTTP-запросы и маршрутизирует их к нужным агентам.</p>
 <p><strong>Настройки:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">gateway</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">gateway</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">bind</span>: <span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">3005</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">auth</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>

@@ -213,7 +213,7 @@
 <pre tabindex="0"><code># На VPS клиента
 echo &#34;&lt;IP_ВАШЕГО_ПРОКСИ&gt; api.anthropic.com&#34; &gt;&gt; /etc/hosts
 </code></pre><p>Теперь <code>api.anthropic.com</code> резолвится на мой VPS в Европе, где nginx проксирует к реальному Anthropic:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">api.anthropic.com</span>;
 </span></span><span style="display:flex;"><span>
@@ -224,7 +224,7 @@ echo &#34;&lt;IP_ВАШЕГО_ПРОКСИ&gt; api.anthropic.com&#34; &gt;&gt; /
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">deny</span> <span style="color:#e6db74">all</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resolver</span> <span style="color:#ae81ff">8</span><span style="color:#e6db74">.8.8.8</span> <span style="color:#e6db74">ipv6=off</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resolver</span> 8.8.8.8 <span style="color:#e6db74">ipv6=off</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">set</span> $backend <span style="color:#e6db74">&#34;https://api.anthropic.com&#34;</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_pass</span> $backend;
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">proxy_ssl_server_name</span> <span style="color:#66d9ef">on</span>;
@@ -239,11 +239,11 @@ echo &#34;&lt;IP_ВАШЕГО_ПРОКСИ&gt; api.anthropic.com&#34; &gt;&gt; /
 <h2 id="проблема-2-autoselectfamily">Проблема №2: autoSelectFamily</h2>
 <p>После прокси — новая ошибка: <code>sendMessage failed: Network request failed</code>. Telegram не может отправить сообщение. Но curl к Telegram API работает!</p>
 <p>Оказалось, OpenClaw ставит <code>autoSelectFamily=false</code> для Telegram по умолчанию. На некоторых VPS это ломает IPv4/IPv6 fallback. Фикс — одна строка:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw config set channels.telegram.network.autoSelectFamily true
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw config set channels.telegram.network.autoSelectFamily true
 </span></span></code></pre></div><h2 id="проблема-3-формат-auth-profilesjson">Проблема №3: формат auth-profiles.json</h2>
 <p>Токен прописал. Gateway не видит. «No API key found for provider anthropic.»</p>
 <p>Оказалось, формат файла строгий:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#ae81ff">1</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;profiles&#34;</span>: {
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;anthropic:default&#34;</span>: {
