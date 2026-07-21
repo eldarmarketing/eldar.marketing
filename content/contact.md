@@ -41,3 +41,16 @@ description: "Оставьте заявку — свяжемся в течени
 </script>
 
 Или напишите напрямую: [@eldarmarketing](https://t.me/eldarmarketing)
+
+<div style="margin-top:2.5em;border:1px solid rgba(128,128,128,0.25);border-radius:16px;padding:1.5em 1.75em">
+  <div style="font-weight:700;font-size:1.05em;margin-bottom:0.9em">Реквизиты</div>
+  <table style="width:100%;border-collapse:collapse;font-size:0.95em;line-height:1.5">
+    <tr><td style="padding:0.35em 0;opacity:0.65;white-space:nowrap;vertical-align:top">Наименование</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">Индивидуальный предприниматель Малышев Максим Александрович</td></tr>
+    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">ИНН</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">780162236049</td></tr>
+    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">ОГРНИП</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">325784700365064</td></tr>
+    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">Расчётный счёт</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">40802810420000798697</td></tr>
+    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">Банк</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">ООО «Банк Точка»</td></tr>
+    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">БИК</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">044525104</td></tr>
+    <tr><td style="padding:0.35em 0;opacity:0.65;vertical-align:top">Корр. счёт</td><td style="padding:0.35em 0 0.35em 1.25em;font-weight:600">30101810745374525104</td></tr>
+  </table>
+</div>
