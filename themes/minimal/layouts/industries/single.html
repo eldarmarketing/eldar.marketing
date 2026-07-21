@@ -1,0 +1,209 @@
+{{ define "main" }}
+{{ $hero := .Params.hero }}
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": {{ .Title | jsonify }},
+    "description": {{ .Description | jsonify }},
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Eldar Marketing",
+      "address": { "@type": "PostalAddress", "addressLocality": "Санкт-Петербург", "addressCountry": "RU" }
+    },
+    "areaServed": "Россия"
+  }{{ if .Params.faq }},
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {{ range $i, $f := .Params.faq }}{{ if $i }},{{ end }}{
+        "@type": "Question",
+        "name": {{ $f.q | jsonify }},
+        "acceptedAnswer": { "@type": "Answer", "text": {{ $f.a | jsonify }} }
+      }{{ end }}
+    ]
+  }{{ end }}
+]
+</script>
+
+<section class="service-hero">
+  <div class="service-hero__inner">
+    <span class="eyebrow">{{ $hero.eyebrow }}</span>
+    <h1 class="service-hero__title">{{ $hero.title }}</h1>
+    <p class="service-hero__lead">{{ $hero.lead }}</p>
+    <div class="service-hero__cta-row">
+      <a href="#zayavka" class="btn btn--primary btn--invert">
+        Оставить заявку <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="https://t.me/eldarmarketing" class="btn btn--ghost btn--invert">Написать в&nbsp;Telegram</a>
+    </div>
+    {{ with $hero.metrics }}
+    <ul class="service-hero__metrics">
+      {{ range . }}
+      <li>
+        <strong>{{ .value }}</strong>
+        <span>{{ .label }}</span>
+      </li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </div>
+</section>
+
+{{ $.Scratch.Set "n" 0 }}
+
+{{ with .Params.pains }}
+{{ $.Scratch.Add "n" 1 }}
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">{{ printf "%02d" ($.Scratch.Get "n") }} / Проблемы</span>
+      <h2 class="section-head__title">{{ .title }}</h2>
+    </div>
+    {{ with .lead }}<p class="section-head__lead">{{ . }}</p>{{ end }}
+  </div>
+  <ul class="stack-grid">
+    {{ range .items }}
+    <li class="stack-cell">
+      <strong class="stack-cell__name">{{ .name }}</strong>
+      <span class="stack-cell__desc">{{ .desc }}</span>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ with .Params.system }}
+{{ $.Scratch.Add "n" 1 }}
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">{{ printf "%02d" ($.Scratch.Get "n") }} / Система</span>
+      <h2 class="section-head__title">{{ .title }}</h2>
+    </div>
+    {{ with .lead }}<p class="section-head__lead">{{ . }}</p>{{ end }}
+  </div>
+  <div class="services-grid">
+    {{ range $i, $s := .items }}
+    {{ if $s.href }}
+    <a class="service-cell" href="{{ $s.href }}">
+      <span class="service-cell__num">{{ printf "%02d" (add $i 1) }}</span>
+      <h3 class="service-cell__title">{{ $s.title }}</h3>
+      <p class="service-cell__desc">{{ $s.desc }}</p>
+      <span class="service-cell__arrow" aria-hidden="true">→</span>
+    </a>
+    {{ else }}
+    <div class="service-cell">
+      <span class="service-cell__num">{{ printf "%02d" (add $i 1) }}</span>
+      <h3 class="service-cell__title">{{ $s.title }}</h3>
+      <p class="service-cell__desc">{{ $s.desc }}</p>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.case }}
+{{ $.Scratch.Add "n" 1 }}
+<section class="section section--invert">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">{{ printf "%02d" ($.Scratch.Get "n") }} / Кейс</span>
+      <h2 class="section-head__title">{{ .title }}</h2>
+    </div>
+    {{ with .lead }}<p class="section-head__lead">{{ . }}</p>{{ end }}
+  </div>
+  {{ with .metrics }}
+  <ul class="service-hero__metrics">
+    {{ range . }}
+    <li>
+      <strong>{{ .value }}</strong>
+      <span>{{ .label }}</span>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+  {{ with .href }}
+  <p style="margin-top:32px">
+    <a href="{{ . }}" class="btn btn--ghost btn--invert">Читать кейс <span class="btn__arrow" aria-hidden="true">→</span></a>
+  </p>
+  {{ end }}
+</section>
+{{ end }}
+
+{{ with .Params.process }}
+{{ $.Scratch.Add "n" 1 }}
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">{{ printf "%02d" ($.Scratch.Get "n") }} / Процесс</span>
+      <h2 class="section-head__title">{{ .title }}</h2>
+    </div>
+    {{ with .lead }}<p class="section-head__lead">{{ . }}</p>{{ end }}
+  </div>
+  <ol class="process">
+    {{ range .steps }}
+    <li class="process__step">
+      <div class="process__num">{{ .num }}</div>
+      <h3 class="process__title">{{ .title }}</h3>
+      <p class="process__desc">{{ .desc }}</p>
+      {{ with .time }}<div class="process__time">{{ . }}</div>{{ end }}
+    </li>
+    {{ end }}
+  </ol>
+</section>
+{{ end }}
+
+{{ with .Params.faq }}
+{{ $.Scratch.Add "n" 1 }}
+<section class="section" id="faq">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">{{ printf "%02d" ($.Scratch.Get "n") }} / Вопросы</span>
+      <h2 class="section-head__title">Частые вопросы</h2>
+    </div>
+  </div>
+  <ul class="faq-list">
+    {{ range . }}
+    <li class="faq-item">
+      <details>
+        <summary class="faq-item__q">
+          <span>{{ .q }}</span>
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-item__a"><p>{{ .a }}</p></div>
+      </details>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ $.Scratch.Add "n" 1 }}
+<section class="section" id="lead">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">{{ printf "%02d" ($.Scratch.Get "n") }} / Заявка</span>
+    </div>
+  </div>
+  <div style="max-width:760px">
+    {{ partial "lead-form.html" (dict
+      "goal" (.Params.form.goal | default "lead_form")
+      "heading" (.Params.form.heading | default "Обсудить задачу")
+      "sub" (.Params.form.sub | default "Расскажите, что за бизнес — предложим решение. Отвечаем в течение рабочего дня.")
+      "placeholder" (.Params.form.placeholder | default "Опишите задачу")
+    ) }}
+  </div>
+</section>
+
+{{ if .Content }}
+<article class="page-article markdown">
+  {{ .Content }}
+</article>
+{{ end }}
+
+{{ end }}
