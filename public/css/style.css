@@ -1040,6 +1040,13 @@ html.dark .hero__photo-frame img { filter: brightness(0.9); }
     box-shadow: 0 12px 32px -12px rgba(0,0,0,0.12);
 }
 
+/* Карточка с постером (отрасли) */
+.case-card--img { padding: 0; overflow: hidden; }
+.case-card--img .case-card__pic { display: block; }
+.case-card--img .case-card__pic img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform var(--transition-med); }
+.case-card--img:hover .case-card__pic img { transform: scale(1.025); }
+.case-card--img .case-card__body { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-3); flex: 1; }
+
 .case-card__meta {
     font-family: var(--font-mono);
     font-size: var(--t-xs);

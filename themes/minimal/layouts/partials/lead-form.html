@@ -1,0 +1,56 @@
+<style>
+.lf-embed { border: 1px solid var(--line, #e8e8e8); padding: clamp(28px, 4vw, 44px); margin: 48px 0; }
+.lf-embed h3 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 28px); letter-spacing: -0.02em; }
+.lf-embed__sub { color: var(--muted, #6b6b6b); margin: 0 0 24px; }
+.lf-embed label { display: block; font-size: 14px; color: var(--muted, #6b6b6b); margin: 14px 0 6px; }
+.lf-embed input[type=text], .lf-embed textarea { width: 100%; padding: 13px 15px; font: inherit; font-size: 16px; border: 1px solid var(--line-2, #d4d4d4); border-radius: 8px; background: var(--bg, #fff); color: var(--ink, #0a0a0a); box-sizing: border-box; }
+.lf-embed input[type=text]:focus, .lf-embed textarea:focus { outline: none; border-color: var(--ink, #0a0a0a); }
+.lf-embed__consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; color: var(--muted, #6b6b6b); margin-top: 16px; line-height: 1.4; cursor: pointer; }
+.lf-embed__consent input { margin-top: 3px; flex-shrink: 0; }
+.lf-embed button { margin-top: 18px; width: 100%; padding: 15px 34px; font: inherit; font-size: 16px; font-weight: 600; background: var(--ink, #0a0a0a); color: var(--bg, #fff); border: none; border-radius: 999px; cursor: pointer; }
+.lf-embed__ok { display: none; }
+.lf-embed__ok b { font-size: 19px; }
+</style>
+<div class="lf-embed" id="zayavka">
+  <h3>{{ .heading }}</h3>
+  <p class="lf-embed__sub">{{ .sub }}</p>
+  <form class="lf-embed__form" action="/api/lead" method="POST" data-goal="{{ .goal }}">
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <input type="hidden" name="js_check" value="">
+    <label>Имя</label>
+    <input type="text" name="name" required placeholder="Как к вам обращаться">
+    <label>Телефон или Telegram</label>
+    <input type="text" name="contact" required placeholder="+7... или @username">
+    <label>Чем можем помочь?</label>
+    <textarea name="message" rows="3" placeholder="{{ .placeholder }}"></textarea>
+    <label class="lf-embed__consent">
+      <input type="checkbox" name="consent" required>
+      <span>Даю согласие на обработку персональных данных в соответствии с <a href="/privacy/" target="_blank">политикой конфиденциальности</a></span>
+    </label>
+    <button type="submit">Отправить заявку</button>
+  </form>
+  <div class="lf-embed__ok">
+    <b>Заявка отправлена.</b><br>
+    Свяжемся в течение рабочего дня. Если срочно — <a href="https://t.me/eldarmarketing">напишите в Telegram</a>.
+  </div>
+</div>
+<script>
+(function(){
+  var box = document.currentScript.previousElementSibling;
+  var f = box.querySelector('.lf-embed__form');
+  f.addEventListener('submit', function(e){
+    f.querySelector('[name=js_check]').value = Date.now().toString(36);
+    e.preventDefault();
+    var btn = f.querySelector('button');
+    btn.disabled = true; btn.textContent = 'Отправляем…';
+    fetch(f.action, { method: 'POST', body: new FormData(f) })
+      .then(function(r){
+        if (!r.ok) throw new Error(r.status);
+        try { ym(106070005, 'reachGoal', f.dataset.goal, { page: location.pathname }); } catch(err){}
+        f.style.display = 'none';
+        box.querySelector('.lf-embed__ok').style.display = 'block';
+      })
+      .catch(function(){ f.submit(); });
+  });
+})();
+</script>

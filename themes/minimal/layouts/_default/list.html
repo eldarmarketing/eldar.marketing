@@ -38,6 +38,21 @@
         </li>
     {{ end }}
     </ul>
+{{ else if eq .Section "industries" }}
+    <div class="cases-grid">
+    {{ range $p := .Pages.ByWeight }}
+        <a href="{{ .Permalink }}" class="case-card{{ if .Params.image }} case-card--img{{ end }}">
+            {{ with .Params.image }}
+            <span class="case-card__pic"><img src="{{ . }}" alt="{{ $p.Title }}" loading="lazy" width="1200" height="800"></span>
+            {{ end }}
+            <span class="case-card__body">
+                <span class="case-card__title">{{ .Title }}</span>
+                {{ if .Description }}<span class="case-card__desc">{{ .Description | safeHTML }}</span>{{ end }}
+                <span class="case-card__cta">Открыть <span aria-hidden="true">→</span></span>
+            </span>
+        </a>
+    {{ end }}
+    </div>
 {{ else }}
     <div class="cases-grid">
     {{ range .Pages.ByDate.Reverse }}
