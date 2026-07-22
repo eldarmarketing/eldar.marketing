@@ -38,12 +38,29 @@ esac
 omp -p --model "$MODEL" --max-time 600 "$PROMPT" >"$LOG" 2>&1
 RC=$?
 
-notify() {
+# Доставка: основной канал — Telegram (@ai_eldar_bot), macOS-баннер как дубль.
+[ -f "$HOME/.config/coo/.env" ] && { set -a; . "$HOME/.config/coo/.env"; set +a; }
+
+banner() {
   /usr/bin/osascript -e "display notification \"$1\" with title \"AI-COO: $TITLE\"" 2>/dev/null
 }
 
+tg_send() {
+  [ -z "${NOTIFY_BOT_TOKEN:-}" ] || [ -z "${NOTIFY_CHAT_ID:-}" ] && return 1
+  local text="$1"
+  while [ -n "$text" ]; do
+    local chunk="${text:0:3800}"
+    text="${text:3800}"
+    curl -sS -o /dev/null --max-time 20 -X POST \
+      "https://api.telegram.org/bot$NOTIFY_BOT_TOKEN/sendMessage" \
+      --data-urlencode "chat_id=$NOTIFY_CHAT_ID" \
+      --data-urlencode "text=$chunk"
+  done
+}
+
 if [ $RC -ne 0 ]; then
-  notify "Сбой запуска ($RC) — см. $LOG"
+  tg_send "⚠️ AI-COO: $TITLE — сбой запуска ($RC). Лог: .briefings/$(basename "$LOG")"
+  banner "Сбой запуска ($RC) — см. $LOG"
   exit $RC
 fi
 
@@ -51,4 +68,8 @@ if [ "$MODE" = "heartbeat" ] && tail -3 "$LOG" | grep -qx "OK"; then
   exit 0  # тишина по умолчанию: всё в порядке
 fi
 
-notify "Готово → .briefings/$(basename "$LOG")"
+BODY="$(sed '/^Working\.\.\.$/d' "$LOG")"
+tg_send "🤖 AI-COO · $TITLE
+
+$BODY"
+banner "Готово → .briefings/$(basename "$LOG")"
