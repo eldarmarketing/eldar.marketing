@@ -13,6 +13,9 @@ import sys
 import urllib.parse
 import urllib.request
 from datetime import date, timedelta
+import signal
+
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 CFG = json.loads((pathlib.Path.home() / ".config/yandex-webmaster/app.json").read_text())
 WM = "https://api.webmaster.yandex.net/v4"
