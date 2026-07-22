@@ -36,6 +36,12 @@
     {{ end }}
 
     <script>(function(){document.documentElement.classList.add("js");var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
+    <!-- Сброс позиции скролла при обычной навигации: некоторые браузеры
+         (в первую очередь iOS Safari) на многостраничных сайтах иногда
+         сохраняют scrollY предыдущей страницы на новой. Back/forward не
+         трогаем — там браузер сам восстанавливает позицию, это ожидаемое
+         поведение. Ранний вызов до первой отрисовки — без визуального flash. -->
+    <script>(function(){var n=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];var bf=n?n.type==="back_forward":(performance.navigation&&performance.navigation.type===2);if(!bf&&!window.location.hash)window.scrollTo(0,0)})()</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/css/style.css?v=2026072101">
 
@@ -404,6 +410,19 @@ function acceptCookies(){
     }, { threshold: 0.5 });
 
     counters.forEach(function(c){ observer.observe(c); });
+})();
+</script>
+<script>
+// Довершение сброса скролла: обработка перехода по якорю на новую
+// страницу (например /services/#pricing). При обычной навигации без
+// якоря позиция уже сброшена ранним скриптом в <head>; back/forward
+// не трогаем.
+(function(){
+    var navEntry = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    var isBackForward = navEntry ? navEntry.type === "back_forward" : (performance.navigation && performance.navigation.type === 2);
+    if (isBackForward || !window.location.hash) return;
+    var el = document.querySelector(window.location.hash);
+    if (el) el.scrollIntoView();
 })();
 </script>
 </body>
