@@ -1,0 +1,12 @@
+# eldar.marketing — проектная конфигурация omp
+# Закрепляет fable как главного оркестратора для всех сессий в этом репо,
+# независимо от изменений глобального ~/.omp/agent/config.yml.
+modelRoles:
+  default: anthropic/claude-fable-5
+  plan: anthropic/claude-fable-5:high
+  slow: anthropic/claude-fable-5:max
+  designer: anthropic/claude-fable-5
+  task: anthropic/claude-sonnet-5
+  smol: anthropic/claude-haiku-4-5
+  tiny: anthropic/claude-haiku-4-5
+  advisor: anthropic/claude-sonnet-5:medium
