@@ -119,6 +119,42 @@ def tx_fields(t: dict) -> tuple[str, float, str, str, str]:
     return date, amount, side, f"{cp} ({cp_inn})" if cp_inn else cp, purpose
 
 
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def classifications() -> list[dict]:
+    """docs/ai-coo/classifications.yml — вердикты владельца по спорным операциям."""
+    path = os.path.join(ROOT, "docs", "ai-coo", "classifications.yml")
+    entries: list[dict] = []
+    cur = None
+    if not os.path.exists(path):
+        return entries
+    for line in open(path, encoding="utf-8"):
+        s = line.strip()
+        if s.startswith("#") or not s:
+            continue
+        if s.startswith("- "):
+            cur = {}
+            entries.append(cur)
+            s = s[2:]
+        if cur is None or ":" not in s:
+            continue
+        k, v = s.split(":", 1)
+        cur[k.strip()] = v.strip().strip('"')
+    return entries
+
+
+def classify(date: str, amount: float, purpose: str) -> str | None:
+    for e in classifications():
+        try:
+            if e.get("date") == date and abs(float(e.get("amount", "0")) - amount) < 0.01 \
+                    and e.get("match", "") in purpose:
+                return e.get("verdict")
+        except ValueError:
+            continue
+    return None
+
+
 def all_credits(who: str, d_from: str, d_to: str) -> list[tuple]:
     """Кредитовые операции по всем счетам, без переводов между своими счетами."""
     own_inn = own_tax_code(who)
@@ -130,7 +166,10 @@ def all_credits(who: str, d_from: str, d_to: str) -> list[tuple]:
                 continue
             if own_inn and own_inn in cp:
                 continue  # перевод между своими счетами / себе
-            review = "внесение" in purpose.lower() or "банк точка" in cp.lower()
+            verdict = classify(date, amount, purpose)
+            if verdict == "own":
+                continue  # владелец подтвердил: собственные средства, не доход
+            review = verdict != "income" and ("внесение" in purpose.lower() or "банк точка" in cp.lower())
             rows.append((date, amount, cp, purpose, a["accountId"], review))
     return sorted(rows)
 
