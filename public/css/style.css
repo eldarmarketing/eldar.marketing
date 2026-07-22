@@ -4,11 +4,11 @@
    ===================================================== */
 
 /* === FONTS === */
-@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_thin.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_thin.woff2') format('woff2'), url('/fonts/gteestiprodisplay_thin.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_light.woff2') format('woff2'), url('/fonts/gteestiprodisplay_light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_regular.woff2') format('woff2'), url('/fonts/gteestiprodisplay_regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_medium.woff2') format('woff2'), url('/fonts/gteestiprodisplay_medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'GT Eesti'; src: url('/fonts/gteestiprodisplay_bold.woff2') format('woff2'), url('/fonts/gteestiprodisplay_bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
 
 /* === DESIGN TOKENS === */
 :root {

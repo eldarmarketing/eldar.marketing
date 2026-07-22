@@ -27,7 +27,7 @@ metric:
 
 Стек: Next.js 16 + React 19 + Tailwind CSS 4. Шрифт — GT Eesti Pro Display.
 
-<video src="/images/cases/temnila/desktop.mp4" poster="/images/cases/temnila/desktop-poster.jpg" autoplay loop muted playsinline preload="auto" style="width:100%;border-radius:8px;background:#000;"></video>
+<video src="/images/cases/temnila/desktop.mp4" poster="/images/cases/temnila/desktop-poster.webp" autoplay loop muted playsinline preload="auto" style="width:100%;border-radius:8px;background:#000;"></video>
 
 ### 2. Страницы услуг
 

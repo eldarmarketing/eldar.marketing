@@ -11,7 +11,7 @@ description: "Разработка современного сайта для с
 
 Старый сайт: устаревший дизайн, нет мобильной адаптации, нет&nbsp;портфолио&nbsp;работ.
 
-![Главная страница DSG Clinic](/images/cases/dsgclinic/hero.png)
+![Главная страница DSG Clinic](/images/cases/dsgclinic/hero.webp)
 
 ## Решение
 
@@ -34,7 +34,7 @@ description: "Разработка современного сайта для с
 - Страница /qrkod (linktree-стиль для&nbsp;QR-кодов)
 - Акции · О&nbsp;нас · Цены · Марки авто
 
-![Статистика и портфолио](/images/cases/dsgclinic/stats.png)
+![Статистика и портфолио](/images/cases/dsgclinic/stats.webp)
 
 ### Фичи
 
@@ -47,7 +47,7 @@ description: "Разработка современного сайта для с
 
 ### Страница услуги
 
-![Страница услуги](/images/cases/dsgclinic/service.png)
+![Страница услуги](/images/cases/dsgclinic/service.webp)
 
 ### Портфолио с&nbsp;видео
 
@@ -55,15 +55,15 @@ description: "Разработка современного сайта для с
 - Каждая работа: фото до/после, описание, видео процесса
 - SSG-генерация страниц из&nbsp;базы данных
 
-![Портфолио работ](/images/cases/dsgclinic/portfolio.png)
+![Портфолио работ](/images/cases/dsgclinic/portfolio.webp)
 
 ### Мобильная версия
 
-![Мобильная версия](/images/cases/dsgclinic/mobile.png)
+![Мобильная версия](/images/cases/dsgclinic/mobile.webp)
 
 ### Контакты
 
-![Контакты с Яндекс.Картой](/images/cases/dsgclinic/contacts.png)
+![Контакты с Яндекс.Картой](/images/cases/dsgclinic/contacts.webp)
 
 ## Результат
 

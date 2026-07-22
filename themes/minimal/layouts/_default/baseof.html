@@ -35,6 +35,9 @@
     <meta name="twitter:image" content="{{ "images/eldar.jpg" | absURL }}">
     {{ end }}
 
+    <link rel="preload" href="/fonts/gteestiprodisplay_regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/gteestiprodisplay_medium.woff2" as="font" type="font/woff2" crossorigin>
+
     <script>(function(){document.documentElement.classList.add("js");var s=localStorage.getItem("theme");if(s==="dark"||(s!="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")})()</script>
     <!-- Сброс позиции скролла при обычной навигации: некоторые браузеры
          (в первую очередь iOS Safari) на многостраничных сайтах иногда
@@ -43,7 +46,9 @@
          поведение. Ранний вызов до первой отрисовки — без визуального flash. -->
     <script>(function(){var n=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];var bf=n?n.type==="back_forward":(performance.navigation&&performance.navigation.type===2);if(!bf&&!window.location.hash)window.scrollTo(0,0)})()</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="/css/style.css?v=2026072101">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/style.css?v=2026072202">
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">

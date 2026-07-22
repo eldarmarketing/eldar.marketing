@@ -11,7 +11,6 @@ description: "Разработка сайта для автоателье BIRSON
 
 Нужен был современный сайт, который передаёт премиальность услуг, показывает портфолио работ и&nbsp;конвертирует посетителей в&nbsp;заявки.
 
-{{< rawhtml >}}<video autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5em 0"><source src="/images/cases/birson/scroll.mp4" type="video/mp4">Ваш браузер не поддерживает видео.</video>{{< /rawhtml >}}
 
 ## Решение
 
@@ -37,7 +36,6 @@ description: "Разработка сайта для автоателье BIRSON
 - Админ-панель
 - Политика конфиденциальности
 
-![Услуги](/images/cases/birson/services.png)
 
 ### Фичи
 
@@ -53,19 +51,15 @@ description: "Разработка сайта для автоателье BIRSON
 
 ### Портфолио
 
-![Портфолио работ](/images/cases/birson/portfolio.png)
 
 ### Цены
 
-![Цены на услуги](/images/cases/birson/prices.png)
 
 ### Мобильная версия
 
-![Мобильная версия](/images/cases/birson/mobile.png)
 
 ### Контакты
 
-![Контакты](/images/cases/birson/contacts.png)
 
 ## Результат
 

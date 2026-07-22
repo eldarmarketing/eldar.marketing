@@ -50,6 +50,14 @@
     {{ .Content }}
 </article>
 
+{{ if eq .Section "services" }}
+{{ partial "lead-form.html" (dict
+    "goal" "lead_service"
+    "heading" "Обсудить задачу"
+    "sub" "Расскажите, что за бизнес и что болит — предложим решение и назовём цену. Бесплатный созвон 30 минут."
+    "placeholder" "Например: нужен AI-бот для приёма заявок") }}
+{{ end }}
+
 {{ if eq .Section "blog" }}
 <nav class="article-nav">
     {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title | truncate 40 }}</a>{{ else }}<span></span>{{ end }}
