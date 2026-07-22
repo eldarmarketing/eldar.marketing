@@ -1,8 +1,8 @@
 ---
-keywords: ["GitHub Issues", "AI память", "Claude Code", "управление задачами"]
+keywords: ["github issues", "github projects", "claude code", "внешняя память для ai", "gh cli", "управление задачами в github"]
 title: "GitHub Issues как внешняя память для AI"
 date: 2026-03-23
-description: "Как GitHub Issues решает две главные проблемы работы с AI — потерю контекста и потерю задач между сессиями"
+description: "Как GitHub Issues и GitHub Projects помогают держать внешнюю память AI: задачи, комментарии, история решений и Claude Code через gh CLI в терминале."
 readtime: 5
 ---
 

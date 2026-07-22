@@ -1,8 +1,8 @@
 ---
-keywords: ["AI-ассистент", "автоматизация", "маркетинг"]
+keywords: ["telegram-канал на сайт", "как вывести посты из telegram на сайт", "виджет telegram на сайт", "парсинг telegram канала", "telegram iframe"]
 title: "Как вывести Telegram-канал на сайт без виджетов и iframe"
 date: 2026-02-14
-description: "Как интегрировать посты из Telegram-канала в дизайн сайта через серверный парсинг на Next.js"
+description: "Как вывести последние посты из Telegram-канала на сайт без виджетов и iframe: серверный парсинг публичной страницы t.me/s и встраивание в дизайн-систему сайта."
 tags: ["telegram", "nextjs", "integration", "parsing", "react"]
 ---
 

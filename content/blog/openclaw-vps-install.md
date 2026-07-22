@@ -1,8 +1,8 @@
 ---
-keywords: ["AI-ассистент", "автоматизация", "маркетинг"]
+keywords: ["openclaw", "установка openclaw", "ai ассистент на vps", "telegram бот на claude", "anthropic api в россии", "nginx reverse proxy для anthropic"]
 title: "OpenClaw за 10 минут: от 2 часов мучений до автоустановки"
 date: 2026-02-11
-description: "Как я упаковал установку AI-ассистента на VPS в переиспользуемый скилл. История ошибок, DNS-трюк для России и готовый рецепт."
+description: "Как за 10 минут поставить OpenClaw на VPS, обойти блокировку Anthropic в РФ через nginx reverse proxy и не сломать Telegram-бота на Node.js 22."
 ---
 
 Вчера я потратил 2 часа на то, что сегодня занимает 10 минут.
