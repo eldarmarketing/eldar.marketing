@@ -1,9 +1,11 @@
 # eldar.marketing — проектная конфигурация omp
-# Закрепляет fable как главного оркестратора для всех сессий в этом репо,
-# независимо от изменений глобального ~/.omp/agent/config.yml.
+# Роли синхронизированы с глобальной политикой (~/.omp/agent/config.yml):
+# fable — оркестратор/исполнение, GPT Sol (подписка Codex) — план и ревью спек.
 modelRoles:
   default: anthropic/claude-fable-5
-  plan: anthropic/claude-fable-5:high
+  # План — GPT 5.6 Sol medium (чат-консенсус: GPT план лучше, high бредит).
+  # Работает только в основной сессии; в субагентах omp Codex-модели недоступны.
+  plan: openai-codex/gpt-5.6-sol:medium
   slow: anthropic/claude-fable-5:max
   designer: anthropic/claude-fable-5
   task: anthropic/claude-sonnet-5
