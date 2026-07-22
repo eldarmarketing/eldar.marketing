@@ -24,7 +24,7 @@ case "$MODE" in
   heartbeat)
     TITLE="Heartbeat"
     MODEL="anthropic/claude-sonnet-5"
-    PROMPT="Heartbeat COO (только чтение, ничего не менять и не отправлять): (1) борд «Клиенты» (gh project): Inbox без разбора, зависшие In Progress/Waiting — возраст считай по 'gh issue view N -R eldarmarketing/<repo> --json updatedAt', алерть только Waiting/In Progress старше 3 дней; (2) непрочитанные в Telegram; (3) НЕОТВЕЧЕННЫЕ клиенты Strattera: в чате «strattera / посылки» (telegram-reader, id -1002291288806) найди сообщения «💬 Сообщение от …» за последние сутки, на которые после НЕТ ответа оператора (реплай человека или «✅ Ответ отправлен») — вопрос без ответа старше 4 часов = алерт с именем клиента и текстом. Если telegram-reader отдаёт 'database is locked' — одна повторная попытка через 20 секунд, дальше просто пометь «TG занят» одной строкой, не трать время. Если ничего не требует внимания владельца — последней строкой ответа выведи ровно OK. Иначе — короткий нумерованный список."
+    PROMPT="Heartbeat COO (только чтение, ничего не менять и не отправлять): (1) борд «Клиенты»: данные бери ТОЛЬКО из 'bash scripts/coo/board.sh' (борд уже синхронизирован со статусами issues скриптом). Алерты по борду строго по правилам: Inbox — алерт «без разбора» ТОЛЬКО если issue открыта (gh issue view N -R eldarmarketing/<repo> --json state,updatedAt) И в последних коммитах репо (gh api repos/eldarmarketing/<repo>/commits --jq '.[:10]') и комментариях issue за последние 3 дня НЕТ признаков, что работа по её теме сделана; если признаки есть — вместо алерта одна строка «<repo>#N: похоже сделано, но борд не обновлён — закрыть и в Done». In Progress/Waiting — алерт только при updatedAt старше 3 дней. Формат каждого алерта: <repo>#N · <статус> · <возраст> дн · <причина одним предложением>. Ничего не выдумывай — каждая строка подтверждена выводом команды; (2) непрочитанные в Telegram; (3) НЕОТВЕЧЕННЫЕ клиенты Strattera: в чате «strattera / посылки» (telegram-reader, id -1002291288806) найди сообщения «💬 Сообщение от …» за последние сутки, на которые после НЕТ ответа оператора (реплай человека или «✅ Ответ отправлен») — вопрос без ответа старше 4 часов = алерт с именем клиента и текстом. Если telegram-reader отдаёт 'database is locked' — одна повторная попытка через 20 секунд, дальше просто пометь «TG занят» одной строкой, не трать время. Если ничего не требует внимания владельца — последней строкой ответа выведи ровно OK. Иначе — короткий нумерованный список."
     ;;
   retro)
     TITLE="Ретро: черновик готов"
@@ -34,6 +34,25 @@ case "$MODE" in
   *)
     echo "unknown mode: $MODE" >&2; exit 2;;
 esac
+
+# Детерминированная сверка борда с GitHub перед LLM-прогоном:
+# карточка с ЗАКРЫТОЙ issue не в Done → двигаем в Done (единственный источник
+# ложных «Inbox без разбора»). Только статус, ничего больше не трогаем.
+board_sync() {
+  local pid
+  pid=$(gh project view 1 --owner eldarmarketing --format json --jq .id 2>/dev/null) || return 0
+  gh project item-list 1 --owner eldarmarketing --limit 200 --format json 2>/dev/null \
+  | jq -r '.items[] | select(.content.type == "Issue" and .status != "Done")
+      | [.id, .content.repository, (.content.number|tostring)] | @tsv' \
+  | while IFS=$'\t' read -r iid repo num; do
+      [ "$(gh issue view "$num" -R "$repo" --json state --jq .state 2>/dev/null)" = "CLOSED" ] || continue
+      gh project item-edit --id "$iid" --project-id "$pid" \
+        --field-id "PVTSSF_lAHODwDuH84BSfuzzhAAxMk" --single-select-option-id "43113069" >/dev/null 2>&1 \
+        && echo "board-sync: $repo#$num (issue закрыта) → Done"
+    done
+}
+board_sync >"$OUT_DIR/$TS-board-sync.log" 2>&1
+[ -s "$OUT_DIR/$TS-board-sync.log" ] || rm -f "$OUT_DIR/$TS-board-sync.log"
 
 # Разовая миграция телеграм-сессии в WAL (снимает «database is locked» при
 # параллельных клиентах); пока база занята — молча пробуем в следующий раз.
