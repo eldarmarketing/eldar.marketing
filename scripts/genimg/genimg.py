@@ -1,137 +1,97 @@
 #!/usr/bin/env python3
-"""Генерация картинок для контента через kie.ai (issue eldar.marketing#10).
+"""Генерация картинок через AiGate (OpenAI-совместимый шлюз).
 
-Использование:
-  export KIE_API_KEY=...   # ключ с https://kie.ai (пополнение СБП)
-  python3 genimg.py "промпт" -o cover.png
-  python3 genimg.py "логотип-иконка" -o icon.png --transparent
-  python3 genimg.py "промпт" -o img.png --model google/nano-banana-2 --size 16:9
+Gemini image-модели на AiGate работают через /chat/completions
+с modalities: ["text", "image"] (НЕ через /images/generations).
 
-Прозрачность: модели не умеют нативную альфу — генерируем на chroma-зелёном
-фоне и вырезаем его (паттерн из чата вайбкодеров, июль 2026).
-
-Зависимости: pip install pillow requests
+Ключ: env AIGATE_API_KEY / AIGATE_BASE_URL, иначе берём из ~/eldar_progress/.env.
 """
-
 import argparse
+import base64
+import json
 import os
+import pathlib
 import sys
 import time
+import urllib.request
 
-try:
-    import requests
-except ImportError:
-    print("error: нет зависимостей — pip install pillow requests", file=sys.stderr)
-    sys.exit(1)
+DEFAULT_MODEL = "google/gemini-3.1-flash-image-preview"  # быстрая; качественнее: google/gemini-3-pro-image, openai/gpt-image-2
 
-API = "https://api.kie.ai/api/v1"
-CHROMA_SUFFIX = (
-    ", isolated on a solid pure chroma green background (#00FF00), "
-    "no shadows on background, sharp subject edges"
+STYLE_BRAND = (
+    "Minimalist abstract tech illustration, dark charcoal background (#0a0a0a), "
+    "single vivid accent color, thin geometric lines, subtle grid, "
+    "no text, no letters, no people, premium editorial style, 16:9 wide composition. Theme: "
 )
 
 
-def die(msg: str) -> None:
-    print(f"error: {msg}", file=sys.stderr)
-    sys.exit(1)
+def load_env():
+    base = os.environ.get("AIGATE_BASE_URL")
+    key = os.environ.get("AIGATE_API_KEY")
+    if not (base and key):
+        envfile = pathlib.Path.home() / "eldar_progress" / ".env"
+        if envfile.exists():
+            for line in envfile.read_text().splitlines():
+                if line.startswith("AIGATE_") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k, v.strip().strip('"'))
+        base = os.environ.get("AIGATE_BASE_URL")
+        key = os.environ.get("AIGATE_API_KEY")
+    if not (base and key):
+        sys.exit("Нет AIGATE_API_KEY/AIGATE_BASE_URL (env или ~/eldar_progress/.env)")
+    return base, key
 
 
-def create_task(key: str, model: str, prompt: str, size: str) -> str:
-    r = requests.post(
-        f"{API}/jobs/createTask",
-        headers={"Authorization": f"Bearer {key}"},
-        json={
-            "model": model,
-            "input": {"prompt": prompt, "output_format": "png", "image_size": size},
-        },
-        timeout=30,
+def generate(prompt: str, model: str, base: str, key: str) -> bytes:
+    payload = {
+        "model": model,
+        "modalities": ["text", "image"],
+        "messages": [{"role": "user", "content": prompt}],
+    }
+    req = urllib.request.Request(
+        base + "/chat/completions",
+        data=json.dumps(payload).encode(),
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
     )
-    r.raise_for_status()
-    data = r.json()
-    task_id = (data.get("data") or {}).get("taskId") or data.get("taskId")
-    if not task_id:
-        die(f"createTask без taskId: {data}")
-    return task_id
+    with urllib.request.urlopen(req, timeout=240) as r:
+        msg = json.loads(r.read())["choices"][0]["message"]
+    url = None
+    for img in msg.get("images") or []:
+        url = img["image_url"]["url"] if isinstance(img, dict) else img
+        break
+    if not url and isinstance(msg.get("content"), list):
+        for part in msg["content"]:
+            if part.get("type") in ("image_url", "image"):
+                url = part.get("image_url", {}).get("url") or part.get("url")
+                break
+    if not url:
+        raise RuntimeError("в ответе нет картинки: " + json.dumps(msg)[:200])
+    if url.startswith("data:"):
+        return base64.b64decode(url.split(",", 1)[1])
+    return urllib.request.urlopen(url, timeout=120).read()
 
 
-def poll(key: str, task_id: str, timeout_s: int = 300) -> str:
-    """Ждёт завершения, возвращает URL картинки."""
-    deadline = time.time() + timeout_s
-    while time.time() < deadline:
-        r = requests.get(
-            f"{API}/jobs/recordInfo",
-            headers={"Authorization": f"Bearer {key}"},
-            params={"taskId": task_id},
-            timeout=30,
-        )
-        r.raise_for_status()
-        data = r.json().get("data") or {}
-        state = (data.get("state") or data.get("status") or "").lower()
-        if state in ("success", "completed", "succeeded"):
-            result = data.get("resultJson") or data.get("result") or {}
-            if isinstance(result, str):
-                import json as _json
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("prompt")
+    ap.add_argument("-o", "--out", default="out.png")
+    ap.add_argument("--model", default=DEFAULT_MODEL)
+    ap.add_argument("--brand", action="store_true", help="обернуть промпт в фирменный стиль обложек")
+    ap.add_argument("--retries", type=int, default=3)
+    args = ap.parse_args()
 
-                result = _json.loads(result)
-            urls = (
-                result.get("resultUrls")
-                or result.get("result_urls")
-                or result.get("urls")
-                or []
-            )
-            if not urls:
-                die(f"задача завершена, но URL нет: {data}")
-            return urls[0]
-        if state in ("failed", "error"):
-            die(f"генерация упала: {data.get('failMsg') or data}")
-        time.sleep(5)
-    die(f"таймаут {timeout_s}s (taskId={task_id})")
-    raise AssertionError  # unreachable
-
-
-def remove_chroma(png_path: str, threshold: int = 110) -> None:
-    """Вырезает chroma-зелёный фон -> альфа. In-place."""
-    from PIL import Image
-
-    img = Image.open(png_path).convert("RGBA")
-    px = img.load()
-    w, h = img.size
-    for y in range(h):
-        for x in range(w):
-            r, g, b, a = px[x, y]
-            # зелёный доминирует и ярче остальных каналов
-            if g > 120 and g - max(r, b) > threshold // 2 and (g - r) + (g - b) > threshold:
-                px[x, y] = (r, g, b, 0)
-    img.save(png_path)
-
-
-def main() -> None:
-    p = argparse.ArgumentParser(description="Генерация картинок через kie.ai")
-    p.add_argument("prompt")
-    p.add_argument("-o", "--out", required=True, help="выходной .png")
-    p.add_argument("--model", default="google/nano-banana-2")
-    p.add_argument("--size", default="1:1", help="1:1 | 16:9 | 9:16 | 3:2 ...")
-    p.add_argument("--transparent", action="store_true", help="chroma-фон -> альфа")
-    p.add_argument("--timeout", type=int, default=300)
-    args = p.parse_args()
-
-    key = os.environ.get("KIE_API_KEY")
-    if not key:
-        die("нет KIE_API_KEY (ключ: https://kie.ai, API Key Management)")
-
-    prompt = args.prompt + (CHROMA_SUFFIX if args.transparent else "")
-    task_id = create_task(key, args.model, prompt, args.size)
-    print(f"task: {task_id}", file=sys.stderr)
-    url = poll(key, task_id, args.timeout)
-
-    img = requests.get(url, timeout=60)
-    img.raise_for_status()
-    with open(args.out, "wb") as f:
-        f.write(img.content)
-
-    if args.transparent:
-        remove_chroma(args.out)
-    print(args.out)
+    base, key = load_env()
+    prompt = (STYLE_BRAND + args.prompt) if args.brand else args.prompt
+    err = None
+    for attempt in range(args.retries):
+        try:
+            raw = generate(prompt, args.model, base, key)
+            pathlib.Path(args.out).write_bytes(raw)
+            print(f"OK {args.out} {len(raw) // 1024}KB")
+            return
+        except Exception as e:  # noqa: BLE001
+            err = e
+            time.sleep(3 * (attempt + 1))
+    sys.exit(f"FAIL после {args.retries} попыток: {err}")
 
 
 if __name__ == "__main__":
