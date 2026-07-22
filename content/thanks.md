@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Заявка отправлена"
 description: "Спасибо за обращение"
 ---

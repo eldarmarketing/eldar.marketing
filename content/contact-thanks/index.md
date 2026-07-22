@@ -1,4 +1,5 @@
 ---
+noindex: true
 title: "Заявка отправлена"
 url: /contact/thanks/
 sitemap_exclude: true

@@ -10,7 +10,7 @@
     {{ if .Params.keywords }}<meta name="keywords" content="{{ delimit .Params.keywords ", " }}">
     {{ end }}<meta name="author" content="Эльдар Маркетинг">
     <link rel="canonical" href="{{ .Permalink }}">
-    {{ if in (slice "taxonomy" "term") .Kind }}<meta name="robots" content="noindex, follow">{{ end }}
+    {{ if or .Params.noindex (in (slice "taxonomy" "term") .Kind) }}<meta name="robots" content="noindex, follow">{{ end }}
 
     <!-- Open Graph -->
     <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}Эльдар Маркетинг{{ end }}">

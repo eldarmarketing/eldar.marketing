@@ -58,7 +58,10 @@ board_sync >"$OUT_DIR/$TS-board-sync.log" 2>&1
 # параллельных клиентах); пока база занята — молча пробуем в следующий раз.
 sqlite3 -cmd ".timeout 3000" "$HOME/birson_session.session" "PRAGMA journal_mode=WAL;" >/dev/null 2>&1 || true
 
-omp -p --model "$MODEL" --max-time 600 "$PROMPT" >"$LOG" 2>&1
+# Единый стиль: ответ уходит в Telegram (tg_send конвертирует markdown → HTML).
+STYLE=" Оформление ответа (уйдёт сообщением в Telegram): каждую секцию начинай строкой-заголовком «эмодзи + **жирный заголовок**» (📋 борд, ✈️ телеграм, 🛒 strattera, 💰 деньги, ⚠️ проблемы); пункты — короткие строки с нумерацией или «—»; имена, суммы, дедлайны и repo#N выделяй **жирным**, команды — в \`бэктиках\`; пустая строка между секциями. НИКАКИХ #-заголовков, таблиц, код-блоков и HTML. Служебные правила (например ровно OK последней строкой) — без оформления."
+
+omp -p --model "$MODEL" --max-time 600 "$PROMPT$STYLE" >"$LOG" 2>&1
 RC=$?
 
 # Доставка: основной канал — Telegram (@ai_eldar_bot), macOS-баннер как дубль.
@@ -68,16 +71,37 @@ banner() {
   /usr/bin/osascript -e "display notification \"$1\" with title \"AI-COO: $TITLE\"" 2>/dev/null
 }
 
+# Markdown от модели → Telegram HTML: **b** → <b>, `x` → <code>, # → жирный.
+tg_html() {
+  perl -pe '
+    s/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g;
+    s/\*\*(.+?)\*\*/<b>$1<\/b>/g;
+    s/`([^`]+)`/<code>$1<\/code>/g;
+    s/^#{1,6}\s+(.*)$/<b>$1<\/b>/;
+  '
+}
+
 tg_send() {
   [ -z "${NOTIFY_BOT_TOKEN:-}" ] || [ -z "${NOTIFY_CHAT_ID:-}" ] && return 1
-  local text="$1"
+  local text="$1" chunk html resp
   while [ -n "$text" ]; do
-    local chunk="${text:0:3800}"
-    text="${text:3800}"
-    curl -sS -o /dev/null --max-time 20 -X POST \
+    chunk="${text:0:3500}"
+    text="${text:3500}"
+    html="$(printf '%s' "$chunk" | tg_html)"
+    resp=$(curl -sS --max-time 20 -X POST \
       "https://api.telegram.org/bot$NOTIFY_BOT_TOKEN/sendMessage" \
       --data-urlencode "chat_id=$NOTIFY_CHAT_ID" \
-      --data-urlencode "text=$chunk"
+      --data-urlencode "parse_mode=HTML" \
+      --data-urlencode "disable_web_page_preview=true" \
+      --data-urlencode "text=$html")
+    # HTML не прошёл (битая разметка от модели) → шлём этот кусок плоско.
+    case "$resp" in
+      *'"ok":true'*) ;;
+      *) curl -sS -o /dev/null --max-time 20 -X POST \
+           "https://api.telegram.org/bot$NOTIFY_BOT_TOKEN/sendMessage" \
+           --data-urlencode "chat_id=$NOTIFY_CHAT_ID" \
+           --data-urlencode "text=$chunk";;
+    esac
   done
 }
 
@@ -92,7 +116,7 @@ if [ "$MODE" = "heartbeat" ] && tail -3 "$LOG" | grep -qx "OK"; then
 fi
 
 BODY="$(sed '/^Working\.\.\.$/d' "$LOG")"
-tg_send "🤖 AI-COO · $TITLE
+tg_send "🤖 **AI-COO · $TITLE** · $(date '+%d.%m %H:%M')
 
 $BODY"
 banner "Готово → .briefings/$(basename "$LOG")"

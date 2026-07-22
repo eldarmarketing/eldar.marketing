@@ -18,7 +18,7 @@
 </script>
 
 <article class="page-article blog-post markdown">
-    <h2>{{ .Title }}</h2>
+    <h1>{{ .Title }}</h1>
     {{ $months := dict "January" "января" "February" "февраля" "March" "марта" "April" "апреля" "May" "мая" "June" "июня" "July" "июля" "August" "августа" "September" "сентября" "October" "октября" "November" "ноября" "December" "декабря" }}
     {{ $month := index $months (.Date.Format "January") }}
     <div class="article-byline">
