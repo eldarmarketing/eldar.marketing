@@ -3,6 +3,7 @@ keywords: ["openclaw claude", "автоматизация бизнеса с ai",
 title: "OpenClaw + Claude: Как я автоматизирую бизнес с помощью AI"
 date: 2026-02-07
 description: "Практический опыт внедрения OpenClaw и Claude в маркетинговом агентстве: как автоматизировать заявки, CRM, счета, договоры и ответы клиентам 24/7."
+image: "/images/blog/openclaw-claude-business-automation.jpg"
 ---
 
 # OpenClaw + Claude: Как я автоматизирую бизнес с помощью AI
