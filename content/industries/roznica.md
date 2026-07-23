@@ -99,5 +99,6 @@ form:
   heading: "Обсудить задачу магазина или доставки"
   sub: "Расскажите про точку и что сейчас с заказами — предложим план. Отвечаем в течение рабочего дня."
   placeholder: "Например: магазин у дома с доставкой, заказы теряются в WhatsApp"
-image: "/images/industries/roznica.jpg"
+image: "/images/industries/roznica.webp"
+og_image: "/images/industries/roznica-og.jpg"
 ---

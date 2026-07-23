@@ -20,8 +20,8 @@
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:site_name" content="Эльдар Маркетинг">
     <meta property="og:locale" content="ru_RU">
-    {{ if .Params.image }}
-    <meta property="og:image" content="{{ .Params.image | absURL }}">
+    {{ if or .Params.og_image .Params.image }}
+    <meta property="og:image" content="{{ or .Params.og_image .Params.image | absURL }}">
     {{ else }}
     <meta property="og:image" content="{{ "images/og-default.png" | absURL }}">
     <meta property="og:image:width" content="1200">
@@ -32,8 +32,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}Эльдар Маркетинг{{ end }}">
     <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    {{ if .Params.image }}
-    <meta name="twitter:image" content="{{ .Params.image | absURL }}">
+    {{ if or .Params.og_image .Params.image }}
+    <meta name="twitter:image" content="{{ or .Params.og_image .Params.image | absURL }}">
     {{ else }}
     <meta name="twitter:image" content="{{ "images/og-default.png" | absURL }}">
     {{ end }}

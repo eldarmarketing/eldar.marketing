@@ -99,5 +99,6 @@ form:
   heading: "Обсудить задачу интернет-магазина"
   sub: "Расскажите про ассортимент и текущую платформу — предложим план. Отвечаем в течение рабочего дня."
   placeholder: "Например: магазин на 1000+ товаров на конструкторе, хотим уйти от маркетплейса"
-image: "/images/industries/magaziny.jpg"
+image: "/images/industries/magaziny.webp"
+og_image: "/images/industries/magaziny-og.jpg"
 ---

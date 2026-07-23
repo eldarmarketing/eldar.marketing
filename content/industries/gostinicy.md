@@ -99,5 +99,6 @@ form:
   heading: "Обсудить цифровизацию гостиницы"
   sub: "Расскажите про отель и что сейчас с бронями — предложим план. Отвечаем в течение рабочего дня."
   placeholder: "Например: мини-отель на 15 номеров, 80% броней через Booking"
-image: "/images/industries/gostinicy.jpg"
+image: "/images/industries/gostinicy.webp"
+og_image: "/images/industries/gostinicy-og.jpg"
 ---
