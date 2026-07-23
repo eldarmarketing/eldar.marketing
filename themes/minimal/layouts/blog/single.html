@@ -75,7 +75,7 @@
     "@type": "BlogPosting",
     "headline": "{{ .Title }}",
     "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}",
-    {{ if .Params.image }}"image": "{{ .Params.image | absURL }}",{{ else }}"image": "https://eldarmarketing.ru/images/eldar.jpg",{{ end }}
+    {{ if .Params.image }}"image": "{{ .Params.image | absURL }}",{{ else }}"image": "https://eldarmarketing.ru/images/eldar-photo.jpg",{{ end }}
     "datePublished": "{{ .Date.Format "2006-01-02" }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
     "url": "{{ .Permalink }}",

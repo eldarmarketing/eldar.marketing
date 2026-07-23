@@ -44,7 +44,7 @@
     "@type": "Article",
     "headline": {{ .Title | jsonify }},
     "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | truncate 160 | jsonify }}{{ end }},
-    {{ if .Params.image }}"image": {{ .Params.image | absURL | jsonify }},{{ else }}"image": "https://eldarmarketing.ru/images/eldar.jpg",{{ end }}
+    {{ if .Params.image }}"image": {{ .Params.image | absURL | jsonify }},{{ else }}"image": "https://eldarmarketing.ru/images/eldar-photo.jpg",{{ end }}
     "datePublished": "{{ .Date.Format "2006-01-02" }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
     "author": { "@id": "https://eldarmarketing.ru/#person" },

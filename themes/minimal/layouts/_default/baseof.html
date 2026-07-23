@@ -10,6 +10,7 @@
     {{ if .Params.keywords }}<meta name="keywords" content="{{ delimit .Params.keywords ", " }}">
     {{ end }}<meta name="author" content="Эльдар Маркетинг">
     <link rel="canonical" href="{{ .Permalink }}">
+    <link rel="alternate" type="application/rss+xml" title="Эльдар Маркетинг — блог" href="{{ "feed.xml" | absURL }}">
     {{ if or .Params.noindex (in (slice "taxonomy" "term") .Kind) }}<meta name="robots" content="noindex, follow">{{ end }}
 
     <!-- Open Graph -->
@@ -22,7 +23,7 @@
     {{ if .Params.image }}
     <meta property="og:image" content="{{ .Params.image | absURL }}">
     {{ else }}
-    <meta property="og:image" content="{{ "images/eldar.jpg" | absURL }}">
+    <meta property="og:image" content="{{ "images/eldar-photo.jpg" | absURL }}">
     {{ end }}
 
     <!-- Twitter Cards -->
@@ -32,7 +33,7 @@
     {{ if .Params.image }}
     <meta name="twitter:image" content="{{ .Params.image | absURL }}">
     {{ else }}
-    <meta name="twitter:image" content="{{ "images/eldar.jpg" | absURL }}">
+    <meta name="twitter:image" content="{{ "images/eldar-photo.jpg" | absURL }}">
     {{ end }}
 
     <link rel="preload" href="/fonts/gteestiprodisplay_regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -79,9 +80,11 @@
                 "@id": "https://eldarmarketing.ru/#organization",
                 "name": "Эльдар Маркетинг",
                 "alternateName": "Eldar Marketing",
+                "legalName": "ИП Малышев Максим Александрович",
+                "taxID": "780162236049",
                 "url": "https://eldarmarketing.ru/",
-                "logo": "https://eldarmarketing.ru/images/eldar.jpg",
-                "image": "https://eldarmarketing.ru/images/eldar.jpg",
+                "logo": "https://eldarmarketing.ru/images/eldar-photo.jpg",
+                "image": "https://eldarmarketing.ru/images/eldar-photo.jpg",
                 "description": "AI-ассистенты, автоматизация бизнеса и интернет-маркетинг для малого и среднего бизнеса в Санкт-Петербурге",
                 "telephone": "+79035708273",
                 "email": "i@eldarmarketing.ru",
@@ -103,7 +106,7 @@
                 "name": "Эльдар",
                 "alternateName": "Эльдар Маркетинг",
                 "url": "https://eldarmarketing.ru/",
-                "image": "https://eldarmarketing.ru/images/eldar.jpg",
+                "image": "https://eldarmarketing.ru/images/eldar-photo.jpg",
                 "jobTitle": "Интернет-маркетолог",
                 "telephone": "+79035708273",
                 "worksFor": { "@id": "https://eldarmarketing.ru/#organization" },
@@ -290,6 +293,7 @@
     </div>
     <div class="site-footer__bottom">
         <span>© 2017–2026 Эльдар Маркетинг</span>
+        <span>ИП Малышев Максим Александрович · ИНН&nbsp;780162236049 · ОГРНИП&nbsp;325784700365064</span>
         <span><a href="/privacy/">Политика конфиденциальности</a></span>
     </div>
 </footer>
