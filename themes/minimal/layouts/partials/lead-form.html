@@ -4,10 +4,12 @@
 .lf-embed__sub { color: var(--muted, #6b6b6b); margin: 0 0 24px; }
 .lf-embed label { display: block; font-size: 14px; color: var(--muted, #6b6b6b); margin: 14px 0 6px; }
 .lf-embed input[type=text], .lf-embed textarea { width: 100%; padding: 13px 15px; font: inherit; font-size: 16px; border: 1px solid var(--line-2, #d4d4d4); border-radius: 8px; background: var(--bg, #fff); color: var(--ink, #0a0a0a); box-sizing: border-box; }
-.lf-embed input[type=text]:focus, .lf-embed textarea:focus { outline: none; border-color: var(--ink, #0a0a0a); }
+.lf-embed input[type=text]:focus, .lf-embed textarea:focus { outline: none; border-color: var(--ink, #0a0a0a); box-shadow: 0 0 0 1px var(--ink, #0a0a0a) inset; }
 .lf-embed__consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; color: var(--muted, #6b6b6b); margin-top: 16px; line-height: 1.4; cursor: pointer; }
-.lf-embed__consent input { margin-top: 3px; flex-shrink: 0; }
+.lf-embed__consent input { margin-top: 2px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--ink, #0a0a0a); }
+.lf-embed__consent a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .lf-embed button { margin-top: 18px; width: 100%; padding: 15px 34px; font: inherit; font-size: 16px; font-weight: 600; background: var(--ink, #0a0a0a); color: var(--bg, #fff); border: none; border-radius: 999px; cursor: pointer; }
+.lf-embed button:disabled { opacity: 0.6; cursor: default; }
 .lf-embed__ok { display: none; }
 .lf-embed__ok b { font-size: 19px; }
 </style>

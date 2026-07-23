@@ -11,11 +11,13 @@
     {{ .Content }}
 </article>
 
+<div class="reading">
 {{ partial "lead-form.html" (dict
     "goal" "lead_case"
     "heading" "Нужно похожее решение?"
     "sub" "Опишите свою ситуацию — предложим, как адаптировать этот подход под ваш бизнес. Бесплатный созвон 30 минут."
     "placeholder" "Например: у меня автосервис, теряем заявки с Авито") }}
+</div>
 
 <a href="/cases/" class="big-link">
     <div class="big-link__label">Все кейсы</div>

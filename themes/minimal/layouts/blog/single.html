@@ -58,11 +58,13 @@
     </div>
 </aside>
 
+<div class="reading">
 {{ partial "lead-form.html" (dict
     "goal" "lead_blog"
     "heading" "Хотите так же у себя?"
     "sub" "Расскажите про задачу — скажем честно, решается ли она и сколько это стоит. Отвечаем в течение рабочего дня."
     "placeholder" "Например: хочу бота, который сам отвечает клиентам") }}
+</div>
 
 <nav class="article-nav">
     {{ with .PrevInSection }}<a href="{{ .Permalink }}">← {{ .Title | truncate 40 }}</a>{{ else }}<span></span>{{ end }}
