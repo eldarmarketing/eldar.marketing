@@ -37,7 +37,7 @@ image: "/images/blog/second-brain-clients.jpg"
 
 - **Notion** — гибко, но требует настройки
 - **Obsidian** — для тех, кто любит markdown
-- **CRM** — если нужна интеграция с продажами
+- **[CRM](/services/automation/)** — если нужна интеграция с продажами
 
 ## Результат
 
